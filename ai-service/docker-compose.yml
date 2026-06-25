@@ -1,0 +1,29 @@
+services:
+  ai-api:
+    build:
+      context: .
+      dockerfile: services/ai_api/Dockerfile
+    env_file: .env
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./data:/app/data
+    restart: unless-stopped
+
+  rag-service:
+    build:
+      context: .
+      dockerfile: services/rag_service/Dockerfile
+    env_file: .env
+    ports:
+      - "8001:8001"
+    restart: unless-stopped
+
+  sales-agent:
+    build:
+      context: .
+      dockerfile: services/sales_agent/Dockerfile
+    env_file: .env
+    ports:
+      - "8002:8002"
+    restart: unless-stopped

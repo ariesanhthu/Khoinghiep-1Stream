@@ -1,0 +1,4 @@
+-r requirements/ai-api.txt
+-r requirements/rag-service.txt
+-r requirements/sales-agent.txt
+-r requirements/dev.txt

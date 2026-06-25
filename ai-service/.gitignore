@@ -1,0 +1,40 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+dist/
+build/
+
+# Environments and local secrets
+.venv/
+venv/
+.env
+.env.*
+!.env.example
+
+# Runtime state and generated media
+/data/
+/logs/
+/models/
+*.db
+*.sqlite3
+*.mp4
+*.wav
+*.pt
+*.pth
+*.onnx
+*.safetensors
+
+# Editors and operating systems
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.swp
+
+# Browser automation
+.chrome_profile/
