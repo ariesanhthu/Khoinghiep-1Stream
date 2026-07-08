@@ -1,0 +1,72 @@
+\subsection{Danh sách thành viên và vai trò cụ thể trong dự án}
+\begingroup
+\small
+\setlength{\tabcolsep}{5pt}
+\renewcommand{\arraystretch}{1.18}
+\newcommand{\membercell}[2]{\begin{minipage}[t]{\linewidth}\raggedright\textbf{#1}\\{\footnotesize\color{textMuted}#2}\end{minipage}}
+\newcommand{\rolecell}[5]{\begin{minipage}[t]{\linewidth}\raggedright\textbf{#1:}
+\begin{itemize}[leftmargin=*,topsep=2pt,itemsep=1pt,parsep=0pt]
+    \item #2
+    \item #3
+    \item #4
+    \item #5
+\end{itemize}
+\end{minipage}}
+
+\rowcolors{3}{paperBg}{white}
+\begin{longtable}{@{}L{0.27\linewidth}L{0.68\linewidth}@{}}
+\caption{Danh sách thành viên và vai trò cụ thể trong dự án}
+\label{tab:danh-sach-thanh-vien-vai-tro}\\
+\toprule
+\rowcolor{softBlue}
+\textbf{Tên} & \textbf{Vai trò cụ thể trong dự án} \\
+\midrule
+\endfirsthead
+
+\toprule
+\rowcolor{softBlue}
+\textbf{Tên} & \textbf{Vai trò cụ thể trong dự án} \\
+\midrule
+\endhead
+
+\bottomrule
+\endlastfoot
+
+\membercell{Nguyễn Anh Thư}{23127266}
+& \rolecell{CEO/Project Lead}
+{Định hướng tổng thể, giữ dự án bám đúng vấn đề thị trường và khách hàng mục tiêu.}
+{Điều phối Business Plan, phân chia nhiệm vụ, theo dõi tiến độ và kiểm soát chất lượng.}
+{Tổng hợp nghiên cứu, rà logic giữa sản phẩm, thị trường, tài chính và kế hoạch triển khai.}
+{Chuẩn bị nội dung thuyết trình/pitch deck và điều chỉnh phạm vi khi có rủi ro.} \\
+
+\membercell{Lê Nguyên Nhật}{23127239}
+& \rolecell{CTO/Product Lead}
+{Nghiên cứu nhu cầu shop livestream và các điểm nghẽn trong tư vấn, CSKH, chốt đơn.}
+{Thiết kế sản phẩm AI Sales Agent, kịch bản tương tác và lộ trình tính năng.}
+{Đề xuất kiến trúc hệ thống, công nghệ AI/NLP và nền tảng triển khai.}
+{Đánh giá độ chính xác, tốc độ phản hồi và trải nghiệm người dùng.} \\
+
+\membercell{Trần Minh Quang}{23127464}
+& \rolecell{Marketing Lead}
+{Phỏng vấn chủ shop để hiểu khó khăn thực tế khi vận hành livestream.}
+{Triển khai landing page, video demo và nội dung mô tả luồng ``treo livestream''.}
+{Thu hút nhóm khách hàng dùng thử đầu tiên và theo dõi hành vi chuyển đổi.}
+{Tối ưu thông điệp quảng bá cho các gói trả phí.} \\
+
+\membercell{Nguyễn Công Toàn}{23127500}
+& \rolecell{Finance Lead}
+{Ước lượng chi phí cố định và biến đổi: hosting, LLM/API, GPU, lưu trữ media.}
+{Xây dựng mô hình doanh thu theo gói thuê bao và phí setup/onboarding.}
+{Theo dõi cost per comment, cost per generated script/video và đề xuất quota.}
+{Chuẩn bị nội dung tài chính, ngân sách MVP và phần gọi vốn.} \\
+
+\membercell{Nguyễn Ngọc Cảnh}{23127161}
+& \rolecell{Operations Lead}
+{Thiết kế quy trình nhận việc, cập nhật tiến độ, lưu trữ tài liệu và theo dõi mốc đồ án.}
+{Xây dựng test case bình luận mẫu cho AI Sales Agent.}
+{Kiểm thử luồng vận hành, ghi nhận lỗi và đề xuất cải thiện onboarding shop.}
+{Hỗ trợ tổng hợp minh chứng, quản lý rủi ro vận hành và giữ nhịp phối hợp nhóm.} \\
+
+\end{longtable}
+\rowcolors{2}{}{}
+\endgroup
