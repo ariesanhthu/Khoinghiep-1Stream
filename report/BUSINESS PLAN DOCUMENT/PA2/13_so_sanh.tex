@@ -1,24 +1,61 @@
 \subsection{Bảng so sánh sản phẩm với các giải pháp hiện có}
 
-Hình~\ref{fig:feature-heatmap} trình bày bản đồ nhiệt độ phủ tính năng, so sánh
-1Stream với các đối thủ cạnh tranh theo các tính năng cốt lõi cho việc vận hành một
-phiên livestream bán hàng. Mỗi ô được tô màu theo ba mức độ: xanh (có), vàng (một
-phần / gián tiếp), đỏ (không). \newline
-{\scriptsize \textit{Chú thích:} \textit{Nguồn:} tổng hợp từ
-website chính thức của các nền tảng, truy cập tháng 07/2026.}
+Bảng dưới đây so sánh các lựa chọn mà một trung tâm ngoại ngữ
+có thể cân nhắc. Ký hiệu \textbf{Có} nghĩa là năng lực nằm trong đầu ra chính;
+\textbf{Một phần} nghĩa là phải cấu hình thêm, mua bổ sung hoặc tự vận hành;
+\textbf{Không} nghĩa là không thuộc trọng tâm giải pháp. Đánh giá thể hiện định
+vị tổng quát của từng nhóm, không khẳng định mọi nhà cung cấp trong nhóm có cùng
+phạm vi.
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=\textwidth]{imgs/feature_heatmap.png}
-    \caption{Bản đồ nhiệt độ phủ tính năng: so sánh 1Stream với các giải pháp hiện có}
-    \label{fig:feature-heatmap}
-\end{figure}
+\begin{center}
+\scriptsize
+\setlength{\tabcolsep}{2.6pt}
+\renewcommand{\arraystretch}{1.3}
+\begin{longtable}{|>{\raggedright\arraybackslash}p{3.35cm}|
+    >{\centering\arraybackslash}p{2.05cm}|
+    >{\centering\arraybackslash}p{2.05cm}|
+    >{\centering\arraybackslash}p{2.05cm}|
+    >{\centering\arraybackslash}p{2.05cm}|
+    >{\centering\arraybackslash}p{2.05cm}|}
+    \caption{So sánh 1Stream với các nhóm giải pháp hiện có}
+    \label{tab:so-sanh-giai-phap} \\
+    \hline
+    \rowcolor{blue!15}
+    \textbf{Tiêu chí} & \textbf{Agency} & \textbf{AI virtual host} &
+    \textbf{Công cụ phát video} & \textbf{Chatbot/social commerce} &
+    \textbf{1Stream} \\ \hline
+    \endfirsthead
 
-Bản đồ nhiệt độ  cho thấy 1Stream không vượt trội tuyệt đối ở mọi tiêu chí: về host
-ảo và phát sóng 24/7, các nền tảng chuyên virtual host như iLive, AnyLive vẫn
-mạnh hơn; về chốt đơn thuần túy, Harasocial, Sapo và Botcake đã rất hoàn thiện.
-Tuy nhiên, ở đúng nhóm tính năng quyết định cho phân khúc mục tiêu --- phản hồi
-bám dữ liệu sản phẩm riêng, phân loại intent, workflow theo từng phiên,
-human-in-the-loop và tối ưu chi phí --- 1Stream lấp được khoảng trống mà các giải
-pháp hiện có chưa phục vụ trọn vẹn. Đây chính là cơ sở cho định vị ``AI Sales
-Operation Workflow cho shop livestream nhỏ và SME''.
+    \hline
+    \rowcolor{blue!15}
+    \textbf{Tiêu chí} & \textbf{Agency} & \textbf{AI virtual host} &
+    \textbf{Công cụ phát video} & \textbf{Chatbot/social commerce} &
+    \textbf{1Stream} \\ \hline
+    \endhead
+
+    Chuẩn hóa dữ liệu khóa học & Một phần & Một phần & Không & Một phần & Có \\ \hline
+    Tạo kịch bản và video AI & Một phần & Có & Không & Không & Có \\ \hline
+    Duyệt phiên bản trước khi phát & Có & Một phần & Không & Không & Có \\ \hline
+    Lên lịch và giám sát giờ phát & Có & Có & Một phần & Không & Có \\ \hline
+    FAQ theo dữ liệu khóa học & Một phần & Một phần & Không & Có & Có \\ \hline
+    Thu lead và chuyển tư vấn viên & Một phần & Một phần & Không & Có & Có \\ \hline
+    Báo cáo video, giờ-kênh và lead & Một phần & Có & Một phần & Một phần & Có \\ \hline
+    Gói nhỏ theo đầu ra sử dụng & Một phần & Một phần & Có & Một phần & Có \\ \hline
+    Template ưu tiên Anh/Hàn & Một phần & Không & Không & Không & Có \\ \hline
+    Tư vấn chuyên sâu thời gian thực & Có & Không & Không & Không & Không; chuyển người thật \\ \hline
+\end{longtable}
+\end{center}
+
+Kết quả so sánh cho thấy 1Stream không cố thay thế thế mạnh của agency trong các
+buổi cần host thật, cũng không cạnh tranh với phần mềm phát video chỉ bằng giá.
+Khoảng trống mục tiêu là kết hợp \textbf{vận hành tương đối trọn quy trình} với
+\textbf{gói mua linh hoạt}, đồng thời chuyên biệt dữ liệu và flow thu lead cho
+đơn vị bán khóa học. Lợi thế này chỉ có ý nghĩa nếu paid pilot chứng minh được
+chất lượng video, tỷ lệ phát ổn định, chi phí giờ-kênh và tỷ lệ mua lại; vì vậy
+các tiêu chí trên vừa là thông điệp định vị, vừa là giả thuyết cần kiểm chứng.
+
+Facebook và TikTok được xem là kênh phát dự kiến nhưng không được cam kết cho mọi
+tài khoản. Threads chỉ hỗ trợ phân phối nội dung và thảo luận. Với Facebook, nội
+dung ghi hình trước phải được ghi rõ; với TikTok, khả năng LIVE phụ thuộc điều
+kiện tài khoản và quyền truy cập thực tế. Do đó, ``tuân thủ và kiểm tra điều kiện
+kênh'' là một phần của dịch vụ, không phải một tính năng phát đa kênh mặc định.

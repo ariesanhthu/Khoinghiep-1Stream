@@ -1,8 +1,388 @@
 \subsection{Chân dung khách hàng mục tiêu}
 
+\subsubsection{Cách tiếp cận phân khúc và lựa chọn khách hàng mục tiêu}
+
+Chân dung khách hàng của 1Stream được xác định theo ba bước: phân khúc thị
+trường, đánh giá mức độ hấp dẫn của từng phân khúc và lựa chọn nhóm khách hàng
+mà sản phẩm có khả năng phục vụ hiệu quả nhất trong giai đoạn đầu. Việc lựa chọn
+không chỉ dựa trên ngành nghề hoặc quy mô doanh nghiệp, mà còn dựa trên cường độ
+vấn đề, tần suất sử dụng, khả năng chi trả, mức độ sẵn sàng về dữ liệu và chi phí
+phục vụ của 1Stream.
+
+Trong giai đoạn MVP, 1Stream ưu tiên mô hình thị trường ngách. Khách hàng mục
+tiêu đầu tiên là các trung tâm ngoại ngữ và đơn vị kinh doanh khóa học ngôn ngữ,
+trước mắt tập trung vào tiếng Anh và tiếng Hàn. Đây là nhóm có nội dung tư vấn
+khá chuẩn hóa, thường xuyên phải lặp lại các thông tin về học phí, lịch khai
+giảng, trình độ đầu vào, giáo trình, ưu đãi và đăng ký học thử. Nhóm khách hàng
+này cũng có nhu cầu duy trì hiện diện trên Facebook và TikTok nhưng không phải
+lúc nào cũng đủ nhân sự để sản xuất nội dung và đứng livestream liên tục.
+
+\begin{table}[H]
+    \centering
+    \small
+    \setlength{\tabcolsep}{4pt}
+    \renewcommand{\arraystretch}{1.25}
+    \caption{Phân nhóm khách hàng mục tiêu của 1Stream trong giai đoạn đầu}
+    \label{tab:phan-khuc-1stream}
+    \begin{tabularx}{\linewidth}{@{}L{2.4cm}L{3.4cm}Y L{2.1cm}@{}}
+        \toprule
+        \textbf{Nhóm} & \textbf{Đặc điểm nhận diện} &
+        \textbf{Nhu cầu chính} & \textbf{Mức ưu tiên} \\ \midrule
+        ICP cốt lõi & Trung tâm tiếng Anh, tiếng Hàn hoặc đơn vị bán khóa học
+        ngôn ngữ; có đội marketing--livestream--tư vấn khoảng 3--5 người; đã
+        hoạt động trên Facebook hoặc TikTok. &
+        Cần tạo video livestream nhanh, tăng thời lượng phát, giảm phụ thuộc vào
+        host thật và chuẩn hóa các câu trả lời tuyển sinh lặp lại. &
+        Rất cao \\ 
+        Phân khúc liền kề & Đơn vị luyện thi, kỹ năng, đào tạo nghề hoặc khóa học
+        online có thông tin sản phẩm tương đối chuẩn hóa. &
+        Cần tái sử dụng nội dung, phát theo lịch và thu lead từ livestream. &
+        Trung bình; mở rộng sau khi có case study \\ 
+        Phân khúc chưa ưu tiên & Cá nhân bán khóa học phụ thuộc mạnh vào thương
+        hiệu cá nhân; đơn vị chỉ live không thường xuyên; doanh nghiệp lớn yêu
+        cầu tích hợp CRM/ERP và SLA phức tạp. &
+        Nhu cầu tùy biến cao, chu kỳ bán dài hoặc chưa đủ tần suất để tạo hiệu
+        quả kinh tế. &
+        Thấp trong giai đoạn MVP \\ \bottomrule
+    \end{tabularx}
+\end{table}
+
+\subsubsection{Phạm vi thị trường mục tiêu}
+
+Để tránh mô tả thị trường quá rộng, 1Stream phân biệt ba lớp thị trường theo khả
+năng tiếp cận thực tế. Ở giai đoạn đầu, nhóm không sử dụng toàn bộ thị trường giáo
+dục làm khách hàng mục tiêu, mà chỉ tập trung vào phần thị trường có hành vi
+livestream và có khả năng mua gói dịch vụ lặp lại.
+
+\begin{table}[H]
+    \centering
+    \small
+    \setlength{\tabcolsep}{5pt}
+    \renewcommand{\arraystretch}{1.25}
+    \caption{Phạm vi thị trường mục tiêu theo khả năng phục vụ}
+    \label{tab:tam-sam-som-1stream}
+    \begin{tabularx}{\linewidth}{@{}L{2.2cm}Y L{3.2cm}@{}}
+        \toprule
+        \textbf{Lớp thị trường} & \textbf{Phạm vi} & \textbf{Ý nghĩa đối với 1Stream} \\ \midrule
+        Thị trường tổng thể & Các trung tâm đào tạo, đơn vị bán khóa học và tổ
+        chức giáo dục có sử dụng nội dung số để tuyển sinh. &
+        Dùng để mô tả tiềm năng dài hạn; chưa phải toàn bộ đều phù hợp với MVP. \\
+        Thị trường có thể phục vụ & Các đơn vị bán khóa học có hoạt động trên
+        Facebook hoặc TikTok, có quy trình thu lead và có nhu cầu livestream
+        thường xuyên. &
+        Là phạm vi sản phẩm có thể tạo giá trị bằng video AI, phát theo lịch và
+        hỗ trợ trả lời câu hỏi phổ biến. \\
+        Thị trường có thể tiếp cận ban đầu & Các trung tâm ngoại ngữ tại
+        TP.HCM hoặc khu vực nhóm có thể tiếp cận trực tiếp; đội vận hành 3--5
+        người; sẵn sàng thử gói video hoặc gói 30 giờ-kênh. &
+        Là nhóm dùng để phỏng vấn, chạy pilot và tạo khách hàng trả phí đầu tiên. \\ \bottomrule
+    \end{tabularx}
+\end{table}
+
+\subsubsection{Tiêu chí nhận diện ICP cốt lõi}
+
+Các ngưỡng dưới đây là tiêu chí sàng lọc ban đầu để nhóm lựa chọn đối tượng phỏng
+vấn và pilot. Đây chưa phải kết luận thị trường cuối cùng; các ngưỡng cần được
+kiểm chứng bằng dữ liệu phỏng vấn, hành vi sử dụng và mức sẵn sàng trả phí thực
+tế.
+
+\begin{table}[H]
+    \centering
+    \footnotesize
+    \setlength{\tabcolsep}{3.5pt}
+    \renewcommand{\arraystretch}{1.22}
+    \caption{Bộ tiêu chí nhận diện ICP ban đầu của 1Stream}
+    \label{tab:icp-criteria-1stream}
+    \begin{tabularx}{\linewidth}{@{}L{2.3cm}Y Y L{2.1cm}@{}}
+        \toprule
+        \textbf{Nhóm tiêu chí} & \textbf{Điều kiện phù hợp} &
+        \textbf{Bằng chứng cần thu thập} & \textbf{Mức quan trọng} \\ \midrule
+        Ngành nghề & Trung tâm ngoại ngữ hoặc đơn vị bán khóa học tiếng Anh,
+        tiếng Hàn; có thể mở rộng sang luyện thi và kỹ năng sau pilot. &
+        Website, fanpage, danh mục khóa học, lịch khai giảng. & Bắt buộc \\
+        Đội ngũ vận hành & Có khoảng 3--5 người tham gia marketing, nội dung,
+        livestream, trực bình luận hoặc tư vấn tuyển sinh. &
+        Sơ đồ vai trò, người phụ trách từng bước trong một phiên live. & Bắt buộc \\
+        Kênh đang sử dụng & Đã vận hành Facebook và/hoặc TikTok. Threads chỉ
+        đóng vai trò chia sẻ nội dung, tạo thảo luận hoặc dẫn người dùng sang
+        phiên live. &
+        Liên kết tài khoản, lịch đăng, lịch livestream gần nhất. & Cao \\
+        Tần suất livestream & Đang livestream ít nhất 2--3 buổi mỗi tuần hoặc có
+        kế hoạch mua thêm tối thiểu 10 giờ-kênh mỗi tuần. &
+        Lịch live trong 4 tuần gần nhất hoặc kế hoạch nội dung tháng. & Cao \\
+        Mức độ lặp lại của nội dung & Thường xuyên lặp lại thông tin về học phí,
+        lịch học, đầu vào, giáo trình, ưu đãi, học thử và chính sách bảo lưu. &
+        Danh sách câu hỏi thường gặp, kịch bản live hoặc log bình luận. & Cao \\
+        Dữ liệu sẵn có & Có bảng học phí, lịch khai giảng, mô tả khóa học, FAQ,
+        ưu đãi, hình ảnh hoặc video giáo viên và quy trình đăng ký. &
+        File Excel, Google Sheet, brochure, landing page hoặc tài liệu tuyển sinh. & Bắt buộc \\
+        Mô hình chuyển đổi & Người xem được dẫn đến inbox, biểu mẫu, đăng ký học
+        thử, đặt lịch tư vấn hoặc để lại số điện thoại. &
+        Biểu mẫu thu lead, CRM/Sheet, quy trình tiếp nhận và chăm sóc lead. & Cao \\
+        Cường độ vấn đề & Thiếu host, khó duy trì nội dung, tốn thời gian dựng
+        video, nhân viên phải trả lời nhiều câu hỏi giống nhau hoặc bỏ trống khung
+        giờ muốn phát. &
+        Số giờ nhân sự mỗi tuần, số phiên bị hủy, số câu hỏi lặp lại. & Bắt buộc \\
+        Khả năng chi trả & Đã có ngân sách cho quảng cáo, quay dựng, host,
+        nhân viên trực live hoặc agency; có thể chuyển một phần ngân sách đó sang
+        gói dịch vụ của 1Stream. &
+        Chi phí vận hành hiện tại và người có quyền duyệt ngân sách. & Bắt buộc \\
+        Quy trình phê duyệt & Có thể xác định rõ người duyệt nội dung, người duyệt
+        ngân sách và người trực tiếp sử dụng hệ thống. &
+        Tên chức danh, thời gian ra quyết định, các bước phê duyệt. & Trung bình \\
+        Tiềm năng mua lại & Có lịch tuyển sinh, khai giảng hoặc ưu đãi lặp lại
+        theo tuần/tháng, tạo nhu cầu mua thêm video và giờ phát. &
+        Lịch khai giảng, lịch mở lớp và kế hoạch tuyển sinh quý. & Cao \\ \bottomrule
+    \end{tabularx}
+\end{table}
+
+\subsubsection{Tiêu chí đánh giá mức độ hấp dẫn kinh tế của phân khúc}
+
+Một phân khúc chỉ được xem là phù hợp khi vừa có nhu cầu rõ ràng, vừa tạo được
+hiệu quả kinh tế cho 1Stream. Vì vậy, ngoài mô tả nhân khẩu học doanh nghiệp,
+nhóm đánh giá thêm khả năng tiếp cận, mức độ cấp thiết, doanh thu lặp lại và chi
+phí phục vụ.
+
+\begin{table}[H]
+    \centering
+    \small
+    \setlength{\tabcolsep}{4pt}
+    \renewcommand{\arraystretch}{1.25}
+    \caption{Tiêu chí đánh giá sức hấp dẫn kinh tế của ICP}
+    \label{tab:economic-attractiveness-icp}
+    \begin{tabularx}{\linewidth}{@{}L{2.8cm}Y Y@{}}
+        \toprule
+        \textbf{Tiêu chí} & \textbf{Cách đánh giá} & \textbf{Dấu hiệu tích cực} \\ \midrule
+        Khả năng nhận diện & Có thể tìm và phân loại khách hàng bằng ngành nghề,
+        kênh mạng xã hội, tần suất live và quy mô đội vận hành. &
+        Có fanpage/TikTok hoạt động, thông tin trung tâm và người phụ trách rõ ràng. \\
+        Khả năng tiếp cận & Nhóm có thể tiếp cận người ra quyết định qua mạng
+        lưới, cộng đồng giáo dục, đối tác hoặc liên hệ trực tiếp. &
+        Có thể đặt lịch trao đổi hoặc demo trong thời gian ngắn. \\
+        Cường độ vấn đề & Vấn đề xảy ra thường xuyên và ảnh hưởng đến chi phí,
+        tần suất nội dung hoặc số lead. &
+        Khách hàng có thể mô tả thiệt hại hoặc thời gian bị tiêu tốn bằng số liệu. \\
+        Khả năng trả phí & Giá trị nhận được đủ lớn để khách hàng chuyển một phần
+        ngân sách hiện tại sang 1Stream. &
+        Đã chi tiền cho host, dựng video, trực bình luận hoặc agency. \\
+        Tần suất mua lại & Nhu cầu xuất hiện theo lịch khai giảng, khóa học hoặc
+        chương trình ưu đãi. &
+        Có nhu cầu tạo video hoặc mua giờ phát theo tuần/tháng. \\
+        Chi phí phục vụ & Dữ liệu đầu vào chuẩn hóa, ít yêu cầu tùy chỉnh ngoài
+        quy trình và có thể tái sử dụng template. &
+        Một lần onboarding có thể dùng cho nhiều video và nhiều đợt phát. \\
+        Biên lợi nhuận tiềm năng & Doanh thu gói lớn hơn tổng chi phí biến đổi
+        gồm tạo video, GPU/API, băng thông, lưu trữ và hỗ trợ vận hành. &
+        Có thể giới hạn rõ số video, số lần sửa và số giờ-kênh trong từng gói. \\
+        Khả năng mở rộng & Quy trình của một khách hàng có thể chuẩn hóa để áp
+        dụng cho nhiều trung tâm cùng ngành. &
+        Các trung tâm có cấu trúc dữ liệu và câu hỏi tuyển sinh tương tự nhau. \\ \bottomrule
+    \end{tabularx}
+\end{table}
+
+\subsubsection{Mô hình chấm điểm và sàng lọc khách hàng}
+
+Nhóm sử dụng thang điểm 100 để tránh lựa chọn khách hàng chỉ dựa trên cảm tính.
+Điểm số được cập nhật sau cuộc phỏng vấn đầu tiên và trước khi quyết định cho
+khách hàng tham gia pilot.
+
+\begin{table}[H]
+    \centering
+    \small
+    \setlength{\tabcolsep}{4pt}
+    \renewcommand{\arraystretch}{1.22}
+    \caption{Thang điểm đánh giá mức độ phù hợp của khách hàng tiềm năng}
+    \label{tab:icp-scoring-model}
+    \begin{tabularx}{\linewidth}{@{}L{3.3cm}L{1.6cm}Y@{}}
+        \toprule
+        \textbf{Tiêu chí} & \textbf{Trọng số} & \textbf{Cách cho điểm tối đa} \\ \midrule
+        Cường độ và tần suất vấn đề & 20 điểm & Vấn đề xảy ra hàng tuần, làm mất
+        nhiều giờ nhân sự hoặc khiến trung tâm không thể duy trì lịch live. \\
+        Tần suất sử dụng dự kiến & 15 điểm & Có nhu cầu ít nhất 10 giờ-kênh mỗi
+        tuần hoặc nhiều đợt tạo video trong tháng. \\
+        Mức độ sẵn sàng của dữ liệu & 15 điểm & Có đầy đủ học phí, lịch học,
+        FAQ, ưu đãi, nội dung khóa học và tài nguyên hình ảnh/video. \\
+        Khả năng chi trả & 15 điểm & Có ngân sách hiện hữu cho nội dung,
+        livestream, host hoặc vận hành tuyển sinh. \\
+        Phù hợp quy trình thu lead & 10 điểm & Có biểu mẫu, inbox, đăng ký học
+        thử hoặc quy trình chuyển lead cho nhân viên. \\
+        Mức độ sẵn sàng của kênh & 10 điểm & Facebook/TikTok hoạt động ổn định,
+        có lịch nội dung và đủ điều kiện sử dụng tính năng live. \\
+        Khả năng tiếp cận người quyết định & 5 điểm & Có thể làm việc trực tiếp
+        với chủ trung tâm hoặc người có quyền duyệt ngân sách. \\
+        Tiềm năng mua lại và mở rộng & 10 điểm & Có lịch tuyển sinh định kỳ và
+        khả năng mua thêm video, giờ-kênh hoặc mở rộng sang nhiều khóa học. \\
+        \midrule
+        \textbf{Tổng} & \textbf{100 điểm} & \textbf{Dùng để xếp hạng khách hàng pilot.} \\ \bottomrule
+    \end{tabularx}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \small
+    \setlength{\tabcolsep}{5pt}
+    \renewcommand{\arraystretch}{1.2}
+    \caption{Ngưỡng quyết định sau khi chấm điểm ICP}
+    \label{tab:icp-score-threshold}
+    \begin{tabularx}{\linewidth}{@{}L{2.4cm}L{2.4cm}Y@{}}
+        \toprule
+        \textbf{Tổng điểm} & \textbf{Phân loại} & \textbf{Hành động đề xuất} \\ \midrule
+        75--100 & ICP cốt lõi & Ưu tiên demo, đề xuất paid pilot và theo dõi như
+        khách hàng mẫu. \\
+        60--74 & Có tiềm năng & Cho dùng thử giới hạn hoặc tiếp tục thu thập dữ
+        liệu trước khi báo giá. \\
+        40--59 & Chưa phù hợp & Chỉ nuôi dưỡng; chưa ưu tiên nguồn lực triển khai. \\
+        Dưới 40 & Ngoài ICP & Không đưa vào pilot trong giai đoạn hiện tại. \\ \bottomrule
+    \end{tabularx}
+\end{table}
+
+\subsubsection{Đơn vị ra quyết định mua hàng}
+
+Trong mô hình B2B, người sử dụng sản phẩm không nhất thiết là người trả tiền.
+1Stream cần xác định đầy đủ các vai trò tham gia quyết định để thiết kế nội dung
+demo, quy trình bán hàng và onboarding phù hợp.
+
+\begin{table}[H]
+    \centering
+    \small
+    \setlength{\tabcolsep}{4pt}
+    \renewcommand{\arraystretch}{1.25}
+    \caption{Các vai trò trong quyết định mua dịch vụ 1Stream}
+    \label{tab:buying-center-1stream}
+    \begin{tabularx}{\linewidth}{@{}L{2.6cm}L{3.2cm}Y@{}}
+        \toprule
+        \textbf{Vai trò} & \textbf{Chức danh thường gặp} & \textbf{Mối quan tâm chính} \\ \midrule
+        Người duyệt ngân sách & Chủ trung tâm, giám đốc hoặc quản lý chi nhánh &
+        Chi phí, hiệu quả tuyển sinh, rủi ro thương hiệu và khả năng mua lại. \\
+        Người bảo trợ nội bộ & Trưởng marketing, trưởng tuyển sinh hoặc quản lý
+        vận hành &
+        Cần giải quyết vấn đề nhanh, phối hợp được với đội hiện tại và có số liệu
+        để báo cáo. \\
+        Người sử dụng trực tiếp & Nhân viên nội dung, livestream, trực bình luận
+        hoặc tư vấn viên &
+        Dễ sử dụng, ít thao tác, nội dung chính xác và có cơ chế chuyển câu hỏi
+        khó cho người thật. \\
+        Người cung cấp dữ liệu & Giáo viên, học vụ, tư vấn tuyển sinh hoặc quản lý
+        khóa học &
+        Thông tin học thuật, lịch học, học phí và chính sách phải đúng. \\
+        Người có thể phản đối & Bộ phận thương hiệu, pháp lý hoặc quản trị tài
+        khoản mạng xã hội &
+        Quyền sử dụng hình ảnh/giọng nói, nội dung AI và tuân thủ chính sách nền
+        tảng. \\ \bottomrule
+    \end{tabularx}
+\end{table}
+
+\subsubsection{Nhu cầu, vấn đề và kết quả khách hàng mong muốn}
+
+\begin{table}[H]
+    \centering
+    \small
+    \setlength{\tabcolsep}{4pt}
+    \renewcommand{\arraystretch}{1.25}
+    \caption{Công việc, vấn đề và kết quả mong muốn của ICP cốt lõi}
+    \label{tab:jobs-pains-gains-1stream}
+    \begin{tabularx}{\linewidth}{@{}L{2.5cm}Y Y@{}}
+        \toprule
+        \textbf{Nhóm} & \textbf{Mô tả} & \textbf{Cách 1Stream đáp ứng} \\ \midrule
+        Công việc cần hoàn thành & Giới thiệu khóa học, trả lời câu hỏi tuyển sinh,
+        thu lead, duy trì lịch nội dung và hỗ trợ tư vấn viên. &
+        Tạo video livestream từ dữ liệu khóa học, phát theo lịch và chuyển lead
+        về quy trình hiện có. \\
+        Vấn đề hiện tại & Thiếu host, tốn thời gian dựng nội dung, live không đều,
+        thông tin tư vấn không nhất quán và phụ thuộc nhiều vào nhân sự. &
+        Chuẩn hóa dữ liệu, tái sử dụng template, giới hạn phạm vi AI và có bước
+        duyệt trước khi phát. \\
+        Kết quả mong muốn & Tăng số giờ hiện diện, giảm khối lượng công việc lặp
+        lại, duy trì thông tin chính xác và tạo thêm cơ hội tư vấn. &
+        Theo dõi số giờ-kênh, tỷ lệ phát thành công, số lead và số câu hỏi cần
+        chuyển cho nhân viên. \\ \bottomrule
+    \end{tabularx}
+\end{table}
+
+\subsubsection{Mức độ phù hợp giữa ICP và các gói dịch vụ}
+
+\begin{table}[H]
+    \centering
+    \small
+    \setlength{\tabcolsep}{4pt}
+    \renewcommand{\arraystretch}{1.25}
+    \caption{Liên kết nhu cầu khách hàng với các gói dịch vụ của 1Stream}
+    \label{tab:package-fit-1stream}
+    \begin{tabularx}{\linewidth}{@{}L{3.0cm}Y Y@{}}
+        \toprule
+        \textbf{Gói dịch vụ} & \textbf{Khách hàng phù hợp} & \textbf{Kết quả cần bàn giao} \\ \midrule
+        Gói tạo video livestream AI một lần & Trung tâm muốn thử nghiệm nội dung
+        AI nhưng chưa sẵn sàng mua nhiều giờ phát. &
+        Kịch bản đã duyệt, video hoàn chỉnh, phụ đề/giọng đọc và số lần chỉnh sửa
+        được quy định rõ. \\
+        Gói vận hành 30 giờ-kênh & Trung tâm đã có video hoặc nội dung phù hợp,
+        cần mở rộng lịch phát nhưng thiếu nhân sự trực vận hành. &
+        Lịch phát, tổng giờ-kênh sử dụng, trạng thái phiên và báo cáo sau đợt. \\
+        Gói trọn bộ & Trung tâm có lịch tuyển sinh liên tục, muốn thuê ngoài cả
+        khâu tạo video và vận hành phát. &
+        Video, lịch phát, theo dõi phiên, FAQ cơ bản, chuyển lead và báo cáo. \\
+        Dịch vụ bổ sung & Khách hàng cần thêm video, thêm ngôn ngữ, thêm giờ,
+        thêm kênh hoặc tùy chỉnh avatar/giọng nói. &
+        Tính phí theo đơn vị sử dụng và chỉ thực hiện sau khi chốt phạm vi. \\ \bottomrule
+    \end{tabularx}
+\end{table}
+
+\subsubsection{Tiêu chí loại trừ}
+
+Khách hàng không được ưu tiên cho pilot khi thuộc một trong các trường hợp sau:
 \begin{itemize}
-    \item \textbf{Nhóm khách hàng đầu tiên (Early Adopters):} Nhóm Micro-seller và các shop online có quy mô dưới 3 nhân sự. Đây là những người thường xuyên bán hàng qua các kênh TikTok Shop, Facebook Live, Shopee Live, có nhu cầu livestream liên tục nhưng lại thiếu người trực bình luận và không có năng lực sản xuất nội dung đều đặn.
-    \item \textbf{Khách hàng doanh nghiệp vừa và nhỏ (SME):} Các doanh nghiệp SME hoặc thương hiệu thuộc ngành FMCG (mỹ phẩm, đồ gia dụng, phụ kiện) với lượng SKU lớn, cần phản hồi khách hàng nhanh gọn, bán hàng theo các đợt khuyến mãi và có số lượng giao dịch mua bán cao.
-    \item \textbf{Nhóm mở rộng:} Các Livestream agency, KOC/KOL bán hàng cần quản lý nhiều phiên live cùng lúc hoặc các thương hiệu bán lẻ (retail brand) lớn cần tích hợp sâu hệ thống CRM/ERP.
-    item \textbf{Người dùng đặc biệt:} Những người bán hàng là người khuyết tật, gặp khó khăn về thể chất hoặc giọng nói khi phải tiến hành livestream với cường độ cao.
+    \item nội dung bán khóa học phụ thuộc hoàn toàn vào khả năng ứng biến, tranh
+    luận hoặc chữa bài trực tiếp của một cá nhân;
+    \item chưa có bảng học phí, lịch học, mô tả khóa học và chính sách đủ rõ để
+    chuẩn hóa thành dữ liệu đầu vào;
+    \item không có người duyệt nội dung hoặc không xác định được người chịu trách
+    nhiệm khi thông tin thay đổi;
+    \item tần suất livestream thấp, không có nhu cầu mua thêm video hoặc giờ
+    phát trong các tháng tiếp theo;
+    \item yêu cầu tích hợp sâu CRM/ERP, SLA doanh nghiệp hoặc tùy chỉnh ngoài
+    phạm vi MVP;
+    \item không có quyền sử dụng hợp pháp đối với hình ảnh, giọng nói, video và
+    tài liệu cung cấp cho hệ thống.
 \end{itemize}
+
+\subsubsection{Chỉ số kiểm chứng ICP trong giai đoạn pilot}
+
+\begin{table}[H]
+    \centering
+    \small
+    \setlength{\tabcolsep}{4pt}
+    \renewcommand{\arraystretch}{1.25}
+    \caption{Chỉ số kiểm chứng mức độ phù hợp của ICP}
+    \label{tab:icp-validation-metrics}
+    \begin{tabularx}{\linewidth}{@{}L{3.0cm}Y L{3.1cm}@{}}
+        \toprule
+        \textbf{Giả định cần kiểm chứng} & \textbf{Cách đo} & \textbf{Ngưỡng pilot đề xuất} \\ \midrule
+        Vấn đề đủ nghiêm trọng & Phỏng vấn và ghi nhận số giờ nhân sự, số phiên
+        bị bỏ trống hoặc số câu hỏi lặp lại. &
+        Ít nhất 3/5 khách hàng xác nhận vấn đề xảy ra hàng tuần. \\
+        Khách hàng có dữ liệu đủ dùng & Kiểm tra khả năng chuẩn hóa học phí, lịch
+        học, FAQ, ưu đãi và hình ảnh/video. &
+        Ít nhất 4/5 bộ dữ liệu có thể onboarding mà không cần làm lại toàn bộ. \\
+        Khách hàng chấp nhận video AI & Cho xem bản mẫu và ghi nhận mức độ sẵn
+        sàng đưa vào lịch phát thực tế. &
+        Ít nhất 3/5 khách hàng đồng ý chạy thử có giám sát. \\
+        Gói 30 giờ-kênh phù hợp & Đo số giờ khách hàng thực sự sử dụng trong
+        thời hạn gói. &
+        Tỷ lệ sử dụng đạt ít nhất 60\% số giờ đã mua trong pilot. \\
+        Có khả năng mua lại & Hỏi kế hoạch tháng tiếp theo và theo dõi hành vi
+        tái mua. &
+        Có ít nhất 2 khách hàng mua lại hoặc cam kết sử dụng đợt tiếp theo. \\
+        Chi phí phục vụ có thể kiểm soát & Theo dõi chi phí video, GPU/API, băng
+        thông, lưu trữ và giờ hỗ trợ. &
+        Xác định được chi phí biến đổi trên mỗi video và mỗi giờ-kênh. \\ \bottomrule
+    \end{tabularx}
+\end{table}
+
+Từ các tiêu chí trên, ICP cốt lõi của 1Stream có thể được tóm tắt như sau:
+\textit{một trung tâm ngoại ngữ hoặc đơn vị bán khóa học tiếng Anh/tiếng Hàn,
+có đội marketing--livestream--tư vấn khoảng 3--5 người, đang hoạt động trên
+Facebook hoặc TikTok, có nhu cầu phát nội dung ít nhất vài lần mỗi tuần, có dữ
+liệu khóa học chuẩn hóa, có quy trình thu lead và đang phát sinh chi phí cho
+nội dung hoặc vận hành livestream}. Đây là nhóm có khả năng nhận được giá trị
+rõ nhất từ gói tạo video một lần, gói 30 giờ-kênh và gói vận hành trọn bộ của
+1Stream.

@@ -1,99 +1,94 @@
 \subsection{Lộ trình phát triển sản phẩm trong các giai đoạn tiếp theo}
-Sản phẩm không chỉ là công cụ tạo host ảo, mà được định vị là một \textbf{AI Sales Operation Workflow} cho shop livestream nhỏ và SME: quản lý phiên live đa kênh, xử lý bình luận theo ngữ cảnh sản phẩm, hỗ trợ chốt đơn và tạo nội dung livestream bằng AI. Ở giai đoạn đầu, nhóm ưu tiên chứng minh năng lực lõi gồm AI Sales Agent, Knowledge Database, AI Video/Voice Generator và dashboard vận hành đa kênh. Khi sản phẩm đi vào thử nghiệm, trọng tâm chuyển sang đo độ chính xác của phản hồi, độ ổn định khi livestream, khả năng giảm tải nhân sự và mức sẵn sàng trả phí của nhóm khách hàng mục tiêu. Sau MVP, lộ trình mở rộng tập trung vào thương mại hóa tại TP.HCM, sau đó mở rộng ra các thành phố lớn và từng bước tích hợp sâu hơn với hệ thống quản lý bán hàng của khách hàng tổ chức.
+
+Lộ trình mới ưu tiên kiểm chứng một dịch vụ có đầu ra rõ ràng trước khi đầu tư
+vào SaaS tự phục vụ. Mỗi giai đoạn chỉ mở rộng khi các giả định về nhu cầu, khả
+năng vận hành, mức sẵn sàng trả phí và biên lợi nhuận đã có dữ liệu thực tế.
 
 \begin{center}
-\scriptsize
-\setlength{\tabcolsep}{3pt}
-\renewcommand{\arraystretch}{1.28}
-\begin{longtable}{|>{\raggedright\arraybackslash}p{2.0cm}|
-    >{\raggedright\arraybackslash}p{3.0cm}|
-    >{\raggedright\arraybackslash}p{4.0cm}|
-    >{\raggedright\arraybackslash}p{3.35cm}|
-    >{\raggedright\arraybackslash}p{2.65cm}|}
-    \caption{Roadmap phát triển 1Stream từ R\&D đến mở rộng toàn quốc}
+\small
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.25}
+\begin{longtable}{|>{\raggedright\arraybackslash}p{2.3cm}|
+    >{\raggedright\arraybackslash}p{3.7cm}|
+    >{\raggedright\arraybackslash}p{4.4cm}|
+    >{\raggedright\arraybackslash}p{4.2cm}|}
+    \caption{Roadmap kiểm chứng và sản phẩm hóa 1Stream}
     \label{tab:roadmap-1stream} \\
     \hline
     \rowcolor{blue!15}
-    \textbf{Giai đoạn} &
-    \textbf{Trọng tâm chiến lược} &
-    \textbf{Sản phẩm \& công nghệ} &
-    \textbf{Thị trường \& vận hành} &
-    \textbf{Chỉ số kiểm chứng} \\ \hline
+    \textbf{Giai đoạn} & \textbf{Mục tiêu} & \textbf{Hoạt động chính} &
+    \textbf{Điều kiện chuyển giai đoạn} \\ \hline
     \endfirsthead
 
     \hline
     \rowcolor{blue!15}
-    \textbf{Giai đoạn} &
-    \textbf{Trọng tâm chiến lược} &
-    \textbf{Sản phẩm \& công nghệ} &
-    \textbf{Thị trường \& vận hành} &
-    \textbf{Chỉ số kiểm chứng} \\ \hline
+    \textbf{Giai đoạn} & \textbf{Mục tiêu} & \textbf{Hoạt động chính} &
+    \textbf{Điều kiện chuyển giai đoạn} \\ \hline
     \endhead
 
-    \textbf{Giai đoạn 1}\newline \textbf{06--08/2026}\newline \textbf{Research \& Development} &
-    Hoàn thiện nghiên cứu công nghệ lõi cho livestream bán hàng: LLM, xử lý
-    bình luận realtime, TTS, AI video và quản lý phiên live đa kênh. &
-    Xây dựng prototype gồm dashboard live preview, kho nội dung, auto-reply demo,
-    Knowledge Database JSON/TF-IDF, phân loại intent, job video/TTS, micro-scene
-    pipeline, FFmpeg và luồng livestream đa nền tảng qua RTMP. &
-    Nghiên cứu hành vi livestream của shop nhỏ, seller có ít nhân sự và nhóm
-    FMCG/beauty tại TP.HCM. Bootstrap bằng nguồn lực nội bộ; GPU thì có thể dùng nội bộ máy cá nhân ở giai đoạn đầu, API gọi free để thử nghiệm sản phẩm . & Có prototype chạy được cho live preview, RAG reply, sales-agent flow và
-    video/TTS job; hoàn thành bộ test lõi cho intent, retrieval, order tools và
-    micro-scene pipeline. \\ \hline
+    \textbf{Giai đoạn 1}\newline
+    \textbf{Kiểm chứng gói dịch vụ}\newline
+    06--08/2026 &
+    Xác nhận vấn đề và khả năng tạo một phiên livestream AI phù hợp với trung
+    tâm ngoại ngữ. &
+    Phỏng vấn tối thiểu 10 trung tâm hoặc đơn vị bán khóa học; tạo 2--3 mẫu cho
+    tiếng Anh và tiếng Hàn; đo thời gian tạo video, chi phí render và chất lượng
+    đầu ra; thử trên một kênh, ưu tiên Facebook hoặc môi trường demo có kiểm
+    soát; hoàn thiện cách tính giờ-kênh và checklist chính sách. &
+    Có bằng chứng nhu cầu từ phỏng vấn; quy trình từ dữ liệu đến video chạy được;
+    xác định được chi phí video, chi phí giờ-kênh và ranh giới hỗ trợ; có khách
+    hàng đồng ý bước vào thử nghiệm có trả phí. \\ \hline
 
-    \textbf{Giai đoạn 2}\newline \textbf{09--12/2026}\newline \textbf{Testing \& Validation} &
-    Chạy thử nghiệm đóng để kiểm chứng nhu cầu, độ chính xác phản hồi và mức giảm
-    tải vận hành cho người bán. &
-    Hoàn thiện MVP v1: gom bình luận, phân loại ý định, trả lời theo dữ liệu sản
-    phẩm, gợi ý/chốt đơn cơ bản và quản lý phiên live. Tích hợp AI Video/Voice
-    vào MVP v2; kiểm thử WebSocket, job status và độ ổn định khi tạo video. &
-    Alpha test với 5 shop/SME ngành FMCG
-    hoặc beauty. Mở vòng pre-seed để tài trợ cloud, GPU, dữ liệu đánh giá và hỗ
-    trợ khách hàng beta. &
-    Giảm thời gian trả lời bình luận, giảm bỏ sót câu hỏi giá/ship/tồn kho, tỷ lệ
-    câu trả lời cần người sửa ở mức chấp nhận được; có phản hồi rõ về setup và
-    mức sẵn sàng trả phí. \\ \hline
+    \textbf{Giai đoạn 2}\newline
+    \textbf{Paid pilot}\newline
+    09--12/2026 &
+    Kiểm chứng việc khách hàng trả tiền, sử dụng gói và mua lại. &
+    Triển khai với 3--5 khách hàng mua gói hoặc đặt cọc; thử gói video kết hợp
+    30 giờ-kênh; vận hành quy trình duyệt, lịch phát, giám sát, FAQ, chuyển lead
+    và báo cáo; đo uptime, số lead, tỷ lệ cần nhân viên can thiệp, mức hài lòng
+    và biên lợi nhuận gộp. &
+    Có khách hàng hoàn tất gói; đạt mức phát ổn định chấp nhận được; dữ liệu cho
+    thấy giá bán có thể bù chi phí trực tiếp và support; có khách hàng mua lại
+    gói thứ hai hoặc cam kết tiếp tục. \\ \hline
 
-    \textbf{Giai đoạn 3}\newline \textbf{01--04/2027}\newline \textbf{MVP Launch \& Market Entry} &
-    Ra mắt MVP thương mại tại TP.HCM, ưu tiên micro-merchant và shop FMCG/beauty
-    có tần suất livestream cao. &
-    Thương mại hóa 1Stream v1.0: onboarding sản phẩm, auto-reply có
-    human-in-the-loop, dashboard live-session, thống kê bình luận/lead nóng, xuất
-    kết quả phiên live và cấu hình gói Free/Growth/Pro. &
-    Tăng trưởng bằng early-bird pricing, case study từ khách hàng beta, demo
-    trước/sau về chi phí nhân sự và số bình luận được xử lý. Theo dõi CAC, churn,
-    GPU cost/job, chi phí support và tỷ lệ nâng cấp. &
-    Có khách hàng trả phí đầu tiên, case study định lượng, dashboard theo dõi
-    phiên live và dữ liệu thực tế để cải thiện model/prompt. \\ \hline
+    \textbf{Giai đoạn 3}\newline
+    \textbf{Sản phẩm hóa}\newline
+    01--06/2027 &
+    Chuẩn hóa các bước đã được kiểm chứng và giảm công việc thủ công. &
+    Xây template theo loại khóa học; phát triển dashboard để tải dữ liệu, duyệt
+    video, xem lịch và giờ còn lại; tự động hóa các bước lặp lại; bổ sung báo cáo
+    lead; mở thêm nền tảng sau khi xác minh quyền truy cập, điều kiện tài khoản
+    và độ ổn định. &
+    Thời gian onboarding và tạo video giảm; gross margin được cải thiện; quy
+    trình có thể phục vụ đồng thời nhiều khách hàng; tỷ lệ mua lại đủ để đánh
+    giá mô hình doanh thu lặp lại. \\ \hline
 
-    \textbf{Giai đoạn 4}\newline \textbf{05--12/2027}\newline \textbf{Scale-Up \& Optimization} &
-    Mở rộng ra các thành phố lớn, chuẩn hóa hạ tầng, quy trình triển khai và mô
-    hình vận hành cho nhiều ngành hàng có lưu lượng bình luận cao. &
-    Nâng cấp kiến trúc production: hàng đợi job bền vững, object storage,
-    Redis/session store, PostgreSQL/migration, observability, autoscaling cho AI
-    workers và tích hợp ERP/CRM/order service cho khách hàng tổ chức. &
-    Mở rộng sang Hà Nội, Đà Nẵng và các cụm seller lớn; phát triển kênh B2B
-    reseller/agency, hợp tác cộng đồng seller và thử nghiệm gói Enterprise. Gọi
-    vốn seed để mở rộng hạ tầng, sales và customer success. &
-    Hệ thống chịu được nhiều phiên live đồng thời, có SLA nội bộ, dữ liệu vận
-    hành theo ngành hàng và kênh phân phối đủ mạnh để mở rộng ngoài TP.HCM. \\
-    \hline
-
+    \textbf{Giai đoạn 4}\newline
+    \textbf{Mở rộng có chọn lọc}\newline
+    Sau 06/2027 &
+    Mở rộng phân khúc và mức độ tự phục vụ dựa trên dữ liệu tích lũy. &
+    Mở từ tiếng Anh, tiếng Hàn sang luyện thi, kỹ năng hoặc đào tạo nghề; phát
+    triển kênh agency giáo dục; cân nhắc gói định kỳ hoặc self-service khi hành
+    vi mua lại ổn định; đầu tư hạ tầng, bảo mật và phân quyền theo nhu cầu thực. &
+    Có case study, unit economics dương, quy trình tuân thủ ổn định và dữ liệu
+    chứng minh phân khúc mới có nhu cầu tương tự. \\ \hline
 \end{longtable}
 \end{center}
 
-\subsubsection*{Các mốc ưu tiên gần hạn}
+\subsubsection*{KPI cần theo dõi}
 
-\begin{enumerate}
-    \item \textbf{Ổn định lõi AI Sales Agent:} chuẩn hóa Knowledge Database, tăng
-    độ chính xác phân loại bình luận, thêm cơ chế từ chối khi thiếu dữ liệu và
-    lưu lại prompt/model version để đánh giá chất lượng.
-    \item \textbf{Hoàn thiện workflow livestream:} kết nối rõ hơn giữa dashboard,
-    bình luận realtime, auto-reply, hot lead, đơn hàng và báo cáo sau phiên live.
-    \item \textbf{Kiểm soát chi phí AI video:} tách tác vụ nặng sang queue, batch
-    rendering, lưu trữ kết quả dùng lại và chỉ dùng GPU/API model khi thật sự cần.
-    \item \textbf{Chuẩn bị thương mại hóa:} thiết kế gói Standard/Growth/Pro,
-    quy trình onboarding dữ liệu sản phẩm và bộ KPI để chứng minh lợi ích giảm
-    chi phí nhân sự, tăng tốc độ phản hồi và tăng khả năng chốt đơn.
-\end{enumerate}
+\begin{itemize}
+    \item \textbf{Sản xuất:} chi phí tạo một video; thời gian từ lúc nhận đủ dữ
+    liệu đến khi có video; số lượt sửa; tỷ lệ video được duyệt.
+    \item \textbf{Vận hành:} chi phí một giờ-kênh; tỷ lệ phát ổn định; số giờ đã
+    dùng trên số giờ đã mua; số sự cố và số giờ phải bù.
+    \item \textbf{Lead Assistant:} số lead thu được; tỷ lệ câu hỏi được trả lời
+    trong phạm vi dữ liệu; tỷ lệ phải chuyển cho nhân viên; số phản hồi cần sửa.
+    \item \textbf{Kinh doanh:} tỷ lệ pilot trả phí; tỷ lệ khách dùng hết gói;
+    tỷ lệ mua lại; doanh thu trung bình mỗi đợt và gross margin từng gói.
+\end{itemize}
 
+Trong giai đoạn này, 1Stream không ưu tiên phát đồng thời trên mọi nền tảng,
+avatar tùy chỉnh phức tạp, chốt thanh toán tự động, CRM/ERP đầy đủ hoặc cam kết
+phát 24/7. Những hạng mục đó chỉ được xem xét sau khi gói dịch vụ cốt lõi đã được
+kiểm chứng.
