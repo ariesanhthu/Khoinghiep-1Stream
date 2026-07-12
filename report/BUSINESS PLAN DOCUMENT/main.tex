@@ -7,10 +7,10 @@
 \documentclass[12pt,a4paper]{article}
 
 % ---------- Language and fonts ----------
-\usepackage[vietnamese,english]{babel}
+\usepackage[vietnamese]{babel}
 \usepackage{fontspec}
-\setmainfont{Noto Serif}
-\setsansfont{Noto Sans}
+\setmainfont{Times New Roman}
+\setsansfont{Arial}
 \setmonofont{Consolas}
 
 % ---------- Page layout ----------
@@ -152,13 +152,13 @@
 
 % ---------- Template variables: edit these ----------
 \newcommand{\ProjectName}{1Stream}
-\newcommand{\ProjectTagline}{Nền tảng SaaS quản lý livestream bán hàng đa kênh}
-\newcommand{\CourseName}{Đồ án môn Khởi nghiệp}
-\newcommand{\TeamName}{Nhóm sinh viên}
+\newcommand{\ProjectTagline}{Nền tảng quản lý livestream đa kênh \\ tích hợp AI tư vấn chốt đơn}
+\newcommand{\CourseName}{Đồ án môn học \\ Khởi nghiệp}
+\newcommand{\TeamName}{05}
 \newcommand{\ClassName}{23CLC}
 \newcommand{\InstructorName}{TS. Đinh Bá Tiến}
 \newcommand{\SubmissionDate}{08/07/2026}
-\newcommand{\DocumentVersion}{Version 1.0.0}
+\newcommand{\DocumentVersion}{Phiên bản 1.7.0}
 \newcommand{\Confidentiality}{Business Plan Document}
 
 % ---------- Utility commands ----------
@@ -185,20 +185,24 @@
 }
 
 \newcommand{\BusinessIllustration}{%
-\begin{tikzpicture}[x=1cm,y=1cm]
-  \fill[brandBlue!10,rounded corners=12pt] (0,0) rectangle (8.8,4.6);
-  \draw[brandBlue!45,line width=1pt,rounded corners=12pt] (0,0) rectangle (8.8,4.6);
-  \node[anchor=west,font=\sffamily\bfseries\large,text=brandNavy] at (.45,4.05) {Business Growth Snapshot};
-  \foreach \i/\h/\c in {0/1.0/brandCyan,1/1.45/brandBlue,2/2.0/brandGold,3/2.75/brandCyan,4/3.35/brandBlue} {
-    \fill[\c,rounded corners=2pt] (.7+\i*1.05,.55) rectangle (1.25+\i*1.05,.55+\h);
-  }
-  \draw[brandNavy,line width=1.2pt] (.45,.55) -- (6.15,.55);
-  \draw[brandNavy,line width=1.2pt] (.45,.55) -- (.45,3.95);
-  \draw[brandRed,line width=1.4pt] (.65,1.05) .. controls (2.2,1.25) and (2.6,2.2) .. (3.55,2.05) .. controls (4.5,1.95) and (4.9,3.3) .. (6.05,3.55);
-  \foreach \x/\y in {.65/1.05,3.55/2.05,6.05/3.55} {\fill[brandRed] (\x,\y) circle (3pt);}
-  \node[draw=brandCyan!45,fill=white,rounded corners=7pt,align=center,font=\sffamily\small] at (7.15,2.6) {\begin{tabular}{c}Market\\Product\\Finance\end{tabular}};
-  \node[draw=brandGold!55,fill=white,rounded corners=7pt,align=center,font=\sffamily\small] at (7.1,1.15) {\begin{tabular}{c}MVP\\Roadmap\end{tabular}};
-\end{tikzpicture}%
+% \begin{tikzpicture}[x=1cm,y=1cm]
+%   \fill[brandBlue!10,rounded corners=12pt] (0,0) rectangle (8.8,4.6);
+%   \draw[brandBlue!45,line width=1pt,rounded corners=12pt] (0,0) rectangle (8.8,4.6);
+%   \node[anchor=west,font=\sffamily\bfseries\large,text=brandNavy] at (.45,4.05) {Business Growth Snapshot};
+%   \foreach \i/\h/\c in {0/1.0/brandCyan,1/1.45/brandBlue,2/2.0/brandGold,3/2.75/brandCyan,4/3.35/brandBlue} {
+%     \fill[\c,rounded corners=2pt] (.7+\i*1.05,.55) rectangle (1.25+\i*1.05,.55+\h);
+%   }
+%   \draw[brandNavy,line width=1.2pt] (.45,.55) -- (6.15,.55);
+%   \draw[brandNavy,line width=1.2pt] (.45,.55) -- (.45,3.95);
+%   \draw[brandRed,line width=1.4pt] (.65,1.05) .. controls (2.2,1.25) and (2.6,2.2) .. (3.55,2.05) .. controls (4.5,1.95) and (4.9,3.3) .. (6.05,3.55);
+%   \foreach \x/\y in {.65/1.05,3.55/2.05,6.05/3.55} {\fill[brandRed] (\x,\y) circle (3pt);}
+%   \node[draw=brandCyan!45,fill=white,rounded corners=7pt,align=center,font=\sffamily\small] at (7.15,2.6) {\begin{tabular}{c}Market\\Product\\Finance\end{tabular}};
+%   \node[draw=brandGold!55,fill=white,rounded corners=7pt,align=center,font=\sffamily\small] at (7.1,1.15) {\begin{tabular}{c}MVP\\Roadmap\end{tabular}};
+% \end{tikzpicture}%
+\begin{tikzpicture}
+  \node[anchor=south west,inner sep=0] at (0,0)
+      {\includegraphics[width=10.25cm]{imgs/logo2.jpg}};
+\end{tikzpicture}
 }
 
 % ---------- Document starts ----------
@@ -220,10 +224,16 @@
   }
 
   \node[anchor=north west,text=white,text width=4.55cm,align=left,font=\sffamily\bfseries\Large]
-    at ($(current page.north west)+(1.0cm,-1.35cm)$) {\CourseName};
+    at ($(current page.north west)+(0.75cm,-1.35cm)$) {\CourseName};
 
-  \node[draw=white,fill=white,fill opacity=.10,text opacity=1,rounded corners=9pt,minimum width=4.1cm,minimum height=3.2cm,align=center,text=white]
-    at ($(current page.north west)+(3.05cm,-6.1cm)$) {\includegraphics[width=3.3cm]{imgs/logo.jpg}};
+  % \node at ($(current page.north west)+(3.05cm,-6.1cm)$) {
+  %   \begin{tikzpicture}
+  %       \clip[rounded corners=10pt]
+  %           (0,0) rectangle (3.75cm,3.75cm);
+  %       \node[anchor=south west,inner sep=0] at (0,0)
+  %           {\includegraphics[width=3.75cm]{imgs/logo1.png}};
+  %   \end{tikzpicture}
+  % };
 
   \node[anchor=south west,text=white,text width=4.9cm,align=left,font=\sffamily\small]
     at ($(current page.south west)+(.8cm,1.15cm)$) {\Confidentiality\\[3pt]\DocumentVersion};
@@ -244,18 +254,22 @@
   \fill[white,rounded corners=8pt] ($(current page.north west)+(8.48cm,-14.95cm)$) rectangle ($(current page.north west)+(19.25cm,-21.35cm)$);
   \draw[lineGray,rounded corners=8pt,line width=.7pt] ($(current page.north west)+(8.48cm,-14.95cm)$) rectangle ($(current page.north west)+(19.25cm,-21.35cm)$);
   \node[anchor=north west,text=brandNavy,font=\sffamily\small\bfseries] at ($(current page.north west)+(8.95cm,-15.35cm)$) {Nhóm};
-  \node[anchor=north west,text=brandNavy,text width=7.1cm,align=left,font=\sffamily\small] at ($(current page.north west)+(11.6cm,-15.35cm)$) {\TeamName};
+  \node[anchor=north west,text=brandNavy,text width=7.1cm,align=left,font=\sffamily\small] at ($(current page.north west)+(12.3cm,-15.35cm)$) {\TeamName};
   \node[anchor=north west,text=brandNavy,font=\sffamily\small\bfseries] at ($(current page.north west)+(8.95cm,-16.05cm)$) {Lớp};
-  \node[anchor=north west,text=brandNavy,text width=7.1cm,align=left,font=\sffamily\small] at ($(current page.north west)+(11.6cm,-16.05cm)$) {\ClassName};
+  \node[anchor=north west,text=brandNavy,text width=7.1cm,align=left,font=\sffamily\small] at ($(current page.north west)+(12.3cm,-16.05cm)$) {\ClassName};
   \node[anchor=north west,text=brandNavy,font=\sffamily\small\bfseries] at ($(current page.north west)+(8.95cm,-16.75cm)$) {Giảng viên};
-  \node[anchor=north west,text=brandNavy,text width=7.1cm,align=left,font=\sffamily\small] at ($(current page.north west)+(11.6cm,-16.75cm)$) {\InstructorName};
-  \node[anchor=north west,text=brandNavy,font=\sffamily\small\bfseries] at ($(current page.north west)+(8.95cm,-17.45cm)$) {Ngày nộp};
-  \node[anchor=north west,text=brandNavy,text width=7.1cm,align=left,font=\sffamily\small] at ($(current page.north west)+(11.6cm,-17.45cm)$) {\SubmissionDate};
+  \node[anchor=north west,text=brandNavy,text width=7.1cm,align=left,font=\sffamily\small] at ($(current page.north west)+(12.3cm,-16.75cm)$) {\InstructorName};
+  \node[anchor=north west,text=brandNavy,font=\sffamily\small\bfseries] at ($(current page.north west)+(8.95cm,-17.45cm)$) {Ngày cập nhật};
+  \node[anchor=north west,text=brandNavy,text width=7.1cm,align=left,font=\sffamily\small] at ($(current page.north west)+(12.3cm,-17.45cm)$) {\SubmissionDate};
   \node[anchor=north west,text=brandNavy,font=\sffamily\small\bfseries] at ($(current page.north west)+(8.95cm,-18.15cm)$) {Thành viên};
-  \node[anchor=north west,text=brandNavy,text width=7.1cm,align=left,font=\sffamily\small] at ($(current page.north west)+(11.6cm,-18.15cm)$) {Nguyễn Công Toàn -- 23127500; Lê Nguyên Nhật -- 23127239; Nguyễn Ngọc Cảnh -- 23127161; Trần Minh Quang -- 23127464; Nguyễn Anh Thư -- 23127266};
+  \node[anchor=north west,text=brandNavy,text width=7.1cm,align=left,font=\sffamily\small] at ($(current page.north west)+(12.3cm,-18.15cm)$) {Nguyễn Công Toàn -- 23127500 \\
+                                                      Lê Nguyên Nhật -- 23127239 \\
+                                                      Nguyễn Ngọc Cảnh -- 23127161 \\
+                                                      Trần Minh Quang -- 23127464 \\
+                                                      Nguyễn Anh Thư -- 23127266};
 
   \node[anchor=south east,text=textMuted,align=right,font=\sffamily\small]
-    at ($(current page.south east)+(-1.2cm,1.25cm)$) {Trường Đại học Khoa học tự nhiên -- ĐHQG TP.HCM\\[3pt]{\bfseries\color{brandNavy}Khoa Công nghệ Thông tin}};
+    at ($(current page.south east)+(-1.2cm,1.25cm)$) {Trường Đại học Khoa học tự nhiên, ĐHQG-HCM\\[3pt]{\bfseries\color{brandNavy}Khoa Công nghệ Thông tin}};
 \end{tikzpicture}
 \mbox{}
 \end{titlepage}
@@ -289,8 +303,18 @@
     \rowcolor{softBlue}
     \textbf{Phiên bản (PA)} & \textbf{Người chỉnh sửa} & \textbf{Ngày chỉnh sửa} & \textbf{Nội dung chỉnh sửa} \\
     \midrule
-    1.0.0 & Nguyễn Ngọc Cảnh & 23/06/2026 & Khởi tạo và chuẩn bị cấu trúc cho Business Plan Document \\
-    1.1.0 & Lê Nguyên Nhật & 28/06/2026 & Làm phần Các vị trí và năng lực còn thiếu trong đội ngũ \\
+    1.0.0 & Nguyễn Ngọc Cảnh & 23/06/2026 & Khởi tạo và chuẩn bị cấu trúc cho Business Plan Document. Soạn mục 1.1 dựa trên nội dung đã có từ PA0. \\
+    1.1.0 & Nguyễn Anh Thư & 23/06/2026 & Soạn mục 1.2 dựa trên nội dung đã có từ PA0. \\
+    1.2.0 & Nguyễn Anh Thư & 25/06/2026 & Soạn mục 1.3. \\
+    1.2.1 & Nguyễn Ngọc Cảnh & 26/06/2026 & Cập nhật mục 1.3. \\
+    1.2.2 & Lê Nguyên Nhật & 26/06/2026 & Cập nhật mục 1.3. \\
+    1.2.3 & Trần Minh Quang & 27/06/2026 & Cập nhật mục 1.3. \\
+    1.2.4 & Nguyễn Công Toàn & 27/06/2026 & Cập nhật mục 1.3. \\
+    1.3.0 & Lê Nguyên Nhật & 28/06/2026 & Soạn mục 1.6. \\
+    1.4.0 & Nguyễn Công Toàn & 30/06/2026 & Soạn mục 1.5. \\
+    1.5.0 & Trần Minh Quang & 30/06/2026 & Soạn mục 1.4. \\
+    1.6.0 & Nguyễn Anh Thư & 01/07/2026 & Soạn mục 1.7. \\
+    1.7.0 & Nguyễn Ngọc Cảnh & 08/07/2026 & Chỉnh sửa format, sửa lỗi, hoàn thiện tài liệu. \\
     \bottomrule
     \end{tabularx}
     \rowcolors{2}{}{}
@@ -310,7 +334,7 @@
 \pagenumbering{arabic}
 \input{PA1/PA1}\newpage
 \input{PA2/PA2}\newpage
-\input{PA3/PA3}\newpage
-\input{PA4/PA4}\newpage
+% \input{PA3/PA3}\newpage
+% \input{PA4/PA4}\newpage
 
 \end{document}
