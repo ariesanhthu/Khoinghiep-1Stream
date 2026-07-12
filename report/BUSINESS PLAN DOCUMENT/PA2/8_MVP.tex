@@ -1,19 +1,143 @@
 \subsection{Phiên bản sản phẩm tối thiểu khả thi, gọi là MVP}
-MVP của 1Stream được định nghĩa là phiên bản tối thiểu giúp kiểm chứng năng lực lõi của sản phẩm: hỗ trợ người bán livestream xử lý bình luận, tư vấn sản phẩm và chốt đơn cơ bản dựa trên dữ liệu riêng của từng shop. Ở giai đoạn này, MVP không nhằm triển khai đầy đủ toàn bộ nền tảng AI livestream, mà tập trung chứng minh rằng AI Sales Agent có thể giảm tải vận hành cho shop nhỏ và SME trong một phiên bán hàng thực tế.
 
-Phiên bản MVP v1 sẽ bao gồm các thành phần chính: dashboard quản lý phiên livestream, cơ sở tri thức sản phẩm, luồng tiếp nhận bình luận, phân loại ý định khách hàng, trả lời tự động theo dữ liệu sản phẩm và cơ chế chuyển tiếp cho người bán khi câu hỏi vượt ngoài phạm vi xử lý của AI. Người bán có thể nhập thông tin sản phẩm như tên sản phẩm, giá, tồn kho, ưu đãi, chính sách giao hàng và các câu hỏi thường gặp để hệ thống sử dụng làm nguồn trả lời.
+MVP của 1Stream được xác định là phiên bản tối thiểu có khả năng trình diễn và
+kiểm chứng luồng giá trị cốt lõi của sản phẩm: từ dữ liệu khóa học đã được chuẩn
+hóa, hệ thống tạo nội dung video AI, hỗ trợ vận hành một phiên livestream thử
+nghiệm, trả lời các câu hỏi tuyển sinh phổ biến và chuyển các trường hợp ngoài
+phạm vi cho nhân viên phụ trách.
 
-Các tính năng cốt lõi của MVP bao gồm:
+MVP không nhằm triển khai ngay một nền tảng livestream AI đa kênh hoàn chỉnh
+hoặc tự động hóa toàn bộ quy trình. Mục tiêu của phiên bản này là kiểm chứng ba
+giả định chính:
+
 \begin{itemize}
-    \item Quản lý một phiên livestream thử nghiệm trên dashboard.
-    \item Nhập và cập nhật Knowledge Database cho từng shop.
-    \item Thu thập hoặc mô phỏng luồng bình luận từ khách hàng.
-    \item Phân loại ý định bình luận như hỏi giá, hỏi tồn kho, hỏi phí ship, hỏi ưu đãi hoặc muốn mua.
-    \item Tạo phản hồi tự động dựa trên dữ liệu sản phẩm đã được xác thực.
-    \item Đánh dấu các bình luận cần người bán xử lý thủ công.
-    \item Tổng hợp báo cáo sau phiên live về số bình luận, tốc độ phản hồi và các lead tiềm năng.
+    \item trung tâm ngoại ngữ chấp nhận sử dụng video AI cho các nội dung tuyển
+    sinh có tính lặp lại;
+
+    \item AI Agent có thể hỗ trợ trả lời một tập câu hỏi phổ biến dựa trên dữ
+    liệu đã được khách hàng xác nhận;
+
+    \item quy trình kết hợp giữa video AI, hỗ trợ tương tác và chuyển lead có
+    thể giúp giảm khối lượng công việc lặp lại trong một phiên livestream.
 \end{itemize}
 
-Trong phạm vi MVP v1, các tính năng nặng như tạo host ảo, sinh video AI hoàn chỉnh, tích hợp sâu CRM/ERP và phát livestream đa nền tảng ở quy mô lớn sẽ chưa được ưu tiên. Những tính năng này sẽ được phát triển ở các phiên bản tiếp theo sau khi nhóm kiểm chứng được nhu cầu thật, độ chính xác của AI Sales Agent và mức sẵn sàng trả phí của khách hàng mục tiêu.
+Trong giai đoạn MVP, 1Stream được triển khai theo mô hình
+\textit{service-enabled software}. Một số bước như kiểm tra dữ liệu, duyệt nội
+dung, cấu hình phiên phát và giám sát sự cố vẫn được đội ngũ 1Stream thực hiện
+thủ công nhằm kiểm soát chất lượng và thu thập dữ liệu trước khi tự động hóa ở
+các phiên bản tiếp theo.
 
-MVP sẽ được thử nghiệm với một nhóm nhỏ shop online hoặc SME trong ngành FMCG/beauty. Các chỉ số đánh giá chính gồm thời gian phản hồi bình luận, tỷ lệ câu trả lời chính xác, số lượng câu hỏi bị bỏ sót, tỷ lệ câu trả lời cần người bán chỉnh sửa và phản hồi của người dùng về quy trình thiết lập dữ liệu sản phẩm.
+\subsubsection*{Phạm vi khách hàng thử nghiệm}
+
+MVP ưu tiên thử nghiệm với một nhóm nhỏ trung tâm tiếng Anh, tiếng Hàn hoặc đơn
+vị bán khóa học ngôn ngữ có hoạt động trên Facebook hoặc TikTok, có dữ liệu
+khóa học tương đối đầy đủ và có người phụ trách duyệt nội dung, vận hành
+livestream hoặc tiếp nhận lead.
+
+Dữ liệu đầu vào tối thiểu gồm:
+
+\begin{itemize}
+    \item tên và mô tả khóa học;
+    \item học phí, lịch khai giảng và ưu đãi;
+    \item lộ trình học và trình độ đầu vào;
+    \item thông tin đăng ký học thử hoặc tư vấn;
+    \item các câu hỏi tuyển sinh thường gặp;
+    \item hình ảnh, video hoặc tài sản truyền thông có quyền sử dụng.
+\end{itemize}
+
+\subsubsection*{Các thành phần cốt lõi của MVP}
+
+\begin{enumerate}
+    \item \textbf{Tiếp nhận và chuẩn hóa dữ liệu khóa học:}
+    cung cấp biểu mẫu nhập học phí, lịch khai giảng, lộ trình, ưu đãi, CTA và
+    FAQ. Các thông tin thiếu hoặc mâu thuẫn được đánh dấu để khách hàng xác nhận
+    trước khi sử dụng.
+
+    \item \textbf{Tạo nội dung video AI:}
+    tạo bản nháp kịch bản từ dữ liệu khóa học, kết hợp với một giọng đọc hoặc
+    avatar có sẵn, hình ảnh, video nền và phụ đề để tạo một video livestream
+    mẫu có khả năng phát lặp.
+
+    \item \textbf{Quy trình duyệt nội dung:}
+    khách hàng xem trước, phản hồi và xác nhận phiên bản nội dung cuối cùng.
+    Chỉ video và dữ liệu đã được duyệt mới được đưa vào phiên thử nghiệm.
+
+    \item \textbf{Quản lý một phiên livestream thử nghiệm:}
+    hiển thị video AI, trạng thái phiên và luồng bình luận trong môi trường demo
+    có kiểm soát hoặc trên một kênh thử nghiệm đủ điều kiện.
+
+    \item \textbf{AI Agent hỗ trợ FAQ:}
+    nhận diện và trả lời một số nhóm câu hỏi cơ bản như học phí, lịch khai
+    giảng, trình độ đầu vào, ưu đãi và đăng ký học thử dựa trên cơ sở tri thức
+    đã được xác nhận.
+
+    \item \textbf{Chuyển người thật và ghi nhận lead:}
+    đánh dấu các câu hỏi ngoài cơ sở tri thức, câu hỏi chuyên môn hoặc nội dung
+    nhạy cảm để chuyển cho nhân viên. Người xem có nhu cầu tư vấn hoặc đăng ký
+    học thử được ghi nhận dưới dạng lead cơ bản.
+
+    \item \textbf{Báo cáo sau phiên:}
+    tổng hợp thời lượng phát, số lượt bình luận, số phản hồi AI, số câu hỏi cần
+    chuyển người thật, số lead được ghi nhận và các lỗi phát sinh.
+\end{enumerate}
+
+\subsubsection*{Đầu ra của MVP}
+
+Đầu ra của MVP được xác định theo các thành phần có thể trình diễn, kiểm tra và
+đo lường trực tiếp, bao gồm:
+
+\begin{itemize}
+    \item một bộ dữ liệu khóa học mẫu đã được chuẩn hóa;
+
+    \item một kịch bản và video livestream AI hoàn chỉnh sử dụng avatar hoặc
+    giọng đọc có sẵn;
+
+    \item một phiên livestream thử nghiệm trong môi trường demo có kiểm soát
+    hoặc trên một kênh đủ điều kiện;
+
+    \item một cơ sở tri thức chứa các câu hỏi tuyển sinh phổ biến;
+
+    \item một AI Agent có khả năng phản hồi tập FAQ cơ bản;
+
+    \item một cơ chế chuyển câu hỏi ngoài phạm vi cho người thật;
+
+    \item một chức năng ghi nhận lead cơ bản;
+
+    \item một báo cáo sau phiên gồm dữ liệu vận hành, tương tác và chuyển giao;
+
+    \item một bộ kết quả kiểm thử gồm thời gian tạo video, tỷ lệ phản hồi đúng,
+    tỷ lệ phản hồi cần chỉnh sửa, tỷ lệ phải chuyển người thật và các lỗi còn
+    tồn tại.
+\end{itemize}
+
+MVP được xem là hoàn thành khi nhóm có thể trình diễn liên tục luồng sau:
+
+\begin{align*}
+&\text{Dữ liệu khóa học} \rightarrow \text{Chuẩn hóa} \rightarrow \text{Video AI} \\
+&\rightarrow \text{Duyệt nội dung} \rightarrow \text{Phiên livestream thử nghiệm} \\
+&\rightarrow \text{AI xử lý FAQ} \rightarrow \text{Chuyển lead} \rightarrow \text{Báo cáo}
+\end{align*}
+
+\subsubsection*{Các chức năng chưa thuộc phạm vi MVP}
+
+Để tránh mở rộng phạm vi quá sớm, MVP chưa bao gồm:
+
+\begin{itemize}
+    \item phát đồng thời trên nhiều nền tảng ở quy mô lớn;
+    \item cam kết vận hành liên tục 24/7;
+    \item avatar tùy chỉnh phức tạp hoặc sao chép hoàn toàn hình ảnh người thật;
+    \item hỗ trợ nhiều ngôn ngữ trong cùng một phiên;
+    \item tự động tư vấn chuyên môn học thuật;
+    \item tự động chốt thanh toán hoặc xác nhận đăng ký khóa học;
+    \item tích hợp sâu với CRM, ERP hoặc hệ thống quản lý đào tạo;
+    \item phân quyền doanh nghiệp, SLA và các yêu cầu Enterprise;
+    \item nền tảng SaaS tự phục vụ hoàn toàn không có đội ngũ hỗ trợ.
+\end{itemize}
+
+Các chỉ số dùng để đánh giá MVP gồm thời gian chuẩn hóa dữ liệu, thời gian tạo
+video, mức độ chấp nhận video AI, tỷ lệ phản hồi FAQ chính xác, tỷ lệ câu hỏi
+cần chuyển người thật, độ ổn định của phiên thử nghiệm và phản hồi của khách
+hàng về khả năng giảm công việc lặp lại. Mức sẵn sàng tham gia paid pilot hoặc
+mua gói được sử dụng để kiểm chứng thị trường và quyết định chuyển sang giai
+đoạn phát triển tiếp theo, không phải là điều kiện kỹ thuật để xác định MVP đã
+hoàn thành.
