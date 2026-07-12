@@ -1,0 +1,20 @@
+\subsection{Mô hình hoạt động cơ bản của sản phẩm/dịch vụ}
+
+Mô hình hoạt động của 1Stream được chia thành hai luồng xử lý chính:
+\begin{itemize}
+    \item \textbf{Luồng 1: Trợ lý tư vấn khách hàng tự động}
+    \begin{itemize}
+        \item \textbf{Xử lý bình luận thô:} Đầu tiên, hệ thống sẽ tiếp nhận và làm sạch các bình luận, loại bỏ các dòng văn bản quá ngắn hoặc các biểu tượng cảm xúc.
+        \item \textbf{Phân loại \& Gom nhóm:} Phân tích ý định của khách hàng (ví dụ: đang hỏi giá sản phẩm) và gom nhóm các bình luận để tối ưu hóa quá trình xử lý.
+        \item \textbf{Truy xuất thông tin:} Hệ thống sẽ xây dựng chỉ mục (TF-IDF Index Building) trên tập Cơ sở tri thức sản phẩm để tìm kiếm các thông tin liên quan nhất và xuất ra tài liệu trả lời.
+        \item \textbf{Phản hồi bằng LLM:} Cuối cùng, hệ thống tập hợp các cấu trúc lệnh (prompt), đoạn bình luận và thông tin sản phẩm vừa tìm được đưa qua LLM để tạo ra các câu trả lời mượt mà, sau đó định dạng và xuất ra màn hình.
+    \end{itemize}
+
+    \item \textbf{Luồng 2: Hệ thống sản xuất nội dung video AI}
+    \begin{itemize}
+        \item \textbf{Nhập liệu:} Người dùng tiến hành cung cấp các tư liệu đầu vào như hành động mẫu, giọng nói, thông tin sản phẩm và hình mẫu nhân vật.
+        \item \textbf{Sinh kịch bản :} Mô hình LLM sẽ xử lý và chia tách kịch bản tổng thể thành từng phân cảnh chi tiết dưới định dạng tệp JSON (Split scene).
+        \item \textbf{Tạo hình ảnh/chuyển động:} Tiếp theo, hệ thống tiến hành tạo video hoặc ảnh kết hợp khớp khẩu hình (GAN+Wav2Lip/Veo), đồng thời đảm bảo tính nhất quán chuyển động giữa các cảnh quay.
+        \item \textbf{Xử lý hậu kỳ:} Cuối cùng, nền tảng sử dụng FFmpeg để ghép phụ đề, thêm các hiệu ứng và dùng mô hình Text-to-Speech (như OmniVoice) để lồng tiếng, từ đó xuất ra một video hoàn chỉnh để phát livestream.
+    \end{itemize}
+\end{itemize}
