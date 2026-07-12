@@ -1,61 +1,158 @@
-\subsection{Bảng so sánh sản phẩm với các giải pháp hiện có}
+\subsection{So sánh sản phẩm với các giải pháp hiện có}
 
-Bảng dưới đây so sánh các lựa chọn mà một trung tâm ngoại ngữ
-có thể cân nhắc. Ký hiệu \textbf{Có} nghĩa là năng lực nằm trong đầu ra chính;
-\textbf{Một phần} nghĩa là phải cấu hình thêm, mua bổ sung hoặc tự vận hành;
-\textbf{Không} nghĩa là không thuộc trọng tâm giải pháp. Đánh giá thể hiện định
-vị tổng quát của từng nhóm, không khẳng định mọi nhà cung cấp trong nhóm có cùng
-phạm vi.
+\subsubsection{So sánh nhóm đối thủ trực tiếp}
 
-\begin{center}
-\scriptsize
-\setlength{\tabcolsep}{2.6pt}
-\renewcommand{\arraystretch}{1.3}
-\begin{longtable}{|>{\raggedright\arraybackslash}p{3.35cm}|
-    >{\centering\arraybackslash}p{2.05cm}|
-    >{\centering\arraybackslash}p{2.05cm}|
-    >{\centering\arraybackslash}p{2.05cm}|
-    >{\centering\arraybackslash}p{2.05cm}|
-    >{\centering\arraybackslash}p{2.05cm}|}
-    \caption{So sánh 1Stream với các nhóm giải pháp hiện có}
-    \label{tab:so-sanh-giai-phap} \\
-    \hline
-    \rowcolor{blue!15}
-    \textbf{Tiêu chí} & \textbf{Agency} & \textbf{AI virtual host} &
-    \textbf{Công cụ phát video} & \textbf{Chatbot/social commerce} &
-    \textbf{1Stream} \\ \hline
-    \endfirsthead
+Bảng dưới đây chỉ so sánh iLive, AnyLive và 1Stream vì đây là nhóm có phạm vi
+workflow AI livestream tương đối gần nhau. Ký hiệu không được hiểu là xếp hạng
+chất lượng:
+\begin{itemize}
+    \item \textbf{Đã thương mại hóa}: năng lực được công bố và đang cung cấp;
+    \item \textbf{Có một phần}: có hỗ trợ nhưng không phải trọng tâm hoặc cần cấu hình;
+    \item \textbf{MVP dự kiến}: nằm trong phạm vi xây dựng của 1Stream nhưng chưa qua paid pilot;
+    \item \textbf{Ngoài MVP}: chưa triển khai trong giai đoạn hiện tại.
+\end{itemize}
 
-    \hline
-    \rowcolor{blue!15}
-    \textbf{Tiêu chí} & \textbf{Agency} & \textbf{AI virtual host} &
-    \textbf{Công cụ phát video} & \textbf{Chatbot/social commerce} &
-    \textbf{1Stream} \\ \hline
-    \endhead
+\begin{table}[H]
+    \centering
+    \footnotesize
+    \setlength{\tabcolsep}{4pt}
+    \renewcommand{\arraystretch}{1.28}
+    \caption{So sánh nhóm đối thủ AI livestream trực tiếp}
+    \label{tab:direct-competitor-comparison}
+    \rowcolors{2}{paperBg}{white}
+    \begin{tabularx}{\linewidth}{@{}L{4.2cm}L{3.0cm}L{3.0cm}Y@{}}
+        \toprule
+        \rowcolor{softBlue}
+        \textbf{Tiêu chí} & \textbf{iLive} & \textbf{AnyLive} &
+        \textbf{1Stream MVP} \\ \midrule
 
-    Chuẩn hóa dữ liệu khóa học & Một phần & Một phần & Không & Một phần & Có \\ \hline
-    Tạo kịch bản và video AI & Một phần & Có & Không & Không & Có \\ \hline
-    Duyệt phiên bản trước khi phát & Có & Một phần & Không & Không & Có \\ \hline
-    Lên lịch và giám sát giờ phát & Có & Có & Một phần & Không & Có \\ \hline
-    FAQ theo dữ liệu khóa học & Một phần & Một phần & Không & Có & Có \\ \hline
-    Thu lead và chuyển tư vấn viên & Một phần & Một phần & Không & Có & Có \\ \hline
-    Báo cáo video, giờ-kênh và lead & Một phần & Có & Một phần & Một phần & Có \\ \hline
-    Gói nhỏ theo đầu ra sử dụng & Một phần & Một phần & Có & Một phần & Có \\ \hline
-    Template ưu tiên Anh/Hàn & Một phần & Không & Không & Không & Có \\ \hline
-    Tư vấn chuyên sâu thời gian thực & Có & Không & Không & Không & Không; chuyển người thật \\ \hline
-\end{longtable}
-\end{center}
+        AI avatar/video livestream &
+        Đã thương mại hóa; có kho host và custom host &
+        Đã thương mại hóa; AI live streamer 24/7 &
+        MVP dự kiến; dùng avatar/giọng có sẵn \\
 
-Kết quả so sánh cho thấy 1Stream không cố thay thế thế mạnh của agency trong các
-buổi cần host thật, cũng không cạnh tranh với phần mềm phát video chỉ bằng giá.
-Khoảng trống mục tiêu là kết hợp \textbf{vận hành tương đối trọn quy trình} với
-\textbf{gói mua linh hoạt}, đồng thời chuyên biệt dữ liệu và flow thu lead cho
-đơn vị bán khóa học. Lợi thế này chỉ có ý nghĩa nếu paid pilot chứng minh được
-chất lượng video, tỷ lệ phát ổn định, chi phí giờ-kênh và tỷ lệ mua lại; vì vậy
-các tiêu chí trên vừa là thông điệp định vị, vừa là giả thuyết cần kiểm chứng.
+        Tạo và cập nhật kịch bản &
+        Có kịch bản theo gói, FAQ/keyword &
+        Có tạo và cải tiến script dựa trên dữ liệu &
+        MVP dự kiến từ dữ liệu khóa học đã duyệt \\
 
-Facebook và TikTok được xem là kênh phát dự kiến nhưng không được cam kết cho mọi
-tài khoản. Threads chỉ hỗ trợ phân phối nội dung và thảo luận. Với Facebook, nội
-dung ghi hình trước phải được ghi rõ; với TikTok, khả năng LIVE phụ thuộc điều
-kiện tài khoản và quyền truy cập thực tế. Do đó, ``tuân thủ và kiểm tra điều kiện
-kênh'' là một phần của dịch vụ, không phải một tính năng phát đa kênh mặc định.
+        Phát dài giờ/đa nền tảng &
+        Có gói 30--90 giờ; một số gói đa kênh &
+        Có 24/7, đa nền tảng và đa ngôn ngữ &
+        Một kênh trong MVP; chưa cam kết 24/7 \\
+
+        Phản hồi bình luận realtime &
+        Có FAQ/keyword theo phạm vi gói &
+        Có phản hồi và phân tích comment &
+        FAQ cơ bản dự kiến; câu khó chuyển người thật \\
+
+        Analytics và cải tiến sau phiên &
+        Có báo cáo/hỗ trợ theo gói; mức chi tiết tùy gói &
+        Năng lực cốt lõi: sales, viewership, comments &
+        Báo cáo cơ bản dự kiến; chưa có dữ liệu thực tế \\
+
+        Dịch vụ triển khai và vận hành &
+        Đã có quy trình, hỗ trợ và chính sách bù giờ &
+        Có nền tảng và tư vấn triển khai cho thương hiệu &
+        Vận hành bán thủ công trong pilot \\
+
+        Phù hợp ICP trung tâm khóa học &
+        Không công bố là phân khúc ưu tiên &
+        Không công bố là phân khúc ưu tiên &
+        Là phân khúc mục tiêu dự kiến; chưa kiểm chứng \\
+
+        Bằng chứng thị trường &
+        Có gói giá công khai và case thương hiệu &
+        Có sản phẩm/case ở nhiều thị trường &
+        Chưa có paid pilot hoàn tất \\ \bottomrule
+    \end{tabularx}
+    \rowcolors{2}{}{}
+\end{table}
+
+Nhận xét chính:
+\begin{itemize}
+    \item iLive và AnyLive hiện mạnh hơn 1Stream về độ trưởng thành, số giờ phát,
+    đa nền tảng và bằng chứng triển khai;
+    \item 1Stream chỉ có giả thuyết khác biệt ở ICP hẹp, dữ liệu khóa học, gói vào
+    nhỏ và flow chuyển lead tuyển sinh;
+    \item vì chưa có paid pilot, cột 1Stream không được diễn giải là ``Có'' theo
+    nghĩa năng lực đã được chứng minh.
+\end{itemize}
+
+\subsubsection{Phân tích giải pháp thay thế theo cấu phần}
+
+Các giải pháp dưới đây không được chấm bằng bộ tiêu chí của nhóm AI livestream.
+Thay vào đó, mỗi giải pháp được đánh giá theo công việc mà khách hàng có thể dùng
+nó để thay thế.
+
+\begin{table}[H]
+    \centering
+    \footnotesize
+    \setlength{\tabcolsep}{4pt}
+    \renewcommand{\arraystretch}{1.25}
+    \caption{Các giải pháp thay thế theo từng cấu phần}
+    \label{tab:component-substitutes}
+    \rowcolors{2}{paperBg}{white}
+    \begin{tabularx}{\linewidth}{@{}L{2.8cm}L{3.2cm}Y Y@{}}
+        \toprule
+        \rowcolor{softBlue}
+        \textbf{Giải pháp} & \textbf{Công việc thay thế} &
+        \textbf{Điểm mạnh trong phạm vi riêng} &
+        \textbf{Phần khách hàng vẫn phải tự làm} \\ \midrule
+
+        GoStream &
+        Phát/lên lịch từ video có sẵn &
+        Tập trung vào streaming, dễ dùng khi nội dung đã chuẩn bị xong &
+        Chuẩn hóa dữ liệu, tạo video, duyệt, FAQ, thu lead và báo cáo kinh doanh \\
+
+        Botcake &
+        Chatbot, FAQ, thu lead và handover &
+        Messaging flow, lead automation và chuyển bot--nhân viên &
+        Tạo video, phát livestream và giám sát giờ-kênh \\ \bottomrule
+    \end{tabularx}
+    \rowcolors{2}{}{}
+\end{table}
+
+\subsubsection{Phân tích giải pháp gián tiếp}
+
+\begin{table}[H]
+    \centering
+    \footnotesize
+    \setlength{\tabcolsep}{4pt}
+    \renewcommand{\arraystretch}{1.25}
+    \caption{Các giải pháp gián tiếp trong social commerce và quản lý bán hàng}
+    \label{tab:indirect-solutions}
+    \rowcolors{2}{paperBg}{white}
+    \begin{tabularx}{\linewidth}{@{}L{2.8cm}L{3.3cm}Y Y@{}}
+        \toprule
+        \rowcolor{softBlue}
+        \textbf{Giải pháp} & \textbf{Phạm vi chính} &
+        \textbf{Mức liên quan với 1Stream} &
+        \textbf{Lý do không đặt trong bảng đối thủ trực tiếp} \\ \midrule
+
+        Harasocial &
+        Hội thoại, bình luận, livestream commerce và tạo đơn &
+        Có thể thay thế một phần khâu phản hồi và quản lý tương tác &
+        Không tạo/vận hành video AI theo giờ-kênh; trọng tâm là commerce \\
+
+        Sapo &
+        Chat AI, đơn hàng, tồn kho và quản lý bán hàng hợp kênh &
+        Có thể nhận lead hoặc tiếp tục chăm sóc sau phiên &
+        Phạm vi là hệ thống bán hàng rộng; không phải AI livestream service \\ \bottomrule
+    \end{tabularx}
+    \rowcolors{2}{}{}
+\end{table}
+
+\subsubsection{Kết luận phương pháp so sánh}
+
+Không có một bảng duy nhất có thể phản ánh công bằng tất cả giải pháp:
+\begin{itemize}
+    \item iLive, AnyLive và 1Stream được so sánh theo workflow AI livestream;
+    \item GoStream và Botcake được phân tích theo mức độ thay thế từng cấu phần;
+    \item Harasocial và Sapo được xem là giải pháp gián tiếp, không chấm cùng thang;
+    \item agency và đội ngũ nội bộ được xem là phương án thay thế về vận hành.
+\end{itemize}
+
+Cách trình bày này tránh thiên kiến ``1Stream có nhiều ô xanh nhất'' và giúp chỉ
+ra rõ hơn rủi ro thật: khách hàng có thể chọn một giải pháp trọn bộ trưởng thành,
+hoặc tự ghép các công cụ chuyên biệt với chi phí và công vận hành khác nhau.

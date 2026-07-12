@@ -1,60 +1,227 @@
 \subsection{Mô hình hoạt động cơ bản của sản phẩm/dịch vụ}
 
-1Stream vận hành theo quy trình có điểm duyệt rõ ràng giữa khách hàng, nền tảng
-nội bộ và đội ngũ hỗ trợ:
+1Stream vận hành theo mô hình kết hợp giữa nền tảng phần mềm và dịch vụ hỗ trợ
+vận hành (\textit{service-enabled software}). Khách hàng có thể sử dụng riêng
+AI Agent để hỗ trợ tương tác, mua video livestream AI theo từng lần hoặc thuê
+1Stream vận hành livestream theo tháng. Dịch vụ tạo video không phải là bước
+bắt buộc đối với khách hàng đã có sẵn nội dung phù hợp.
+
+Quy trình hoạt động cơ bản gồm các bước sau:
 
 \begin{enumerate}
-    \item \textbf{Nhận brief và kiểm tra điều kiện:} xác định khóa học, mục tiêu
-    chiến dịch, nền tảng, tài khoản, khung giờ, số giờ-kênh và đầu ra của gói;
-    kiểm tra quyền sử dụng hình ảnh, giọng nói, tài liệu và điều kiện LIVE.
-    \item \textbf{Chuẩn hóa dữ liệu khóa học:} nhập học phí, lịch khai giảng,
-    lộ trình, trình độ đầu vào, ưu đãi, CTA, FAQ và nguyên tắc chuyển người thật
-    vào mẫu dữ liệu thống nhất. Các thông tin thiếu hoặc mâu thuẫn được yêu cầu
-    xác nhận trước khi tạo nội dung.
-    \item \textbf{Tạo kịch bản:} hệ thống đề xuất cấu trúc mở đầu, nội dung chính,
-    đoạn lặp hợp lý và lời kêu gọi đăng ký tư vấn hoặc học thử. Đội ngũ 1Stream
-    kiểm tra tuyên bố về khóa học và chỉnh sửa bản nháp.
-    \item \textbf{Tạo và duyệt video:} sinh giọng đọc hoặc avatar, ghép hình ảnh,
-    video nền và phụ đề; gửi bản xem trước cho khách hàng. Mọi thay đổi được ghi
-    nhận theo số lượt chỉnh sửa của gói và chỉ bản đã duyệt mới được sử dụng.
-    \item \textbf{Lên lịch phát:} cấu hình kênh, thời lượng và lịch; quy đổi thành
-    giờ-kênh; kiểm tra stream key, đường truyền, nhãn nội dung ghi hình trước và
-    các yêu cầu kỹ thuật của nền tảng.
-    \item \textbf{Phát và giám sát:} theo dõi trạng thái phiên, thời lượng thực
-    tế và sự cố. Khi có gián đoạn, đội ngũ áp dụng mức hỗ trợ và nguyên tắc bù
-    giờ đã công bố trong gói.
-    \item \textbf{Xử lý FAQ và lead:} AI Lead Assistant trả lời trong phạm vi cơ
-    sở tri thức, xin thông tin liên hệ theo kịch bản được duyệt và chuyển câu hỏi
-    chuyên sâu hoặc nhạy cảm cho đội tư vấn của khách hàng.
-    \item \textbf{Báo cáo và cải tiến:} bàn giao số giờ-kênh đã dùng, trạng thái
-    kỹ thuật, nhóm câu hỏi, lead và tỷ lệ cần can thiệp; cập nhật template cho
-    đợt tiếp theo nếu khách hàng mua lại.
+    \item \textbf{Tiếp nhận nhu cầu và lựa chọn gói dịch vụ:} xác định khóa học,
+    mục tiêu của phiên livestream hoặc đợt tuyển sinh, nền tảng sử dụng, số tài
+    khoản, tần suất phát, lượng tương tác dự kiến và quy trình tiếp nhận lead.
+    Trên cơ sở đó, khách hàng lựa chọn gói AI Agent, tạo video AI, vận hành
+    livestream hoặc giải pháp doanh nghiệp.
+
+    \item \textbf{Kết nối kênh và kiểm tra điều kiện vận hành:} kiểm tra quyền
+    truy cập tài khoản, điều kiện sử dụng tính năng livestream, stream key,
+    đường truyền, quyền sử dụng hình ảnh, giọng nói, tài liệu và các yêu cầu
+    ghi nhãn nội dung của từng nền tảng.
+
+    \item \textbf{Chuẩn hóa dữ liệu và thiết lập cơ sở tri thức:} nhập học phí,
+    lịch khai giảng, lộ trình, trình độ đầu vào, ưu đãi, CTA, FAQ, quy trình
+    đăng ký học thử và nguyên tắc chuyển cho nhân viên vào mẫu dữ liệu thống
+    nhất. Các thông tin thiếu hoặc mâu thuẫn phải được khách hàng xác nhận
+    trước khi hệ thống được đưa vào sử dụng.
+
+    \item \textbf{Thiết lập AI Agent:} cấu hình giọng điệu, nội dung được phép
+    trả lời, thông tin cần thu thập và các trường hợp phải chuyển cho người
+    thật. AI Agent có thể trả lời câu hỏi phổ biến, hướng dẫn đăng ký, phân
+    loại nhu cầu và chuyển lead cho đội tư vấn của khách hàng trong phạm vi
+    dữ liệu đã duyệt.
+
+    \item \textbf{Tạo và duyệt video AI khi có nhu cầu:} đối với khách hàng mua
+    dịch vụ tạo video, hệ thống đề xuất kịch bản, sinh giọng đọc hoặc avatar,
+    ghép hình ảnh, video nền và phụ đề. Bản xem trước được gửi cho khách hàng
+    duyệt và mọi thay đổi được ghi nhận theo số lượt chỉnh sửa của gói. Chỉ
+    video đã được duyệt mới được sử dụng để phát.
+
+    \item \textbf{Lên lịch, phát và giám sát phiên livestream:} cấu hình kênh,
+    lịch phát và thời lượng; theo dõi trạng thái phiên, lượng tương tác và các
+    cảnh báo kỹ thuật. Thời lượng sử dụng được quy đổi theo giờ-kênh, trong đó
+    một giờ phát trên một kênh được tính là một giờ-kênh.
+
+    \item \textbf{Can thiệp ngoại lệ và chuyển người thật:} AI chỉ xử lý những
+    nội dung thuộc cơ sở tri thức và quy tắc đã được duyệt. Các câu hỏi chuyên
+    môn, khiếu nại, nội dung nhạy cảm hoặc trường hợp có khả năng chuyển đổi
+    cao được chuyển cho nhân viên của khách hàng xử lý.
+
+    \item \textbf{Báo cáo và cải tiến:} hệ thống tổng hợp số phiên, số giờ-kênh
+    đã sử dụng, số lượt phản hồi AI, nhóm câu hỏi phổ biến, số lead, tỷ lệ cần
+    nhân viên can thiệp và các sự cố phát sinh. Dữ liệu này được sử dụng để cập
+    nhật cơ sở tri thức và tối ưu nội dung cho các đợt tiếp theo.
 \end{enumerate}
 
-\subsubsection*{Cấu trúc gói thương mại dự kiến}
+
+\subsubsection*{Phân tích khả năng tiết kiệm và ROI dự kiến}
+
+Trong mô hình livestream truyền thống, một phiên kéo dài thường cần tối thiểu
+một nhân sự vận hành kỹ thuật, một nhân sự hỗ trợ bình luận và hai host luân
+phiên lên hình. 1Stream tập trung giảm khối lượng công việc lặp lại của các vai
+trò này thay vì cam kết thay thế hoàn toàn con người.
+
+AI Generative Video có thể đảm nhiệm phần giới thiệu khóa học, học phí, lịch
+khai giảng, ưu đãi và lời kêu gọi đăng ký đã được chuẩn hóa. AI Agent hỗ trợ
+trả lời FAQ, ghi nhận nhu cầu và sàng lọc lead. Doanh nghiệp vẫn duy trì một
+nhân sự giám sát để xử lý sự cố và các trường hợp ngoại lệ.
 
 \begin{table}[H]
     \centering
-    \small
+    \footnotesize
     \setlength{\tabcolsep}{4pt}
-    \renewcommand{\arraystretch}{1.25}
-    \caption{Cấu trúc gói dịch vụ của 1Stream}
-    \label{tab:goi-dich-vu-1stream}
-    \begin{tabularx}{\linewidth}{@{}L{3.2cm}Y L{3.0cm}@{}}
+    \renewcommand{\arraystretch}{1.3}
+    \caption{Phân tích khả năng tiết kiệm chi phí của khách hàng}
+    \label{tab:phan-tich-roi-1stream}
+    \begin{tabularx}{\linewidth}
+        {@{}L{2.7cm}L{3.3cm}Y L{3.0cm}@{}}
         \toprule
-        \textbf{Gói} & \textbf{Đầu ra chính} & \textbf{Cách tính} \\ \midrule
-        Tạo Video Livestream AI & Thu thập dữ liệu, tạo kịch bản, giọng đọc hoặc
-        avatar, video nền, phụ đề và số lượt chỉnh sửa quy định. & Mua một lần
-        cho từng video. \\
-        Phát Livestream 30H & Lên lịch, phát nội dung đã duyệt, giám sát trạng
-        thái và báo cáo thời lượng. & 30 giờ-kênh, có thời hạn sử dụng. \\
-        Livestream Trọn Bộ & Tạo video, 30 giờ-kênh, FAQ cơ bản, thu và chuyển
-        lead, báo cáo sau đợt. & Mua theo đợt hoặc theo tuần. \\
-        Dịch vụ bổ sung & Thêm video, ngôn ngữ, avatar, kênh, giờ, lượt chỉnh sửa
-        hoặc AI trả lời nâng cao. & Tính theo đơn vị phát sinh. \\ \bottomrule
+        \textbf{Hạng mục} &
+        \textbf{Mô hình hiện tại} &
+        \textbf{Tác động của 1Stream} &
+        \textbf{Khả năng tiết kiệm} \\ \midrule
+
+        Host livestream &
+        Cần hai host hoặc cộng tác viên luân phiên trong phiên dài. &
+        Video AI đảm nhiệm các phần nội dung đã chuẩn hóa, được duyệt trước
+        và có thể tái sử dụng trong nhiều khung giờ. &
+        Giảm chi phí thuê host cho nội dung lặp lại và khung giờ thấp điểm. \\
+
+        Hỗ trợ bình luận &
+        Cần một người trực bình luận, trả lời FAQ và sàng lọc người xem có
+        nhu cầu. &
+        AI Agent trả lời câu hỏi phổ biến, thu thông tin và chuyển câu hỏi
+        phức tạp cho nhân viên. &
+        Giảm số giờ trực bình luận và thời gian xử lý câu hỏi lặp lại. \\
+
+        Vận hành phiên &
+        Nhân viên phải thiết lập, theo dõi và tổng hợp trạng thái riêng trên
+        từng kênh. &
+        Dashboard tập trung lịch phát, trạng thái kênh, cảnh báo và dữ liệu
+        phiên livestream. &
+        Một nhân sự có thể giám sát nhiều phiên hoặc nhiều kênh hiệu quả hơn. \\
+
+        Sản xuất nội dung &
+        Phải viết lại kịch bản, thu âm, dựng video và làm phụ đề cho từng đợt
+        tuyển sinh. &
+        Hệ thống tạo kịch bản, giọng đọc hoặc avatar và video từ dữ liệu khóa
+        học đã chuẩn hóa. &
+        Giảm thời gian sản xuất nội dung và chi phí thuê ngoài theo từng video. \\
+
+        Quản lý đa kênh &
+        Phải lên lịch, kiểm tra và theo dõi từng tài khoản bằng nhiều công cụ
+        khác nhau. &
+        1Stream hỗ trợ quản lý lịch phát, thời lượng và trạng thái kênh trên
+        cùng một hệ thống. &
+        Giảm thao tác lặp lại và thời gian tổng hợp báo cáo. \\
+
+        Xử lý lead &
+        Bình luận có thể bị bỏ sót, phản hồi chậm hoặc không được chuyển đúng
+        người phụ trách. &
+        AI phân loại nhu cầu, ghi nhận lead và chuyển cho đội tư vấn theo
+        quy tắc được duyệt. &
+        Giảm chi phí cơ hội do bỏ sót người xem có nhu cầu. \\
+
+        Thời lượng hiện diện &
+        Thời gian phát phụ thuộc vào lịch làm việc và khả năng lên hình của
+        host. &
+        Video AI cho phép duy trì thêm các khung giờ phát đã được lên lịch
+        mà không cần bố trí thêm host tương ứng. &
+        Mở rộng thời lượng livestream mà không tăng tỷ lệ thuận số nhân sự. \\
+        \bottomrule
     \end{tabularx}
 \end{table}
 
-Giá bán chưa được ấn định trước khi có dữ liệu pilot. Giá sàn của từng gói phải
-được tính từ chi phí tạo video, chi phí mỗi giờ-kênh, công hỗ trợ, dự phòng sự cố
-và biên lợi nhuận mục tiêu.
+Hiệu quả tài chính của khách hàng được đánh giá bằng chênh lệch giữa tổng chi
+phí vận hành trước và sau khi sử dụng 1Stream:
+
+\[
+    ROI =
+    \frac{
+        \text{Chi phí tiết kiệm}
+        + \text{Giá trị tăng thêm}
+        - \text{Phí sử dụng 1Stream}
+    }{
+        \text{Phí sử dụng 1Stream}
+    }
+    \times 100\%
+\]
+
+Trong đó, chi phí tiết kiệm có thể gồm chi phí host, nhân sự hỗ trợ, sản xuất
+nội dung và thời gian vận hành. Giá trị tăng thêm có thể được đo bằng số giờ
+livestream được mở rộng, số lead không bị bỏ sót và thời gian nhân viên được
+giải phóng để tập trung vào tư vấn chuyên sâu.
+
+Các chỉ số cần thu thập trong giai đoạn pilot gồm số nhân sự tham gia mỗi phiên,
+số giờ làm việc, chi phí thuê host hoặc cộng tác viên, thời gian sản xuất một
+video, số lượt tương tác, tỷ lệ AI xử lý được và tỷ lệ cần nhân viên can thiệp.
+ROI thực tế chỉ được xác nhận sau khi so sánh dữ liệu trước và sau triển khai.
+
+
+\subsubsection*{Cấu trúc gói sản phẩm và dịch vụ dự kiến}
+
+\begin{table}[H]
+    \centering
+    \footnotesize
+    \setlength{\tabcolsep}{4pt}
+    \renewcommand{\arraystretch}{1.3}
+    \caption{Cấu trúc gói sản phẩm và dịch vụ của 1Stream}
+    \label{tab:goi-dich-vu-1stream}
+    \begin{tabularx}{\linewidth}
+        {@{}L{2.6cm}Y L{3.2cm}L{2.7cm}@{}}
+        \toprule
+        \textbf{Gói} &
+        \textbf{Dịch vụ cung cấp} &
+        \textbf{Hạn mức hoặc đầu ra dự kiến} &
+        \textbf{Giá dự kiến} \\ \midrule
+
+        AI Agent Basic &
+        Kết nối kênh, thiết lập cơ sở tri thức, trả lời FAQ, ghi nhận nhu cầu,
+        chuyển lead và báo cáo lượt tương tác. &
+        1 kênh, tối đa 200 lượt phản hồi AI mỗi tháng. &
+        399.000 đồng/tháng. \\
+
+        AI Agent Growth &
+        Quản lý tương tác đa kênh, trả lời FAQ, phân loại lead, chuyển nhân viên
+        và báo cáo tổng hợp. &
+        Tối đa 3 kênh, tối đa 1.000 lượt phản hồi AI mỗi tháng. &
+        799.000 đồng/tháng. \\
+
+        Tạo Video Livestream AI &
+        Chuẩn hóa dữ liệu, tạo kịch bản, giọng đọc hoặc avatar, video nền, phụ
+        đề, bản xem trước và số lượt chỉnh sửa theo thỏa thuận. &
+        Mua một lần theo từng video; giới hạn thời lượng và số lượt chỉnh sửa
+        được xác định trước. &
+        Dự kiến 800.000--1.500.000 đồng/video. \\
+
+        Livestream AI Trọn Gói &
+        Tiếp nhận hoặc tạo video, lên lịch phát, giám sát phiên, AI Agent hỗ trợ
+        FAQ, thu và chuyển lead, báo cáo sau mỗi tháng. &
+        Hạn mức số kênh, giờ-kênh và lượt phản hồi AI được quy định trong hợp
+        đồng; giai đoạn pilot có thể áp dụng tối đa 30 giờ-kênh mỗi tuần. &
+        Từ 3.000.000 đồng/tháng. \\
+
+        Enterprise &
+        Nhiều kênh hoặc chi nhánh, cơ sở tri thức riêng, hạn mức lớn, phân quyền,
+        tích hợp CRM, SLA và hỗ trợ theo yêu cầu doanh nghiệp. &
+        Xác định theo số tài khoản, phạm vi tích hợp, dữ liệu và mức hỗ trợ. &
+        Liên hệ báo giá. \\
+
+        Dịch vụ bổ sung &
+        Thêm video, ngôn ngữ, avatar, kênh, giờ-kênh, lượt phản hồi AI, lượt
+        chỉnh sửa hoặc tích hợp theo yêu cầu. &
+        Tính theo đơn vị phát sinh ngoài hạn mức của gói chính. &
+        Báo giá theo nhu cầu. \\
+        \bottomrule
+    \end{tabularx}
+\end{table}
+
+Các mức giá trên là giá dự kiến cho giai đoạn pilot và chưa phải bảng giá cố
+định. Mỗi gói phải quy định rõ số kênh, số lượt phản hồi AI, số video, số lượt
+chỉnh sửa, số giờ-kênh, thời hạn sử dụng, phạm vi giám sát và mức hỗ trợ khi có
+sự cố.
+
+Sau pilot, giá bán được điều chỉnh dựa trên chi phí mỗi lượt phản hồi AI, chi
+phí tạo một video, chi phí mỗi giờ-kênh, thời gian hỗ trợ thủ công, tỷ lệ sự cố
+và biên lợi nhuận gộp mục tiêu.
