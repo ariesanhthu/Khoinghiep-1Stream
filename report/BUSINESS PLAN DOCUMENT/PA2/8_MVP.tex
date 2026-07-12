@@ -1,1 +1,19 @@
 \subsection{Phiên bản sản phẩm tối thiểu khả thi, gọi là MVP}
+MVP của 1Stream được định nghĩa là phiên bản tối thiểu giúp kiểm chứng năng lực lõi của sản phẩm: hỗ trợ người bán livestream xử lý bình luận, tư vấn sản phẩm và chốt đơn cơ bản dựa trên dữ liệu riêng của từng shop. Ở giai đoạn này, MVP không nhằm triển khai đầy đủ toàn bộ nền tảng AI livestream, mà tập trung chứng minh rằng AI Sales Agent có thể giảm tải vận hành cho shop nhỏ và SME trong một phiên bán hàng thực tế.
+
+Phiên bản MVP v1 sẽ bao gồm các thành phần chính: dashboard quản lý phiên livestream, cơ sở tri thức sản phẩm, luồng tiếp nhận bình luận, phân loại ý định khách hàng, trả lời tự động theo dữ liệu sản phẩm và cơ chế chuyển tiếp cho người bán khi câu hỏi vượt ngoài phạm vi xử lý của AI. Người bán có thể nhập thông tin sản phẩm như tên sản phẩm, giá, tồn kho, ưu đãi, chính sách giao hàng và các câu hỏi thường gặp để hệ thống sử dụng làm nguồn trả lời.
+
+Các tính năng cốt lõi của MVP bao gồm:
+\begin{itemize}
+    \item Quản lý một phiên livestream thử nghiệm trên dashboard.
+    \item Nhập và cập nhật Knowledge Database cho từng shop.
+    \item Thu thập hoặc mô phỏng luồng bình luận từ khách hàng.
+    \item Phân loại ý định bình luận như hỏi giá, hỏi tồn kho, hỏi phí ship, hỏi ưu đãi hoặc muốn mua.
+    \item Tạo phản hồi tự động dựa trên dữ liệu sản phẩm đã được xác thực.
+    \item Đánh dấu các bình luận cần người bán xử lý thủ công.
+    \item Tổng hợp báo cáo sau phiên live về số bình luận, tốc độ phản hồi và các lead tiềm năng.
+\end{itemize}
+
+Trong phạm vi MVP v1, các tính năng nặng như tạo host ảo, sinh video AI hoàn chỉnh, tích hợp sâu CRM/ERP và phát livestream đa nền tảng ở quy mô lớn sẽ chưa được ưu tiên. Những tính năng này sẽ được phát triển ở các phiên bản tiếp theo sau khi nhóm kiểm chứng được nhu cầu thật, độ chính xác của AI Sales Agent và mức sẵn sàng trả phí của khách hàng mục tiêu.
+
+MVP sẽ được thử nghiệm với một nhóm nhỏ shop online hoặc SME trong ngành FMCG/beauty. Các chỉ số đánh giá chính gồm thời gian phản hồi bình luận, tỷ lệ câu trả lời chính xác, số lượng câu hỏi bị bỏ sót, tỷ lệ câu trả lời cần người bán chỉnh sửa và phản hồi của người dùng về quy trình thiết lập dữ liệu sản phẩm.
