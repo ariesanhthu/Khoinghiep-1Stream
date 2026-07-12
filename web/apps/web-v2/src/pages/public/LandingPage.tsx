@@ -1,1409 +1,525 @@
-import { useState, useEffect, useRef } from 'react'
-import { useNavigate, Link } from 'react-router-dom'
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import {
-  Sparkles,
-  Play,
-  Package,
-  Mic2,
-  Video,
-  Check,
   ArrowRight,
-  TrendingUp,
-  Clock,
-  ShieldCheck,
+  BadgeCheck,
+  BookOpen,
+  Bot,
+  CalendarClock,
+  Check,
   ChevronDown,
-  Users,
-  Award,
-  Zap,
-  Phone,
-  Mail,
-  MapPin,
-  Laptop,
-  CheckCircle,
-  HelpCircle,
-  ChevronRight,
-  MessageSquare
+  CirclePlay,
+  Clock3,
+  FileCheck2,
+  FileText,
+  GraduationCap,
+  Headphones,
+  MessageCircleMore,
+  Radio,
+  Share2,
+  Send,
+  ShieldCheck,
+  Sparkles,
+  Target,
+  UserRoundCheck,
+  UsersRound,
+  Video,
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardContent,
-  CardFooter,
-} from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
-import { Separator } from '@/components/ui/separator'
-import { cn, formatVND } from '@/lib/utils'
-import { useSubscriptionStore } from '@/store/subscriptionStore'
-import { PLATFORM_META } from '@/types'
-import type { PlatformId, PlanId } from '@/types'
-import { toast } from '@/components/ui/sonner'
+import { cn } from '@/lib/utils'
 
-interface ChatMessage {
-  id: string
-  user: string
-  avatar: string
-  message: string
-  timestamp: string
-  platform: PlatformId
-  isAI?: boolean
-  link?: { label: string; href: string }
-}
-
-const BRAND_PLATFORMS = [
-  { name: 'TikTok Shop', color: '#fe2c55', bg: 'bg-[#fe2c55]/10', text: 'text-[#fe2c55]', id: 'tiktok' as PlatformId },
-  { name: 'Shopee Live', color: '#ee4d2d', bg: 'bg-[#ee4d2d]/10', text: 'text-[#ee4d2d]', id: 'shopee' as PlatformId },
-  { name: 'Facebook Live', color: '#1877f2', bg: 'bg-[#1877f2]/10', text: 'text-[#1877f2]', id: 'facebook' as PlatformId },
-  { name: 'YouTube Live', color: '#ff0000', bg: 'bg-[#ff0000]/10', text: 'text-[#ff0000]', id: 'youtube' as PlatformId },
-]
-
-const INTRO_CAPABILITIES = [
+const SERVICES = [
   {
-    icon: Sparkles,
-    title: 'Nói chuyện tự nhiên như người thật',
-    desc: 'Hệ thống chuyển đổi kịch bản văn bản thành giọng nói A.I với ngữ điệu sinh động, cảm xúc chân thực và khẩu hình đồng bộ tự nhiên.',
-    color: 'from-violet-500 to-purple-500',
+    icon: Video,
+    number: '01',
+    title: 'Tạo video livestream AI',
+    description:
+      'Chuẩn hóa dữ liệu khóa học, tạo kịch bản, giọng đọc hoặc avatar, video nền và phụ đề để trung tâm duyệt trước.',
+    deliverables: ['Video theo từng chiến dịch', 'Bản xem trước để góp ý', 'Số lượt chỉnh sửa rõ ràng'],
+    accent: 'bg-blue-600',
   },
   {
-    icon: MessageSquare,
-    title: 'Tương tác trực tiếp với người xem',
-    desc: 'A.I có khả năng tự động đọc và phản hồi bình luận real-time theo kịch bản thiết lập sẵn, tạo tương tác hai chiều nhịp nhàng.',
-    color: 'from-sky-500 to-blue-500',
+    icon: CalendarClock,
+    number: '02',
+    title: 'Vận hành giờ phát',
+    description:
+      'Lên lịch, phát trên kênh đủ điều kiện, giám sát trạng thái và tổng hợp thời lượng theo đơn vị giờ-kênh.',
+    deliverables: ['Facebook & TikTok', 'Theo dõi giờ-kênh', 'Báo cáo trạng thái phiên'],
+    accent: 'bg-amber-500',
   },
   {
-    icon: Clock,
-    title: 'Phát sóng 24/7, không gián đoạn',
-    desc: 'Duy trì livestream liên tục suốt ngày đêm không mệt mỏi, không lo mất năng lượng, phù hợp với mọi múi giờ và chiến dịch.',
-    color: 'from-amber-500 to-orange-500',
-  },
-  {
-    icon: Laptop,
-    title: 'Đa nền tảng – Một lần thiết lập',
-    desc: 'Cấu hình đơn giản một lần, tự động phát luồng song song lên TikTok, Shopee, Facebook, YouTube cùng lúc giúp tiếp cận tối đa khách hàng.',
-    color: 'from-emerald-500 to-teal-500',
+    icon: MessageCircleMore,
+    number: '03',
+    title: 'FAQ & thu lead',
+    description:
+      'AI trả lời trong phạm vi dữ liệu đã duyệt, ghi nhận nhu cầu học thử và chuyển câu hỏi chuyên sâu cho tư vấn viên.',
+    deliverables: ['FAQ nhất quán', 'Phân loại nhu cầu', 'Human-in-the-loop'],
+    accent: 'bg-emerald-500',
   },
 ]
 
-const STEPS_WORKFLOW = [
+const WORKFLOW = [
   {
-    step: '01',
-    title: 'Nhập kịch bản nội dung',
-    desc: 'Người dùng soạn sẵn nội dung hoặc để trợ lý AI (tích hợp ChatGPT) tự động viết kịch bản livestream thu hút từ thông tin, thuộc tính của sản phẩm.',
-    visualTitle: 'Trình soạn kịch bản AI',
-    visualContent: (
-      <div className="space-y-3 font-mono text-xs">
-        <div className="flex items-center gap-2 border-b border-border/40 pb-2">
-          <span className="h-2 w-2 rounded-full bg-red-400" />
-          <span className="text-muted-foreground">Kich_Ban_Ban_Ao_Thun.txt</span>
-        </div>
-        <div className="space-y-1.5 text-muted-foreground">
-          <p><span className="text-primary font-bold">[Mở đầu]</span> Chào mọi người nhé! Hôm nay em mang đến một cực phẩm áo thun cotton 100% cực mát...</p>
-          <p className="text-foreground bg-primary/10 p-1.5 rounded border border-primary/20"><span className="text-primary font-bold">[Ưu đãi]</span> Áo thun này hiện đang giảm mạnh 30% duy nhất trên sóng live hôm nay! Chỉ còn 149k thui ạ!</p>
-          <p><span className="text-primary font-bold">[Tương tác]</span> Ai muốn tư vấn size thì comment chiều cao cân nặng giúp em nha!</p>
-        </div>
-        <div className="flex items-center justify-between text-[10px] text-muted-foreground bg-muted p-2 rounded">
-          <span>✍️ AI đã tạo kịch bản bán hàng tự động</span>
-          <span className="text-primary font-semibold">Tối ưu hóa thành công</span>
-        </div>
-      </div>
-    )
-  },
-  {
-    step: '02',
-    title: 'Chọn nhân vật ảo (A.I Avatar)',
-    desc: 'Lựa chọn từ thư viện hơn 50+ avatar nam/nữ đa dạng quốc tịch, độ tuổi, trang phục hoặc yêu cầu nhân bản độc quyền chính gương mặt của doanh nghiệp bạn.',
-    visualTitle: 'Thư viện Người mẫu A.I',
-    visualContent: (
-      <div className="grid grid-cols-3 gap-2 text-xs">
-        <div className="border border-primary bg-primary/5 rounded-lg p-2 flex flex-col items-center gap-1.5 text-center relative overflow-hidden">
-          <div className="absolute top-1 right-1 h-2 w-2 rounded-full bg-green-500" />
-          <div className="h-10 w-10 rounded-full bg-slate-200 border border-primary/20 overflow-hidden">
-            <img src="https://api.dicebear.com/7.x/adventurer/svg?seed=Mai" alt="Mai" />
-          </div>
-          <span className="font-semibold">Mai Anh</span>
-          <span className="text-[9px] text-muted-foreground">Giọng Việt Bắc</span>
-        </div>
-        <div className="border border-border rounded-lg p-2 flex flex-col items-center gap-1.5 text-center hover:bg-muted/40 transition-colors cursor-pointer">
-          <div className="h-10 w-10 rounded-full bg-slate-200 border border-border overflow-hidden">
-            <img src="https://api.dicebear.com/7.x/adventurer/svg?seed=Quoc" alt="Quoc" />
-          </div>
-          <span className="font-semibold">Quốc Tuấn</span>
-          <span className="text-[9px] text-muted-foreground">Giọng Việt Nam</span>
-        </div>
-        <div className="border border-border rounded-lg p-2 flex flex-col items-center gap-1.5 text-center hover:bg-muted/40 transition-colors cursor-pointer">
-          <div className="h-10 w-10 rounded-full bg-slate-200 border border-border overflow-hidden">
-            <img src="https://api.dicebear.com/7.x/adventurer/svg?seed=Elena" alt="Elena" />
-          </div>
-          <span className="font-semibold">Elena</span>
-          <span className="text-[9px] text-muted-foreground">Giọng Anh-Mỹ</span>
-        </div>
-        <div className="col-span-3 border border-dashed border-border rounded-lg p-2 flex items-center justify-center gap-2 text-muted-foreground hover:text-foreground cursor-pointer">
-          <Sparkles className="h-4 w-4 text-primary" />
-          <span>Tạo Custom Digital Human riêng của bạn</span>
-        </div>
-      </div>
-    )
-  },
-  {
-    step: '03',
-    title: 'A.I xử lý & Lên sóng',
-    desc: 'Hệ thống tự động đồng bộ khẩu hình môi khớp 99% với kịch bản thoại tiếng Việt, thiết lập luồng phát đa kênh và kích hoạt chế độ tự động tương tác bình luận.',
-    visualTitle: 'Bảng điều khiển Live Đa Kênh',
-    visualContent: (
-      <div className="space-y-3 text-xs">
-        <div className="flex items-center justify-between border-b border-border/40 pb-2">
-          <div className="flex items-center gap-2">
-            <span className="h-2 w-2 rounded-full bg-red-500 animate-ping" />
-            <span className="font-bold text-red-500">ĐANG PHÁT TRỰC TIẾP</span>
-          </div>
-          <span className="text-muted-foreground text-[10px]">Thời gian: 03h:42m</span>
-        </div>
-        <div className="space-y-2">
-          <div className="flex items-center justify-between bg-muted/60 p-2 rounded">
-            <span className="font-semibold text-foreground">TikTok Shop Live</span>
-            <span className="px-1.5 py-0.5 rounded bg-green-500/10 text-green-500 text-[10px] border border-green-500/20 font-bold">KHỎE MẠNH</span>
-          </div>
-          <div className="flex items-center justify-between bg-muted/60 p-2 rounded">
-            <span className="font-semibold text-foreground">Shopee Live Feed</span>
-            <span className="px-1.5 py-0.5 rounded bg-green-500/10 text-green-500 text-[10px] border border-green-500/20 font-bold">KHỎE MẠNH</span>
-          </div>
-          <div className="flex items-center justify-between bg-muted/60 p-2 rounded">
-            <span className="font-semibold text-foreground">Facebook Page Stream</span>
-            <span className="px-1.5 py-0.5 rounded bg-green-500/10 text-green-500 text-[10px] border border-green-500/20 font-bold">KHỎE MẠNH</span>
-          </div>
-        </div>
-      </div>
-    )
-  },
-  {
-    step: '04',
-    title: 'Theo dõi & Tối ưu hóa',
-    desc: 'Xem báo cáo doanh thu bán hàng, biểu đồ mắt xem thực tế, số lượng bình luận được AI xử lý và phân tích hành vi mua sắm của khách hàng tức thì.',
-    visualTitle: 'Báo cáo & Phân tích thời gian thực',
-    visualContent: (
-      <div className="space-y-3 text-xs">
-        <div className="grid grid-cols-2 gap-2 text-center">
-          <div className="bg-muted p-2 rounded border border-border/30">
-            <div className="text-[10px] text-muted-foreground">Mắt xem cao nhất</div>
-            <div className="text-base font-extrabold text-primary">14.280</div>
-          </div>
-          <div className="bg-muted p-2 rounded border border-border/30">
-            <div className="text-[10px] text-muted-foreground">Bình luận đã trả lời</div>
-            <div className="text-base font-extrabold text-sky-500">1.840</div>
-          </div>
-        </div>
-        <div className="border border-border/40 rounded p-2 bg-card space-y-1.5">
-          <div className="flex justify-between items-center text-[10px]">
-            <span className="text-muted-foreground">Tỷ lệ chuyển đổi đơn</span>
-            <span className="font-bold text-green-500">+48.2%</span>
-          </div>
-          <div className="h-1.5 w-full bg-slate-100 rounded overflow-hidden">
-            <div className="h-full w-[78%] bg-gradient-to-r from-primary to-sky-500 rounded" />
-          </div>
-          <span className="text-[9px] text-muted-foreground block text-right">Tăng trưởng 2.5x so với tuần trước</span>
-        </div>
-      </div>
-    )
-  }
-]
-
-const FEATURE_GRID = [
-  {
-    icon: Clock,
-    title: 'Phát trực tiếp 24/7 không giới hạn',
-    desc: 'Phát sóng liên tục suốt ngày đêm để tiếp cận khách hàng ở mọi khung giờ, tăng tối đa cơ hội tiếp xúc. Hệ thống tự động lặp nội dung linh hoạt theo lịch đặt sẵn.',
-  },
-  {
-    icon: Users,
-    title: 'Thư viện 50+ Avatar đa dạng',
-    desc: 'Kho tàng hơn 50 nhân vật ảo nam/nữ từ nhiều độ tuổi, sắc tộc, phong cách. Đặc biệt hỗ trợ các avatar nói tiếng Việt chuẩn, phát âm tự nhiên, biểu cảm chân thực.',
+    icon: FileText,
+    title: 'Gửi dữ liệu khóa học',
+    description: 'Học phí, lịch khai giảng, đầu vào, giáo trình, ưu đãi, hình ảnh và FAQ.',
   },
   {
     icon: Sparkles,
-    title: 'AI tự động viết kịch bản & TTS',
-    desc: 'Chỉ cần cung cấp từ khóa sản phẩm, AI sẽ tự tạo kịch bản bán hàng chuẩn SEO, chốt deal tốt. Sau đó, công nghệ Text-to-Speech sẽ tự động chuyển thành giọng nói truyền cảm.',
+    title: '1Stream tạo nội dung',
+    description: 'Đội ngũ chuẩn hóa dữ liệu, tạo kịch bản, giọng đọc, avatar và bản video nháp.',
   },
   {
-    icon: Laptop,
-    title: 'Đa nền tảng – Phát đồng thời',
-    desc: 'Tiết kiệm thời gian với tính năng cấu hình 1 lần, phát song song cùng lúc lên Facebook, Shopee Live, TikTok Shop, Lazada, YouTube... không gây trễ luồng.',
+    icon: FileCheck2,
+    title: 'Trung tâm duyệt',
+    description: 'Chỉ phiên bản đã xác nhận mới được đưa vào lịch phát và cơ sở tri thức.',
   },
   {
-    icon: MessageSquare,
-    title: 'Tương tác real-time thông minh',
-    desc: 'Avatar AI có khả năng đọc bình luận trực tiếp của người xem và phản hồi trả lời bằng giọng nói theo kịch bản và luật đã định, tự động dẫn link giỏ hàng.',
-  },
-  {
-    icon: Zap,
-    title: 'Thiết lập nhanh chóng dưới 10 phút',
-    desc: 'Giao diện trực quan được tối ưu hóa cho người không chuyên. Chỉ cần chọn avatar, nhập kịch bản sản phẩm, kết nối luồng và bấm phát ngay tức thì.',
+    icon: Radio,
+    title: 'Phát, hỗ trợ và báo cáo',
+    description: 'Theo dõi phiên, hỗ trợ FAQ, thu lead và bàn giao báo cáo sau đợt.',
   },
 ]
 
-const FAQ_LIST = [
+const SCENARIOS = [
   {
-    q: '1. A.I Livestream khác gì so với livestream truyền thống?',
-    a: 'Hệ thống dùng nhân vật ảo A.I Avatar tự phát sóng, đồng bộ khẩu hình và tương tác tự động — không cần MC, không cần studio. Doanh nghiệp livestream 24/7 với chi phí tối thiểu.'
+    id: 'opening',
+    tab: 'Mở lớp mới',
+    title: 'Livestream tuyển sinh trước ngày khai giảng',
+    subtitle: 'IELTS Foundation 5.5 · Khai giảng 28/07',
+    script:
+      'Bạn đang muốn bắt đầu IELTS nhưng chưa biết trình độ hiện tại? Lớp Foundation 5.5 giúp bạn củng cố ngữ pháp, từ vựng và làm quen đủ 4 kỹ năng trong 12 tuần.',
+    comment: 'Em mất gốc thì có học lớp này được không ạ?',
+    answer:
+      'Lớp phù hợp với đầu vào khoảng 3.0–3.5. Bạn có thể đăng ký kiểm tra đầu vào miễn phí; tư vấn viên sẽ xác nhận lớp phù hợp sau khi có kết quả.',
+    intent: 'Kiểm tra đầu vào',
   },
   {
-    q: '2. iLive có thể phát đồng thời trên những nền tảng nào?',
-    a: 'Phát đồng thời lên TikTok Shop, Shopee Live, Facebook Live, Lazada và YouTube. Tất cả quản lý tập trung trên một bảng điều khiển duy nhất.'
+    id: 'trial',
+    tab: 'Thu lead học thử',
+    title: 'Giới thiệu buổi học trải nghiệm',
+    subtitle: 'Giao tiếp tiếng Anh · Học thử tối thứ 5',
+    script:
+      'Buổi học thử 60 phút tập trung phản xạ giao tiếp theo tình huống thật. Học viên được giáo viên đánh giá phát âm và gợi ý lộ trình sau buổi học.',
+    comment: 'Mình muốn đăng ký học thử thì làm sao?',
+    answer:
+      'Bạn để lại từ khóa HỌC THỬ, 1Stream sẽ gửi biểu mẫu đăng ký. Trung tâm chỉ liên hệ khi bạn đồng ý cung cấp thông tin.',
+    intent: 'Lead học thử',
   },
   {
-    q: '3. Tôi có thể tự chọn giọng nói hoặc ngoại hình nhân vật ảo không?',
-    a: 'Thư viện 50+ avatar nam/nữ đa dạng phong cách và giọng vùng miền. Doanh nghiệp lớn có thể clone hình ảnh + giọng nói riêng để tạo Digital Human thương hiệu độc quyền.'
+    id: 'faq',
+    tab: 'FAQ ngoài giờ',
+    title: 'Giải đáp câu hỏi lặp lại ngoài khung live thật',
+    subtitle: 'Tiếng Hàn TOPIK I · Cơ sở Quận 3',
+    script:
+      'Khóa TOPIK I dành cho người mới bắt đầu, gồm 36 buổi. Học viên được cung cấp giáo trình và tham gia nhóm chữa bài xuyên suốt khóa.',
+    comment: 'Học phí bao nhiêu và có lớp cuối tuần không?',
+    answer:
+      'Học phí đang được duyệt là 2.800.000đ/khóa. Hiện có lớp sáng thứ 7 và chủ nhật; câu hỏi về bảo lưu sẽ được chuyển cho tư vấn viên.',
+    intent: 'Học phí & lịch học',
   },
-  {
-    q: '4. Nhân vật ảo A.I có thực sự trả lời bình luận của khách hàng theo thời gian thực không?',
-    a: 'Có. AI Auto-Reply phân tích bình luận và điều khiển avatar trả lời bằng giọng nói ngay trên livestream, đồng thời ghim sản phẩm / gửi link mua hàng tự động.'
-  },
-  {
-    q: '5. Hệ thống có dễ sử dụng không? Có cần người kỹ thuật vận hành không?',
-    a: 'Không cần lập trình hay thiết bị phức tạp. 3 bước trong 10 phút: chọn nhân vật → nhập kịch bản → bấm phát sóng. Wizard hướng dẫn từng bước.'
-  },
-  {
-    q: '6. Có thể tự tùy chỉnh kịch bản nói và tạo kịch bản bằng AI không?',
-    a: 'Tự soạn hoặc dùng AI viết kịch bản tích hợp sẵn. Chỉ cần nhập tên sản phẩm + khuyến mãi, AI tạo kịch bản livestream chuyên nghiệp trong vài giây.'
-  },
-  {
-    q: '7. Chi phí và chính sách dùng thử của iLive như thế nào?',
-    a: 'Nhiều gói linh hoạt cho cá nhân đến doanh nghiệp. Dùng thử miễn phí 7 ngày đầy đủ tính năng, hủy bất kỳ lúc nào, không ràng buộc.'
-  }
 ]
 
-const DEMO_VIDEOS = [
+const PACKAGES = [
   {
-    title: 'Video MC Quay Thật',
-    badge: 'Nguyên Bản',
-    badgeColor: 'border-muted-foreground/30 bg-muted/20 text-muted-foreground',
-    desc: 'Video ghi hình thực tế của MC làm tư liệu quét hình ảnh và giọng nói.',
-    src: '/videos/video_goc.mp4',
-    poster: '/videos/thumbs/goc.jpg',
-    duration: '0:22',
-    longDesc: 'Đây là video ghi hình thực tế của MC thật trong phòng studio phông xanh. Video này được sử dụng làm nguồn dữ liệu đầu vào (Dataset) chất lượng cao để hệ thống A.I học cử chỉ gương mặt, khẩu hình môi và clone (nhân bản) giọng nói độc quyền.',
-    tagName: 'MC Thật (Original)',
-    tagColor: 'border-muted-foreground/30 bg-muted/20 text-muted-foreground',
-    keySpecs: ['MC thật 100%', 'Độ phân giải Full HD', 'Giọng nói tự nhiên', 'Cần chuẩn bị phòng Studio và thiết bị']
+    name: 'AI Agent Basic',
+    price: '399.000đ',
+    unit: '/ tháng',
+    description: 'Bắt đầu với một kênh và bộ FAQ đã duyệt.',
+    features: ['1 kênh kết nối', 'Tối đa 200 phản hồi AI/tháng', 'Ghi nhận và chuyển lead', 'Báo cáo lượt tương tác'],
   },
   {
-    title: 'Gói Standard (AI Lip-Sync)',
-    badge: 'Standard',
-    badgeColor: 'border-blue-500/30 bg-blue-500/10 text-blue-400',
-    desc: 'AI thay đổi khẩu hình môi khớp với kịch bản văn bản mới.',
-    src: '/videos/video_free.mp4',
-    poster: '/videos/thumbs/free.jpg',
-    duration: '0:22',
-    longDesc: 'Phiên bản A.I Livestream sử dụng công nghệ Lip-sync tiêu chuẩn. Hệ thống chỉ xử lý và điều chỉnh chuyển động vùng cơ môi của nhân vật để khớp đồng bộ với kịch bản thoại mới được nhập vào, trong khi các cử động cơ thể và nền tảng cũ được giữ nguyên.',
-    tagName: 'A.I Standard (Lip-Sync)',
-    tagColor: 'border-blue-500/30 bg-blue-500/10 text-blue-400',
-    keySpecs: ['Khẩu hình khớp cơ bản', 'Độ phân giải 720p', 'Tối đa 2 nền tảng', 'AI hỗ trợ chốt đơn cơ bản']
+    name: 'Tạo Video Livestream AI',
+    price: '800K–1,5tr',
+    unit: '/ video',
+    description: 'Đầu ra trọn vẹn cho một nội dung tuyển sinh.',
+    features: ['Chuẩn hóa dữ liệu & kịch bản', 'Giọng đọc hoặc avatar', 'Video nền và phụ đề', 'Bản xem trước & lượt sửa theo gói'],
+    featured: true,
   },
   {
-    title: 'Gói Pro (AI VEO3 Cao Cấp)',
-    badge: 'Pro VEO3',
-    badgeColor: 'border-primary/30 bg-primary/10 text-primary',
-    desc: 'Mô hình VEO3 thế hệ mới tái tạo chuyển động và biểu cảm siêu thực.',
-    src: '/videos/video_pro.mp4',
-    poster: '/videos/thumbs/pro.jpg',
-    duration: '0:22',
-    longDesc: 'Giải pháp A.I Livestream cao cấp nhất ứng dụng mô hình AI VEO3 độc quyền. Không chỉ đồng bộ khẩu hình môi đạt độ mượt mà tuyệt đối 99%, VEO3 còn tạo ra các biểu cảm tự nhiên như nháy mắt, nhíu mày, mỉm cười và chuyển động đầu khớp với ngữ điệu nói sinh động.',
-    tagName: 'A.I Pro (Mô Hình VEO3)',
-    tagColor: 'border-primary/30 bg-primary/10 text-primary',
-    keySpecs: ['Công nghệ VEO3 siêu thực', 'Độ phân giải 2K sắc nét', 'Đồng bộ khẩu hình 99%', 'Không watermark', 'Clone giọng nói cảm xúc']
-  }
+    name: 'Livestream AI Trọn Gói',
+    price: 'Từ 3.000.000đ',
+    unit: '/ tháng',
+    description: '1Stream cùng vận hành từ dữ liệu đến báo cáo.',
+    features: ['Tạo hoặc tiếp nhận video', 'Lịch phát & giám sát phiên', 'FAQ, thu và chuyển lead', 'Hạn mức giờ-kênh theo hợp đồng'],
+  },
+]
+
+const FAQS = [
+  {
+    question: '1Stream có phải phần mềm tự phục vụ hoàn toàn không?',
+    answer:
+      'Chưa. Trong giai đoạn đầu, 1Stream là nền tảng có dịch vụ vận hành theo gói. Khách hàng mua đầu ra cụ thể; đội ngũ 1Stream thực hiện, kiểm soát chất lượng và bàn giao kết quả.',
+  },
+  {
+    question: 'Một giờ-kênh được tính như thế nào?',
+    answer:
+      'Phát một giờ trên một kênh được tính là một giờ-kênh. Nếu phát đồng thời một giờ trên Facebook và TikTok, tổng mức sử dụng là hai giờ-kênh.',
+  },
+  {
+    question: 'AI có tự tư vấn chuyên môn hoặc chốt thanh toán không?',
+    answer:
+      'Không. AI chỉ phản hồi trong phạm vi dữ liệu đã duyệt, ghi nhận nhu cầu và chuyển các câu hỏi chuyên sâu hoặc trường hợp cần cam kết cho nhân viên của trung tâm.',
+  },
+  {
+    question: 'Cần chuẩn bị gì để tạo một phiên mẫu?',
+    answer:
+      'Tối thiểu gồm mô tả khóa học, học phí, lịch khai giảng, yêu cầu đầu vào, ưu đãi, quy trình đăng ký, FAQ và tài sản hình ảnh có quyền sử dụng.',
+  },
 ]
 
 export function LandingPage() {
   const navigate = useNavigate()
-  const plans = useSubscriptionStore((s) => s.plans)
-  const startTrial = useSubscriptionStore((s) => s.startTrial)
-  const [activeDemoIndex, setActiveDemoIndex] = useState(0)
+  const [activeScenario, setActiveScenario] = useState(0)
+  const [openFaq, setOpenFaq] = useState<number | null>(0)
 
-  // Interactive UI States
-  const [activePlatform, setActivePlatform] = useState<PlatformId>('tiktok')
-  const [viewers, setViewers] = useState(2450)
-  const [chatMessages, setChatMessages] = useState<ChatMessage[]>([
-    {
-      id: '1',
-      user: 'Khánh Vy',
-      avatar: 'https://api.dicebear.com/7.x/adventurer/svg?seed=Vy',
-      message: 'Son màu cam đất còn hàng không shop ơi? Cho em xem bảng màu với ạ!',
-      timestamp: '15:20',
-      platform: 'tiktok',
-    },
-    {
-      id: '2',
-      user: 'iLive Assistant',
-      avatar: 'https://api.dicebear.com/7.x/bottts/svg?seed=assistant',
-      message: 'Chào Khánh Vy! Son màu cam đất hiện đang có sẵn 5 thỏi trong giỏ hàng. Bạn bấm vào sản phẩm số 3 để nhận ngay mã giảm giá 30k hôm nay nhé!',
-      timestamp: '15:20',
-      platform: 'tiktok',
-      isAI: true,
-      link: { label: 'Mua ngay - 189.000đ', href: '#' },
-    },
-  ])
-  const [activeStepTab, setActiveStepTab] = useState(0)
-  const [openFaq, setOpenFaq] = useState<number | null>(null)
-
-  // Lead Generation form state
-  const [formData, setFormData] = useState({
-    name: '',
-    phone: '',
-    email: '',
-    message: '',
-    businessType: 'Cá nhân'
-  })
-  const [isSubmittingForm, setIsSubmittingForm] = useState(false)
-  const [formSubmitted, setFormSubmitted] = useState(false)
-
-  // Stream simulation effects
-  useEffect(() => {
-    const activeMeta = PLATFORM_META[activePlatform]
-    // Generate viewer simulation base on active platform
-    const baseViewers = activePlatform === 'shopee' ? 3850 : activePlatform === 'tiktok' ? 2450 : activePlatform === 'facebook' ? 1280 : 920
-    setViewers(baseViewers)
-
-    // Append welcome message
-    const timeStr = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-    const systemMsg: ChatMessage = {
-      id: Date.now().toString() + '-sys',
-      user: 'Hệ thống iLive',
-      avatar: 'https://api.dicebear.com/7.x/bottts/svg?seed=ilive',
-      message: `Đã đồng bộ thành công luồng phát tự động đến kênh ${activePlatform === 'shopee' ? 'Shopee Live' : activePlatform === 'tiktok' ? 'TikTok Shop' : activePlatform === 'facebook' ? 'Facebook Live' : 'YouTube Live'}.`,
-      timestamp: timeStr,
-      platform: activePlatform,
-      isAI: true,
-    }
-    setChatMessages((prev) => [...prev.slice(-4), systemMsg])
-  }, [activePlatform])
-
-  // Periodic simulated user questions & chat scroll
-  useEffect(() => {
-    const vnQuestions = [
-      { user: 'Thế Anh', text: 'Có được kiểm tra hàng trước khi nhận không shop?' },
-      { user: 'Minh Hằng', text: 'Ủng hộ shop 2 đơn rồi nha, hàng dùng siêu thích!' },
-      { user: 'Hoài Nam', text: 'Sản phẩm này bảo hành bao lâu thế ạ?' },
-      { user: 'Bích Phương', text: 'Giao về Hà Nội mất mấy ngày vậy ạ?' },
-    ]
-
-    const triggerMessageSim = () => {
-      const qIndex = Math.floor(Math.random() * vnQuestions.length)
-      const selected = vnQuestions[qIndex]
-      const timeStr = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-
-      const newCustMsg: ChatMessage = {
-        id: Date.now().toString() + '-cust',
-        user: selected.user,
-        avatar: `https://api.dicebear.com/7.x/adventurer/svg?seed=${selected.user}`,
-        message: selected.text,
-        timestamp: timeStr,
-        platform: activePlatform,
-      }
-
-      setChatMessages((prev) => [...prev.slice(-4), newCustMsg])
-
-      // AI response delay simulation
-      setTimeout(() => {
-        let responseText: string
-        let linkObj = undefined
-
-        if (selected.text.includes('kiểm tra')) {
-          responseText = 'Chào Thế Anh nhé! Mọi đơn hàng mua từ live đều được đồng kiểm 100% trước khi thanh toán nên bạn hoàn toàn yên tâm nhé!'
-        } else if (selected.text.includes('Ủng hộ')) {
-          responseText = 'iLive xin cảm ơn Minh Hằng rất nhiều ạ! Món quà tri ân khách hàng thân thiết đã được gửi kèm đơn hàng của bạn rồi đó.'
-        } else if (selected.text.includes('bảo hành')) {
-          responseText = 'Sản phẩm này được bảo hành chính hãng 12 tháng lỗi 1 đổi 1 trong vòng 30 ngày đầu tiên nha Hoài Nam!'
-          linkObj = { label: 'Xem chi tiết bảo hành', href: '#' }
-        } else {
-          responseText = 'Chào Bích Phương! Đơn hàng sẽ được đóng gói phát ngay trong ngày, giao về Hà Nội cực nhanh chỉ từ 1 - 2 ngày thôi nhé.'
-        }
-
-        const newAIMsg: ChatMessage = {
-          id: Date.now().toString() + '-ai',
-          user: 'iLive Copilot (AI)',
-          avatar: 'https://api.dicebear.com/7.x/bottts/svg?seed=assistant',
-          message: responseText,
-          timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-          platform: activePlatform,
-          isAI: true,
-          link: linkObj,
-        }
-
-        setChatMessages((prev) => [...prev.slice(-4), newAIMsg])
-        setViewers((prev) => prev + Math.floor(Math.random() * 40) - 15)
-      }, 2000)
-    }
-
-    const interval = setInterval(triggerMessageSim, 10000)
-    return () => clearInterval(interval)
-  }, [activePlatform])
-
-  // Form submit handler simulation
-  const handleFormSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    if (!formData.name || !formData.phone) return
-
-    setIsSubmittingForm(true)
-    setTimeout(() => {
-      setIsSubmittingForm(false)
-      setFormSubmitted(true)
-    }, 1800)
-  }
-
-  const handleTrialStart = (planId: PlanId) => {
-    if (planId === 'enterprise') {
-      toast.info("Vui lòng liên hệ Hotline: 083 627 1312 hoặc gửi email về ilive@shopnow.vn để đăng ký gói Enterprise!", { duration: 5000 })
-      return
-    }
-    startTrial(planId as 'standard' | 'pro')
-    navigate('/login')
-  }
-
-  const handleContactPlan = (planName: string) => {
-    setFormData((prev) => ({
-      ...prev,
-      message: `Tôi muốn liên hệ để mua gói dịch vụ ${planName}. Vui lòng tư vấn cho tôi.`
-    }))
-    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })
-  }
+  const scenario = SCENARIOS[activeScenario]
 
   return (
-    <div className="relative pt-16 overflow-x-hidden">
-      {/* BACKGROUND DECORATIONS */}
-      <div className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute top-0 -left-48 h-[600px] w-[600px] rounded-full bg-primary/10 blur-3xl opacity-60" />
-        <div className="absolute top-96 -right-48 h-[500px] w-[500px] rounded-full bg-sky-500/10 blur-3xl opacity-50" />
-        <div className="absolute top-[1800px] left-1/3 h-[700px] w-[700px] rounded-full bg-fuchsia-500/5 blur-3xl opacity-40" />
-        <div className="absolute bottom-0 right-1/4 h-[500px] w-[500px] rounded-full bg-primary/10 blur-3xl opacity-50" />
-      </div>
-
-      {/* HERO SECTION */}
-      <section id="hero" className="relative min-h-[calc(100vh-4rem)] flex items-center py-20 px-6">
-        <div className="mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-12 w-full">
-          {/* Left Hero Texts */}
-          <div className="space-y-6 lg:col-span-7 text-left animate-appear">
-            <Badge variant="brand" className="px-3.5 py-1.5 rounded-full font-semibold text-xs tracking-wider uppercase animate-bounce">
-              <Sparkles className="mr-1.5 h-3.5 w-3.5 text-white animate-pulse" />
-              Kỷ nguyên Digital Human Commerce
-            </Badge>
-
-            <h1 className="text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl lg:text-6xl text-foreground">
-              Biến host đạt chuẩn thành <span className="bg-gradient-to-r from-primary to-sky-500 bg-clip-text text-transparent">tài sản số</span>
+    <div className="overflow-hidden bg-[#f7f8fb] text-slate-950">
+      <section id="hero" className="relative scroll-mt-20 border-b border-slate-200 bg-[#07172f] pt-28 text-white">
+        <div className="pointer-events-none absolute inset-0 opacity-30 [background-image:radial-gradient(circle_at_1px_1px,rgba(255,255,255,.18)_1px,transparent_0)] [background-size:28px_28px]" />
+        <div className="pointer-events-none absolute -right-40 top-10 h-[520px] w-[520px] rounded-full bg-blue-600/25 blur-3xl" />
+        <div className="relative mx-auto grid max-w-7xl gap-14 px-6 pb-20 lg:grid-cols-[1.03fr_.97fr] lg:items-center lg:px-8 lg:pb-28">
+          <div>
+            <div className="mb-7 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/8 px-3 py-1.5 text-xs font-semibold text-blue-100 backdrop-blur">
+              <GraduationCap className="h-4 w-4 text-amber-400" />
+              AI livestream cho trung tâm ngoại ngữ
+            </div>
+            <h1 className="max-w-3xl text-4xl font-black leading-[1.04] tracking-[-0.04em] sm:text-6xl lg:text-[68px]">
+              Biến dữ liệu khóa học thành{' '}
+              <span className="text-amber-400">phiên live tuyển sinh.</span>
             </h1>
-
-            <p className="text-xl font-bold tracking-tight text-primary/95 sm:text-2xl">
-              Tối ưu hoá tăng trưởng bằng A.I Livestream & Automation
+            <p className="mt-7 max-w-xl text-base leading-7 text-slate-300 sm:text-lg">
+              1Stream giúp trung tâm tạo video AI, vận hành giờ phát và hỗ trợ FAQ — thu lead trên cùng một quy trình có kiểm duyệt.
             </p>
-
-            <p className="text-base text-muted-foreground max-w-xl leading-relaxed">
-              Xây dựng <strong>Digital Human A.I</strong> livestream, tư vấn và chốt đơn tự động 24/7 — không cần MC, không cần studio.
-            </p>
-
-            <div className="flex flex-wrap gap-4 pt-2">
+            <div className="mt-9 flex flex-col gap-3 sm:flex-row">
               <Button
-                variant="brand"
                 size="lg"
-                className="font-bold text-white shadow-lg shadow-primary/20 scale-100 hover:scale-105 active:scale-95 transition-all duration-200"
+                className="h-12 bg-amber-400 px-6 font-bold text-slate-950 shadow-lg shadow-amber-400/15 hover:bg-amber-300"
+                onClick={() => navigate('/login')}
+              >
+                <CirclePlay className="mr-2 h-5 w-5" /> Xem AI demo
+              </Button>
+              <Button
+                size="lg"
+                variant="outline"
+                className="h-12 border-white/20 bg-white/5 px-6 text-white hover:bg-white/10 hover:text-white"
                 onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
               >
-                Tư vấn miễn phí
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
-              <Button
-                variant="outline"
-                size="lg"
-                className="font-semibold border-border hover:bg-muted/40 transition-colors"
-                onClick={() => document.getElementById('ai-livestream')?.scrollIntoView({ behavior: 'smooth' })}
-              >
-                Tìm hiểu thêm
+                Đăng ký phiên mẫu <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </div>
-
-            <div className="flex items-center gap-6 pt-4 text-xs sm:text-sm text-muted-foreground">
-              <span className="flex items-center gap-1.5 font-medium">
-                <ShieldCheck className="h-4.5 w-4.5 text-green-500 shrink-0" /> Dùng thử 7 ngày free
-              </span>
-              <span className="flex items-center gap-1.5 font-medium">
-                <Check className="h-4.5 w-4.5 text-green-500 shrink-0" /> Không cần thẻ tín dụng
-              </span>
+            <div className="mt-8 flex flex-wrap gap-x-6 gap-y-3 text-sm text-slate-300">
+              {['Duyệt trước khi phát', 'Bắt đầu theo từng gói', 'Có người vận hành cùng'].map((item) => (
+                <span key={item} className="flex items-center gap-2">
+                  <BadgeCheck className="h-4 w-4 text-emerald-400" /> {item}
+                </span>
+              ))}
             </div>
           </div>
 
-          {/* Right Hero Video/Stream Simulator Mockup */}
-          <div className="lg:col-span-5 relative w-full animate-appear animation-delay-200">
-            <div className="absolute -inset-1 rounded-2xl bg-gradient-to-tr from-primary to-sky-500 opacity-20 blur-xl" />
-            
-            <div className="relative rounded-2xl border border-border/80 bg-card p-3 shadow-2xl overflow-hidden glass">
-              
-              {/* Simulator Header */}
-              <div className="flex items-center justify-between mb-3 border-b border-border/50 pb-2">
-                <div className="flex items-center gap-2">
-                  <span className="h-3 w-3 rounded-full bg-red-500 animate-pulse" />
-                  <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">iLive Live Stream Simulator</span>
-                </div>
-                <div className="flex gap-1">
-                  <span className="h-2 w-2 rounded-full bg-slate-300" />
-                  <span className="h-2 w-2 rounded-full bg-slate-300" />
-                  <span className="h-2 w-2 rounded-full bg-slate-300" />
-                </div>
-              </div>
-
-              {/* Video stream box */}
-              <div className="relative aspect-square w-full overflow-hidden rounded-xl bg-slate-900 border border-slate-800">
+          <div className="relative mx-auto w-full max-w-[590px] lg:mx-0">
+            <div className="absolute -inset-4 rounded-[32px] bg-gradient-to-br from-blue-500/25 to-amber-400/10 blur-2xl" />
+            <div className="relative overflow-hidden rounded-[26px] border border-white/15 bg-white/10 p-2 shadow-2xl backdrop-blur">
+              <div className="relative aspect-[4/4.1] overflow-hidden rounded-[20px] bg-slate-900 sm:aspect-[4/3.25]">
                 <img
-                  src="/images/ai_streamer_host.png"
-                  alt="AI stream host"
-                  className="h-full w-full object-cover transition duration-500 scale-100"
+                  src="/images/education/teacher-laptop.webp"
+                  alt="Giáo viên chuẩn bị nội dung tuyển sinh trực tuyến"
+                  className="h-full w-full object-cover"
+                  fetchPriority="high"
                 />
-
-                {/* Overlaid UI components */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-black/30 pointer-events-none" />
-
-                {/* Live indicators */}
-                <div className="absolute left-3 top-3 flex items-center gap-2">
-                  <Badge variant="destructive" className="px-2.5 py-0.5 animate-pulseLive flex items-center gap-1 text-[10px] font-extrabold uppercase">
-                    ● LIVE
-                  </Badge>
-                  <span className="rounded-full bg-black/60 px-2 py-0.5 text-[10px] font-semibold text-white backdrop-blur-sm flex items-center gap-1">
-                    👁️ {(viewers / 1000).toFixed(1)}K đang xem
-                  </span>
+                <div className="absolute inset-0 bg-gradient-to-t from-[#061429] via-transparent to-transparent" />
+                <div className="absolute left-4 top-4 flex items-center gap-2 rounded-full bg-red-500 px-3 py-1.5 text-[11px] font-extrabold tracking-wide text-white shadow-lg">
+                  <span className="h-2 w-2 animate-pulse rounded-full bg-white" /> LIVE
+                </div>
+                <div className="absolute right-4 top-4 rounded-full bg-black/55 px-3 py-1.5 text-xs font-medium backdrop-blur">
+                  482 đang xem
                 </div>
 
-                {/* Product Card floating overlay */}
-                <div className="absolute right-3 top-3 max-w-[120px] rounded-lg border border-white/10 bg-black/60 p-1.5 text-white backdrop-blur-sm shadow-xl flex flex-col gap-1">
-                  <div className="aspect-square w-full rounded bg-white/20 overflow-hidden">
-                    <img src="https://picsum.photos/seed/cosmetics/120/120" alt="Son Kem" className="h-full w-full object-cover" />
+                <div className="absolute inset-x-4 bottom-4 grid gap-3 sm:grid-cols-[1fr_170px]">
+                  <div className="rounded-2xl border border-white/15 bg-[#07172f]/85 p-4 backdrop-blur-md">
+                    <div className="mb-2 flex items-center justify-between gap-3">
+                      <span className="text-[10px] font-bold uppercase tracking-[.16em] text-amber-300">AI đang trả lời</span>
+                      <span className="rounded-full bg-emerald-400/15 px-2 py-0.5 text-[10px] font-semibold text-emerald-300">Trong dữ liệu</span>
+                    </div>
+                    <p className="text-sm font-semibold">“Mất gốc có học lớp này được không?”</p>
+                    <p className="mt-2 text-xs leading-5 text-slate-300">Lớp phù hợp với đầu vào 3.0–3.5. Bạn có thể đăng ký kiểm tra miễn phí trước khi xếp lớp.</p>
                   </div>
-                  <span className="text-[9px] font-bold truncate">Son Matte Velvet</span>
-                  <span className="text-[10px] text-primary-foreground font-extrabold">189.000đ</span>
-                  <button className="w-full py-0.5 rounded bg-primary text-[8px] font-bold text-white tracking-wide uppercase hover:bg-primary/90 transition-colors">
-                    Mua ngay
-                  </button>
-                </div>
-
-                {/* Real-time Ticker comments feed */}
-                <div className="absolute bottom-3 left-3 right-3 max-h-[140px] overflow-y-auto space-y-1.5 flex flex-col justify-end pointer-events-auto">
-                  {chatMessages.map((msg) => (
-                    <div
-                      key={msg.id}
-                      className={cn(
-                        "rounded-lg p-2 text-[10px] leading-relaxed max-w-[90%] backdrop-blur-sm shadow-md animate-in fade-in slide-in-from-bottom-2 duration-300",
-                        msg.isAI
-                          ? "bg-primary/25 border border-primary/30 text-white self-start ml-2"
-                          : "bg-black/60 border border-white/5 text-white self-start"
-                      )}
-                    >
-                      <div className="flex items-center gap-1.5 font-bold mb-0.5">
-                        <span className="text-white/90">{msg.user}</span>
-                        {msg.isAI && (
-                          <span className="px-1 rounded bg-primary text-[8px] text-white font-extrabold uppercase shrink-0">AI</span>
-                        )}
-                        <span className="text-[8px] font-normal text-white/50">{msg.timestamp}</span>
-                      </div>
-                      <p className="text-white/95 font-medium">{msg.message}</p>
-                      {msg.link && (
-                        <a
-                          href={msg.link.href}
-                          className="mt-1.5 inline-flex items-center gap-1 font-bold text-sky-300 hover:text-sky-200 transition-colors bg-white/10 px-2 py-0.5 rounded border border-white/10"
-                        >
-                          <Package className="h-3 w-3 shrink-0" />
-                          {msg.link.label}
-                        </a>
-                      )}
-                    </div>
-                  ))}
-                </div>
-
-                {/* Audio visualizer bar */}
-                <div className="absolute bottom-3 right-3 flex items-end gap-0.5 h-6">
-                  {[1, 2, 3, 4, 5].map((bar) => (
-                    <span
-                      key={bar}
-                      className="live-audio-bar w-0.8 bg-primary rounded-full"
-                      style={{ height: `${Math.floor(Math.random() * 16) + 8}px` }}
-                    />
-                  ))}
+                  <div className="hidden rounded-2xl bg-amber-400 p-4 text-slate-950 sm:block">
+                    <Target className="h-5 w-5" />
+                    <p className="mt-3 text-2xl font-black">12</p>
+                    <p className="text-xs font-semibold">lead muốn học thử</p>
+                  </div>
                 </div>
               </div>
-
-              {/* Platform switcher tab buttons */}
-              <div className="mt-3">
-                <div className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider mb-2 text-center">Chọn kênh để kiểm tra thử:</div>
-                <div className="grid grid-cols-4 gap-1.5">
-                  {BRAND_PLATFORMS.map((p) => {
-                    const isActive = activePlatform === p.id
-                    return (
-                      <button
-                        key={p.id}
-                        onClick={() => setActivePlatform(p.id)}
-                        className={cn(
-                          "rounded-lg px-1 py-1.5 text-[9px] font-bold border transition-all text-center flex flex-col items-center justify-center gap-1 active:scale-95",
-                          isActive
-                            ? `${p.bg} ${p.text} border-primary shadow-sm`
-                            : "border-border/60 hover:bg-muted text-muted-foreground"
-                        )}
-                      >
-                        <span className="font-extrabold">{p.name.split(' ')[0]}</span>
-                      </button>
-                    )
-                  })}
-                </div>
-              </div>
-
             </div>
-          </div>
-
-        </div>
-      </section>
-
-      {/* PLATFORMS SUPPORTED / PARTNER BRANDS BAR */}
-      <section className="border-y border-border/40 bg-muted/20 py-8 px-6 animate-appear animation-delay-300">
-        <div className="mx-auto max-w-6xl text-center">
-          <p className="text-xs font-bold text-muted-foreground tracking-wider uppercase mb-5">Hỗ trợ phát đồng thời đa nền tảng tốt nhất hiện nay</p>
-          <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-12">
-            {BRAND_PLATFORMS.map((p) => (
-              <div key={p.id} className="flex items-center gap-2 grayscale hover:grayscale-0 opacity-70 hover:opacity-100 transition-all duration-300">
-                <span className="h-2 w-2 rounded-full" style={{ backgroundColor: p.color }} />
-                <span className="font-bold text-base sm:text-lg text-foreground tracking-tight">{p.name}</span>
-              </div>
-            ))}
-            <div className="flex items-center gap-2 grayscale hover:grayscale-0 opacity-70 hover:opacity-100 transition-all duration-300">
-              <span className="h-2 w-2 rounded-full bg-[#f15a24]" />
-              <span className="font-bold text-base sm:text-lg text-foreground tracking-tight">Lazada Live</span>
+            <div className="absolute -bottom-7 -left-5 hidden items-center gap-3 rounded-2xl border border-slate-200 bg-white p-3 pr-5 text-slate-950 shadow-xl sm:flex">
+              <div className="grid h-10 w-10 place-items-center rounded-xl bg-blue-50 text-blue-700"><Share2 className="h-5 w-5" /></div>
+              <div><p className="text-xs text-slate-500">Phiên hôm nay</p><p className="text-sm font-bold">2,5 giờ-kênh đã dùng</p></div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* REAL DEMO VIDEOS SECTION */}
-      <section id="demo-videos" className="py-24 px-6 max-w-6xl mx-auto animate-appear">
-        <div className="mb-16 text-center space-y-3">
-          <Badge variant="brand" className="px-3 py-1 rounded-full text-xs font-semibold">Demo thực tế</Badge>
-          <h2 className="text-3xl font-extrabold sm:text-4xl text-foreground">Xem sức mạnh của A.I Livestream hoạt động</h2>
-          <p className="text-muted-foreground text-sm sm:text-base max-w-xl mx-auto">
-            So sánh chất lượng giữa MC thật ban đầu và các phiên bản A.I Livestream tự động hóa đa cấp độ của iLive.
-          </p>
+      <section className="border-b border-slate-200 bg-white">
+        <div className="mx-auto grid max-w-7xl grid-cols-2 divide-x divide-y divide-slate-200 px-6 sm:grid-cols-4 sm:divide-y-0 lg:px-8">
+          {[
+            ['Ngành ưu tiên', 'Anh ngữ & Hàn ngữ'],
+            ['Kênh triển khai', 'Facebook · TikTok'],
+            ['Đơn vị vận hành', 'Theo giờ-kênh'],
+            ['Mô hình ban đầu', 'Dịch vụ theo gói'],
+          ].map(([label, value]) => (
+            <div key={label} className="px-4 py-6 first:pl-0 sm:py-7 sm:text-center">
+              <p className="text-[11px] font-bold uppercase tracking-[.14em] text-slate-400">{label}</p>
+              <p className="mt-1.5 text-sm font-bold text-slate-800">{value}</p>
+            </div>
+          ))}
         </div>
+      </section>
 
-        <div className="grid gap-8 lg:grid-cols-12 items-stretch">
-          {/* Left: Main Video Player Showcase */}
-          <div className="lg:col-span-7 flex flex-col justify-between">
-            <div className="relative aspect-video w-full rounded-2xl bg-card border border-border/60 shadow-2xl overflow-hidden glass group">
-              {/* Decorative light reflection or glow */}
-              <div className="absolute -inset-1 rounded-2xl bg-gradient-to-tr from-primary/20 via-sky-500/10 to-fuchsia-500/10 opacity-30 blur-lg -z-10 group-hover:opacity-50 transition-opacity duration-500" />
-
-              <video
-                key={DEMO_VIDEOS[activeDemoIndex].src}
-                src={DEMO_VIDEOS[activeDemoIndex].src}
-                poster={DEMO_VIDEOS[activeDemoIndex].poster}
-                controls
-                autoPlay={false}
-                className="w-full h-full object-contain bg-black"
-                playsInline
-              />
-
-              {/* Tag indicating what version is playing */}
-              <div className="absolute top-4 left-4 z-10">
-                <Badge className={cn("px-3 py-1 font-bold text-xs uppercase tracking-wide border", DEMO_VIDEOS[activeDemoIndex].tagColor)}>
-                  Đang phát: {DEMO_VIDEOS[activeDemoIndex].tagName}
-                </Badge>
-              </div>
-            </div>
-
-            {/* Video stats/features below the player */}
-            <div className="mt-4 p-5 rounded-xl border border-border/40 bg-card/40 glass text-left space-y-2">
-              <div className="flex items-center justify-between">
-                <h4 className="font-bold text-lg text-foreground">{DEMO_VIDEOS[activeDemoIndex].title}</h4>
-                <Badge variant="outline" className="text-[10px] font-semibold text-muted-foreground border-border/80">
-                  {DEMO_VIDEOS[activeDemoIndex].duration}
-                </Badge>
-              </div>
-              <p className="text-sm text-muted-foreground leading-relaxed">
-                {DEMO_VIDEOS[activeDemoIndex].longDesc}
-              </p>
-              <div className="pt-2 flex flex-wrap gap-2">
-                {DEMO_VIDEOS[activeDemoIndex].keySpecs.map((spec, i) => (
-                  <span key={i} className="inline-flex items-center gap-1 text-[11px] font-semibold text-foreground bg-muted/60 px-2.5 py-1 rounded-md border border-border/30">
-                    <Check className="h-3 w-3 text-primary shrink-0" /> {spec}
-                  </span>
-                ))}
-              </div>
-            </div>
+      <section id="solutions" className="scroll-mt-20 py-24">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <SectionHeading
+            eyebrow="Một đầu mối, ba đầu ra"
+            title="Không chỉ tạo avatar. 1Stream cùng bạn vận hành cả đợt tuyển sinh."
+            description="Bắt đầu từ một video, bổ sung giờ phát hoặc chọn gói trọn bộ tùy mức độ sẵn sàng của trung tâm."
+          />
+          <div className="mt-12 grid gap-5 lg:grid-cols-3">
+            {SERVICES.map((service) => {
+              const Icon = service.icon
+              return (
+                <article key={service.title} className="group relative overflow-hidden rounded-3xl border border-slate-200 bg-white p-7 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl">
+                  <div className={cn('absolute inset-x-0 top-0 h-1', service.accent)} />
+                  <div className="flex items-start justify-between">
+                    <div className="grid h-12 w-12 place-items-center rounded-2xl bg-slate-950 text-white"><Icon className="h-6 w-6" /></div>
+                    <span className="text-4xl font-black text-slate-100">{service.number}</span>
+                  </div>
+                  <h3 className="mt-7 text-xl font-black tracking-tight">{service.title}</h3>
+                  <p className="mt-3 min-h-[72px] text-sm leading-6 text-slate-600">{service.description}</p>
+                  <ul className="mt-6 space-y-3 border-t border-slate-100 pt-6">
+                    {service.deliverables.map((item) => (
+                      <li key={item} className="flex items-center gap-2.5 text-sm font-semibold text-slate-700"><Check className="h-4 w-4 text-emerald-500" />{item}</li>
+                    ))}
+                  </ul>
+                </article>
+              )
+            })}
           </div>
+        </div>
+      </section>
 
-          {/* Right: Playlist tabs selector */}
-          <div className="lg:col-span-5 flex flex-col justify-between gap-4">
-            <div className="space-y-4 text-left">
-              <h3 className="font-bold text-lg text-foreground mb-4 flex items-center gap-2">
-                <Video className="h-5 w-5 text-primary" /> Lựa chọn phiên bản demo
-              </h3>
-
-              {DEMO_VIDEOS.map((item, idx) => {
-                const isActive = activeDemoIndex === idx
+      <section id="workflow" className="scroll-mt-20 bg-[#07172f] py-24 text-white">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="grid gap-12 lg:grid-cols-[.85fr_1.15fr] lg:items-center">
+            <div>
+              <p className="text-xs font-bold uppercase tracking-[.2em] text-amber-400">Quy trình có kiểm duyệt</p>
+              <h2 className="mt-4 text-3xl font-black tracking-[-.03em] sm:text-5xl">Từ file học phí đến phiên live, không bỏ qua bước duyệt.</h2>
+              <p className="mt-5 max-w-lg leading-7 text-slate-300">Mọi nội dung và câu trả lời đều bắt đầu từ dữ liệu do trung tâm xác nhận. Những trường hợp ngoài phạm vi được chuyển cho con người.</p>
+              <a
+                href="/samples/1stream-course-input-template.csv"
+                download
+                className="mt-8 inline-flex items-center gap-2 rounded-xl border border-white/15 bg-white/10 px-4 py-3 text-sm font-bold transition hover:bg-white/15"
+              >
+                <FileText className="h-4 w-4 text-amber-400" /> Tải file input mẫu (.csv)
+              </a>
+            </div>
+            <div className="grid gap-4 sm:grid-cols-2">
+              {WORKFLOW.map((step, index) => {
+                const Icon = step.icon
                 return (
-                  <div
-                    key={idx}
-                    onClick={() => setActiveDemoIndex(idx)}
-                    className={cn(
-                      "flex items-center gap-4 p-4 rounded-xl border transition-all duration-300 cursor-pointer relative overflow-hidden group",
-                      isActive
-                        ? "bg-card border-primary/50 shadow-lg shadow-primary/5"
-                        : "bg-transparent border-border/40 hover:bg-muted/40"
-                    )}
-                  >
-                    {isActive && (
-                      <div className="absolute top-0 left-0 w-1.5 h-full bg-primary" />
-                    )}
-
-                    {/* Video thumbnail with small play button overlay */}
-                    <div className="relative h-16 w-24 shrink-0 rounded-lg overflow-hidden border border-border/60 bg-muted">
-                      <img src={item.poster} alt={item.title} className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />
-                      <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
-                        <div className={cn("h-6 w-6 rounded-full flex items-center justify-center bg-white/90 text-background transition-transform duration-300", isActive ? "scale-110 bg-primary text-primary-foreground" : "group-hover:scale-110")}>
-                          <Play className="h-3 w-3 fill-current ml-0.5" />
-                        </div>
-                      </div>
+                  <div key={step.title} className="rounded-2xl border border-white/10 bg-white/[.06] p-6">
+                    <div className="flex items-center justify-between">
+                      <Icon className="h-6 w-6 text-amber-400" />
+                      <span className="font-mono text-xs text-slate-500">0{index + 1}</span>
                     </div>
-
-                    <div className="flex-1 min-w-0 space-y-1">
-                      <div className="flex items-center justify-between gap-2">
-                        <span className="font-bold text-sm text-foreground truncate group-hover:text-primary transition-colors">
-                          {item.title}
-                        </span>
-                        <Badge className={cn("text-[9px] px-1.5 py-0.5 rounded font-extrabold uppercase shrink-0 border", item.badgeColor)}>
-                          {item.badge}
-                        </Badge>
-                      </div>
-                      <p className="text-xs text-muted-foreground line-clamp-2 leading-relaxed">
-                        {item.desc}
-                      </p>
-                    </div>
+                    <h3 className="mt-5 font-bold">{step.title}</h3>
+                    <p className="mt-2 text-sm leading-6 text-slate-400">{step.description}</p>
                   </div>
                 )
               })}
             </div>
-
-            {/* Premium CTA banner to contact for trial/purchase */}
-            <div className="p-5 rounded-xl bg-gradient-to-r from-primary/10 to-sky-500/10 border border-primary/20 text-left space-y-3">
-              <div className="flex items-center gap-2">
-                <Sparkles className="h-5 w-5 text-primary animate-pulse" />
-                <span className="font-bold text-sm text-foreground">Bạn muốn sở hữu bản sao số cho riêng mình?</span>
-              </div>
-              <p className="text-xs text-muted-foreground leading-relaxed">
-                Liên hệ tư vấn gói Pro ngay hôm nay để sở hữu mô hình AI VEO3 cao cấp nhất với mức giá ưu đãi nhất.
-              </p>
-              <Button size="sm" variant="brand" className="w-full font-bold text-xs" onClick={() => handleContactPlan('Pro')}>
-                Liên Hệ Tư Vấn & Mua Ngay <ArrowRight className="ml-1 h-3 w-3" />
-              </Button>
-            </div>
           </div>
         </div>
       </section>
 
-      {/* INTRODUCTION / WHAT IS AI LIVESTREAM */}
-      <section id="ai-livestream" className="py-24 px-6 max-w-6xl mx-auto animate-appear">
-        <div className="grid gap-12 lg:grid-cols-2 items-center">
-          
-          <div className="space-y-6 text-left">
-            <Badge variant="brand" className="px-3 py-1 rounded-full text-xs font-semibold">
-              Định nghĩa A.I Livestream
-            </Badge>
-            <h2 className="text-3xl font-extrabold sm:text-4xl leading-tight text-foreground">
-              A.I Livestream là gì và hoạt động như thế nào?
-            </h2>
-            <p className="text-muted-foreground text-base leading-relaxed">
-              Nhân vật ảo <strong>A.I Avatar</strong> tự phát sóng, tương tác và chốt đơn liên tục — không cần MC, không cần thiết bị chuyên dụng.
-            </p>
-            <div className="border-l-4 border-primary pl-4 py-1.5 italic text-muted-foreground text-sm">
-              "Kỷ nguyên chuyển dịch từ con người sang tài sản số 1STREAM giúp cắt giảm tới 80% chi phí vận hành livestream thông thường."
-            </div>
-          </div>
-
-          <div className="grid gap-4 sm:grid-cols-2">
-            {INTRO_CAPABILITIES.map((c, i) => (
-              <Card key={i} className="hover:-translate-y-1.5 hover:shadow-lg transition-all duration-300 border-border/50 relative overflow-hidden group">
-                <div className={`absolute top-0 left-0 w-1.5 h-full bg-gradient-to-b ${c.color}`} />
-                <CardHeader className="pb-2">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 mb-2">
-                    <c.icon className="h-5 w-5 text-primary shrink-0" />
-                  </div>
-                  <CardTitle className="text-base font-bold leading-snug">{c.title}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-xs text-muted-foreground leading-relaxed">{c.desc}</p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-
-        </div>
-      </section>
-
-      {/* AI DIGITAL HUMAN SECTION */}
-      <section id="digital-human" className="py-20 px-6 bg-muted/30 border-y border-border/40 relative overflow-hidden animate-appear">
-        <div className="absolute inset-0 bg-grid-white/[0.02] -z-10" />
-        <div className="mx-auto max-w-4xl text-center space-y-6">
-          <Badge variant="outline" className="px-3 py-1 rounded-full text-xs font-semibold text-primary border-primary/30 bg-primary/5">
-            Giải pháp Digital Human Cao Cấp
-          </Badge>
-          <h2 className="text-3xl font-extrabold sm:text-4xl tracking-tight text-foreground">
-            A.I Digital Human - Bản Sao Số Của Doanh Nghiệp
-          </h2>
-          <p className="text-base text-muted-foreground max-w-xl mx-auto leading-relaxed">
-            Biến hình ảnh thương hiệu thành <strong>tài sản số</strong> vận hành 24/7 — AI quét chuyển động, nhân bản giọng nói, tạo Digital Human livestream bán hàng tự động.
-          </p>
-          <div className="inline-flex flex-wrap items-center justify-center gap-6 pt-4 text-sm font-semibold text-foreground">
-            <span className="flex items-center gap-2">
-              <CheckCircle className="h-5 w-5 text-green-500 shrink-0" /> Đồng bộ khẩu hình 99%
-            </span>
-            <span className="flex items-center gap-2">
-              <CheckCircle className="h-5 w-5 text-green-500 shrink-0" /> Giọng nói biểu cảm tự nhiên
-            </span>
-            <span className="flex items-center gap-2">
-              <CheckCircle className="h-5 w-5 text-green-500 shrink-0" /> Nhân bản chỉ trong 3 ngày
-            </span>
-          </div>
-        </div>
-      </section>
-
-      {/* INTERACTIVE WORKFLOW STEPS */}
-      <section className="py-24 px-6 max-w-6xl mx-auto animate-appear">
-        <div className="mb-16 text-center space-y-3">
-          <Badge variant="brand" className="px-3 py-1 rounded-full text-xs font-semibold">Quy trình vận hành</Badge>
-          <h2 className="text-3xl font-extrabold sm:text-4xl text-foreground">Cách hoạt động của A.I Livestream</h2>
-          <p className="text-muted-foreground text-sm sm:text-base max-w-lg mx-auto">Chỉ với 4 bước đơn giản, bạn đã có một cỗ máy bán hàng tự động phát sóng đa nền tảng.</p>
-        </div>
-
-        <div className="grid gap-12 lg:grid-cols-12 items-center">
-          {/* Left Step Selectors */}
-          <div className="lg:col-span-7 space-y-4">
-            {STEPS_WORKFLOW.map((s, idx) => {
-              const isActive = activeStepTab === idx
-              return (
-                <div
-                  key={idx}
-                  onClick={() => setActiveStepTab(idx)}
-                  className={cn(
-                    "flex items-start gap-4 p-5 rounded-xl border transition-all duration-300 cursor-pointer text-left relative overflow-hidden group",
-                    isActive
-                      ? "bg-card border-primary/50 shadow-md shadow-primary/5"
-                      : "bg-transparent border-border/40 hover:bg-muted/40"
-                  )}
-                >
-                  {isActive && (
-                    <div className="absolute top-0 left-0 w-1.5 h-full bg-primary" />
-                  )}
-                  <span className={cn(
-                    "text-xl sm:text-2xl font-extrabold shrink-0",
-                    isActive ? "text-primary animate-pulse" : "text-muted-foreground/60"
-                  )}>
-                    {s.step}
-                  </span>
-                  <div className="space-y-1">
-                    <h3 className="font-bold text-base sm:text-lg text-foreground group-hover:text-primary transition-colors">{s.title}</h3>
-                    <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">{s.desc}</p>
-                  </div>
-                </div>
-              )
-            })}
-          </div>
-
-          {/* Right Visual Representation Box */}
-          <div className="lg:col-span-5 relative w-full h-full min-h-[300px] flex items-center justify-center">
-            <div className="absolute -inset-2 rounded-2xl bg-gradient-to-br from-primary/10 to-sky-500/10 blur-xl -z-10" />
-            <Card className="w-full h-full border-border/60 shadow-xl overflow-hidden glass">
-              <CardHeader className="bg-muted/50 border-b border-border/50 py-3 px-4 flex flex-row items-center gap-2">
-                <Laptop className="h-4 w-4 text-primary shrink-0" />
-                <span className="text-xs font-bold text-foreground uppercase tracking-wide">{STEPS_WORKFLOW[activeStepTab].visualTitle}</span>
-              </CardHeader>
-              <CardContent className="p-5 flex flex-col justify-center min-h-[220px]">
-                {STEPS_WORKFLOW[activeStepTab].visualContent}
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* CORE FEATURES GRID */}
-      <section className="py-24 px-6 bg-muted/20 border-y border-border/40 relative animate-appear">
-        <div className="max-w-6xl mx-auto">
-          <div className="mb-16 text-center space-y-3">
-            <Badge variant="brand" className="px-3 py-1 rounded-full text-xs font-semibold">Ưu điểm vượt trội</Badge>
-            <h2 className="text-3xl font-extrabold sm:text-4xl text-foreground">Tính năng nổi bật của iLive</h2>
-            <p className="text-muted-foreground text-sm sm:text-base max-w-lg mx-auto">Chúng tôi mang lại giải pháp công nghệ dẫn đầu hỗ trợ đắc lực cho công việc kinh doanh.</p>
-          </div>
-
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {FEATURE_GRID.map((f, i) => (
-              <Card key={i} className="hover:-translate-y-2 hover:shadow-lg transition-all duration-300 border-border/50 bg-card/60 glass">
-                <CardHeader className="pb-2">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-gradient shadow-md shadow-primary/10 mb-3">
-                    <f.icon className="h-6 w-6 text-white" />
-                  </div>
-                  <CardTitle className="text-lg font-bold">{f.title}</CardTitle>
-                </CardHeader>
-                <CardContent className="pt-2">
-                  <p className="text-sm text-muted-foreground leading-relaxed">{f.desc}</p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* BUSINESS BENEFITS / VALUE PROP SECTION */}
-      <section id="benefits" className="py-24 px-6 max-w-6xl mx-auto animate-appear">
-        <div className="grid gap-12 lg:grid-cols-2 items-center">
-          
-          {/* Left statistics grid */}
-          <div className="grid gap-6 sm:grid-cols-3 text-center">
-            
-            <div className="p-6 rounded-2xl border border-border/40 bg-card hover:border-primary/50 transition-colors shadow-sm flex flex-col justify-center relative overflow-hidden group">
-              <div className="absolute top-0 left-0 w-full h-1 bg-primary" />
-              <span className="text-3xl sm:text-4xl font-extrabold text-primary mb-2">+100%</span>
-              <span className="text-xs font-bold text-foreground mb-1 uppercase tracking-wide">Phủ Sóng</span>
-              <p className="text-[10px] text-muted-foreground">Livestream liên tục 24/7 không giới hạn khung giờ tiếp cận khách hàng.</p>
-            </div>
-
-            <div className="p-6 rounded-2xl border border-border/40 bg-card hover:border-primary/50 transition-colors shadow-sm flex flex-col justify-center relative overflow-hidden group">
-              <div className="absolute top-0 left-0 w-full h-1 bg-sky-500" />
-              <span className="text-3xl sm:text-4xl font-extrabold text-sky-500 mb-2">+150%</span>
-              <span className="text-xs font-bold text-foreground mb-1 uppercase tracking-wide">Tương Tác</span>
-              <p className="text-[10px] text-muted-foreground">Phản hồi bình luận cực nhanh giữ chân khách xem ở lại live lâu hơn.</p>
-            </div>
-
-            <div className="p-6 rounded-2xl border border-border/40 bg-card hover:border-primary/50 transition-colors shadow-sm flex flex-col justify-center relative overflow-hidden group">
-              <div className="absolute top-0 left-0 w-full h-1 bg-emerald-500" />
-              <span className="text-3xl sm:text-4xl font-extrabold text-emerald-500 mb-2">+40%</span>
-              <span className="text-xs font-bold text-foreground mb-1 uppercase tracking-wide">Đơn Hàng</span>
-              <p className="text-[10px] text-muted-foreground">Tự động đẩy link, ghim bình luận chốt sale nhanh chóng.</p>
-            </div>
-
-            <div className="sm:col-span-3 p-5 rounded-xl border border-dashed border-border/80 bg-muted/30 text-xs sm:text-sm font-semibold text-muted-foreground flex items-center justify-center gap-2">
-              🔥 Cắt giảm tối đa chi phí thuê Studio, thiết bị và nhân sự livestream!
-            </div>
-          </div>
-
-          {/* Right value description text */}
-          <div className="space-y-6 text-left lg:pl-6">
-            <Badge variant="brand" className="px-3 py-1 rounded-full text-xs font-semibold">Lợi ích thực tế</Badge>
-            <h2 className="text-3xl font-extrabold sm:text-4xl leading-tight text-foreground">Tại sao nên chuyển đổi sang A.I Livestream?</h2>
-            
-            <div className="space-y-4">
-              <div className="flex gap-3">
-                <div className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-green-500/10 text-green-500 mt-1">
-                  <Check className="h-3 w-3" />
-                </div>
-                <div>
-                  <h4 className="font-bold text-base text-foreground">Tiết kiệm 80% chi phí nhân sự</h4>
-                  <p className="text-sm text-muted-foreground">Không cần lo lắng chi phí thuê KOL, MC hay các vấn đề nghỉ phép, giảm hiệu suất làm việc. Máy ảo tự vận hành với chi phí chỉ bằng 1/5 MC thật.</p>
-                </div>
-              </div>
-
-              <div className="flex gap-3">
-                <div className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-green-500/10 text-green-500 mt-1">
-                  <Check className="h-3 w-3" />
-                </div>
-                <div>
-                  <h4 className="font-bold text-base text-foreground">Nội dung nhất quán và chuẩn chỉ</h4>
-                  <p className="text-sm text-muted-foreground">Nhân vật ảo luôn bám sát theo kịch bản quy chuẩn 100%, không nói sai thông tin sản phẩm, giữ hình ảnh thương hiệu luôn an toàn và ổn định tuyệt đối.</p>
-                </div>
-              </div>
-
-              <div className="flex gap-3">
-                <div className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-green-500/10 text-green-500 mt-1">
-                  <Check className="h-3 w-3" />
-                </div>
-                <div>
-                  <h4 className="font-bold text-base text-foreground">Mở rộng quy mô kinh doanh không giới hạn</h4>
-                  <p className="text-sm text-muted-foreground">Dễ dàng nhân bản cấu hình ra hàng chục luồng livestream khác nhau phát cùng lúc để phủ sóng thị trường đa kênh nhanh chóng mà sức người không bao giờ làm được.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </section>
-
-      {/* AI LIVESTREAM TRAINING COURSE */}
-      <section id="course" className="py-20 px-6 bg-muted/40 border-y border-border/40 relative overflow-hidden animate-appear">
-        <div className="mx-auto max-w-6xl grid gap-12 lg:grid-cols-12 items-center">
-          
-          <div className="lg:col-span-7 space-y-6 text-left">
-            <Badge variant="brand" className="px-3.5 py-1.5 rounded-full font-semibold text-xs tracking-wider uppercase">
-              Chương trình đào tạo thực chiến
-            </Badge>
-            <h2 className="text-3xl font-extrabold sm:text-4xl text-foreground">
-              Khóa Học Đón Đầu Xu Hướng AI Livestream
-            </h2>
-            <p className="text-base text-muted-foreground leading-relaxed">
-              Giáo trình đào tạo thực chiến giúp doanh nghiệp <strong>làm chủ AI Livestream</strong> và tối ưu doanh số nhanh nhất:
-            </p>
-            <ul className="space-y-3.5 text-sm sm:text-base">
-              {[
-                'Kỹ thuật xây dựng phòng lab AI Livestream tinh gọn cho doanh nghiệp.',
-                'Tối ưu hóa viết kịch bản livestream giữ chân khách bằng ChatGPT & Claude.',
-                'Kỹ năng thiết lập phần mềm và lách luật bypass các thuật toán kiểm duyệt khắt khe.',
-                'Quản lý, phân tích chỉ số phễu chuyển đổi dữ liệu và tối ưu vận hành tự động hóa.'
-              ].map((item, i) => (
-                <li key={i} className="flex items-start gap-2.5">
-                  <Award className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                  <span className="text-muted-foreground font-medium">{item}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="lg:col-span-5 relative w-full flex justify-center">
-            <div className="absolute -inset-1 rounded-2xl bg-gradient-to-tr from-primary to-sky-500 opacity-20 blur-xl" />
-            <Card className="w-full max-w-md border-border/60 shadow-xl overflow-hidden glass p-6 space-y-5 text-center relative">
-              <div className="absolute top-0 right-0 rounded-bl-xl bg-primary px-3 py-1 text-[10px] font-bold text-white uppercase tracking-wider">
-                Ưu đãi học viên
-              </div>
-              <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-brand-gradient shadow-lg shadow-primary/20">
-                <Zap className="h-7 w-7 text-white" />
-              </div>
-              <h3 className="text-xl font-extrabold text-foreground">Đăng ký khóa đào tạo A.I</h3>
-              <p className="text-xs text-muted-foreground leading-relaxed">
-                Hướng dẫn 1-1 bởi chuyên gia, tặng 50+ kịch bản mẫu và tài khoản VIP 1 tháng.
-              </p>
-              <div className="border-t border-border/40 pt-4 flex flex-col gap-2.5">
-                <Button 
-                  variant="brand" 
-                  className="w-full font-bold shadow-md hover:shadow-lg transition-all"
-                  onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-                >
-                  Nhận tư vấn khóa học
-                </Button>
-              </div>
-            </Card>
-          </div>
-
-        </div>
-      </section>
-
-      {/* PRICING PLANS */}
-      <section id="pricing" className="py-24 px-6 max-w-6xl mx-auto animate-appear">
-        <div className="mb-16 text-center space-y-3">
-          <Badge variant="brand" className="px-3 py-1 rounded-full text-xs font-semibold">Bảng giá dịch vụ</Badge>
-          <h2 className="text-3xl font-extrabold sm:text-4xl text-foreground">Chọn gói phù hợp với quy mô bán hàng</h2>
-          <p className="text-muted-foreground text-sm sm:text-base max-w-lg mx-auto">Giá cước siêu ưu đãi hỗ trợ tối đa doanh nghiệp bứt phá doanh số. Liên hệ ngay để đăng ký cài đặt.</p>
-        </div>
-
-        <div className="mx-auto grid max-w-5xl gap-6 md:grid-cols-3">
-          {plans.map((plan) => {
-            const isPro = plan.id === 'pro'
-            const isEnterprise = plan.id === 'enterprise'
-            return (
-              <Card
-                key={plan.id}
+      <section id="scenarios" className="scroll-mt-20 py-24">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <SectionHeading
+            eyebrow="Kịch bản thực tế"
+            title="Được thiết kế quanh hành trình tuyển sinh, không phải bán hàng đại trà."
+            description="Bộ mock hiện tại minh họa ba tình huống phù hợp với trung tâm ngoại ngữ trong giai đoạn pilot."
+          />
+          <div className="mt-10 flex flex-wrap gap-2">
+            {SCENARIOS.map((item, index) => (
+              <button
+                key={item.id}
+                type="button"
+                onClick={() => setActiveScenario(index)}
                 className={cn(
-                  'relative flex flex-col border transition-all duration-300',
-                  isPro 
-                    ? 'border-primary shadow-xl shadow-primary/10 hover:shadow-primary/20 hover:-translate-y-1.5' 
-                    : isEnterprise
-                    ? 'border-violet-500/40 shadow-md shadow-violet-500/5 hover:shadow-violet-500/10 hover:-translate-y-1.5'
-                    : 'border-border/60 hover:shadow-md hover:-translate-y-1'
+                  'rounded-full px-4 py-2.5 text-sm font-bold transition',
+                  activeScenario === index ? 'bg-slate-950 text-white shadow-lg' : 'border border-slate-200 bg-white text-slate-600 hover:border-slate-400',
                 )}
               >
-                {isPro && (
-                  <Badge
-                    variant="brand"
-                    className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1.5 rounded-full font-bold uppercase tracking-wider text-[9px]"
-                  >
-                    Được khuyên dùng nhiều nhất
-                  </Badge>
-                )}
-                {isEnterprise && (
-                  <Badge
-                    variant="secondary"
-                    className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1.5 rounded-full font-bold uppercase tracking-wider text-[9px] border-violet-500/30 text-violet-400 bg-violet-950/20"
-                  >
-                    Độc quyền doanh nghiệp
-                  </Badge>
-                )}
-                
-                <CardHeader className="text-left">
-                  <CardTitle className="text-2xl font-extrabold">{plan.name}</CardTitle>
-                  <CardDescription className="text-xs pt-1">
-                    {isEnterprise
-                      ? 'Dành cho các doanh nghiệp quy mô lớn, thương hiệu độc quyền'
-                      : plan.model === 'veo3'
-                      ? 'Áp dụng mô hình người ảo VEO3 Lip-sync mượt mà, cao cấp nhất'
-                      : 'Đồng bộ khẩu hình môi tiêu chuẩn lip-sync cơ bản'}
-                  </CardDescription>
-                  <div className="mt-5 flex items-baseline gap-1">
-                    <span className="text-4xl font-extrabold text-foreground tracking-tight">
-                      {isEnterprise ? 'Liên hệ' : formatVND(plan.priceMonthly)}
-                    </span>
-                    {!isEnterprise && (
-                      <span className="text-xs font-semibold text-muted-foreground">/tháng</span>
-                    )}
-                  </div>
-                </CardHeader>
-
-                <CardContent className="flex-1 text-left">
-                  <Separator className="my-5" />
-                  <ul className="space-y-3.5 text-xs sm:text-sm text-muted-foreground font-medium">
-                    {plan.features.map((f, i) => (
-                      <li key={i} className="flex items-start gap-2.5">
-                        <Check className="mt-0.5 h-4.5 w-4.5 shrink-0 text-primary" />
-                        <span className="text-foreground/90">{f}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </CardContent>
-
-                <CardFooter className="pt-4 border-t border-border/20 bg-muted/10 p-6">
-                  <Button
-                    variant={isPro ? 'brand' : isEnterprise ? 'secondary' : 'outline'}
-                    className={cn(
-                      "w-full font-bold py-5 hover:shadow-md transition-all duration-200 active:scale-98",
-                      isEnterprise && "border-violet-500/30 hover:bg-violet-950/10 text-violet-400"
-                    )}
-                    onClick={() => {
-                      if (isEnterprise) {
-                        handleContactPlan(plan.name)
-                      } else {
-                        handleTrialStart(plan.id as PlanId)
-                      }
-                    }}
-                  >
-                    {isEnterprise ? 'Liên hệ đăng ký' : 'Bắt đầu dùng thử 7 ngày miễn phí'}
-                  </Button>
-                </CardFooter>
-              </Card>
-            )
-          })}
-        </div>
-      </section>
-
-      {/* FREQUENTLY ASKED QUESTIONS (FAQ ACCORDION) */}
-      <section className="py-24 px-6 bg-muted/20 border-t border-border/40 animate-appear">
-        <div className="max-w-4xl mx-auto">
-          <div className="mb-16 text-center space-y-3">
-            <Badge variant="brand" className="px-3 py-1 rounded-full text-xs font-semibold">Giải đáp thắc mắc</Badge>
-            <h2 className="text-3xl font-extrabold sm:text-4xl text-foreground">Câu hỏi thường gặp</h2>
-            <p className="text-muted-foreground text-sm sm:text-base">Mọi thắc mắc của bạn về giải pháp AI Livestream sẽ được trả lời tại đây.</p>
+                {item.tab}
+              </button>
+            ))}
           </div>
 
-          <div className="space-y-4">
-            {FAQ_LIST.map((faq, i) => {
-              const isOpen = openFaq === i
-              return (
-                <div
-                  key={i}
-                  className="rounded-xl border border-border/50 bg-card overflow-hidden transition-all duration-300 shadow-sm"
-                >
-                  <button
-                    onClick={() => setOpenFaq(isOpen ? null : i)}
-                    className="flex w-full items-center justify-between p-5 text-left font-bold text-sm sm:text-base text-foreground hover:bg-muted/40 transition-colors"
-                  >
-                    <span>{faq.q}</span>
-                    <ChevronDown className={cn(
-                      "h-5 w-5 shrink-0 text-muted-foreground transition-transform duration-300",
-                      isOpen ? "rotate-180 text-primary" : ""
-                    )} />
-                  </button>
-                  
-                  {isOpen && (
-                    <div className="p-5 pt-0 border-t border-border/20 bg-muted/10 animate-in slide-in-from-top-2 duration-200 text-left">
-                      <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed whitespace-pre-line">
-                        {faq.a}
-                      </p>
-                    </div>
-                  )}
+          <div className="mt-6 grid overflow-hidden rounded-[28px] border border-slate-200 bg-white shadow-xl lg:grid-cols-[.9fr_1.1fr]">
+            <div className="relative min-h-[440px] overflow-hidden bg-slate-900">
+              <img src="/images/education/language-classroom.webp" alt="Lớp học ngoại ngữ" className="absolute inset-0 h-full w-full object-cover opacity-80" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#07172f] via-[#07172f]/45 to-transparent" />
+              <div className="relative flex h-full min-h-[440px] flex-col justify-between p-7 sm:p-10">
+                <div className="flex items-center justify-between">
+                  <span className="inline-flex items-center gap-2 rounded-full bg-red-500 px-3 py-1.5 text-xs font-black text-white"><span className="h-2 w-2 rounded-full bg-white" /> LIVE PREVIEW</span>
+                  <span className="rounded-full bg-black/40 px-3 py-1.5 text-xs text-white backdrop-blur">Facebook</span>
                 </div>
-              )
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* FINAL CALL TO ACTION & CONSULTATION LEAD CAPTURE FORM */}
-      <section id="contact" className="py-24 px-6 max-w-4xl mx-auto animate-appear">
-        <div className="relative rounded-3xl overflow-hidden bg-brand-gradient p-8 sm:p-12 text-white shadow-2xl text-center space-y-8">
-          <div className="absolute top-0 right-0 -mt-12 -mr-12 h-44 w-44 rounded-full bg-white/10 blur-xl" />
-          <div className="absolute bottom-0 left-0 -mb-12 -ml-12 h-44 w-44 rounded-full bg-white/10 blur-xl" />
-
-          <div className="max-w-2xl mx-auto space-y-3">
-            <h2 className="text-3xl font-extrabold sm:text-4xl">Sẵn sàng đột phá doanh thu livestream?</h2>
-            <p className="text-sm text-white/90 leading-relaxed">
-              Để lại thông tin để nhận tư vấn 1-1 miễn phí và tài khoản VIP dùng thử.
-            </p>
-          </div>
-
-          {formSubmitted ? (
-            <Card className="max-w-md mx-auto bg-white text-slate-900 border-none p-8 rounded-2xl shadow-xl flex flex-col items-center justify-center gap-4 animate-in zoom-in-95 duration-300">
-              <CheckCircle className="h-16 w-16 text-green-500 animate-pulse" />
-              <h3 className="text-xl font-bold text-foreground">Đăng ký thành công!</h3>
-              <p className="text-xs text-muted-foreground leading-relaxed">
-                Cảm ơn <strong>{formData.name}</strong>! Chuyên gia sẽ gọi lại số <strong>{formData.phone}</strong> trong vòng 10 phút.
-              </p>
-              <Button 
-                variant="brand" 
-                onClick={() => setFormSubmitted(false)}
-                className="font-semibold text-white px-6 mt-2"
-              >
-                Gửi lại yêu cầu khác
-              </Button>
-            </Card>
-          ) : (
-            <Card className="max-w-lg mx-auto bg-white/95 text-slate-900 border-none p-6 sm:p-8 rounded-2xl shadow-2xl glass">
-              <form onSubmit={handleFormSubmit} className="space-y-4 text-left">
-                <div className="grid gap-4 sm:grid-cols-2">
-                  <div className="space-y-1.5">
-                    <label className="text-xs font-bold text-slate-700">Họ & Tên *</label>
-                    <input
-                      type="text"
-                      required
-                      placeholder="Nguyễn Văn A"
-                      value={formData.name}
-                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="w-full rounded-xl border border-slate-300 px-3.5 py-2.5 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
-                    />
-                  </div>
-                  <div className="space-y-1.5">
-                    <label className="text-xs font-bold text-slate-700">Số điện thoại *</label>
-                    <input
-                      type="tel"
-                      required
-                      placeholder="09xxxxxxxx"
-                      value={formData.phone}
-                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      className="w-full rounded-xl border border-slate-300 px-3.5 py-2.5 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
-                    />
-                  </div>
+                <div className="text-white">
+                  <p className="text-sm font-bold text-amber-300">{scenario.subtitle}</p>
+                  <h3 className="mt-3 max-w-md text-3xl font-black tracking-tight">{scenario.title}</h3>
+                  <p className="mt-4 max-w-lg text-sm leading-6 text-slate-200">“{scenario.script}”</p>
                 </div>
-
-                <div className="space-y-1.5">
-                  <label className="text-xs font-bold text-slate-700">Địa chỉ Email</label>
-                  <input
-                    type="email"
-                    placeholder="email@example.com"
-                    value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full rounded-xl border border-slate-300 px-3.5 py-2.5 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
-                  />
-                </div>
-
-                <div className="grid gap-4 sm:grid-cols-2 items-center">
-                  <div className="space-y-1.5 flex flex-col">
-                    <label className="text-xs font-bold text-slate-700">Mô hình kinh doanh</label>
-                    <select
-                      value={formData.businessType}
-                      onChange={(e) => setFormData({ ...formData, businessType: e.target.value })}
-                      className="w-full rounded-xl border border-slate-300 px-3 py-2.5 text-xs text-slate-800 bg-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all cursor-pointer"
-                    >
-                      <option value="Cá nhân">Cá nhân bán lẻ</option>
-                      <option value="Doanh nghiệp">Doanh nghiệp / Brand</option>
-                      <option value="Agency">Agency truyền thông / Ads</option>
-                    </select>
-                  </div>
-                  <div className="text-[10px] text-muted-foreground pt-4 leading-relaxed">
-                    * Thông tin của bạn được bảo mật tuyệt đối theo tiêu chuẩn chính sách bảo mật khách hàng của iLive.
-                  </div>
-                </div>
-
-                <div className="space-y-1.5">
-                  <label className="text-xs font-bold text-slate-700">Mô tả nhu cầu sản phẩm cần bán</label>
-                  <textarea
-                    rows={2}
-                    placeholder="Sản phẩm mỹ phẩm chăm sóc da, thời trang..."
-                    value={formData.message}
-                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    className="w-full rounded-xl border border-slate-300 px-3.5 py-2 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all resize-none"
-                  />
-                </div>
-
-                <Button
-                  type="submit"
-                  variant="brand"
-                  disabled={isSubmittingForm}
-                  className="w-full font-bold py-6 text-white shadow-lg hover:shadow-xl active:scale-98 transition-all duration-200 mt-2 flex items-center justify-center gap-2"
-                >
-                  {isSubmittingForm ? (
-                    <>
-                      <span className="h-4.5 w-4.5 animate-spin rounded-full border-2 border-white border-t-transparent" />
-                      Đang xử lý dữ liệu đăng ký...
-                    </>
-                  ) : (
-                    <>
-                      <Zap className="h-4.5 w-4.5 animate-pulse" />
-                      Đăng Ký Tư Vấn Chiến Lược Miễn Phí
-                    </>
-                  )}
-                </Button>
-              </form>
-            </Card>
-          )}
-
-        </div>
-      </section>
-
-      {/* FOOTER & CONTACT DETAILS */}
-      <footer className="border-t border-border/40 bg-muted/10 py-16 px-6">
-        <div className="mx-auto max-w-6xl grid gap-8 sm:grid-cols-2 lg:grid-cols-4 text-left">
-          
-          {/* Logo & Slogan Column */}
-          <div className="space-y-4 lg:col-span-1">
-            <Link to="/" className="flex items-center gap-2.5 group">
-              <div className="flex h-9.5 w-9.5 items-center justify-center rounded-xl bg-brand-gradient shadow-md shadow-primary/20">
-                <Sparkles className="h-5 w-5 text-white" />
               </div>
-              <span className="text-xl font-extrabold tracking-tight bg-gradient-to-r from-primary to-sky-500 bg-clip-text text-transparent">1STREAM</span>
-            </Link>
-            <p className="text-xs text-muted-foreground leading-relaxed">
-              Giải pháp AI Livestream Platform & Digital Human đột phá hỗ trợ đắc lực doanh nghiệp cắt giảm chi phí và nâng tầm tăng trưởng doanh thu đa kênh 24/7.
-            </p>
-            <p className="text-[10px] text-muted-foreground pt-2">
-              © {new Date().getFullYear()} iLive by 1STREAM. Bảo lưu mọi quyền.
-            </p>
-          </div>
+            </div>
 
-          {/* Solutions Column */}
-          <div className="space-y-3.5">
-            <h4 className="text-xs font-bold text-foreground uppercase tracking-widest">Các Giải Pháp</h4>
-            <ul className="space-y-2.5 text-xs text-muted-foreground font-semibold">
-              <li><button onClick={() => document.getElementById('ai-livestream')?.scrollIntoView({ behavior: 'smooth' })} className="hover:text-primary transition-colors">A.I Livestream tự động</button></li>
-              <li><button onClick={() => document.getElementById('digital-human')?.scrollIntoView({ behavior: 'smooth' })} className="hover:text-primary transition-colors">Digital Human A.I</button></li>
-              <li><button onClick={() => document.getElementById('course')?.scrollIntoView({ behavior: 'smooth' })} className="hover:text-primary transition-colors">Đào tạo Thực chiến</button></li>
-            </ul>
+            <div className="flex flex-col bg-[#fbfcfe]">
+              <div className="flex items-center justify-between border-b border-slate-200 px-6 py-4">
+                <div className="flex items-center gap-2"><Bot className="h-5 w-5 text-blue-600" /><span className="text-sm font-black">AI Lead Assistant</span></div>
+                <span className="flex items-center gap-1.5 text-xs font-bold text-emerald-600"><span className="h-2 w-2 rounded-full bg-emerald-500" /> Đang giám sát</span>
+              </div>
+              <div className="flex-1 space-y-5 p-6 sm:p-8">
+                <div className="max-w-[88%] rounded-2xl rounded-tl-sm bg-white p-4 shadow-sm ring-1 ring-slate-200">
+                  <div className="mb-2 flex items-center justify-between"><span className="text-xs font-bold">Thảo Nguyễn</span><span className="text-[10px] text-slate-400">20:14</span></div>
+                  <p className="text-sm leading-6 text-slate-700">{scenario.comment}</p>
+                </div>
+                <div className="ml-auto max-w-[92%] rounded-2xl rounded-tr-sm bg-blue-600 p-4 text-white shadow-lg shadow-blue-600/15">
+                  <div className="mb-2 flex items-center gap-2"><Sparkles className="h-3.5 w-3.5 text-amber-300" /><span className="text-xs font-black">1Stream AI</span></div>
+                  <p className="text-sm leading-6 text-blue-50">{scenario.answer}</p>
+                </div>
+                <div className="grid gap-3 sm:grid-cols-2">
+                  <div className="rounded-xl border border-slate-200 bg-white p-4"><p className="text-[10px] font-bold uppercase tracking-wide text-slate-400">Ý định</p><p className="mt-1 text-sm font-black">{scenario.intent}</p></div>
+                  <div className="rounded-xl border border-slate-200 bg-white p-4"><p className="text-[10px] font-bold uppercase tracking-wide text-slate-400">Hành động</p><p className="mt-1 flex items-center gap-1.5 text-sm font-black text-emerald-600"><UserRoundCheck className="h-4 w-4" /> Ghi nhận / chuyển lead</p></div>
+                </div>
+              </div>
+              <div className="flex items-center gap-3 border-t border-slate-200 bg-white p-4">
+                <div className="flex-1 rounded-xl bg-slate-100 px-4 py-3 text-sm text-slate-400">Nhập bình luận mô phỏng...</div>
+                <button type="button" aria-label="Gửi bình luận mẫu" className="grid h-11 w-11 place-items-center rounded-xl bg-slate-950 text-white"><Send className="h-4 w-4" /></button>
+              </div>
+            </div>
           </div>
+        </div>
+      </section>
 
-          {/* Quick Access Column */}
-          <div className="space-y-3.5">
-            <h4 className="text-xs font-bold text-foreground uppercase tracking-widest">Truy Cập Nhanh</h4>
-            <ul className="space-y-2.5 text-xs text-muted-foreground font-semibold">
-              <li><button onClick={() => document.getElementById('hero')?.scrollIntoView({ behavior: 'smooth' })} className="hover:text-primary transition-colors">Trang chủ</button></li>
-              <li><button onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })} className="hover:text-primary transition-colors">Bảng giá gói cước</button></li>
-              <li><button onClick={() => document.getElementById('benefits')?.scrollIntoView({ behavior: 'smooth' })} className="hover:text-primary transition-colors">Lợi ích thực tế</button></li>
-            </ul>
+      <section id="audience" className="scroll-mt-20 bg-white py-24">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
+            <div className="relative overflow-hidden rounded-[28px]">
+              <img src="/images/education/language-classroom.webp" alt="Trung tâm ngoại ngữ tổ chức lớp học" className="aspect-[4/3] h-full w-full object-cover" loading="lazy" />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/75 via-transparent to-transparent" />
+              <div className="absolute inset-x-6 bottom-6 rounded-2xl border border-white/15 bg-white/10 p-5 text-white backdrop-blur-md">
+                <p className="text-xs font-bold uppercase tracking-[.16em] text-amber-300">ICP giai đoạn đầu</p>
+                <p className="mt-2 text-lg font-black">Trung tâm tiếng Anh, tiếng Hàn tại TP.HCM</p>
+              </div>
+            </div>
+            <div className="lg:pl-8">
+              <p className="text-xs font-bold uppercase tracking-[.2em] text-blue-700">Phù hợp nhất khi</p>
+              <h2 className="mt-4 text-3xl font-black tracking-[-.03em] sm:text-5xl">Đội ngũ nhỏ, dữ liệu sẵn, nhu cầu lặp lại.</h2>
+              <div className="mt-8 space-y-5">
+                {[
+                  [UsersRound, 'Đội marketing – livestream – tư vấn khoảng 3–5 người.'],
+                  [Clock3, 'Đang live 2–3 buổi/tuần hoặc muốn mua thêm giờ phát.'],
+                  [BookOpen, 'Có bảng học phí, lịch khai giảng, FAQ và tài sản truyền thông.'],
+                  [Target, 'Dẫn người xem đến học thử, inbox, biểu mẫu hoặc tư vấn.'],
+                ].map(([Icon, text]) => {
+                  const ItemIcon = Icon as typeof UsersRound
+                  return <div key={text as string} className="flex items-start gap-4"><div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-blue-50 text-blue-700"><ItemIcon className="h-5 w-5" /></div><p className="pt-2 text-sm font-semibold leading-6 text-slate-700">{text as string}</p></div>
+                })}
+              </div>
+            </div>
           </div>
+        </div>
+      </section>
 
-          {/* Contact Details Column */}
-          <div className="space-y-3.5">
-            <h4 className="text-xs font-bold text-foreground uppercase tracking-widest">Liên Hệ</h4>
-            <ul className="space-y-3 text-xs text-muted-foreground font-semibold">
-              <li className="flex items-center gap-2">
-                <Phone className="h-4 w-4 text-primary shrink-0" />
-                <span>Hotline: 083 627 1312</span>
-              </li>
-              <li className="flex items-center gap-2">
-                <Mail className="h-4 w-4 text-primary shrink-0" />
-                <a href="mailto:ilive@shopnow.vn" className="hover:text-primary transition-colors">ilive@shopnow.vn</a>
-              </li>
-              <li className="flex items-center gap-2">
-                <MapPin className="h-4.5 w-4.5 text-primary shrink-0" />
-                <span>Trụ sở chính: Hà Nội, Việt Nam</span>
-              </li>
-            </ul>
+      <section id="pricing" className="scroll-mt-20 py-24">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <SectionHeading
+            eyebrow="Gói pilot dự kiến"
+            title="Mua đúng đầu ra cần thử, chưa cần cam kết hệ thống dài hạn."
+            description="Mức giá dưới đây dùng cho giai đoạn pilot và được chốt lại theo số kênh, giờ-kênh, lượt phản hồi, số video và mức hỗ trợ."
+          />
+          <div className="mt-12 grid gap-5 lg:grid-cols-3">
+            {PACKAGES.map((plan) => (
+              <article key={plan.name} className={cn('relative flex flex-col rounded-3xl border p-7', plan.featured ? 'border-blue-600 bg-[#07172f] text-white shadow-2xl shadow-blue-950/15' : 'border-slate-200 bg-white')}>
+                {plan.featured ? <span className="absolute -top-3 left-7 rounded-full bg-amber-400 px-3 py-1 text-[10px] font-black uppercase tracking-wider text-slate-950">Phù hợp để bắt đầu</span> : null}
+                <h3 className="text-lg font-black">{plan.name}</h3>
+                <p className={cn('mt-2 min-h-12 text-sm leading-6', plan.featured ? 'text-slate-300' : 'text-slate-500')}>{plan.description}</p>
+                <div className="mt-6"><span className="text-3xl font-black tracking-tight">{plan.price}</span><span className={cn('ml-1 text-xs', plan.featured ? 'text-slate-400' : 'text-slate-500')}>{plan.unit}</span></div>
+                <ul className="mt-7 flex-1 space-y-3 border-t border-current/10 pt-6">
+                  {plan.features.map((feature) => <li key={feature} className="flex items-start gap-2.5 text-sm"><Check className={cn('mt-0.5 h-4 w-4 shrink-0', plan.featured ? 'text-amber-400' : 'text-emerald-500')} />{feature}</li>)}
+                </ul>
+                <Button className={cn('mt-8 w-full', plan.featured ? 'bg-amber-400 text-slate-950 hover:bg-amber-300' : '')} variant={plan.featured ? 'default' : 'outline'} onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}>Trao đổi gói pilot</Button>
+              </article>
+            ))}
           </div>
+          <p className="mt-5 text-center text-xs text-slate-500">AI Agent Growth: 799.000đ/tháng · tối đa 3 kênh và 1.000 lượt phản hồi AI. Enterprise và dịch vụ bổ sung báo giá theo nhu cầu.</p>
+        </div>
+      </section>
 
+      <section className="bg-white py-24">
+        <div className="mx-auto grid max-w-7xl gap-12 px-6 lg:grid-cols-[.85fr_1.15fr] lg:px-8">
+          <div>
+            <div className="grid h-12 w-12 place-items-center rounded-2xl bg-emerald-50 text-emerald-700"><ShieldCheck className="h-6 w-6" /></div>
+            <h2 className="mt-6 text-3xl font-black tracking-tight">Rõ phạm vi AI, rõ trách nhiệm con người.</h2>
+            <p className="mt-4 max-w-md text-sm leading-7 text-slate-600">1Stream không cam kết tăng lead hoặc thay thế tư vấn viên. Mục tiêu là giảm phần việc lặp lại, giữ nội dung nhất quán và đo hiệu quả thật trong pilot.</p>
+            <div className="mt-7 flex flex-wrap gap-2">
+              {['Dữ liệu được duyệt', 'Có cơ chế chuyển người thật', 'Kiểm tra quyền nội dung', 'Theo dõi sự cố phiên'].map((tag) => <span key={tag} className="rounded-full bg-slate-100 px-3 py-2 text-xs font-bold text-slate-600">{tag}</span>)}
+            </div>
+          </div>
+          <div className="divide-y divide-slate-200 border-y border-slate-200">
+            {FAQS.map((faq, index) => (
+              <div key={faq.question}>
+                <button type="button" className="flex w-full items-center justify-between gap-6 py-5 text-left" onClick={() => setOpenFaq(openFaq === index ? null : index)} aria-expanded={openFaq === index}>
+                  <span className="font-bold">{faq.question}</span><ChevronDown className={cn('h-5 w-5 shrink-0 text-slate-400 transition-transform', openFaq === index && 'rotate-180')} />
+                </button>
+                {openFaq === index ? <p className="max-w-2xl pb-5 text-sm leading-7 text-slate-600">{faq.answer}</p> : null}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" className="scroll-mt-20 bg-amber-400 py-20">
+        <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-8 px-6 lg:flex-row lg:items-center lg:px-8">
+          <div>
+            <p className="text-xs font-black uppercase tracking-[.2em] text-amber-900">Bắt đầu bằng một phiên mẫu</p>
+            <h2 className="mt-3 max-w-2xl text-3xl font-black tracking-[-.03em] text-slate-950 sm:text-5xl">Gửi một khóa học. Nhận một kịch bản live có thể duyệt.</h2>
+            <p className="mt-4 max-w-xl text-sm leading-6 text-amber-950/75">Chuẩn bị file input mẫu và trao đổi với đội ngũ 1Stream về kênh, thời lượng và mục tiêu thu lead.</p>
+          </div>
+          <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
+            <a href="mailto:hello@1stream.ai?subject=Đăng ký phiên livestream AI mẫu" className="inline-flex h-12 items-center justify-center rounded-xl bg-slate-950 px-6 text-sm font-bold text-white transition hover:bg-slate-800"><Headphones className="mr-2 h-4 w-4" /> Đăng ký tư vấn</a>
+            <Button className="h-12 border-amber-700/20 bg-white px-6 text-slate-950 hover:bg-amber-50" onClick={() => navigate('/login')}><CirclePlay className="mr-2 h-4 w-4" /> Mở AI demo</Button>
+          </div>
+        </div>
+      </section>
+
+      <footer className="bg-[#07172f] py-10 text-slate-400">
+        <div className="mx-auto flex max-w-7xl flex-col gap-6 px-6 sm:flex-row sm:items-center sm:justify-between lg:px-8">
+          <div className="flex items-center gap-3"><img src="/images/1stream-mark.png" alt="" className="h-9 w-9 rounded-lg bg-white object-cover" /><div><p className="font-black tracking-wider text-white">1STREAM</p><p className="text-[10px] uppercase tracking-[.16em]">AI livestream for education</p></div></div>
+          <div className="flex flex-wrap gap-5 text-xs font-semibold"><button type="button" onClick={() => document.getElementById('solutions')?.scrollIntoView({ behavior: 'smooth' })}>Giải pháp</button><button type="button" onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })}>Gói pilot</button><a href="/samples/1stream-course-input-template.csv" download>Input mẫu</a></div>
+          <p className="text-xs">© 2026 1Stream. Pilot product.</p>
         </div>
       </footer>
+    </div>
+  )
+}
+
+function SectionHeading({ eyebrow, title, description }: { eyebrow: string; title: string; description: string }) {
+  return (
+    <div className="max-w-3xl">
+      <p className="text-xs font-black uppercase tracking-[.2em] text-blue-700">{eyebrow}</p>
+      <h2 className="mt-4 text-3xl font-black tracking-[-.035em] sm:text-5xl">{title}</h2>
+      <p className="mt-5 max-w-2xl text-sm leading-7 text-slate-600 sm:text-base">{description}</p>
     </div>
   )
 }

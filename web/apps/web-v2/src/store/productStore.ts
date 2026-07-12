@@ -21,6 +21,6 @@ export const useProductStore = create<ProductState>()(
         set((s) => ({ products: s.products.map((it) => (it.id === id ? { ...it, ...patch } : it)) })),
       remove: (id) => set((s) => ({ products: s.products.filter((it) => it.id !== id) })),
     }),
-    { name: '1stream.products' }
+    { name: '1stream.products.education' }
   )
 )

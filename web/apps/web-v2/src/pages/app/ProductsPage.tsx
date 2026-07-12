@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react'
-import { Package, Plus, X } from 'lucide-react'
+import { BookOpen, Plus, X } from 'lucide-react'
 import type { Product } from '@/types'
 import { useProductStore } from '@/store/productStore'
 import { PageHeader } from '@/components/common/PageHeader'
@@ -31,7 +31,7 @@ interface FormState {
 const emptyForm: FormState = { name: '', description: '', price: '', images: [] }
 
 function coverImage(p: Product): string {
-  return p.images[0] || `https://picsum.photos/seed/${p.id}/600/400`
+  return p.images[0] || '/images/education/teacher-laptop.webp'
 }
 
 export function ProductsPage() {
@@ -76,7 +76,7 @@ export function ProductsPage() {
 
   function handleSubmit() {
     if (!form.name.trim()) {
-      toast.error('Vui lòng nhập tên sản phẩm')
+      toast.error('Vui lòng nhập tên khóa học')
       return
     }
     const payload = {
@@ -87,10 +87,10 @@ export function ProductsPage() {
     }
     if (editing) {
       update(editing.id, payload)
-      toast.success('Đã cập nhật sản phẩm')
+      toast.success('Đã cập nhật khóa học')
     } else {
       add(payload)
-      toast.success('Đã thêm sản phẩm')
+      toast.success('Đã thêm khóa học')
     }
     setDialogOpen(false)
   }
@@ -98,15 +98,15 @@ export function ProductsPage() {
   function handleDelete() {
     if (!deleteId) return
     remove(deleteId)
-    toast.success('Đã xoá sản phẩm')
+    toast.success('Đã xoá khóa học')
     setDeleteId(null)
   }
 
   return (
     <div>
       <PageHeader
-        title="Sản phẩm"
-        description="Quản lý danh mục sản phẩm dùng cho phiên livestream"
+        title="Dữ liệu khóa học"
+        description="Quản lý khóa học được dùng để tạo kịch bản và trả lời FAQ trong phiên live"
         actions={
           <Button variant="brand" onClick={openCreate}>
             <Plus className="h-4 w-4" /> Thêm mới
@@ -116,10 +116,10 @@ export function ProductsPage() {
 
       {products.length === 0 ? (
         <EmptyState
-          icon={Package}
-          title="Chưa có sản phẩm nào"
-          description="Thêm sản phẩm để bắt đầu tạo phiên livestream bán hàng bằng AI."
-          actionLabel="Thêm sản phẩm"
+          icon={BookOpen}
+          title="Chưa có khóa học nào"
+          description="Thêm dữ liệu khóa học để bắt đầu tạo phiên livestream tuyển sinh."
+          actionLabel="Thêm khóa học"
           onAction={openCreate}
         />
       ) : (
@@ -140,8 +140,8 @@ export function ProductsPage() {
       <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
         <DialogContent className="max-w-lg">
           <DialogHeader>
-            <DialogTitle>{editing ? 'Sửa sản phẩm' : 'Thêm sản phẩm'}</DialogTitle>
-            <DialogDescription>Nhập thông tin sản phẩm bên dưới.</DialogDescription>
+            <DialogTitle>{editing ? 'Sửa khóa học' : 'Thêm khóa học'}</DialogTitle>
+            <DialogDescription>Nhập thông tin đã được trung tâm xác nhận.</DialogDescription>
           </DialogHeader>
 
           <div className="grid gap-4 py-2">
@@ -151,7 +151,7 @@ export function ProductsPage() {
                 id="p-name"
                 value={form.name}
                 onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
-                placeholder="VD: Son dưỡng môi"
+                placeholder="VD: IELTS Foundation 5.5"
               />
             </div>
             <div className="grid gap-2">
@@ -160,11 +160,11 @@ export function ProductsPage() {
                 id="p-desc"
                 value={form.description}
                 onChange={(e) => setForm((f) => ({ ...f, description: e.target.value }))}
-                placeholder="Mô tả ngắn về sản phẩm"
+                placeholder="Lộ trình, đầu vào, lịch khai giảng..."
               />
             </div>
             <div className="grid gap-2">
-              <Label htmlFor="p-price">Giá (VND)</Label>
+              <Label htmlFor="p-price">Học phí (VND)</Label>
               <Input
                 id="p-price"
                 type="number"
@@ -241,7 +241,7 @@ export function ProductsPage() {
       <ConfirmDialog
         open={deleteId !== null}
         onOpenChange={(o) => !o && setDeleteId(null)}
-        title="Xoá sản phẩm?"
+        title="Xoá khóa học?"
         description="Hành động này không thể hoàn tác."
         confirmLabel="Xoá"
         onConfirm={handleDelete}

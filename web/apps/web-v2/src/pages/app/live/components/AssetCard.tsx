@@ -21,7 +21,7 @@ export function AssetCard({
 
   return (
     <div
-      className={`relative w-full overflow-hidden rounded-lg text-left border group transition hover:border-primary/50 cursor-pointer ${asset.active ? 'border-primary bg-card' : asset.muted ? 'border-border bg-secondary/50' : 'border-border bg-card'}`}
+      className={`group relative w-full cursor-pointer overflow-hidden rounded-xl border bg-white text-left transition hover:-translate-y-0.5 hover:shadow-md ${asset.active ? 'border-blue-500 ring-2 ring-blue-500/10' : asset.muted ? 'border-slate-200 opacity-70' : 'border-slate-200 hover:border-blue-300'}`}
     >
       {/* Thumbnail area */}
       <div
@@ -32,7 +32,7 @@ export function AssetCard({
           <img
             src={asset.thumbnail}
             alt={asset.title}
-            className="absolute inset-0 h-full w-full object-contain"
+            className="absolute inset-0 h-full w-full object-cover"
             onError={() => setImgError(true)}
           />
         ) : (
@@ -54,7 +54,7 @@ export function AssetCard({
         )}
 
         {/* Type badge: image vs video */}
-        <span className={`absolute top-1.5 right-1.5 px-1.5 py-0.5 rounded text-[7px] font-extrabold uppercase tracking-wider ${isImage ? 'bg-amber-500/80 text-white' : 'bg-primary/80 text-white'}`}>
+        <span className={`absolute right-1.5 top-1.5 rounded px-1.5 py-0.5 text-[7px] font-extrabold uppercase tracking-wider text-white ${isImage ? 'bg-amber-500/90' : 'bg-blue-600/90'}`}>
           {isImage ? 'Ảnh' : 'Video'}
         </span>
 
@@ -64,8 +64,8 @@ export function AssetCard({
         </span>
 
         {asset.active && (
-          <span className="absolute top-1.5 left-1.5 bg-primary px-1.5 py-0.5 rounded text-[7px] font-extrabold text-white uppercase tracking-wider">
-            Đang phát
+          <span className="absolute left-1.5 top-1.5 rounded bg-rose-500 px-1.5 py-0.5 text-[7px] font-extrabold uppercase tracking-wider text-white">
+            Đang dùng
           </span>
         )}
         {asset.bars && asset.active && (
@@ -85,14 +85,14 @@ export function AssetCard({
         )}
       </div>
 
-      <div className="px-2.5 py-2">
-        <p className="truncate text-[10px] font-bold text-foreground">{asset.title}</p>
+      <div className="px-2.5 py-2.5">
+        <p className="truncate text-[10px] font-bold text-slate-800">{asset.title}</p>
         <p className="text-[9px] text-muted-foreground mt-0.5">
           {asset.isCreating
             ? 'Đang tạo...'
             : asset.productLabel
               ? `${asset.productLabel} · ${asset.duration}`
-              : `Lip-sync · ${asset.duration}`}
+              : `Nội dung · ${asset.duration}`}
         </p>
       </div>
     </div>

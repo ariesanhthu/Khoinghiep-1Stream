@@ -3,7 +3,7 @@ import type { ChatItem } from '../live-preview.lib'
 
 export function LeadCard({ lead }: { lead: ChatItem }) {
   return (
-    <div className="flex items-center justify-between gap-2 rounded-lg border border-border bg-card px-2.5 py-2 hover:border-primary/40 transition">
+    <div className="flex items-center justify-between gap-2 rounded-xl border border-slate-200 bg-white px-2.5 py-2.5 transition hover:border-blue-300">
       <div className="flex items-center gap-2 min-w-0">
         <div className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-primary/10 text-[9px] font-bold text-primary">
           {lead.name
@@ -20,9 +20,9 @@ export function LeadCard({ lead }: { lead: ChatItem }) {
       </div>
       <button
         type="button"
-        className="rounded-md bg-primary hover:opacity-90 px-2 py-1 text-[9px] font-bold text-white transition flex items-center gap-0.5"
+        className="flex items-center gap-0.5 rounded-lg bg-blue-50 px-2 py-1.5 text-[9px] font-bold text-blue-700 transition hover:bg-blue-100"
       >
-        Liên hệ <ArrowRight className="h-2.5 w-2.5" />
+        Mở lead <ArrowRight className="h-2.5 w-2.5" />
       </button>
     </div>
   )

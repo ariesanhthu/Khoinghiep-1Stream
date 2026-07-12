@@ -3,7 +3,7 @@ import {
   Crown,
   Clock,
   Link2,
-  Package,
+  BookOpen,
   Mic,
   Users,
   Radio,
@@ -31,13 +31,14 @@ interface RecentVideo {
   id: string
   title: string
   status: string
+  image: string
 }
 
 const RECENT_VIDEOS: RecentVideo[] = [
-  { id: 'recent1', title: 'Live mỹ phẩm — Serum dưỡng da', status: 'Hoàn tất' },
-  { id: 'recent2', title: 'Giới thiệu nồi chiên không dầu', status: 'Hoàn tất' },
-  { id: 'recent3', title: 'Bộ sưu tập thời trang mùa hè', status: 'Hoàn tất' },
-  { id: 'recent4', title: 'Flash sale phụ kiện công nghệ', status: 'Hoàn tất' },
+  { id: 'recent1', title: 'Live tuyển sinh — IELTS Foundation 5.5', status: 'Đã duyệt', image: '/images/education/teacher-laptop.webp' },
+  { id: 'recent2', title: 'Hỏi đáp đầu vào — TOPIK I', status: 'Hoàn tất', image: '/images/education/language-classroom.webp' },
+  { id: 'recent3', title: 'Mời đăng ký học thử giao tiếp', status: 'Đã duyệt', image: '/images/education/teacher-laptop.webp' },
+  { id: 'recent4', title: 'Nhắc lịch khai giảng tháng 8', status: 'Bản nháp', image: '/images/education/language-classroom.webp' },
 ]
 
 function StatCard({
@@ -91,10 +92,10 @@ export function DashboardPage() {
         <StatCard icon={Clock} label="Ngày dùng thử còn lại" value={daysLeft} />
         <StatCard
           icon={Link2}
-          label="Nền tảng đã kết nối"
+          label="Kênh demo đã kết nối"
           value={`${connectedPlatforms.length}/4`}
         />
-        <StatCard icon={Package} label="Sản phẩm" value={products.length} />
+        <StatCard icon={BookOpen} label="Khóa học" value={products.length} />
         <StatCard icon={Mic} label="Giọng nói" value={voices.length} />
         <StatCard icon={Users} label="Người mẫu" value={models.length} />
       </div>
@@ -125,7 +126,7 @@ export function DashboardPage() {
             <div>
               <h2 className="text-lg font-bold">Bắt đầu live nhanh</h2>
               <p className="text-sm text-white/80">
-                Chọn sản phẩm, giọng và người mẫu để AI lên sóng ngay.
+                Chọn khóa học, giọng và người dẫn để tạo bản live tuyển sinh mẫu.
               </p>
             </div>
           </div>
@@ -148,7 +149,7 @@ export function DashboardPage() {
             <Card key={video.id} className="overflow-hidden">
               <div className="relative aspect-video">
                 <img
-                  src={`https://picsum.photos/seed/${video.id}/400/240`}
+                  src={video.image}
                   alt={video.title}
                   className="h-full w-full object-cover"
                 />

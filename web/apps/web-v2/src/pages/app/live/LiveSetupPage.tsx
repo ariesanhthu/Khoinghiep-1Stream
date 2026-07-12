@@ -68,7 +68,7 @@ export function LiveSetupPage() {
 
   const missing: { label: string; to: string }[] = []
   if (connected.length === 0) missing.push({ label: 'Kết nối nền tảng', to: '/platforms' })
-  if (products.length === 0) missing.push({ label: 'Thêm sản phẩm', to: '/products' })
+  if (products.length === 0) missing.push({ label: 'Thêm khóa học', to: '/products' })
   if (voices.length === 0) missing.push({ label: 'Thêm giọng nói', to: '/voices' })
   if (models.length === 0) missing.push({ label: 'Thêm người mẫu', to: '/models' })
 
@@ -241,16 +241,16 @@ export function LiveSetupPage() {
             (products.length === 0 ? (
               <EmptyState
                 icon={Package}
-                title="Chưa có sản phẩm nào"
-                description="Thêm sản phẩm để giới thiệu khi live."
+                title="Chưa có khóa học nào"
+                description="Thêm dữ liệu khóa học để giới thiệu khi live."
                 actionLabel="Đi tới Sản phẩm"
                 onAction={() => navigate('/products')}
               />
             ) : (
               <div>
-                <h2 className="mb-1 text-lg font-semibold">Chọn sản phẩm</h2>
+                <h2 className="mb-1 text-lg font-semibold">Chọn khóa học</h2>
                 <p className="mb-4 text-sm text-muted-foreground">
-                  Chọn một sản phẩm để AI giới thiệu trong phiên live.
+                  Chọn một khóa học để AI giới thiệu trong phiên live.
                 </p>
                 <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
                   {products.map((p) => {
@@ -453,13 +453,12 @@ export function LiveSetupPage() {
                       <div>
                         <p className="text-sm font-medium">Đã hết hạn mức video trong tháng</p>
                         <p className="text-sm text-muted-foreground">
-                          Gói {plan?.name} cho phép {plan?.maxVideosPerMonth} video/tháng. Nâng cấp lên
-                          Pro để live không giới hạn.
+                          Flow demo của gói {plan?.name} giới hạn {plan?.maxVideosPerMonth} lần tạo video/tháng. Chuyển sang Growth để tiếp tục mô phỏng.
                         </p>
                       </div>
                     </div>
                     <Button variant="brand" onClick={() => navigate('/subscription')}>
-                      Nâng cấp Pro
+                      Xem gói Growth
                     </Button>
                   </CardContent>
                 </Card>

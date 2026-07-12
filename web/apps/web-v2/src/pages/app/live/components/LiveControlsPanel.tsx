@@ -38,8 +38,8 @@ export function LiveControlsPanel({
 }: LiveControlsPanelProps) {
   const overlays = [
     { label: 'Watermark', value: showWatermark, toggle: () => setShowWatermark(!showWatermark) },
-    { label: 'Ticker khuyến mãi', value: showTicker, toggle: () => setShowTicker(!showTicker) },
-    { label: 'Cảm xúc AI', value: showSentimentCard, toggle: () => setShowSentimentCard(!showSentimentCard) },
+    { label: 'Ticker tuyển sinh', value: showTicker, toggle: () => setShowTicker(!showTicker) },
+    { label: 'Trạng thái dữ liệu', value: showSentimentCard, toggle: () => setShowSentimentCard(!showSentimentCard) },
   ]
 
   return (
@@ -47,7 +47,7 @@ export function LiveControlsPanel({
       <div>
         <div className="flex items-center gap-1.5 mb-1.5">
           <Palette className="h-3 w-3 text-muted-foreground" />
-          <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider">Bộ lọc camera</span>
+          <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider">Hiệu ứng khung hình</span>
         </div>
         <div className="grid grid-cols-3 gap-1">
           {FILTER_LABELS.map((f) => (
@@ -67,7 +67,7 @@ export function LiveControlsPanel({
         <div className="flex items-center justify-between mb-1.5">
           <div className="flex items-center gap-1.5">
             <Mic className="h-3 w-3 text-muted-foreground" />
-            <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider">Mic gain</span>
+            <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider">Âm lượng giọng</span>
           </div>
           <span className="text-[10px] font-bold text-foreground">{micGain}%</span>
         </div>

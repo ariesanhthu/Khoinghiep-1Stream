@@ -1,5 +1,5 @@
 import { useRef, useState, useEffect, useCallback } from 'react'
-import { Camera, Play, Sparkles, Bot, Eye, Activity, Wand2, Package, ShoppingBag, RefreshCw, Crown } from 'lucide-react'
+import { Activity, BookOpen, Bot, Camera, ChevronRight, Eye, Play, RefreshCw, Sparkles, Wand2 } from 'lucide-react'
 import { formatVND } from '@/lib/utils'
 import type { Product } from '@/types'
 import type { CameraFilter, ChatItem } from '../live-preview.lib'
@@ -87,10 +87,14 @@ export function LivePhoneFrame({
   }, [])
 
   return (
-    <section className="flex-1 min-w-0 h-full flex flex-col">
-      <div className="flex-1 min-h-0 flex items-center justify-center bg-muted/50 relative overflow-hidden p-6">
+    <section className="flex h-full min-w-0 flex-1 flex-col bg-[#eef1f5]">
+      <div className="flex h-12 shrink-0 items-center justify-between border-b border-slate-200 bg-white/70 px-5">
+        <div><p className="text-xs font-black text-slate-800">Xem trước khung dọc</p><p className="text-[10px] text-slate-400">Nội dung người xem sẽ nhìn thấy</p></div>
+        <div className="flex items-center gap-2"><span className="rounded-md bg-slate-100 px-2 py-1 text-[10px] font-bold text-slate-500">9:16</span><span className="rounded-md bg-slate-100 px-2 py-1 text-[10px] font-bold text-slate-500">78%</span></div>
+      </div>
+      <div className="relative flex min-h-0 flex-1 items-center justify-center overflow-hidden p-5 [background-image:radial-gradient(circle_at_1px_1px,rgba(100,116,139,.16)_1px,transparent_0)] [background-size:24px_24px]">
 
-        <div ref={phoneRef} className={`relative h-[min(680px,100%)] aspect-[9/16] overflow-hidden bg-[#0c0f17] rounded-2xl border shadow-lg transition-all duration-300 ${isLive ? 'border-rose-500/50 shadow-[0_0_30px_rgba(244,63,94,0.15)]' : 'border-border shadow-[0_0_20px_rgba(139,92,246,0.04)]'}`}>
+        <div ref={phoneRef} className={`relative h-[min(700px,100%)] aspect-[9/16] overflow-hidden rounded-[22px] border-[3px] bg-[#0c0f17] shadow-2xl transition-all duration-300 ${isLive ? 'border-slate-900 shadow-[0_24px_60px_rgba(15,23,42,.22)]' : 'border-slate-700 shadow-[0_20px_50px_rgba(15,23,42,.18)]'}`}>
 
           {/* AI playback video (free / pro / gốc) */}
           <video
@@ -107,7 +111,7 @@ export function LivePhoneFrame({
 
           {/* Model thumbnail fallback */}
           {!activePlaybackSrc && !(isWebcamActive && isLive) && previewThumbnail && (
-            <img src={previewThumbnail} alt={previewModelName} className={`absolute inset-0 h-full w-full object-cover transition-all duration-500 ${filterClass} ${isLive ? 'opacity-80 scale-105' : 'opacity-25 scale-100'}`} />
+            <img src={previewThumbnail} alt={previewModelName} className={`absolute inset-0 h-full w-full object-cover transition-all duration-500 ${filterClass} ${isLive ? 'opacity-100 scale-100' : 'opacity-30 scale-100'}`} />
           )}
 
           {!activePlaybackSrc && !(isWebcamActive && isLive) && !previewThumbnail && (
@@ -117,9 +121,9 @@ export function LivePhoneFrame({
           <div className="pointer-events-none absolute inset-0 live-scanline" />
 
           {showWatermark && (
-            <div className="absolute top-4 left-4 z-20 flex items-center gap-1.5 rounded bg-black/60 px-2 py-1 border border-white/5 backdrop-blur-sm pointer-events-none">
-              <Sparkles className="h-3 w-3 text-primary animate-pulse" />
-              <span className="text-[10px] font-bold text-white uppercase tracking-wider">1Stream Live AI</span>
+            <div className="pointer-events-none absolute left-4 top-4 z-20 flex items-center gap-1.5 rounded-full border border-white/15 bg-slate-950/75 px-2.5 py-1.5 backdrop-blur-md">
+              <Sparkles className="h-3 w-3 text-amber-300" />
+              <span className="text-[9px] font-black uppercase tracking-wider text-white">1Stream AI Live</span>
             </div>
           )}
 
@@ -133,22 +137,13 @@ export function LivePhoneFrame({
           )}
 
           {showSentimentCard && (
-            <div className="absolute top-4 right-4 z-20 flex items-center gap-2 rounded-full bg-black/65 border border-white/5 px-2.5 py-1 backdrop-blur-sm pointer-events-none">
-              <div className="flex h-1.5 w-1.5 rounded-full bg-emerald-500 animate-ping" />
-              <span className="text-[9px] font-bold text-white uppercase">Cảm xúc: 96% Tích cực</span>
+            <div className="pointer-events-none absolute right-4 top-4 z-20 flex items-center gap-2 rounded-full border border-white/15 bg-slate-950/75 px-2.5 py-1.5 backdrop-blur-md">
+              <div className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
+              <span className="text-[9px] font-bold text-white">Dữ liệu đã duyệt</span>
             </div>
           )}
 
-          <button
-            type="button"
-            onClick={onToggleProPhone}
-            className="absolute top-[52px] right-4 z-20 group"
-          >
-            <span className="absolute inset-[-4px] rounded-full bg-violet-500/30 pro-glow-ring" />
-            <span className="relative flex items-center gap-1 bg-gradient-to-r from-violet-500 to-purple-700 text-white text-[8px] font-extrabold px-2.5 py-1.5 rounded-full shadow-[0_4px_12px_rgba(139,92,246,0.4)] group-hover:opacity-90 transition">
-              <Crown className="h-2.5 w-2.5" /> Xem PRO
-            </span>
-          </button>
+          <button type="button" onClick={onToggleProPhone} className="absolute right-4 top-[52px] z-20 rounded-full border border-white/15 bg-white/90 px-2.5 py-1 text-[8px] font-black text-blue-700 shadow-lg transition hover:bg-white">So sánh bản nâng cao</button>
 
           {isLive ? (
             <LiveOverlay topComment={topComment} generating={isGenerating} viewers={viewers} micGain={micGain} />
@@ -157,21 +152,21 @@ export function LivePhoneFrame({
           )}
 
           {showTicker && isLive && (
-            <div className="absolute bottom-24 left-0 w-full z-20 bg-primary/20 border-y border-primary/20 py-1 overflow-hidden pointer-events-none backdrop-blur-sm">
-              <div className="whitespace-nowrap text-[9px] font-bold text-white tracking-wide flex gap-4 uppercase animate-[marquee_20s_linear_infinite]">
-                <span>CHÀO HÈ BÙNG NỔ · MUA 2 GIẢM 12% · FREESHIP TOÀN QUỐC · BẤM VÀO GIỎ HÀNG NGAY!</span>
-                <span>CHÀO HÈ BÙNG NỔ · MUA 2 GIẢM 12% · FREESHIP TOÀN QUỐC · BẤM VÀO GIỎ HÀNG NGAY!</span>
+            <div className="pointer-events-none absolute bottom-24 left-0 z-20 w-full overflow-hidden border-y border-blue-400/20 bg-blue-700/80 py-1.5 backdrop-blur-sm">
+              <div className="flex whitespace-nowrap text-[8px] font-black uppercase tracking-wide text-white animate-[marquee_20s_linear_infinite] gap-4">
+                <span>IELTS FOUNDATION 5.5 · KHAI GIẢNG 28/07 · KIỂM TRA ĐẦU VÀO MIỄN PHÍ · ĐĂNG KÝ HỌC THỬ</span>
+                <span>IELTS FOUNDATION 5.5 · KHAI GIẢNG 28/07 · KIỂM TRA ĐẦU VÀO MIỄN PHÍ · ĐĂNG KÝ HỌC THỬ</span>
               </div>
             </div>
           )}
 
-          <ProductDock product={product} />
+          <CourseDock product={product} />
         </div>
 
         <button
           type="button"
           onClick={onToggleLive}
-          className={`absolute bottom-6 right-6 z-[15] grid h-12 w-12 place-items-center rounded-full text-white shadow-xl transition-all duration-300 hover:scale-105 ${isLive ? 'bg-rose-500 shadow-rose-500/30 hover:bg-rose-600' : 'bg-primary shadow-primary/30 hover:bg-primary-hover'}`}
+          className={`absolute bottom-5 right-5 z-[15] grid h-11 w-11 place-items-center rounded-full border-4 border-white text-white shadow-xl transition-all duration-300 hover:scale-105 ${isLive ? 'bg-rose-500 shadow-rose-500/30 hover:bg-rose-600' : 'bg-blue-600 shadow-blue-600/30 hover:bg-blue-700'}`}
           aria-label={isLive ? 'Tạm dừng live' : 'Bật live'}
         >
           {isLive ? <RefreshCw className="h-5 w-5 animate-spin" /> : <Play className="h-5 w-5" fill="currentColor" />}
@@ -197,14 +192,14 @@ function ReadyState({ onStart, onWebcam, onGenerate }: { onStart: () => void; on
         <div className="mx-auto grid h-16 w-16 place-items-center rounded-full border border-primary/20 bg-primary/10 text-primary shadow-[0_0_15px_rgba(139,92,246,0.2)] animate-pulse">
           <Camera className="h-7 w-7" />
         </div>
-        <h2 className="mt-5 text-lg font-bold text-white">Sẵn Sàng Phát Sóng</h2>
-        <p className="mt-1 text-xs text-slate-300">Nạp máy ảnh hoặc chọn clip AI</p>
+        <h2 className="mt-5 text-lg font-bold text-white">Sẵn sàng xem trước</h2>
+        <p className="mt-1 text-xs text-slate-300">Chọn ảnh, clip đã duyệt hoặc bật camera</p>
         <div className="mt-6 space-y-2.5">
           <button type="button" onClick={onWebcam} className="flex h-11 w-full items-center justify-center gap-2 rounded-xl bg-primary text-xs font-bold text-white hover:opacity-90 shadow-md transition">
-            <Camera className="h-4 w-4" /> Bật Camera & Live
+            <Camera className="h-4 w-4" /> Dùng camera trực tiếp
           </button>
           <button type="button" onClick={onStart} className="flex h-11 w-full items-center justify-center gap-2 rounded-xl bg-white/10 border border-white/20 text-xs font-bold text-white hover:bg-white/20 transition">
-            <Play className="h-4 w-4 text-primary" /> Phát Live Loop
+            <Play className="h-4 w-4 text-primary" /> Dùng ảnh live mẫu
           </button>
           <button type="button" onClick={onGenerate} className="h-10 w-full text-[11px] font-semibold text-primary hover:underline transition">
             Tạo thêm video AI mới
@@ -223,7 +218,7 @@ function LiveOverlay({ topComment, generating, viewers, micGain }: { topComment?
           <div className="h-1.5 w-1.5 rounded-full bg-white" /> Live
         </div>
         <div className="flex items-center gap-1.5 rounded-full bg-black/60 border border-white/5 px-2.5 py-1 text-[9px] font-bold backdrop-blur-sm shadow-sm">
-          <Eye className="h-3 w-3 text-rose-400" /> {viewers.toLocaleString('vi-VN')} khách
+          <Eye className="h-3 w-3 text-rose-400" /> {viewers.toLocaleString('vi-VN')} người xem
         </div>
       </div>
       <div className="mb-20 space-y-2.5">
@@ -232,7 +227,7 @@ function LiveOverlay({ topComment, generating, viewers, micGain }: { topComment?
             <div className="mb-1 flex items-center gap-1 text-[9px] font-bold text-yellow-400 uppercase tracking-wide">
               <Sparkles className="h-3 w-3" /> Tiêu Điểm Hỏi Đáp
             </div>
-            <p className="text-xs font-semibold leading-relaxed text-white truncate-2-lines">{topComment.text}</p>
+            <p className="line-clamp-2 text-xs font-semibold leading-relaxed text-white">{topComment.text}</p>
           </div>
         ) : null}
         <div className="flex items-center justify-between text-[9px] font-bold">
@@ -242,7 +237,7 @@ function LiveOverlay({ topComment, generating, viewers, micGain }: { topComment?
             </span>
           ) : (
             <span className="flex items-center gap-1.5 rounded-full bg-emerald-500 px-2.5 py-1 shadow-md">
-              <Activity className="h-3 w-3 animate-pulse" /> AI Tự Trả Lời
+              <Activity className="h-3 w-3 animate-pulse" /> FAQ trong dữ liệu
             </span>
           )}
           <div className="flex items-center gap-1 rounded bg-black/55 px-2 py-1 border border-white/5 backdrop-blur-sm">
@@ -261,23 +256,23 @@ function LiveOverlay({ topComment, generating, viewers, micGain }: { topComment?
   )
 }
 
-function ProductDock({ product }: { product: Product }) {
+function CourseDock({ product }: { product: Product }) {
   return (
-    <div className="absolute bottom-4 left-4 right-4 flex items-center gap-2.5 rounded-xl bg-black/75 border border-white/10 p-2.5 shadow-xl backdrop-blur-md z-[15]">
+    <div className="absolute bottom-4 left-4 right-4 z-[15] flex items-center gap-2.5 rounded-2xl border border-white/15 bg-slate-950/85 p-2.5 shadow-xl backdrop-blur-md">
       <div className="grid h-10 w-10 shrink-0 place-items-center overflow-hidden rounded-lg bg-slate-800 text-slate-400 border border-slate-700">
         {product.images?.[0] ? (
           <img src={product.images[0]} alt={product.name} className="h-full w-full object-cover" />
         ) : (
-          <Package className="h-5 w-5 text-primary" />
+          <BookOpen className="h-5 w-5 text-blue-300" />
         )}
       </div>
       <div className="min-w-0 flex-1">
-        <p className="truncate text-[10px] font-bold text-white uppercase tracking-wider">Đang ghim ưu đãi</p>
+        <p className="truncate text-[8px] font-black uppercase tracking-[.14em] text-blue-200">Khóa học đang giới thiệu</p>
         <p className="truncate text-xs font-bold text-white leading-tight">{product.name}</p>
-        <p className="text-xs font-extrabold text-primary mt-0.5">{formatVND(product.price)}</p>
+        <p className="mt-0.5 text-[11px] font-extrabold text-amber-300">Học phí {formatVND(product.price)}</p>
       </div>
-      <div className="h-8 w-8 rounded-lg bg-primary/20 hover:bg-primary/30 border border-primary/30 grid place-items-center text-primary shrink-0 transition cursor-pointer">
-        <ShoppingBag className="h-4 w-4" />
+      <div className="grid h-8 w-8 shrink-0 cursor-pointer place-items-center rounded-lg border border-blue-400/30 bg-blue-500/20 text-blue-200 transition hover:bg-blue-500/30">
+        <ChevronRight className="h-4 w-4" />
       </div>
     </div>
   )

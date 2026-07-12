@@ -4,41 +4,38 @@ import { PLATFORM_META } from '@/types'
 export const SEED_PLANS: Plan[] = [
   {
     id: 'standard',
-    name: 'Standard',
-    priceMonthly: 99000,
+    name: 'AI Agent Basic',
+    priceMonthly: 399000,
     model: 'lip-sync',
     maxVideosPerMonth: 30,
     maxDurationMin: 5,
     quality: '720p',
     maxConcurrentPlatforms: 2,
     features: [
-      'Mô hình Lip-sync (đổi khẩu hình)',
-      '30 video / tháng',
-      'Thời lượng tối đa 5 phút',
-      'Chất lượng 720p',
-      'Live tối đa 2 nền tảng đồng thời',
-      '5 giọng nói mẫu',
-      'AI trả lời bình luận cơ bản',
+      'Kết nối 1 kênh',
+      '200 lượt phản hồi AI / tháng',
+      'Cơ sở tri thức khóa học đã duyệt',
+      'Trả lời FAQ tuyển sinh',
+      'Ghi nhận và chuyển lead',
+      'Báo cáo lượt tương tác',
     ],
   },
   {
     id: 'pro',
-    name: 'Pro',
-    priceMonthly: 399000,
+    name: 'AI Agent Growth',
+    priceMonthly: 799000,
     model: 'veo3',
     maxVideosPerMonth: null,
     maxDurationMin: 30,
     quality: '2K',
-    maxConcurrentPlatforms: 4,
+    maxConcurrentPlatforms: 3,
     features: [
-      'Mô hình VEO3 (generate lại video)',
-      'Video không giới hạn',
-      'Thời lượng tối đa 30 phút',
-      'Chất lượng 2K',
-      'Live cả 4 nền tảng đồng thời',
-      'Giọng nói không giới hạn + clone giọng',
-      'AI trả lời bình luận nâng cao',
-      'Không watermark',
+      'Kết nối tối đa 3 kênh',
+      '1.000 lượt phản hồi AI / tháng',
+      'FAQ đa kênh theo dữ liệu đã duyệt',
+      'Phân loại nhu cầu học',
+      'Chuyển tư vấn viên khi cần',
+      'Báo cáo tổng hợp',
     ],
   },
   {
@@ -51,24 +48,20 @@ export const SEED_PLANS: Plan[] = [
     quality: '2K',
     maxConcurrentPlatforms: 4,
     features: [
-      'Mô hình thiết kế riêng',
-      'Thời lượng tối đa 60 phút',
-      'Live không giới hạn nền tảng',
-      'Ưu tiên xử lý băng thông cao',
-      'Clone giọng nói & hình ảnh độc quyền',
-      'AI trả lời bình luận thông minh',
-      'Hỗ trợ kỹ thuật 24/7 chuyên nghiệp',
+      'Nhiều kênh hoặc chi nhánh',
+      'Cơ sở tri thức riêng',
+      'Phân quyền theo vai trò',
+      'Tích hợp CRM theo phạm vi',
+      'Hạn mức và SLA tùy chỉnh',
+      'Hỗ trợ vận hành theo yêu cầu',
     ],
   },
 ]
 
-const img = (seed: string) => `https://picsum.photos/seed/${seed}/600/400`
-
 export const SEED_PRODUCTS: Product[] = [
-  { id: 'p1', name: 'Serum dưỡng trắng Vitamin C', description: 'Serum dưỡng trắng da, mờ thâm, cấp ẩm sâu.', price: 350000, images: [img('serum1'), img('serum2')], createdAt: new Date().toISOString() },
-  { id: 'p2', name: 'Nồi chiên không dầu 5L', description: 'Nồi chiên không dầu dung tích 5L, tiết kiệm điện.', price: 1290000, images: [img('airfryer1')], createdAt: new Date().toISOString() },
-  { id: 'p3', name: 'Áo khoác nỉ unisex', description: 'Áo khoác nỉ form rộng, chất liệu cotton dày dặn.', price: 259000, images: [img('jacket1'), img('jacket2')], createdAt: new Date().toISOString() },
-  { id: 'p4', name: 'Tai nghe Bluetooth TWS', description: 'Tai nghe không dây chống ồn, pin 30 giờ.', price: 490000, images: [img('earbuds1')], createdAt: new Date().toISOString() },
+  { id: 'p1', name: 'IELTS Foundation 5.5', description: 'Lộ trình 12 tuần cho học viên đầu vào IELTS 3.0–3.5. Khai giảng 28/07.', price: 3900000, images: ['/images/education/teacher-laptop.webp'], createdAt: new Date().toISOString() },
+  { id: 'p2', name: 'TOPIK I — Tiếng Hàn sơ cấp', description: 'Khóa 36 buổi cho người mới bắt đầu, có lớp cuối tuần.', price: 2800000, images: ['/images/education/language-classroom.webp'], createdAt: new Date().toISOString() },
+  { id: 'p3', name: 'Tiếng Anh giao tiếp phản xạ', description: 'Lộ trình 10 tuần, học thử 60 phút và đánh giá phát âm miễn phí.', price: 2400000, images: ['/images/education/language-classroom.webp'], createdAt: new Date().toISOString() },
 ]
 
 export const SEED_VOICES: Voice[] = [
@@ -79,12 +72,10 @@ export const SEED_VOICES: Voice[] = [
 ]
 
 export const SEED_MODELS: ModelAsset[] = [
-  { id: 'm1', name: 'Người mẫu nữ - Studio', kind: 'image', url: img('model1'), thumbnail: img('model1'), createdAt: new Date().toISOString() },
-  { id: 'm2', name: 'Người mẫu nam - Casual', kind: 'image', url: img('model2'), thumbnail: img('model2'), createdAt: new Date().toISOString() },
-  { id: 'm3', name: 'Người mẫu nữ - Ngoài trời', kind: 'image', url: img('model3'), thumbnail: img('model3'), createdAt: new Date().toISOString() },
-  { id: 'm4', name: 'Người mẫu nam - Văn phòng', kind: 'image', url: img('model4'), thumbnail: img('model4'), createdAt: new Date().toISOString() },
-  { id: 'm5', name: 'Clip giới thiệu nữ', kind: 'video', url: 'https://www.w3schools.com/html/mov_bbb.mp4', thumbnail: img('vid1'), createdAt: new Date().toISOString() },
-  { id: 'm6', name: 'Clip giới thiệu nam', kind: 'video', url: 'https://www.w3schools.com/html/mov_bbb.mp4', thumbnail: img('vid2'), createdAt: new Date().toISOString() },
+  { id: 'm1', name: 'Tư vấn viên AI — Studio', kind: 'image', url: '/images/education/ai-advisor-live-v1.webp', thumbnail: '/images/education/ai-advisor-live-v1.webp', createdAt: new Date().toISOString() },
+  { id: 'm2', name: 'Giảng viên — Bảng lớp học', kind: 'image', url: '/images/education/teacher-laptop.webp', thumbnail: '/images/education/teacher-laptop.webp', createdAt: new Date().toISOString() },
+  { id: 'm3', name: 'Không gian lớp ngoại ngữ', kind: 'image', url: '/images/education/language-classroom.webp', thumbnail: '/images/education/language-classroom.webp', createdAt: new Date().toISOString() },
+  { id: 'm4', name: 'Video tư vấn tuyển sinh mẫu', kind: 'video', url: '/videos/video_free.mp4', thumbnail: '/videos/thumbs/free.jpg', createdAt: new Date().toISOString() },
 ]
 
 export const SEED_PLATFORMS: Platform[] = (Object.keys(PLATFORM_META) as Array<keyof typeof PLATFORM_META>).map((id) => ({

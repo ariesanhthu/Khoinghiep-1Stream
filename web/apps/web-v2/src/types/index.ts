@@ -1,4 +1,4 @@
-export type PlatformId = 'tiktok' | 'facebook' | 'youtube' | 'shopee'
+export type PlatformId = 'tiktok' | 'facebook' | 'youtube'
 
 export interface Platform {
   id: PlatformId
@@ -80,5 +80,5 @@ export const PLATFORM_META: Record<PlatformId, { name: string; color: string; sh
   tiktok: { name: 'TikTok Shop', color: '#ff0050', short: 'TT' },
   facebook: { name: 'Facebook', color: '#1877f2', short: 'FB' },
   youtube: { name: 'YouTube', color: '#ff0000', short: 'YT' },
-  shopee: { name: 'Shopee Live', color: '#ee4d2d', short: 'SP' },
+  // shopee: { name: 'Shopee Live', color: '#ee4d2d', short: 'SP' },
 }

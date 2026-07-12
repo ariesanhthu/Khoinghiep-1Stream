@@ -19,6 +19,6 @@ export const useModelStore = create<ModelState>()(
       update: (id, patch) => set((s) => ({ models: s.models.map((it) => (it.id === id ? { ...it, ...patch } : it)) })),
       remove: (id) => set((s) => ({ models: s.models.filter((it) => it.id !== id) })),
     }),
-    { name: '1stream.models' }
+    { name: '1stream.models.education' }
   )
 )

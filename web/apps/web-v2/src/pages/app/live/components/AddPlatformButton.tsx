@@ -4,13 +4,14 @@ import { usePlatformStore } from '@/store/platformStore'
 import { PLATFORM_META } from '@/types'
 import type { PlatformId } from '@/types'
 
+const ALL_PLATFORM_IDS = Object.keys(PLATFORM_META) as PlatformId[]
+
 export function AddPlatformButton() {
   const { platforms, connect } = usePlatformStore()
   const [open, setOpen] = useState(false)
   const [selectedId, setSelectedId] = useState<PlatformId | ''>('')
   const [accountName, setAccountName] = useState('')
-  const allIds: PlatformId[] = ['tiktok', 'facebook', 'youtube', 'shopee']
-  const available = allIds.filter((id) => !platforms.some((p) => p.id === id))
+  const available = ALL_PLATFORM_IDS.filter((id) => !platforms.some((p) => p.id === id))
 
   const close = () => {
     setOpen(false)

@@ -2,7 +2,7 @@ import { NavLink, useNavigate } from 'react-router-dom'
 import {
   LayoutDashboard,
   CreditCard,
-  Package,
+  BookOpen,
   Mic,
   Users,
   Share2,
@@ -18,7 +18,7 @@ const NAV = [
   { to: '/live/preview', label: 'Livestream Preview', icon: Radio },
   { to: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
   { to: '/subscription', label: 'Gói dịch vụ', icon: CreditCard },
-  { to: '/products', label: 'Sản phẩm', icon: Package },
+  { to: '/products', label: 'Khóa học', icon: BookOpen },
   { to: '/voices', label: 'Giọng nói', icon: Mic },
   { to: '/models', label: 'Người mẫu', icon: Users },
   { to: '/platforms', label: 'Nền tảng', icon: Share2 },

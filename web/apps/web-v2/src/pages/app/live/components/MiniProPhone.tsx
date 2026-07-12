@@ -35,7 +35,7 @@ export function MiniProPhone({ visible, onClose, onUpgrade, mainPhoneHeight, pro
     >
       <div className="relative h-full w-full rounded-2xl border-[1.5px] border-violet-500 bg-[#0d1025] overflow-hidden shadow-[0_0_24px_rgba(139,92,246,0.35)]">
 
-        {/* PRO video */}
+        {/* Advanced preview video */}
         {proVideoSrc && (
           <video
             ref={videoRef}
@@ -50,9 +50,9 @@ export function MiniProPhone({ visible, onClose, onUpgrade, mainPhoneHeight, pro
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,rgba(139,92,246,0.25),transparent_60%)]" />
         )}
 
-        {/* PRO badge */}
+        {/* Advanced badge */}
         <div className="absolute top-3 left-1/2 -translate-x-1/2 z-10 flex items-center gap-1 bg-gradient-to-r from-violet-500 to-purple-700 text-white text-[8px] font-extrabold px-2.5 py-1 rounded-full tracking-wide shadow-[0_2px_8px_rgba(139,92,246,0.4)]">
-          <Crown className="h-2.5 w-2.5" /> PRO PREVIEW
+          <Crown className="h-2.5 w-2.5" /> BẢN NÂNG CAO
         </div>
 
         {/* Close */}
@@ -70,7 +70,7 @@ export function MiniProPhone({ visible, onClose, onUpgrade, mainPhoneHeight, pro
           onClick={onUpgrade}
           className="absolute bottom-3 left-3 right-3 z-10 bg-gradient-to-r from-violet-500 to-purple-700 text-white py-2 rounded-lg text-[9px] font-bold hover:opacity-90 transition"
         >
-          Nâng cấp PRO
+          Trao đổi gói nâng cao
         </button>
       </div>
     </div>

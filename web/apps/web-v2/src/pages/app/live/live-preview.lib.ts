@@ -40,28 +40,28 @@ export const SHOPPERS = [
 ]
 
 export const SAMPLE_COMMENTS = [
-  'Sản phẩm này dùng cho da nhạy cảm được không?',
-  'Giá hôm nay bao nhiêu vậy shop?',
-  'Shop có ship Hà Nội không ạ?',
-  'Mua 2 hũ có giảm thêm không?',
-  'Còn hàng không shop ơi?',
-  'Chốt đơn ở đâu vậy ạ?',
-  'Nhìn mẫu đang dùng thấy mê quá',
-  'Có freeship trong live không shop?',
+  'Em mất gốc thì có học lớp này được không ạ?',
+  'Học phí khóa này bao nhiêu vậy trung tâm?',
+  'Lớp sắp tới khai giảng ngày nào ạ?',
+  'Có lớp học cuối tuần không trung tâm?',
+  'Mình muốn đăng ký kiểm tra đầu vào ạ',
+  'Khóa này có buổi học thử không?',
+  'Học online hay tại trung tâm vậy ạ?',
+  'Cho mình xin lộ trình học chi tiết nhé',
 ]
 
 export const MANUAL_QUESTIONS = [
-  'Sản phẩm này dùng cho da nhạy cảm được không?',
-  'Shop có ship Hà Nội không ạ?',
-  'Mua 2 có giảm thêm không?',
+  'Em mất gốc thì có học lớp này được không?',
+  'Lớp sắp tới khai giảng ngày nào ạ?',
+  'Mình muốn đăng ký học thử thì làm sao?',
 ]
 
 export const FALLBACK_PRODUCT: Product = {
   id: 'preview-product',
-  name: 'Gel tẩy da chết cà phê Đắk Lắk',
-  description: 'Sản phẩm demo cho livestream preview.',
-  price: 125000,
-  images: [],
+  name: 'IELTS Foundation 5.5',
+  description: 'Lộ trình 12 tuần cho học viên đầu vào IELTS 3.0–3.5.',
+  price: 3900000,
+  images: ['/images/education/teacher-laptop.webp'],
   createdAt: new Date().toISOString(),
 }
 
@@ -74,42 +74,45 @@ export const FILTER_LABELS: { value: CameraFilter; label: string }[] = [
 ]
 
 export const COPILOT_COMMANDS = [
-  { label: '📣 Kêu gọi chốt đơn', prompt: 'Kêu gọi khách hàng nhấn vào giỏ hàng bên dưới để chốt sản phẩm với mã giảm giá độc quyền ngay lập tức.' },
-  { label: '🎁 Promo Voucher 50K', prompt: 'Thông báo tặng ngay Voucher giảm 50.000đ dành riêng cho 10 khách hàng đầu tiên bình luận mã "LIVE50".' },
-  { label: '⚡ Kể câu chuyện vui', prompt: 'Kể một mẩu truyện hài hước ngắn về thói quen chăm sóc da của các chị em để tạo tiếng cười trong phòng live.' },
-  { label: '💬 Đọc bình luận mới nhất', prompt: 'Đọc to bình luận mới nhất của khách hàng và giải đáp thắc mắc của họ bằng giọng điệu ngọt ngào.' },
+  { label: '📣 Mời đăng ký học thử', prompt: 'Mời người xem để lại từ khóa HỌC THỬ để nhận biểu mẫu đăng ký và lịch tư vấn phù hợp.' },
+  { label: '🗓️ Nhắc lịch khai giảng', prompt: 'Thông báo ngày khai giảng 28/07, lịch học thứ 3-5-7 và lưu ý số lượng chỗ của lớp.' },
+  { label: '🎓 Giới thiệu lộ trình', prompt: 'Tóm tắt lộ trình 12 tuần, yêu cầu đầu vào IELTS 3.0–3.5 và mục tiêu nền tảng 5.5.' },
+  { label: '💬 Đọc bình luận mới nhất', prompt: 'Đọc bình luận mới nhất và trả lời trong phạm vi dữ liệu tuyển sinh đã được trung tâm duyệt.' },
 ]
 
 export function detectIntent(text: string) {
-  if (/(giá|bao nhiêu|mua 2|giảm|combo|mã|freeship)/i.test(text)) return 'Giá & ưu đãi'
-  if (/(ship|hà nội|miền bắc|sài gòn|order|đặt|chốt)/i.test(text)) return 'Vận chuyển'
-  if (/(da|bầu|trẻ em|an toàn|mặt|dùng được)/i.test(text)) return 'Tư vấn sản phẩm'
-  if (/(hàng|chính hãng|hạn sử dụng|có hàng|hết hàng|còn hàng)/i.test(text)) return 'Tồn kho'
+  if (/(học phí|bao nhiêu|giảm|ưu đãi|đóng phí)/i.test(text)) return 'Học phí & ưu đãi'
+  if (/(khai giảng|lịch học|cuối tuần|thứ mấy|online|tại trung tâm)/i.test(text)) return 'Lịch & hình thức học'
+  if (/(mất gốc|đầu vào|trình độ|lộ trình|đầu ra|phù hợp)/i.test(text)) return 'Tư vấn khóa học'
+  if (/(học thử|kiểm tra|đăng ký|tư vấn|liên hệ|giữ chỗ)/i.test(text)) return 'Lead tuyển sinh'
   return 'Tương tác'
 }
 
 export function buildAnswer(text: string, product: Product) {
-  if (/(giá|bao nhiêu)/i.test(text)) {
-    return `${product.name} đang có giá ${formatVND(product.price)}. Trong live này khách chốt đơn được áp mã freeship và quà mini size.`
+  if (/(học phí|bao nhiêu|đóng phí)/i.test(text)) {
+    return `Học phí ${product.name} hiện được duyệt là ${formatVND(product.price)}. Chính sách ưu đãi sẽ áp dụng đúng theo thời hạn trung tâm công bố.`
   }
-  if (/(mua 2|combo|giảm|mã|freeship)/i.test(text)) {
-    return 'Có nha, mua combo trong live sẽ được ưu đãi riêng. Agent đã ghim mã ở giỏ hàng để khách chốt ngay.'
+  if (/(giảm|ưu đãi)/i.test(text)) {
+    return 'Trung tâm đang có ưu đãi đăng ký sớm theo thông tin đã duyệt. Tư vấn viên sẽ xác nhận mức áp dụng trước khi bạn đóng học phí.'
   }
-  if (/(ship|hà nội|miền bắc|sài gòn|order|đặt|chốt)/i.test(text)) {
-    return 'Shop giao toàn quốc. Nội thành thường 1-2 ngày, các tỉnh khoảng 2-4 ngày, có COD và theo dõi vận đơn.'
+  if (/(khai giảng|lịch học|cuối tuần|thứ mấy)/i.test(text)) {
+    return 'Lớp gần nhất khai giảng ngày 28/07, học thứ 3-5-7 từ 19:00 đến 20:30. Hiện cũng có ca cuối tuần để bạn đăng ký tư vấn.'
   }
-  if (/(da nhạy cảm|nhạy cảm|mặt|an toàn|bầu|trẻ em|dùng được)/i.test(text)) {
-    return 'Sản phẩm ưu tiên dùng nhẹ 1-2 lần mỗi tuần. Da nhạy cảm nên test vùng nhỏ trước khi dùng toàn mặt.'
+  if (/(online|tại trung tâm|offline)/i.test(text)) {
+    return 'Khóa có lớp trực tiếp tại cơ sở Quận 3. Hình thức online được mở theo từng đợt; tư vấn viên sẽ kiểm tra lịch phù hợp cho bạn.'
   }
-  if (/(hàng|chính hãng|hạn sử dụng|có hàng|hết hàng|còn hàng)/i.test(text)) {
-    return 'Hàng chính hãng, lô mới còn hạn dài. Hiện còn sẵn hàng trong kho live, agent có thể giữ đơn ngay.'
+  if (/(mất gốc|đầu vào|trình độ|lộ trình|đầu ra|phù hợp)/i.test(text)) {
+    return 'Khóa phù hợp với đầu vào khoảng IELTS 3.0–3.5. Bạn nên làm bài kiểm tra miễn phí; tư vấn viên sẽ xác nhận lớp phù hợp sau khi có kết quả.'
   }
-  return 'Cảm ơn bạn đã tương tác. Agent đã ghi nhận câu hỏi và sẽ nhắc lại ưu đãi phù hợp trong live.'
+  if (/(học thử|kiểm tra|đăng ký|tư vấn|liên hệ|giữ chỗ)/i.test(text)) {
+    return 'Bạn có thể để lại từ khóa HỌC THỬ để nhận biểu mẫu. 1Stream chỉ ghi nhận thông tin liên hệ khi bạn đồng ý và sẽ chuyển cho tư vấn viên.'
+  }
+  return 'Cảm ơn bạn đã quan tâm. 1Stream đã ghi nhận câu hỏi; nếu nội dung nằm ngoài dữ liệu được duyệt, tư vấn viên của trung tâm sẽ hỗ trợ thêm.'
 }
 
 export function toChatItem(text: string, index: number, product: Product): ChatItem {
   const intent = detectIntent(text)
-  const hasBuyingSignal = /giá|mua|ship|order|đặt|giảm|combo|có hàng|chốt|freeship/i.test(text)
+  const hasBuyingSignal = /học phí|học thử|kiểm tra|đăng ký|tư vấn|giữ chỗ/i.test(text)
   return {
     id: index,
     name: SHOPPERS[index % SHOPPERS.length],

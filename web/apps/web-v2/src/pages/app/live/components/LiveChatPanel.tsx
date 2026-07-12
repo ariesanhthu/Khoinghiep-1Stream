@@ -36,9 +36,10 @@ export function LiveChatPanel({
   onOpenProModal,
 }: LiveChatPanelProps) {
   return (
-    <aside className="hidden lg:flex flex-col h-full min-h-0 w-[340px] select-none shrink-0 border-l border-border">
+    <aside className="hidden h-full min-h-0 w-[380px] shrink-0 select-none flex-col border-l border-slate-200 bg-white xl:flex">
 
-      <div className="shrink-0 px-4 py-3 border-b border-border">
+      <div className="shrink-0 border-b border-slate-200 px-4 py-3.5">
+        <div className="mb-2.5 flex items-center justify-between"><span className="text-[10px] font-black uppercase tracking-[.16em] text-slate-500">Kênh phát</span><span className="text-[10px] font-semibold text-slate-400">Chọn để bật mô phỏng</span></div>
         <div className="flex items-center gap-2 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           {platforms.map((p) => {
             const isLiveOn = liveChannelIds.includes(p.id)
@@ -47,15 +48,15 @@ export function LiveChatPanel({
                 key={p.id}
                 type="button"
                 onClick={() => onToggleChannel(p.id)}
-                className={`flex items-center gap-1.5 rounded-lg border px-2.5 py-1.5 transition cursor-pointer shrink-0 ${isLiveOn ? 'border-primary bg-primary/5' : 'border-border bg-card opacity-60 hover:opacity-100'}`}
+                className={`flex shrink-0 cursor-pointer items-center gap-2 rounded-xl border px-2.5 py-2 transition ${isLiveOn ? 'border-blue-300 bg-blue-50 shadow-sm' : 'border-slate-200 bg-white opacity-70 hover:opacity-100'}`}
               >
-                <div className={`grid h-5 w-5 place-items-center rounded-full shrink-0 ${isLiveOn ? 'bg-primary/20 text-primary' : 'bg-secondary text-muted-foreground'}`}>
+                <div className={`grid h-6 w-6 shrink-0 place-items-center rounded-full ${isLiveOn ? 'bg-blue-600 text-white' : 'bg-slate-100 text-slate-400'}`}>
                   <Radio className="h-2.5 w-2.5" />
                 </div>
                 <div className="min-w-0">
-                  <p className="truncate text-[10px] font-bold text-foreground leading-none">{PLATFORM_META[p.id].name}</p>
-                  <p className={`text-[9px] font-semibold truncate ${isLiveOn ? 'text-rose-500' : 'text-muted-foreground'}`}>
-                    {isLiveOn ? 'Live' : p.connected ? 'Ready' : 'Offline'}
+                  <p className="truncate text-[10px] font-bold leading-none text-slate-800">{PLATFORM_META[p.id].name}</p>
+                  <p className={`truncate text-[9px] font-semibold ${isLiveOn ? 'text-rose-500' : 'text-slate-400'}`}>
+                    {isLiveOn ? 'Đang phát' : p.connected ? 'Sẵn sàng' : 'Chưa kết nối'}
                   </p>
                 </div>
               </button>
@@ -65,22 +66,22 @@ export function LiveChatPanel({
         </div>
       </div>
 
-      <div className="flex flex-col min-h-0 flex-1 px-4 py-3">
-        <div className="mb-3 flex items-center justify-between shrink-0">
+      <div className="flex min-h-0 flex-1 flex-col px-4 py-4">
+        <div className="mb-4 flex shrink-0 items-center justify-between">
           <div className="flex items-center gap-1.5">
             <MessageSquareCode className="h-4 w-4 text-primary" />
-            <h2 className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground">Bình luận trực tiếp</h2>
+            <div><h2 className="text-xs font-black text-slate-900">Bình luận trực tiếp</h2><p className="mt-0.5 text-[10px] text-slate-400">AI phản hồi từ dữ liệu đã duyệt</p></div>
           </div>
           <span className="flex items-center gap-1.5 text-[10px] font-bold">
             {isPro ? (
               <>
                 <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                <span className="text-emerald-600">AI Online</span>
+                <span className="text-emerald-600">AI đang hỗ trợ</span>
               </>
             ) : (
               <ProTooltip feature="auto-reply" onOpenModal={onOpenProModal}>
                 <span className="flex items-center gap-1.5 cursor-pointer">
-                  <span className="text-muted-foreground">AI Offline</span>
+                  <span className="text-slate-400">AI chưa bật</span>
                   <ProBadge size="sm" onClick={() => onOpenProModal('auto-reply')} />
                 </span>
               </ProTooltip>
@@ -88,20 +89,20 @@ export function LiveChatPanel({
           </span>
         </div>
 
-        <div ref={chatListRef} className="flex-1 min-h-0 space-y-4 overflow-y-auto pr-0.5 mb-3 scrollbar-thin">
+        <div ref={chatListRef} className="mb-3 min-h-0 flex-1 space-y-5 overflow-y-auto pr-1 scrollbar-thin">
           {comments.map((item) => (
             <CommentBubble key={item.id} item={item} />
           ))}
         </div>
 
-        <div className="mt-auto pt-3 shrink-0 border-t border-border">
+        <div className="mt-auto shrink-0 border-t border-slate-200 pt-3">
           <div className="flex gap-1.5 overflow-x-auto pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             {MANUAL_QUESTIONS.map((item) => (
               <button
                 type="button"
                 key={item}
                 onClick={() => onSubmitQuestion(item)}
-                className="shrink-0 whitespace-nowrap rounded-full border border-border bg-secondary hover:border-primary px-3 py-1.5 text-[11px] font-semibold text-muted-foreground hover:text-primary transition"
+                className="shrink-0 whitespace-nowrap rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5 text-[10px] font-semibold text-slate-500 transition hover:border-blue-300 hover:bg-blue-50 hover:text-blue-700"
               >
                 {item}
               </button>
@@ -115,10 +116,10 @@ export function LiveChatPanel({
             <input
               value={question}
               onChange={(e) => onQuestionChange(e.target.value)}
-              placeholder="Nhập câu hỏi mô phỏng..."
-              className="h-10 min-w-0 flex-1 rounded-lg border border-border bg-secondary px-3.5 text-sm outline-none transition focus:border-primary/50 text-foreground placeholder-muted-foreground"
+              placeholder="Nhập bình luận để thử AI..."
+              className="h-11 min-w-0 flex-1 rounded-xl border border-slate-200 bg-slate-50 px-3.5 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-blue-400 focus:bg-white"
             />
-            <button type="submit" className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-primary hover:opacity-90 text-white shadow-sm" aria-label="Gửi câu hỏi">
+            <button type="submit" className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-blue-600 text-white shadow-sm transition hover:bg-blue-700" aria-label="Gửi câu hỏi">
               <Send className="h-4 w-4" />
             </button>
           </form>

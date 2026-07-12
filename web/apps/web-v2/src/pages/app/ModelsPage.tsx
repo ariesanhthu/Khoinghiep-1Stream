@@ -37,8 +37,8 @@ interface FormState {
 const emptyForm: FormState = { name: '', kind: 'image', url: '', thumbnail: '' }
 
 function cover(m: ModelAsset): string {
-  if (m.kind === 'video') return m.thumbnail || m.url || `https://picsum.photos/seed/${m.id}/600/400`
-  return m.url || m.thumbnail || `https://picsum.photos/seed/${m.id}/600/400`
+  if (m.kind === 'video') return m.thumbnail || m.url || '/images/education/teacher-laptop.webp'
+  return m.url || m.thumbnail || '/images/education/teacher-laptop.webp'
 }
 
 export function ModelsPage() {

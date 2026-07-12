@@ -1,6 +1,5 @@
 import { Check, Clock, Sparkles, Crown, Info } from 'lucide-react'
 import { PageHeader } from '@/components/common/PageHeader'
-import { QuotaBar } from '@/components/common/QuotaBar'
 import { Button } from '@/components/ui/button'
 import {
   Card,
@@ -17,8 +16,10 @@ import { cn, formatVND } from '@/lib/utils'
 import { useSubscriptionStore } from '@/store/subscriptionStore'
 import type { Plan } from '@/types'
 
-function modelLabel(model: Plan['model']): string {
-  return model === 'veo3' ? 'VEO3' : 'Lip-sync'
+const PLAN_SUMMARY: Record<Plan['id'], Array<[string, string]>> = {
+  standard: [['Số kênh', '1 kênh'], ['Phản hồi AI', 'Tối đa 200/tháng'], ['Phạm vi', 'FAQ & chuyển lead'], ['Hình thức', 'Theo tháng']],
+  pro: [['Số kênh', 'Tối đa 3 kênh'], ['Phản hồi AI', 'Tối đa 1.000/tháng'], ['Phạm vi', 'Phân loại & chuyển lead'], ['Báo cáo', 'Tổng hợp đa kênh']],
+  enterprise: [['Số kênh', 'Theo nhu cầu'], ['Cơ sở tri thức', 'Riêng theo đơn vị'], ['Tích hợp', 'CRM & phân quyền'], ['Hỗ trợ', 'Theo SLA']],
 }
 
 function PlanRow({ label, value }: { label: string; value: string }) {
@@ -52,7 +53,7 @@ export function SubscriptionPage() {
     <div>
       <PageHeader
         title="Gói dịch vụ"
-        description="So sánh và chọn gói phù hợp. Không có gói Free — chỉ dùng thử 7 ngày."
+        description="Gói AI Lead Assistant dự kiến cho giai đoạn pilot. Video AI và giờ phát được báo giá theo đầu ra."
       />
 
       {/* Trial status banner */}
@@ -62,7 +63,7 @@ export function SubscriptionPage() {
             <Clock className="h-5 w-5 text-amber-400" />
             <div>
               <p className="font-medium text-amber-200">
-                Bạn đang dùng thử · còn {daysLeft} ngày
+                Môi trường demo · còn {daysLeft} ngày
               </p>
               <p className="text-sm text-amber-200/70">
                 Gói hiện tại: {currentPlan?.name ?? '—'}
@@ -74,7 +75,7 @@ export function SubscriptionPage() {
         <Card className="mb-6 border-brand-from/40 bg-brand-from/10">
           <CardContent className="flex items-center gap-3 p-4">
             <Sparkles className="h-5 w-5 text-violet-400" />
-            <p className="font-medium">Chọn gói để bắt đầu 7 ngày dùng thử</p>
+            <p className="font-medium">Chọn gói Agent để mô phỏng hạn mức trong demo</p>
           </CardContent>
         </Card>
       )}
@@ -125,21 +126,7 @@ export function SubscriptionPage() {
 
               <CardContent className="flex flex-1 flex-col gap-4">
                 <div className="space-y-2">
-                  <PlanRow label="Công nghệ" value={modelLabel(plan.model)} />
-                  <PlanRow
-                    label="Video/tháng"
-                    value={
-                      plan.maxVideosPerMonth === null
-                        ? 'Không giới hạn'
-                        : String(plan.maxVideosPerMonth)
-                    }
-                  />
-                  <PlanRow label="Thời lượng" value={`${plan.maxDurationMin} phút`} />
-                  <PlanRow label="Chất lượng" value={plan.quality} />
-                  <PlanRow
-                    label="Số nền tảng"
-                    value={String(plan.maxConcurrentPlatforms)}
-                  />
+                  {PLAN_SUMMARY[plan.id].map(([label, value]) => <PlanRow key={label} label={label} value={value} />)}
                 </div>
 
                 <Separator />
@@ -160,7 +147,7 @@ export function SubscriptionPage() {
                     variant="outline"
                     className="w-full border-primary/50 text-primary hover:bg-primary/10 font-bold"
                     onClick={() => {
-                      toast.info("Vui lòng liên hệ Hotline: 083 627 1312 hoặc email ilive@shopnow.vn để đăng ký gói Enterprise!", { duration: 5000 })
+                      toast.info('Vui lòng liên hệ hello@1stream.ai để trao đổi phạm vi Enterprise.', { duration: 5000 })
                     }}
                   >
                     Liên hệ ngay
@@ -171,7 +158,7 @@ export function SubscriptionPage() {
                     className="w-full"
                     onClick={() => handleStartTrial(plan)}
                   >
-                    Bắt đầu dùng thử
+                    Kích hoạt demo
                   </Button>
                 ) : isActive ? (
                   <Button variant="secondary" className="w-full" disabled>
@@ -183,7 +170,7 @@ export function SubscriptionPage() {
                     className="w-full"
                     onClick={() => handleSwitch(plan)}
                   >
-                    {isPro ? 'Nâng cấp lên Pro' : `Chuyển sang ${plan.name}`}
+                    {isPro ? 'Chuyển sang Growth' : `Chuyển sang ${plan.name}`}
                   </Button>
                 )}
               </CardFooter>
@@ -192,25 +179,9 @@ export function SubscriptionPage() {
         })}
       </div>
 
-      {/* Quota section */}
-      {subscription && currentPlan && (
-        <Card className="mt-6">
-          <CardHeader>
-            <CardTitle className="text-base">Hạn mức sử dụng</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <QuotaBar
-              label="Video đã dùng tháng này"
-              used={subscription.videosUsed}
-              total={currentPlan.maxVideosPerMonth}
-            />
-          </CardContent>
-        </Card>
-      )}
-
       <p className="mt-6 flex items-center gap-2 text-sm text-muted-foreground">
         <Info className="h-4 w-4" />
-        Không có gói Free — chỉ dùng thử 7 ngày.
+        Giá trên là mức dự kiến cho pilot; hạn mức và phạm vi hỗ trợ được xác nhận trong từng hợp đồng.
       </p>
     </div>
   )

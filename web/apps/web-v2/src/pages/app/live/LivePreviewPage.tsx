@@ -16,7 +16,6 @@ import {
   Zap,
 } from 'lucide-react'
 
-import { useModelStore } from '@/store/modelStore'
 import { usePlatformStore } from '@/store/platformStore'
 import { useProductStore } from '@/store/productStore'
 import { useSubscriptionStore } from '@/store/subscriptionStore'
@@ -39,11 +38,9 @@ import type { ProFeatureId } from './components/ProTooltip'
 
 export function LivePreviewPage() {
   const products = useProductStore((s) => s.products)
-  const models = useModelStore((s) => s.models)
   const platforms = usePlatformStore((s) => s.platforms)
 
   const product = products[0] ?? FALLBACK_PRODUCT
-  const previewModel = models[0]
 
   const [isLive, setIsLive] = useState(true)
   const [isWebcamActive, setIsWebcamActive] = useState(false)
@@ -59,7 +56,7 @@ export function LivePreviewPage() {
   const [copilotStatus, setCopilotStatus] = useState<string | null>(null)
   const [liveChannelIds, setLiveChannelIds] = useState<PlatformId[]>([])
   const [showControls, setShowControls] = useState(false)
-  const [activePlaybackSrc, setActivePlaybackSrc] = useState<string | null>('/videos/video_free.mp4')
+  const [activePlaybackSrc, setActivePlaybackSrc] = useState<string | null>(null)
 
   const subscription = useSubscriptionStore((s) => s.subscription)
   const isPro = subscription?.planId === 'pro'
@@ -74,35 +71,34 @@ export function LivePreviewPage() {
 
   const [assets, setAssets] = useState<ContentAsset[]>([
     {
-      id: 1, title: 'Video Gốc', duration: '30s', icon: Radio, active: true, bars: true,
-      type: 'video', productLabel: 'Gốc', tier: 'goc',
-      thumbnail: '/videos/thumbs/goc.jpg',
-      videoSrc: '/videos/video_goc.mp4',
+      id: 1, title: 'Host AI — IELTS', duration: '1 ảnh', icon: ImageIcon, active: true,
+      type: 'image', productLabel: 'Ảnh live', tier: 'goc',
+      thumbnail: '/images/education/ai-advisor-live-v1.webp',
     },
     {
-      id: 2, title: 'Gel Tẩy Da Chết', duration: '3 ảnh', icon: ImageIcon,
-      type: 'image', productLabel: 'Sản phẩm',
-      thumbnail: 'https://images.unsplash.com/photo-1571781926291-c50fb9722f63?w=320&h=180&fit=crop&auto=format&q=80',
+      id: 2, title: 'IELTS Foundation 5.5', duration: '3 ảnh', icon: ImageIcon,
+      type: 'image', productLabel: 'Khóa học',
+      thumbnail: '/images/education/teacher-laptop.webp',
     },
     {
-      id: 3, title: 'Flash Sale 50%', duration: '2 ảnh', icon: Tag,
-      type: 'image', productLabel: 'Khuyến mãi',
-      thumbnail: 'https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=320&h=180&fit=crop&auto=format&q=80',
+      id: 3, title: 'Lịch khai giảng 28/07', duration: '2 ảnh', icon: Tag,
+      type: 'image', productLabel: 'Khai giảng',
+      thumbnail: '/images/education/language-classroom.webp',
     },
     {
-      id: 4, title: 'Q&A Clip Mẫu', duration: '45s', icon: BarChart3, bars: false,
-      type: 'video', productLabel: 'Tương tác',
-      thumbnail: 'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=320&h=180&fit=crop&auto=format&q=80',
+      id: 4, title: 'Q&A đầu vào', duration: '45s', icon: BarChart3, bars: false,
+      type: 'video', productLabel: 'FAQ',
+      thumbnail: '/images/education/teacher-laptop.webp',
     },
     {
-      id: 5, title: 'Trailer Chào Mừng', duration: '01:20', icon: Clapperboard, muted: true,
+      id: 5, title: 'Trailer trung tâm', duration: '01:20', icon: Clapperboard, muted: true,
       type: 'video', productLabel: 'Giới thiệu',
-      thumbnail: 'https://images.unsplash.com/photo-1512436991641-6745cae08739?w=320&h=180&fit=crop&auto=format&q=80',
+      thumbnail: '/images/education/language-classroom.webp',
     },
     {
-      id: 6, title: 'Ảnh Sản Phẩm Main', duration: '5 ảnh', icon: ShoppingBag,
-      type: 'image', productLabel: 'Catalogue',
-      thumbnail: 'https://images.unsplash.com/photo-1556228720-195a672e8a03?w=320&h=180&fit=crop&auto=format&q=80',
+      id: 6, title: 'Học phí & ưu đãi', duration: '5 ảnh', icon: ShoppingBag,
+      type: 'image', productLabel: 'Tuyển sinh',
+      thumbnail: '/images/education/teacher-laptop.webp',
     },
   ])
   const [comments, setComments] = useState<ChatItem[]>(() =>
@@ -192,7 +188,7 @@ export function LivePreviewPage() {
       setCopilotStatus(`AI Host đang nói: "[Hệ thống AI xử lý kịch bản: ${commandLabel}]"`)
       setComments((items) => [
         ...items.slice(-10),
-        { id, name: '1Stream Co-Pilot', text: `[HỆ THỐNG AI ĐÃ KÍCH HOẠT PHẢN HỒI]: ${commandLabel}`, intent: 'Tương tác', answer: `Dạ xin kính chào quý khách, trợ lý AI vừa kích hoạt kịch bản: ${promptText.slice(0, 75)}...`, sentiment: 'warm' },
+        { id, name: '1Stream Co-Pilot', text: `[HỆ THỐNG ĐÃ KÍCH HOẠT]: ${commandLabel}`, intent: 'Kịch bản tuyển sinh', answer: `1Stream đang phát nội dung đã duyệt: ${promptText.slice(0, 88)}...`, sentiment: 'warm' },
       ])
     }, 1500)
     setTimeout(() => setCopilotStatus(null), 6000)
@@ -252,30 +248,30 @@ export function LivePreviewPage() {
   // --- Render ---
 
   return (
-    <div className="h-full w-full bg-background text-foreground overflow-hidden">
-      <div className="h-full w-full flex overflow-hidden gap-0">
+    <div className="h-full w-full overflow-hidden bg-[#f3f5f8] text-slate-950">
+      <div className="flex h-full w-full overflow-hidden">
 
         {/* LEFT COLUMN */}
-        <aside className="hidden lg:flex flex-col h-full min-h-0 w-[300px] select-none shrink-0 border-r border-border bg-card/30">
+        <aside className="hidden h-full min-h-0 w-[324px] shrink-0 select-none flex-col border-r border-slate-200 bg-white xl:flex">
 
-          {/* Campaign header */}
-          <div className="shrink-0 px-4 py-3 border-b border-border">
+          {/* Campaign summary */}
+          <div className="shrink-0 border-b border-slate-200 px-4 py-4">
             <div className="flex items-center gap-2.5">
-              <div className="grid h-8 w-8 place-items-center rounded-lg bg-primary/10">
-                <Zap className="h-4 w-4 text-primary" fill="currentColor" />
+              <div className="grid h-9 w-9 place-items-center rounded-xl bg-blue-50">
+                <Zap className="h-4 w-4 text-blue-700" fill="currentColor" />
               </div>
               <div className="min-w-0 flex-1">
-                <h1 className="text-sm font-bold truncate">Campaign Hè Rực Rỡ</h1>
+                <h1 className="truncate text-sm font-black">Tuyển sinh IELTS tháng 7</h1>
                 <div className="flex items-center gap-2 mt-0.5">
-                  <span className="text-[9px] font-semibold text-muted-foreground bg-secondary px-1.5 py-0.5 rounded">{assets.filter(a => a.type === 'video').length} video</span>
-                  <span className="text-[9px] font-semibold text-muted-foreground bg-secondary px-1.5 py-0.5 rounded">{assets.filter(a => a.type === 'image').length} ảnh</span>
+                  <span className="rounded bg-slate-100 px-1.5 py-0.5 text-[9px] font-semibold text-slate-500">{assets.length} tài sản</span>
+                  <span className="rounded bg-emerald-50 px-1.5 py-0.5 text-[9px] font-bold text-emerald-700">Đã duyệt dữ liệu</span>
                 </div>
               </div>
               <button
                 type="button"
                 onClick={() => setShowControls(!showControls)}
                 title="Điều khiển nâng cao"
-                className={`grid h-7 w-7 place-items-center rounded-lg border transition ${showControls ? 'border-primary bg-primary/10 text-primary' : 'border-border text-muted-foreground hover:text-foreground hover:bg-secondary'}`}
+                className={`grid h-8 w-8 place-items-center rounded-lg border transition ${showControls ? 'border-blue-300 bg-blue-50 text-blue-700' : 'border-slate-200 text-slate-500 hover:bg-slate-50 hover:text-slate-900'}`}
               >
                 <SlidersHorizontal className="h-3.5 w-3.5" />
               </button>
@@ -304,15 +300,15 @@ export function LivePreviewPage() {
           <div className="flex flex-col min-h-0 flex-1 overflow-hidden">
 
             {/* Section header + filter tabs */}
-            <div className="shrink-0 px-3 pt-3 pb-2 space-y-2">
+            <div className="shrink-0 space-y-2.5 px-4 pb-3 pt-4">
               <div className="flex items-center justify-between">
-                <span className="text-[10px] font-extrabold uppercase tracking-widest text-muted-foreground">Kho nội dung</span>
+                <div><span className="text-[10px] font-black uppercase tracking-[.16em] text-slate-500">Kho nội dung</span><p className="mt-0.5 text-[10px] text-slate-400">Tài sản đã duyệt cho phiên này</p></div>
                 <div className="flex items-center gap-1.5">
                   <button
                     type="button"
                     onClick={() => uploadRef.current?.click()}
                     title="Tải lên ảnh / video"
-                    className="flex items-center gap-1 rounded-md border border-dashed border-border bg-secondary hover:border-primary hover:text-primary px-1.5 py-0.5 text-[9px] font-bold text-muted-foreground transition"
+                    className="flex items-center gap-1 rounded-lg border border-dashed border-slate-300 bg-slate-50 px-2 py-1.5 text-[9px] font-bold text-slate-500 transition hover:border-blue-400 hover:text-blue-700"
                   >
                     <Upload className="h-3 w-3" /> Tải lên
                   </button>
@@ -332,7 +328,7 @@ export function LivePreviewPage() {
                   const count = tab === 'all' ? assets.length : assets.filter(a => a.type === tab).length
                   return (
                     <button key={tab} type="button" onClick={() => setAssetTab(tab)}
-                      className={`flex items-center gap-1 rounded-full px-2.5 py-0.5 text-[10px] font-bold transition ${assetTab === tab ? 'bg-primary text-white' : 'bg-secondary text-muted-foreground hover:text-foreground'}`}
+                      className={`flex items-center gap-1 rounded-full px-3 py-1 text-[10px] font-bold transition ${assetTab === tab ? 'bg-slate-950 text-white shadow-sm' : 'bg-slate-100 text-slate-500 hover:text-slate-900'}`}
                     >
                       {label} <span className="opacity-70">{count}</span>
                     </button>
@@ -342,8 +338,8 @@ export function LivePreviewPage() {
             </div>
 
             {/* 2-column asset grid */}
-            <div className="min-h-0 flex-1 overflow-y-auto px-3 pb-1 scrollbar-thin">
-              <div className="grid grid-cols-2 gap-2">
+            <div className="min-h-0 flex-1 overflow-y-auto px-4 pb-2 scrollbar-thin">
+              <div className="grid grid-cols-2 gap-2.5">
                 {assets
                   .filter(a => assetTab === 'all' || a.type === assetTab)
                   .map((asset) => (
@@ -356,52 +352,52 @@ export function LivePreviewPage() {
               </div>
             </div>
 
-            {/* Tạo video — 3 tiers: Gốc | Free | Pro */}
-            <div className="shrink-0 border-t border-border px-3 py-3 space-y-1.5">
-              <span className="text-[9px] font-extrabold uppercase tracking-widest text-muted-foreground">AI tạo livestream từ kho</span>
-              <div className="grid grid-cols-3 gap-1.5">
-                {/* Gốc */}
+            {/* AI generation options */}
+            <div className="shrink-0 space-y-2 border-t border-slate-200 bg-slate-50/70 px-4 py-3.5">
+              <div><span className="text-[9px] font-black uppercase tracking-[.16em] text-slate-500">Tạo nội dung AI</span><p className="mt-0.5 text-[10px] text-slate-400">Chọn cách dựng từ kho hiện tại</p></div>
+              <div className="grid grid-cols-3 gap-2">
+                {/* Quick composition */}
                 <button
                   type="button"
                   onClick={isGenerating ? undefined : generateLiveFromAssets}
                   disabled={isGenerating}
-                  className="flex flex-col items-center gap-1 rounded-lg border border-border bg-secondary hover:bg-secondary/60 px-2 py-2.5 transition disabled:opacity-50"
+                  className="flex flex-col items-center gap-1.5 rounded-xl border border-slate-200 bg-white px-2 py-2.5 transition hover:border-slate-400 disabled:opacity-50"
                 >
                   <Zap className="h-3.5 w-3.5 text-foreground" />
-                  <span className="text-[9px] font-bold text-foreground leading-tight">Gốc</span>
+                  <span className="text-[9px] font-bold text-slate-700 leading-tight">Ghép nhanh</span>
                 </button>
-                {/* Free */}
+                {/* AI video */}
                 <button
                   type="button"
                   onClick={generateVideo}
-                  className="flex flex-col items-center gap-1 rounded-lg border border-primary/40 bg-primary/10 hover:bg-primary/15 px-2 py-2.5 transition"
+                  className="flex flex-col items-center gap-1.5 rounded-xl border border-blue-300 bg-blue-50 px-2 py-2.5 transition hover:bg-blue-100"
                 >
-                  <Plus className="h-3.5 w-3.5 text-primary" />
-                  <span className="text-[9px] font-bold text-primary leading-tight">Free</span>
+                  <Plus className="h-3.5 w-3.5 text-blue-700" />
+                  <span className="text-[9px] font-bold text-blue-700 leading-tight">Video AI</span>
                 </button>
-                {/* Pro */}
+                {/* Advanced output */}
                 <button
                   type="button"
                   onClick={isPro ? generateVideo : () => openProModal('video-ai')}
-                  className="flex flex-col items-center gap-1 rounded-lg border border-violet-500/40 bg-violet-500/10 hover:bg-violet-500/20 px-2 py-2.5 transition"
+                  className="flex flex-col items-center gap-1.5 rounded-xl border border-amber-300 bg-amber-50 px-2 py-2.5 transition hover:bg-amber-100"
                 >
-                  <Sparkles className="h-3.5 w-3.5 text-violet-400" />
-                  <span className="text-[9px] font-bold text-violet-400 leading-tight">Pro</span>
+                  <Sparkles className="h-3.5 w-3.5 text-amber-700" />
+                  <span className="text-[9px] font-bold text-amber-700 leading-tight">Nâng cao</span>
                 </button>
               </div>
             </div>
           </div>
 
           {/* Hot Leads */}
-          <div className="shrink-0 border-t border-border px-3 py-3">
+          <div className="shrink-0 border-t border-slate-200 px-4 py-3.5">
             <div className="mb-2 flex items-center justify-between">
               <span className="text-[10px] font-extrabold uppercase tracking-widest text-muted-foreground flex items-center gap-1.5">
-                <Flame className="h-3.5 w-3.5 text-rose-500" /> Hot Leads
+                <Flame className="h-3.5 w-3.5 text-amber-500" /> Lead cần ưu tiên
               </span>
               <span className="text-[10px] font-bold text-primary">Top {hotLeads.length}</span>
             </div>
             {hotLeads.length === 0 ? (
-              <p className="text-[11px] text-muted-foreground text-center py-2">Chưa phát hiện lead mua hàng</p>
+              <p className="py-2 text-center text-[11px] text-slate-400">Chưa phát hiện nhu cầu tư vấn</p>
             ) : (
               <div className="space-y-1.5">
                 {hotLeads.map((lead) => <LeadCard key={`${lead.id}-lead`} lead={lead} />)}
@@ -415,8 +411,8 @@ export function LivePreviewPage() {
           isLive={isLive}
           isWebcamActive={isWebcamActive}
           activeFilter={activeFilter}
-          previewThumbnail={previewModel?.thumbnail}
-          previewModelName={previewModel?.name}
+          previewThumbnail="/images/education/ai-advisor-live-v1.webp"
+          previewModelName="Tư vấn viên AI tuyển sinh"
           showWatermark={showWatermark}
           showTicker={showTicker && isLive}
           showSentimentCard={showSentimentCard}
@@ -428,8 +424,8 @@ export function LivePreviewPage() {
           viewers={comments.length * 37 + 412}
           videoRef={videoRef}
           activePlaybackSrc={activePlaybackSrc}
-          onStart={() => { setIsLive(true); setActivePlaybackSrc('/videos/video_goc.mp4') }}
-          onWebcam={() => { setIsLive(true); setIsWebcamActive(true); setActivePlaybackSrc('/videos/video_free.mp4') }}
+          onStart={() => { setIsLive(true); setIsWebcamActive(false); setActivePlaybackSrc(null) }}
+          onWebcam={() => { setIsLive(true); setIsWebcamActive(true); setActivePlaybackSrc(null) }}
           onGenerate={generateVideo}
           onToggleLive={() => { const next = !isLive; setIsLive(next); if (!next) { setIsWebcamActive(false); setActivePlaybackSrc(null) } }}
           isPro={isPro}

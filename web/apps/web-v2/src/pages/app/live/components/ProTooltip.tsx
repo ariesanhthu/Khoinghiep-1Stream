@@ -11,19 +11,19 @@ export type ProFeatureId = 'copilot' | 'auto-reply' | 'overlay' | 'video-ai'
 const FEATURE_INFO: Record<ProFeatureId, { title: string; description: string }> = {
   'copilot': {
     title: 'AI Copilot tự động',
-    description: 'Copilot ra lệnh bán hàng, đọc bình luận, kể chuyện — tất cả tự động 24/7.',
+    description: 'Kích hoạt các đoạn kịch bản tuyển sinh đã duyệt và đọc bình luận mới nhất.',
   },
   'auto-reply': {
     title: 'AI Tự Trả Lời',
-    description: 'AI tự nhận diện câu hỏi và trả lời realtime trong chatbox. Không bỏ lỡ khách hàng.',
+    description: 'AI nhận diện FAQ tuyển sinh, trả lời trong phạm vi dữ liệu và chuyển người thật khi cần.',
   },
   'overlay': {
     title: 'Overlay tuỳ chỉnh',
-    description: 'Tùy chỉnh watermark thương hiệu, ticker khuyến mãi chạy ngang — chuyên nghiệp hơn.',
+    description: 'Tùy chỉnh watermark trung tâm và ticker lịch khai giảng.',
   },
   'video-ai': {
     title: 'Video AI Động',
-    description: 'Video AI generate biểu cảm, cử chỉ tự nhiên — không chỉ nhép miệng.',
+    description: 'Tạo video tuyển sinh từ kịch bản, giọng đọc, avatar và tài sản đã duyệt.',
   },
 }
 

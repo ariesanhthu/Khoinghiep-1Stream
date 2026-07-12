@@ -12,24 +12,24 @@ interface ProUpsellModalProps {
 
 const FEATURE_DETAILS: Record<ProFeatureId, { title: string; description: string; highlights: string[] }> = {
   'copilot': {
-    title: 'AI Copilot — Trợ lý bán hàng 24/7',
-    description: 'Ra lệnh bằng 1 nút bấm: kêu gọi chốt đơn, phát voucher, đọc bình luận, kể chuyện vui — AI xử lý tất cả trong khi bạn chỉ cần focus vào sản phẩm.',
-    highlights: ['4 lệnh copilot tùy chỉnh', 'Tự động kêu gọi chốt đơn', 'Đọc và phản hồi bình luận', 'Kể chuyện tương tác với khách'],
+    title: 'AI Copilot — Trợ lý phiên tuyển sinh',
+    description: 'Kích hoạt nhanh các đoạn kịch bản đã duyệt: mời học thử, nhắc lịch khai giảng, giới thiệu lộ trình và đọc bình luận mới.',
+    highlights: ['4 lệnh copilot tùy chỉnh', 'Mời đăng ký học thử', 'Nhắc lịch và lộ trình', 'Đọc bình luận mới nhất'],
   },
   'auto-reply': {
-    title: 'AI Tự Trả Lời — Không bỏ lỡ khách hàng',
-    description: 'AI phân tích ngữ cảnh bình luận realtime, tự động trả lời đúng và nhanh. Khách hỏi giá, hỏi ship, hỏi sản phẩm — đều được phản hồi ngay.',
-    highlights: ['Trả lời comment realtime', 'Phân tích intent khách hàng', 'Tùy chỉnh tone giọng trả lời', 'Hỗ trợ đa nền tảng'],
+    title: 'AI Tự Trả Lời — Không bỏ lỡ nhu cầu học',
+    description: 'AI nhận diện câu hỏi về học phí, lịch khai giảng, đầu vào và học thử dựa trên cơ sở tri thức đã duyệt.',
+    highlights: ['Trả lời FAQ theo dữ liệu', 'Phân loại nhu cầu học', 'Chuyển tư vấn viên khi cần', 'Hỗ trợ đa nền tảng'],
   },
   'overlay': {
     title: 'Overlay Chuyên Nghiệp',
-    description: 'Tùy chỉnh watermark thương hiệu, ticker khuyến mãi chạy ngang màn hình — nâng tầm chuyên nghiệp cho livestream.',
-    highlights: ['Watermark logo thương hiệu', 'Ticker khuyến mãi chạy ngang', 'Tuỳ chỉnh vị trí & màu sắc', 'Bật/tắt linh hoạt'],
+    description: 'Tùy chỉnh watermark trung tâm và ticker lịch khai giảng chạy ngang để thông tin chính luôn dễ nhìn.',
+    highlights: ['Watermark trung tâm', 'Ticker lịch khai giảng', 'Tuỳ chỉnh vị trí & màu sắc', 'Bật/tắt linh hoạt'],
   },
   'video-ai': {
     title: 'Video AI Động — Vượt xa Lip-sync',
-    description: 'Không chỉ nhép miệng — AI generate lại toàn bộ video với biểu cảm, cử chỉ tự nhiên. Chất lượng 2K, thời lượng tối đa 30 phút.',
-    highlights: ['AI generate biểu cảm tự nhiên', 'Chất lượng 2K', 'Thời lượng tối đa 30 phút', 'Video không giới hạn'],
+    description: 'Tạo bản video tuyển sinh từ kịch bản, giọng đọc hoặc avatar, video nền và phụ đề để duyệt trước khi phát.',
+    highlights: ['Kịch bản từ dữ liệu khóa học', 'Giọng đọc hoặc avatar', 'Video nền và phụ đề', 'Có bản xem trước'],
   },
 }
 
@@ -56,7 +56,7 @@ export function ProUpsellModal({ open, onClose, feature }: ProUpsellModalProps) 
           </div>
           <p className="mt-2.5 text-[11px] text-violet-500/50 font-semibold">Bấm để xem demo {details.title.split('—')[0].trim()}</p>
           <span className="absolute top-3 right-3 bg-gradient-to-r from-violet-500 to-purple-700 text-white text-[9px] font-extrabold px-2.5 py-1 rounded-full tracking-wide">
-            PRO FEATURE
+            TÍNH NĂNG NÂNG CAO
           </span>
         </div>
         <div className="p-6">
@@ -76,7 +76,7 @@ export function ProUpsellModal({ open, onClose, feature }: ProUpsellModalProps) 
               onClick={handleUpgrade}
               className="flex-1 bg-gradient-to-r from-violet-500 to-purple-700 text-white border-none py-3 rounded-xl text-[13px] font-bold cursor-pointer hover:opacity-90 transition"
             >
-              Nâng cấp PRO — {proPlan ? formatVND(proPlan.priceMonthly) : '999.000₫'}/tháng
+              Mở demo Growth — {proPlan ? formatVND(proPlan.priceMonthly) : '799.000₫'}/tháng
             </button>
             <button
               type="button"

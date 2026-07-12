@@ -22,39 +22,39 @@ const AUTHORS = [
   'Gia Hân', 'Khánh Vy', 'Trọng Tín', 'Lan Phương',
 ]
 
-type Topic = 'price' | 'shipping' | 'size' | 'stock' | 'praise' | 'order'
+type Topic = 'tuition' | 'schedule' | 'entry' | 'format' | 'praise' | 'trial'
 
 const TEXT_POOL: { topic: Topic; text: string }[] = [
-  { topic: 'price', text: 'Giá sản phẩm này bao nhiêu vậy shop?' },
-  { topic: 'price', text: 'Có giảm giá gì không ạ?' },
-  { topic: 'shipping', text: 'Ship về Đà Nẵng mất bao lâu shop?' },
-  { topic: 'shipping', text: 'Phí ship bao nhiêu vậy ạ?' },
-  { topic: 'size', text: 'Mình 55kg thì lấy size nào ạ?' },
-  { topic: 'size', text: 'Có size lớn hơn không shop?' },
-  { topic: 'stock', text: 'Còn hàng không shop ơi?' },
-  { topic: 'stock', text: 'Màu này còn không ạ?' },
-  { topic: 'praise', text: 'Nhìn xịn quá, chốt đơn luôn!' },
-  { topic: 'praise', text: 'Mê quá đi mất, đẹp ghê 😍' },
-  { topic: 'order', text: 'Cho mình đặt 2 cái nhé!' },
-  { topic: 'order', text: 'Đặt hàng như nào vậy shop?' },
+  { topic: 'tuition', text: 'Học phí khóa này bao nhiêu vậy trung tâm?' },
+  { topic: 'tuition', text: 'Đăng ký sớm có ưu đãi không ạ?' },
+  { topic: 'schedule', text: 'Lớp gần nhất khai giảng ngày nào?' },
+  { topic: 'schedule', text: 'Có lớp học cuối tuần không ạ?' },
+  { topic: 'entry', text: 'Em mất gốc thì có học được không?' },
+  { topic: 'entry', text: 'Khóa này yêu cầu đầu vào thế nào ạ?' },
+  { topic: 'format', text: 'Trung tâm có lớp online không?' },
+  { topic: 'format', text: 'Lớp học ở cơ sở nào vậy ạ?' },
+  { topic: 'praise', text: 'Lộ trình nghe phù hợp với mình quá!' },
+  { topic: 'praise', text: 'Cảm ơn trung tâm tư vấn rõ ràng ạ ❤️' },
+  { topic: 'trial', text: 'Cho mình đăng ký học thử nhé!' },
+  { topic: 'trial', text: 'Đăng ký kiểm tra đầu vào như thế nào ạ?' },
 ]
 
 function replyFor(topic: Topic, productName: string): string {
   switch (topic) {
-    case 'price':
-      return `Dạ "${productName}" đang có giá ưu đãi trong live, bạn ghim giỏ hàng để được giá tốt nhất nhé!`
-    case 'shipping':
-      return 'Dạ shop ship toàn quốc 2-4 ngày, freeship cho đơn trong phiên live ạ!'
-    case 'size':
-      return 'Dạ bạn để lại chiều cao/cân nặng, shop tư vấn size chuẩn cho mình nhé!'
-    case 'stock':
-      return `Dạ "${productName}" còn hàng ạ, bạn chốt đơn nhanh kẻo hết nhé!`
+    case 'tuition':
+      return `Học phí "${productName}" được áp dụng theo bảng giá đã duyệt. Tư vấn viên sẽ xác nhận ưu đãi còn hiệu lực trước khi bạn đăng ký.`
+    case 'schedule':
+      return 'Lớp gần nhất khai giảng ngày 28/07, học thứ 3-5-7 từ 19:00 đến 20:30. Trung tâm cũng có ca cuối tuần ạ.'
+    case 'entry':
+      return 'Khóa phù hợp với đầu vào khoảng IELTS 3.0–3.5. Bạn có thể đăng ký kiểm tra miễn phí trước khi xếp lớp.'
+    case 'format':
+      return 'Hiện có lớp trực tiếp tại cơ sở Quận 3. Lịch online được mở theo từng đợt; tư vấn viên sẽ kiểm tra giúp bạn.'
     case 'praise':
-      return 'Cảm ơn bạn nhiều ạ! Bạn bấm giỏ hàng để được ưu đãi riêng trong live nha ❤️'
-    case 'order':
-      return 'Dạ bạn bấm vào giỏ hàng góc màn hình, chọn số lượng rồi đặt là xong ạ!'
+      return 'Cảm ơn bạn đã quan tâm! Nếu cần lộ trình chi tiết, bạn để lại từ khóa TƯ VẤN để trung tâm hỗ trợ nhé ❤️'
+    case 'trial':
+      return 'Bạn để lại từ khóa HỌC THỬ để nhận biểu mẫu. Thông tin chỉ được chuyển cho tư vấn viên khi bạn đồng ý.'
     default:
-      return 'Cảm ơn bạn đã quan tâm sản phẩm ạ!'
+      return 'Cảm ơn bạn đã quan tâm khóa học ạ!'
   }
 }
 
@@ -94,7 +94,6 @@ export function LiveDashboardPage() {
     tiktok: 0,
     facebook: 0,
     youtube: 0,
-    shopee: 0,
   }))
 
   // Redirect if not live
@@ -168,7 +167,7 @@ export function LiveDashboardPage() {
           if (store.aiAutoReply) {
             window.setTimeout(() => {
               if (cancelled) return
-              const pName = product?.name ?? 'sản phẩm'
+              const pName = product?.name ?? 'khóa học'
               useLiveSessionStore.getState().setAiReply(id, replyFor(pick.topic, pName))
             }, 1500)
           }

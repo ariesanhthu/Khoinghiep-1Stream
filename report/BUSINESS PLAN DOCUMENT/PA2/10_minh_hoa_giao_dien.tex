@@ -1,7 +1,78 @@
 \subsection{Minh họa giao diện, sơ đồ hoạt động hoặc prototype đơn giản.}
 
 Các hình dưới đây minh họa prototype MVP của \textbf{1Stream} theo ba nhóm chức năng chính: luồng tạo nội dung AI, trợ lý bán hàng trong phiên live và khu vực cấu hình/quản trị hệ thống. Cách trình bày theo nhóm giúp làm rõ vai trò của từng màn hình trong quy trình vận hành tổng thể, thay vì chỉ liệt kê các ảnh giao diện rời rạc.
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[
+        node distance=1.35cm,
+        >=Latex,
+        every node/.style={font=\small},
+        line/.style={->, thick, draw=gray!70},
+        mainblock/.style={
+            rectangle,
+            rounded corners=10pt,
+            minimum width=5.2cm,
+            minimum height=1.15cm,
+            align=center,
+            draw=#1!80,
+            fill=#1!12,
+            line width=0.9pt,
+            blur shadow={shadow blur steps=5}
+        },
+        sideblock/.style={
+            rectangle,
+            rounded corners=10pt,
+            minimum width=4.7cm,
+            minimum height=1.05cm,
+            align=center,
+            draw=#1!80,
+            fill=#1!12,
+            line width=0.9pt,
+            blur shadow={shadow blur steps=5}
+        },
+        reportblock/.style={
+            rectangle,
+            rounded corners=12pt,
+            minimum width=5.5cm,
+            minimum height=1.2cm,
+            align=center,
+            draw=black!75,
+            fill=black!7,
+            line width=1pt,
+            blur shadow={shadow blur steps=5}
+        }
+    ]
 
+    % Main flow
+    \node[mainblock=blue] (input) {\textbf{1. Dữ liệu đầu vào}\\học phí, lịch học, FAQ, CTA};
+    \node[mainblock=teal, below=of input] (normalize) {\textbf{2. Chuẩn hóa dữ liệu}\\thiết lập cơ sở tri thức};
+    \node[mainblock=orange, below=of normalize] (genvideo) {\textbf{3. Sinh nội dung AI}\\kịch bản, avatar/giọng đọc, phụ đề};
+    \node[mainblock=violet, below=of genvideo] (approve) {\textbf{4. Duyệt nội dung}\\khách hàng xác nhận trước khi phát};
+    \node[mainblock=red, below=of approve] (livestream) {\textbf{5. Lên lịch và phát livestream}\\trên kênh thử nghiệm};
+    \node[mainblock=green!60!black, below=of livestream] (agent) {\textbf{6. AI Agent xử lý FAQ}\\và ghi nhận lead};
+
+    % Branches
+    \node[sideblock=magenta, below left=1.4cm and 0.45cm of agent] (handover) {\textbf{7a. Chuyển người thật}\\câu hỏi ngoài phạm vi};
+    \node[sideblock=cyan!70!blue, below right=1.4cm and 0.45cm of agent] (lead) {\textbf{7b. Thu lead cơ bản}\\đăng ký học thử / tư vấn};
+
+    % Final report
+    \node[reportblock, below=2.45cm of agent] (report) {\textbf{8. Báo cáo sau phiên}\\tương tác, lead, lỗi kỹ thuật};
+
+    % Arrows
+    \draw[line] (input) -- (normalize);
+    \draw[line] (normalize) -- (genvideo);
+    \draw[line] (genvideo) -- (approve);
+    \draw[line] (approve) -- (livestream);
+    \draw[line] (livestream) -- (agent);
+    \draw[line] (agent) -- (handover);
+    \draw[line] (agent) -- (lead);
+    \draw[line] (handover) |- (report);
+    \draw[line] (lead) |- (report);
+
+    \end{tikzpicture}
+    \caption{Sơ đồ hoạt động hệ thống 1Stream trong giai đoạn MVP}
+    \label{fig:system-activity-1stream}
+\end{figure}
 \subsubsection*{Nhóm 1: Luồng AI cốt lõi của MVP}
 
 \begin{figure}[H]
@@ -46,7 +117,7 @@ Các hình dưới đây minh họa prototype MVP của \textbf{1Stream} theo ba
         \vspace{3pt}
 
         \textbf{Dynamic AI Video Upgrade}\\
-        {\small Màn hình giới thiệu tính năng video AI động thuộc gói Pro, cho thấy định hướng thương mại hóa theo cấp độ chất lượng video, thời lượng tạo nội dung và khả năng tạo biểu cảm tự nhiên.}
+        {\small Màn hình giới thiệu tính năng tự động trả lời, tư vấn sản phẩm.}
     \end{minipage}
     \caption{Giao diện vận hành livestream và phân tầng tính năng nâng cao trong MVP}
     \label{fig:mvp-live-operation}
