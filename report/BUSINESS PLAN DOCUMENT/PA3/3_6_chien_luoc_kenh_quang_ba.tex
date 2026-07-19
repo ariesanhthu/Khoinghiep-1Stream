@@ -48,5 +48,385 @@
 
 \subsection{Chiến lược lựa chọn kênh quảng bá}
 
-% TODO (Lê Nguyên Nhật): Viết nội dung mục 3.6
-% Phối hợp với Trần Minh Quang để xác nhận kênh phù hợp với ICP đã chốt ở 3.3–3.4
+Chiến lược kênh quảng bá của 1Stream trong giai đoạn MVP không được thiết kế theo
+tư duy phủ rộng. Vì sản phẩm đang ở trạng thái \textit{service-enabled software}
+và chưa có nhiều bằng chứng thương mại hóa, mục tiêu quan trọng nhất của kênh
+không phải là tạo thật nhiều lượt xem, mà là đưa nhóm đến đúng người có quyền
+thảo luận pilot: chủ trung tâm, trưởng marketing, trưởng tuyển sinh hoặc quản lý
+vận hành của các đơn vị bán khóa học.
+
+Do đó, việc lựa chọn kênh được đặt trên ba nguyên tắc:
+\begin{itemize}
+    \item \textbf{Đúng ICP trước, quy mô sau:} chỉ ưu tiên kênh có thể nhận diện
+    được trung tâm hoặc đơn vị bán khóa học đang dùng Facebook/TikTok, có dữ liệu
+    khóa học rõ ràng và có đội vận hành mỏng như tiêu chí ở mục 3.3--3.4.
+    \item \textbf{Tạo niềm tin trước khi chốt bán:} 1Stream là sản phẩm B2B mới,
+    nên kênh phải giúp khách hàng thấy được demo, quy trình kiểm duyệt nội dung,
+    cách AI bám vào dữ liệu thật và cách chuyển lead cho nhân viên.
+    \item \textbf{Đo được hành vi trong phễu:} mỗi kênh phải gắn với CTA cụ thể
+    như phản hồi tin nhắn, điền form, đặt lịch demo, gửi dữ liệu mẫu hoặc đồng ý
+    pilot. Các kênh chỉ tạo nhận diện nhưng không đo được sẽ không được ưu tiên
+    trong 3 tháng đầu.
+\end{itemize}
+
+\subsubsection{Ma trận đánh giá kênh quảng bá}
+
+Bảng dưới đây đánh giá các kênh theo mức độ phù hợp với ICP, chất lượng lead,
+chi phí, công sức triển khai, khả năng đo lường, tốc độ tạo kết quả và mức ưu
+tiên. Các mức ``Cao'', ``Trung bình'' và ``Thấp'' là giả định vận hành ban đầu,
+cần được kiểm chứng bằng dữ liệu thật trong các chiến dịch thử nghiệm.
+
+\begin{table}[H]
+    \centering
+    \footnotesize
+    \setlength{\tabcolsep}{2pt}
+    \renewcommand{\arraystretch}{1.22}
+    \caption{Ma trận đánh giá kênh quảng bá của 1Stream trong giai đoạn MVP}
+    \label{tab:channel-evaluation-1stream}
+    \rowcolors{2}{paperBg}{white}
+    \begin{tabularx}{\linewidth}{@{}L{3.0cm}L{1.45cm}L{1.35cm}L{1.35cm}L{1.45cm}L{1.45cm}L{1.35cm}L{1.35cm}@{}}
+        \toprule
+        \rowcolor{softBlue}
+        \textbf{Kênh} &
+        \textbf{Đúng ICP} &
+        \textbf{Lead} &
+        \textbf{Chi phí} &
+        \textbf{Công sức} &
+        \textbf{Đo lường} &
+        \textbf{Tốc độ} &
+        \textbf{Ưu tiên} \\ \midrule
+
+        Tiếp cận trực tiếp theo tài khoản mục tiêu (ABM) &
+        Cao &
+        Cao &
+        Thấp--TB &
+        Cao &
+        Cao &
+        Nhanh &
+        1 \\ 
+
+        Cộng đồng giáo dục, marketing tuyển sinh và nhóm chủ trung tâm &
+        Cao &
+        TB--Cao &
+        Thấp &
+        TB &
+        TB &
+        TB &
+        2 \\
+
+        Đối tác giới thiệu: agency giáo dục, đơn vị chạy ads, CRM/chatbot,
+        mentor khởi nghiệp &
+        Cao &
+        Cao &
+        TB &
+        Cao &
+        TB &
+        TB &
+        3 \\
+
+        Workshop/webinar chuyên đề có demo trực tiếp &
+        Cao &
+        Cao &
+        TB &
+        Cao &
+        Cao &
+        TB &
+        4 \\
+
+        Landing page, form đăng ký demo và tài liệu lead magnet &
+        TB &
+        TB--Cao &
+        Thấp &
+        TB &
+        Cao &
+        TB &
+        Hỗ trợ \\
+
+        Email/Zalo chăm sóc sau tiếp xúc đầu tiên &
+        TB--Cao &
+        TB--Cao &
+        Thấp &
+        TB &
+        Cao &
+        TB &
+        Hỗ trợ \\
+
+        Facebook/TikTok nội dung trình diễn năng lực &
+        TB &
+        TB &
+        Thấp--TB &
+        TB &
+        Cao &
+        TB &
+        Hỗ trợ \\
+
+        LinkedIn cá nhân và LinkedIn outreach &
+        TB &
+        TB--Cao &
+        Thấp--TB &
+        TB &
+        TB &
+        Chậm--TB &
+        Sau \\
+
+        Quảng cáo trả phí diện rộng trên Facebook/TikTok &
+        Thấp--TB &
+        Thấp &
+        Cao &
+        TB &
+        Cao &
+        Nhanh &
+        Chưa dùng \\ \bottomrule
+    \end{tabularx}
+    \rowcolors{2}{}{}
+\end{table}
+
+Kết quả đánh giá cho thấy hai nhóm kênh có giá trị cao nhất là \textbf{kênh chủ
+động} và \textbf{kênh niềm tin}. Kênh chủ động giúp nhóm kiểm soát danh sách tài
+khoản mục tiêu, tự chọn khách hàng theo ma trận chấm điểm ICP và rút ngắn thời
+gian đặt lịch demo. Kênh niềm tin gồm cộng đồng, đối tác và workshop; nhóm kênh
+này không chỉ tạo lead mà còn làm giảm rủi ro cảm nhận của khách hàng khi họ
+được thấy 1Stream vận hành trên dữ liệu thật, có quy trình duyệt nội dung và có
+người chịu trách nhiệm trong giai đoạn pilot.
+
+Danh sách 10 khách hàng tiềm năng nội bộ cho 1Stream cho thấy ngoài nhóm khóa học
+online như Unica, Gitiho, Kyna hoặc Medoo, một số ngành liền kề như linh kiện kỹ
+thuật và du lịch cũng có dữ liệu sản phẩm rõ, nhiều câu hỏi lặp lại và hiện diện
+trên Facebook/YouTube/TikTok.\footnote{Tài liệu nội bộ: \textit{Danh sách 10
+khách hàng tiềm năng cho 1Stream}, cập nhật 14/07/2026.} Tuy nhiên, các nhóm này chỉ nên được dùng làm nguồn kiểm chứng phụ cho cách xây danh
+sách và kịch bản tiếp cận. Khách hàng pilot chính vẫn cần ưu tiên trung tâm ngoại
+ngữ hoặc đơn vị bán khóa học có mức phù hợp cao theo bộ tiêu chí ở mục 3.3.
+
+\subsubsection{Lựa chọn kênh chính thức}
+
+Trong 6 tháng đầu, 1Stream chọn \textbf{ba kênh chính} và \textbf{hai kênh hỗ
+trợ}. Cấu trúc này giúp nhóm đủ tập trung để học nhanh từ thị trường mà không
+phân tán nguồn lực vào quá nhiều kênh truyền thông.
+
+\textbf{Kênh chính 1 -- Tiếp cận trực tiếp theo tài khoản mục tiêu (ABM).}
+Đây là kênh quan trọng nhất để tìm khách hàng pilot. Nhóm xây danh sách 50--80
+đơn vị mục tiêu từ Google Maps, fanpage, TikTok, website, cộng đồng giáo dục và
+mạng lưới quen biết; sau đó chấm điểm theo các tiêu chí: ngành, khu vực, tần suất
+livestream, số lượng nhân sự vận hành, dữ liệu khóa học, quy trình thu lead và
+khả năng tiếp cận người quyết định. Với mỗi tài khoản đạt ngưỡng, nhóm gửi tin
+nhắn/email cá nhân hóa, nêu rõ một vấn đề quan sát được như lịch live chưa đều,
+nhiều câu hỏi lặp lại về học phí hoặc thiếu phản hồi ngoài giờ, rồi đề xuất một
+buổi demo 20--30 phút.
+
+\textbf{Kênh chính 2 -- Cộng đồng giáo dục và đối tác giới thiệu.}
+1Stream cần xuất hiện trong các nhóm có mật độ cao của chủ trung tâm, trưởng
+marketing giáo dục, tư vấn tuyển sinh và người làm nội dung khóa học. Nội dung
+không nên là bài bán hàng trực diện, mà là các bài phân tích ngắn về chi phí bị
+lãng phí khi bỏ sót bình luận, checklist chuẩn hóa dữ liệu khóa học cho AI tư vấn
+và các mẫu kịch bản livestream tuyển sinh. Song song, nhóm thiết lập quan hệ với
+agency chạy ads giáo dục, đơn vị triển khai chatbot/CRM, mentor khởi nghiệp và
+cộng đồng sinh viên/giảng viên có kết nối với trung tâm ngoại ngữ. Những đối tác
+này có thể đưa 1Stream đến khách hàng có nhu cầu thật nhanh hơn quảng cáo lạnh.
+
+\textbf{Kênh chính 3 -- Workshop/webinar chuyên đề kết hợp demo.}
+Workshop là kênh tạo niềm tin tốt nhất cho sản phẩm B2B mới vì khách hàng được
+thấy quy trình làm việc thay vì chỉ nghe lời hứa. Chủ đề nên đi thẳng vào vấn đề
+kinh doanh, ví dụ: ``Cách giảm bỏ sót lead trong livestream tuyển sinh'', ``Chuẩn
+hóa FAQ học phí/lịch học để AI trả lời an toàn'', hoặc ``Tạo một phiên livestream
+tuyển sinh từ dữ liệu khóa học trong 30 phút''. Mỗi buổi cần có demo dựa trên dữ
+liệu mẫu gần với ngành ngoại ngữ, phần Q\&A và CTA đặt lịch kiểm tra dữ liệu miễn
+phí.
+
+\textbf{Kênh hỗ trợ 1 -- Landing page, form đăng ký demo và email/Zalo chăm sóc.}
+Landing page không đóng vai trò trang giới thiệu chung chung, mà là hạ tầng
+chuyển đổi cho toàn bộ kênh. Trang cần có một lời hứa hẹp, ví dụ ``Tạo và vận
+hành livestream tuyển sinh từ dữ liệu khóa học đã duyệt'', kèm video demo ngắn,
+form đăng ký, lịch đặt demo và checklist dữ liệu cần chuẩn bị. Sau khi khách hàng
+để lại thông tin, email hoặc Zalo được dùng để gửi tài liệu, xác nhận nhu cầu,
+nhắc lịch demo và chuyển lead sang bước đánh giá pilot.
+
+\textbf{Kênh hỗ trợ 2 -- Facebook/TikTok để trình diễn năng lực.}
+Facebook và TikTok không được xem là kênh chính để săn người mua B2B trong giai
+đoạn đầu, vì người duyệt ngân sách của trung tâm nhỏ có thể không phản hồi trực
+tiếp trên các nội dung đại chúng. Vai trò phù hợp hơn là \textbf{trình diễn năng
+lực}: đăng video mẫu, tình huống trước--sau khi có AI trả lời bình luận, bản ghi
+ngắn từ workshop và các clip giải thích cách 1Stream kiểm soát rủi ro AI. Các nội
+dung này tạo bằng chứng khi đội ngũ sales gửi link cho khách hàng trong quá trình
+tiếp cận trực tiếp.
+
+\subsubsection{Những kênh chưa sử dụng trong giai đoạn MVP}
+
+\begin{table}[H]
+    \centering
+    \small
+    \setlength{\tabcolsep}{4pt}
+    \renewcommand{\arraystretch}{1.22}
+    \caption{Các kênh chưa ưu tiên và lý do loại trừ tạm thời}
+    \label{tab:channels-not-prioritized-1stream}
+    \rowcolors{2}{paperBg}{white}
+    \begin{tabularx}{\linewidth}{@{}L{3.4cm}Y L{3.1cm}@{}}
+        \toprule
+        \rowcolor{softBlue}
+        \textbf{Kênh} & \textbf{Lý do chưa sử dụng} & \textbf{Điều kiện xem xét lại} \\ \midrule
+
+        Quảng cáo trả phí diện rộng &
+        Dễ tạo nhiều lead ngoài ICP, đốt ngân sách khi chưa có case study và chưa
+        biết thông điệp nào chuyển đổi tốt. &
+        Có ít nhất 2 case study pilot và biết rõ CPA/CAC mục tiêu. \\
+
+        LinkedIn Ads làm kênh chính &
+        Phù hợp hơn với doanh nghiệp lớn hoặc EdTech B2B; chủ trung tâm SME có thể
+        hoạt động mạnh hơn trên Facebook, Zalo và cộng đồng ngành. &
+        Khi mở rộng sang hệ thống đào tạo lớn, B2B training hoặc đối tác doanh
+        nghiệp. \\
+
+        SEO/blog dài hạn làm nguồn lead chính &
+        Tốc độ tạo kết quả chậm, không phù hợp mục tiêu tìm khách hàng pilot trong
+        3 tháng đầu. &
+        Khi đã có bộ từ khóa, case study và đội nội dung duy trì đều đặn. \\
+
+        Hội chợ, triển lãm lớn &
+        Chi phí gian hàng và chuẩn bị cao so với nguồn lực nhóm; khó kiểm soát
+        chất lượng lead nếu chưa có demo hoàn chỉnh. &
+        Khi cần mở rộng thương hiệu sau giai đoạn paid pilot. \\
+
+        KOL/Influencer đại chúng &
+        Tạo nhận diện rộng nhưng không chắc chạm đúng người duyệt ngân sách B2B;
+        thông điệp dễ bị hiểu như công cụ giải trí thay vì giải pháp vận hành. &
+        Khi có gói tự phục vụ giá thấp hoặc chiến dịch tuyển người dùng cuối. \\ \bottomrule
+    \end{tabularx}
+    \rowcolors{2}{}{}
+\end{table}
+
+\subsubsection{Vai trò, CTA và chỉ số của từng kênh trong phễu}
+
+Mỗi kênh được gắn với một nhiệm vụ cụ thể trong phễu tiếp cận. Điều này giúp nhóm
+đánh giá hiệu quả theo hành vi thật, thay vì chỉ nhìn vào các chỉ số nhận diện
+như lượt xem hoặc lượt thích.
+
+\begin{table}[H]
+    \centering
+    \footnotesize
+    \setlength{\tabcolsep}{3pt}
+    \renewcommand{\arraystretch}{1.22}
+    \caption{Vai trò của từng kênh trong phễu quảng bá và chuyển đổi}
+    \label{tab:channel-funnel-role-1stream}
+    \rowcolors{2}{paperBg}{white}
+    \begin{tabularx}{\linewidth}{@{}L{2.9cm}L{2.1cm}Y L{2.9cm}L{3.0cm}@{}}
+        \toprule
+        \rowcolor{softBlue}
+        \textbf{Kênh} &
+        \textbf{Tầng phễu} &
+        \textbf{Vai trò} &
+        \textbf{CTA chính} &
+        \textbf{Chỉ số theo dõi} \\ \midrule
+
+        Tiếp cận trực tiếp/ABM &
+        Khách hàng tiềm năng $\rightarrow$ phản hồi &
+        Tìm đúng khách hàng pilot, xác minh người ra quyết định và nỗi đau vận
+        hành. &
+        Trả lời tin nhắn hoặc đặt lịch demo 20--30 phút. &
+        Tỷ lệ phản hồi, số lịch demo, điểm ICP trung bình. \\
+
+        Cộng đồng giáo dục &
+        Nhận biết $\rightarrow$ quan tâm &
+        Tạo uy tín chuyên môn, thu hút trưởng marketing/tuyển sinh và phát hiện
+        nhu cầu thật. &
+        Tải checklist hoặc đăng ký workshop. &
+        Lượt bình luận chất lượng, form submit, số lead đúng ngành. \\
+
+        Đối tác giới thiệu &
+        Quan tâm $\rightarrow$ đặt lịch &
+        Mượn niềm tin từ agency/mentor/CRM để tiếp cận khách hàng có nhu cầu sẵn. &
+        Nhận buổi tư vấn/demonstration qua giới thiệu. &
+        Số lead referral, tỷ lệ đặt lịch, tỷ lệ đạt SQL. \\
+
+        Workshop/webinar &
+        Đặt lịch demo $\rightarrow$ đồng ý pilot &
+        Trình diễn quy trình, giải thích giới hạn AI và xử lý phản đối về dữ liệu,
+        thương hiệu, vận hành. &
+        Gửi dữ liệu mẫu để kiểm tra khả năng pilot. &
+        Số người tham dự, tỷ lệ ở lại, số yêu cầu demo/pilot. \\
+
+        Landing page/form &
+        Quan tâm $\rightarrow$ đặt lịch &
+        Ghi nhận nguồn lead, thu thông tin, chuẩn hóa nhu cầu và chuyển sang CRM
+        nội bộ. &
+        Điền form đăng ký demo hoặc đặt lịch. &
+        Conversion rate, nguồn lead, tỷ lệ form đủ thông tin. \\
+
+        Email/Zalo chăm sóc &
+        Sau tiếp xúc $\rightarrow$ demo/pilot &
+        Nhắc lịch, gửi tài liệu, trả lời phản đối và nuôi dưỡng lead chưa đủ chín. &
+        Xác nhận demo, gửi checklist dữ liệu, đồng ý pilot. &
+        Open rate, reply rate, số lead chuyển giai đoạn. \\
+
+        Facebook/TikTok demo content &
+        Nhận biết $\rightarrow$ bằng chứng &
+        Trình diễn video AI, tình huống trả lời bình luận và kết quả vận hành để
+        hỗ trợ bán hàng trực tiếp. &
+        Xem demo ngắn hoặc truy cập landing page. &
+        Lượt xem đủ lâu, click, số khách hàng nhắc lại video trong demo. \\ \bottomrule
+    \end{tabularx}
+    \rowcolors{2}{}{}
+\end{table}
+
+Từ bảng trên, Facebook và TikTok có hai vai trò tách biệt. Một mặt, đây là nguồn
+dữ liệu quan sát để nhóm phát hiện trung tâm đang livestream, tần suất đăng nội
+dung và các câu hỏi lặp lại của khách hàng. Mặt khác, đây là sân khấu để 1Stream
+chứng minh năng lực tạo video và phản hồi bình luận. Tuy nhiên, chúng không nên
+được xem là kênh chốt bán chính trong giai đoạn MVP. Quyết định mua B2B vẫn cần
+được kéo về các điểm chạm có độ tin cậy cao hơn như cuộc gọi demo, workshop nhỏ,
+giới thiệu từ đối tác và trao đổi trực tiếp với người duyệt ngân sách.
+
+LinkedIn cũng được sử dụng một cách thận trọng. Với nhóm chủ trung tâm SME,
+LinkedIn không chắc là nơi họ hoạt động thường xuyên nhất. Kênh này chỉ phù hợp
+để xây uy tín cá nhân của đội ngũ sáng lập, tiếp cận mentor, agency, nhà quản lý
+EdTech hoặc khách hàng quy mô lớn hơn. Vì vậy, LinkedIn không nằm trong ba kênh
+chính của giai đoạn pilot, nhưng vẫn có thể hỗ trợ xây dựng niềm tin khi khách
+hàng tìm hiểu hồ sơ đội ngũ 1Stream.
+
+\subsubsection{Kế hoạch thử nghiệm kênh trong 90 ngày}
+
+Để tránh tranh luận cảm tính về kênh nào ``hay hơn'', 1Stream triển khai thử
+nghiệm theo chu kỳ 90 ngày. Mục tiêu của chu kỳ này là kiểm chứng mức độ phù hợp
+của từng kênh dựa trên phản hồi thực tế, số lead tạo ra, chất lượng cuộc hẹn demo
+và khả năng chuyển sang pilot.
+
+\begin{table}[H]
+    \centering
+    \small
+    \setlength{\tabcolsep}{4pt}
+    \renewcommand{\arraystretch}{1.2}
+    \caption{Kế hoạch thử nghiệm kênh quảng bá trong 90 ngày đầu}
+    \label{tab:channel-90-day-test-1stream}
+    \rowcolors{2}{paperBg}{white}
+    \begin{tabularx}{\linewidth}{@{}L{2.3cm}Y Y L{3.0cm}@{}}
+        \toprule
+        \rowcolor{softBlue}
+        \textbf{Giai đoạn} & \textbf{Hoạt động chính} & \textbf{Đầu ra cần có} & \textbf{Ngưỡng học được} \\ \midrule
+
+        Ngày 1--30 &
+        Lập danh sách 50--80 tài khoản mục tiêu; hoàn thiện landing page, form,
+        video demo ngắn và kịch bản outreach. &
+        Danh sách lead đã chấm điểm, 2--3 mẫu tin nhắn/email, 1 checklist dữ liệu
+        khóa học. &
+        Xác định được 15--20 lead đạt ngưỡng tiếp cận. \\
+
+        Ngày 31--60 &
+        Gửi outreach cá nhân hóa, đăng nội dung trong cộng đồng, tổ chức 1 workshop
+        nhỏ và theo dõi phản hồi. &
+        Lịch demo, câu hỏi phản đối phổ biến, danh sách lead cần chăm sóc. &
+        Có tối thiểu 5--8 cuộc trao đổi sâu hoặc demo. \\
+
+        Ngày 61--90 &
+        Đề xuất pilot cho lead đạt SQL, thu dữ liệu mẫu, demo bằng dữ liệu của
+        khách hàng và phân tích nguồn lead tốt nhất. &
+        2--3 khách hàng pilot tiềm năng, báo cáo hiệu quả từng kênh, đề xuất ngân
+        sách giai đoạn tiếp theo. &
+        Xác định được kênh có tỷ lệ SQL và đặt lịch cao nhất. \\ \bottomrule
+    \end{tabularx}
+    \rowcolors{2}{}{}
+\end{table}
+
+Kết luận, chiến lược kênh của 1Stream trong giai đoạn đầu là chiến lược
+\textbf{tập trung, chủ động và có đo lường}. Nhóm không cố gắng tạo nhận diện đại
+chúng khi chưa có bằng chứng thị trường, mà ưu tiên các kênh giúp gặp đúng khách
+hàng, trình diễn được năng lực thật và chuyển đổi từng tài khoản phù hợp thành
+demo hoặc pilot. Khi có case study và dữ liệu chuyển đổi ban đầu, 1Stream mới nên
+mở rộng sang các kênh trả phí hoặc kênh nhận diện có quy mô lớn hơn.

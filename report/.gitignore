@@ -17,7 +17,7 @@
 *.toc
 *.vrb
 *.xdv
-
+tools
 # Temporary build/check files
 build_check*.log
 *.tmp
