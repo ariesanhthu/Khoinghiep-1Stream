@@ -57,9 +57,164 @@
 %     Người dùng thử / Khách hàng trả phí
 %   - Khi chưa có dữ liệu thật → ghi là "mục tiêu thử nghiệm" hoặc "giả định ban đầu"
 % ============================================================
+%
+% GHI CHÚ PHÂN CÔNG (thống nhất với Lê Nguyên Nhật, 19/07/2026):
+%   - Toàn: soạn bảng KPI, công thức phễu và bảng điều kiện tiếp tục/dừng kênh.
+%   - Nhật: rà soát và hoàn thiện CỘT "Nguồn dữ liệu" cho từng KPI, đồng bộ với
+%     danh sách sự kiện tracking ở mục 3.8. Giá trị trong cột này hiện là đề xuất
+%     sơ bộ, Nhật xác nhận lại theo hạ tầng đo lường thực tế.
+% ============================================================
 
 \subsection{Chỉ số đo lường hiệu quả}
 
-% TODO (Nguyễn Công Toàn + Lê Nguyên Nhật): Viết nội dung mục 3.12
-% Toàn phụ trách bảng KPI và công thức
-% Nhật phụ trách nguồn dữ liệu kỹ thuật và danh sách sự kiện tracking (liên kết 3.8)
+Hệ thống chỉ số trong mục này được thiết kế cho giai đoạn Pilot (thử nghiệm) của 1Stream --- thời điểm sản phẩm mới ở mức MVP và nhóm chưa phát sinh doanh thu ổn định. Vì vậy, toàn bộ các con số mục tiêu nêu dưới đây được xác lập với vai trò \textbf{giả định ban đầu} (baseline assumption) phục vụ mục đích học hỏi và ra quyết định, chứ không phải cam kết kết quả. Trong giai đoạn này, quy mô mẫu còn nhỏ (số trung tâm tiếp cận, số phiên livestream và số pilot đều ở mức vài chục trở xuống), nên các tỷ lệ phần trăm chỉ mang tính tham khảo định hướng và cần được kiểm chứng lại khi có đủ dữ liệu thực tế. Nguyên tắc xuyên suốt là đo để \emph{biết đang ở đâu và nên tiếp tục hay dừng}, không phải đo để chứng minh sản phẩm thành công.
+
+\subsubsection{Phân biệt các trạng thái khách hàng trong phễu}
+
+Để các KPI không bị hiểu nhầm hoặc cộng gộp sai, nhóm thống nhất phân biệt rõ năm trạng thái khách hàng theo mức độ cam kết tăng dần. Cách phân biệt này áp dụng nhất quán cho mọi công thức trong mục 3.12 và liên kết trực tiếp với phễu chuyển đổi ở mục 3.8.
+
+\begin{table}[H]
+    \centering
+    \footnotesize
+    \setlength{\tabcolsep}{4pt}
+    \renewcommand{\arraystretch}{1.3}
+    \caption{Định nghĩa năm trạng thái khách hàng dùng để tính KPI}
+    \label{tab:pa3-kpi-trangthai}
+    \begin{tabularx}{\linewidth}{@{}L{0.05\linewidth} L{0.24\linewidth} Y@{}}
+        \toprule
+        \rowcolor{softBlue}
+        \textbf{\#} & \textbf{Trạng thái} & \textbf{Định nghĩa dùng thống nhất} \\ \midrule
+        1 & \textbf{Lead} & Cá nhân hoặc đơn vị đã để lại thông tin liên hệ hoặc tương tác đủ để nhóm chủ động liên hệ lại (điền biểu mẫu, nhắn tin, để lại số trong phiên live). \\
+        2 & \textbf{Lead phù hợp ICP} & Lead thỏa điều kiện chân dung khách hàng mục tiêu ở mục 3.4: trung tâm ngoại ngữ tại TP.HCM, đội vận hành nội dung/marketing 3--5 người, có nhu cầu livestream thường xuyên. \\
+        3 & \textbf{Người đăng ký demo} & Lead phù hợp ICP đã đồng ý và đặt một lịch demo cụ thể. \\
+        4 & \textbf{Người dùng thử (pilot)} & Đơn vị đã đồng ý và đang trực tiếp vận hành thử sản phẩm trong khuôn khổ pilot. \\
+        5 & \textbf{Khách hàng trả phí} & Đơn vị đã ký hợp đồng hoặc thanh toán cho một gói dịch vụ của 1Stream. \\
+        \bottomrule
+    \end{tabularx}
+\end{table}
+
+\subsubsection{Bảng chỉ số KPI theo nhóm mục tiêu}
+
+Các KPI được nhóm theo sáu tầng của hành trình khách hàng: nhận biết, quan tâm, chuyển đổi, kích hoạt và sử dụng, hài lòng và giữ chân, cùng hiệu quả chi phí. Với mỗi KPI, bảng nêu rõ ý nghĩa, công thức tính, nguồn dữ liệu, tần suất cập nhật, người phụ trách cập nhật số liệu và mục tiêu giả định. Những ô ghi ``theo dõi'' là các chỉ số nhóm chủ động chưa đặt mốc cứng vì chưa có cơ sở dữ liệu để suy ra một con số hợp lý --- việc gán một mục tiêu tùy tiện sẽ vi phạm nguyên tắc trung thực của báo cáo.
+
+\begingroup
+\scriptsize
+\setlength{\tabcolsep}{2pt}
+\renewcommand{\arraystretch}{1.3}
+\begin{longtable}{@{}
+    >{\raggedright\arraybackslash}p{2.4cm}
+    >{\raggedright\arraybackslash}p{2.3cm}
+    >{\raggedright\arraybackslash}p{3.1cm}
+    >{\raggedright\arraybackslash}p{2.4cm}
+    >{\raggedright\arraybackslash}p{1.25cm}
+    >{\raggedright\arraybackslash}p{1.35cm}
+    >{\raggedright\arraybackslash}p{2.5cm}@{}}
+\caption{Hệ thống KPI đo lường hiệu quả quảng bá giai đoạn Pilot (mục tiêu là giả định ban đầu)}
+\label{tab:pa3-kpi-full}\\
+\toprule
+\rowcolor{softBlue}
+\textbf{KPI} & \textbf{Ý nghĩa} & \textbf{Công thức} & \textbf{Nguồn dữ liệu\textsuperscript{*}} & \textbf{Tần suất} & \textbf{Phụ trách} & \textbf{Mục tiêu (giả định)} \\
+\midrule
+\endfirsthead
+\multicolumn{7}{@{}l}{\footnotesize\itshape (tiếp theo Bảng~\ref{tab:pa3-kpi-full})}\\
+\toprule
+\rowcolor{softBlue}
+\textbf{KPI} & \textbf{Ý nghĩa} & \textbf{Công thức} & \textbf{Nguồn dữ liệu\textsuperscript{*}} & \textbf{Tần suất} & \textbf{Phụ trách} & \textbf{Mục tiêu (giả định)} \\
+\midrule
+\endhead
+\midrule
+\multicolumn{7}{@{}r@{}}{\footnotesize\itshape Còn tiếp \dots}\\
+\endfoot
+\bottomrule
+\endlastfoot
+
+% ---------- NHÓM A ----------
+\rowcolor{softGreen}\multicolumn{7}{@{}l}{\textbf{A. Nhận biết \& Tiếp cận (Awareness)}}\\
+Số trung tâm ICP tiếp cận trực tiếp & Quy mô hoạt động tiếp cận B2B chủ động & Đếm số trung tâm đã liên hệ (gọi/email/nhắn tin) & Nhật ký tiếp cận trực tiếp (Google Sheet/CRM đơn giản) & Hàng tuần & Thư, Quang & 40--60 trung tâm trong 3 tháng \\
+Số người tiếp cận (Reach) & Độ phủ nội dung trên kênh số & Tổng lượt tiếp cận trên Facebook/TikTok cộng số phiên truy cập landing page & Insights Facebook/TikTok; thống kê landing page & Hàng tuần & Nhật & Theo dõi để so sánh giữa các kênh \\
+Số phiên livestream thử/demo công khai & Mức độ hiện diện live thực tế & Đếm số phiên đã phát & Log hệ thống 1Stream & Hàng tuần & Nhật & 4--8 phiên/tháng \\
+
+% ---------- NHÓM B ----------
+\rowcolor{softGreen}\multicolumn{7}{@{}l}{\textbf{B. Quan tâm \& Tương tác (Interest)}}\\
+Lượt tương tác & Mức độ quan tâm với nội dung & Tổng lượt thích, bình luận, chia sẻ và nhấp liên kết & Insights Facebook/TikTok & Hàng tuần & Nhật & Theo dõi xu hướng theo tuần \\
+Tỷ lệ phản hồi khi tiếp cận & Chất lượng danh sách và thông điệp tiếp cận & Số trung tâm phản hồi / số trung tâm tiếp cận $\times$ 100\% & Nhật ký tiếp cận trực tiếp & Hàng tuần & Thư, Quang & 20--30\% \\
+Số lead ghi nhận & Nhu cầu thực tế phát sinh & Đếm biểu mẫu gửi về cộng số lead từ tin nhắn/phiên live & Biểu mẫu landing page; tin nhắn; log AI Agent & Hàng tuần & Nhật & 15--25 lead trong 3 tháng \\
+Số lead phù hợp ICP (SQL) & Chất lượng chứ không chỉ số lượng lead & Đếm số lead thỏa điều kiện ICP (trạng thái 2) & Nhật ký tiếp cận trực tiếp đối chiếu tiêu chí ICP (3.4) & Hàng tuần & Quang & $\geq$ 60\% lead là đúng ICP \\
+
+% ---------- NHÓM C ----------
+\rowcolor{softGreen}\multicolumn{7}{@{}l}{\textbf{C. Chuyển đổi (Conversion)}}\\
+Lượt đăng ký dùng thử & Mức sẵn sàng trải nghiệm sản phẩm & Đếm số đăng ký dùng thử/để lại yêu cầu trải nghiệm & Biểu mẫu đăng ký; hệ thống 1Stream & Hàng tuần & Nhật & Theo dõi \\
+Số lịch demo & Ý định nghiêm túc của lead & Đếm số lịch demo được đặt & CRM/Sheet lịch demo & Hàng tuần & Thư & 8--12 lịch demo \\
+Tỷ lệ đặt demo & Hiệu quả chuyển từ phản hồi sang demo & Số lịch demo / số phản hồi $\times$ 100\% & CRM/Sheet lịch demo & Hàng tuần & Toàn (tổng hợp) & 40--50\% \\
+Tỷ lệ tham gia demo & Mức cam kết của người đăng ký & Số demo diễn ra / số lịch đã đặt $\times$ 100\% & CRM/Sheet lịch demo & Sau mỗi demo & Thư & $\geq$ 70\% \\
+Số đơn vị đồng ý pilot & Kết quả cốt lõi của giai đoạn & Đếm số đơn vị bắt đầu pilot & CRM/danh sách pilot & Sau mỗi demo & Thư & 3--5 pilot \\
+Tỷ lệ chuyển đổi pilot & Hiệu quả chuyển từ demo sang pilot & Số đơn vị pilot / số đã demo $\times$ 100\% & CRM/danh sách pilot & Hàng tháng & Toàn & 30--40\% \\
+
+% ---------- NHÓM D ----------
+\rowcolor{softGreen}\multicolumn{7}{@{}l}{\textbf{D. Kích hoạt \& Sử dụng (Activation)}}\\
+Tỷ lệ hoàn tất onboarding & Khả năng đưa khách vào sử dụng thật & Số pilot hoàn tất onboarding / số pilot bắt đầu $\times$ 100\% & Checklist onboarding; log hệ thống & Sau mỗi pilot & Nhật & $\geq$ 80\% \\
+Thời gian đến phiên đầu tiên & Tốc độ tạo giá trị cho khách & Số ngày từ lúc bắt đầu pilot đến phiên livestream đầu tiên & Log hệ thống 1Stream & Sau mỗi pilot & Nhật & $\leq$ 7 ngày \\
+Số phiên livestream mỗi tuần trên mỗi pilot & Mức độ sử dụng sản phẩm thực tế & Trung bình số phiên mỗi pilot mỗi tuần & Log hệ thống 1Stream & Hàng tuần & Nhật & $\geq$ 2 phiên/tuần \\
+Số lead do AI Agent ghi nhận trong pilot & Giá trị sản phẩm trực tiếp tạo ra & Đếm số lead AI Agent thu trong các phiên pilot & Log AI Agent & Sau mỗi phiên & Nhật & Theo dõi \\
+Tỷ lệ câu hỏi AI tự xử lý & Năng lực thực của AI Sales Agent & Số câu AI trả lời trọn vẹn / tổng số câu hỏi $\times$ 100\% & Log AI Agent (đối chiếu chuyển người thật) & Sau mỗi phiên & Nhật & 50--60\% (cần kiểm chứng) \\
+
+% ---------- NHÓM E ----------
+\rowcolor{softGreen}\multicolumn{7}{@{}l}{\textbf{E. Hài lòng \& Giữ chân (Satisfaction)}}\\
+Mức độ hài lòng (CSAT) & Chất lượng trải nghiệm pilot & Điểm trung bình thang 1--5 từ khảo sát & Khảo sát sau pilot (Google Forms) & Sau mỗi pilot & Thư & $\geq$ 4/5 \\
+Ý định tiếp tục hoặc giới thiệu & Khả năng giữ chân và lan truyền & Tỷ lệ chọn ``có tiếp tục/giới thiệu'' trong khảo sát & Khảo sát sau pilot & Sau mỗi pilot & Thư & Theo dõi (định tính) \\
+Phản hồi của khách hàng & Đầu vào để cải thiện sản phẩm & Tổng hợp định tính các góp ý theo chủ đề & Phỏng vấn/khảo sát; ghi chú buổi làm việc & Sau mỗi pilot & Thư, Quang & Theo dõi (định tính) \\
+Tỷ lệ pilot chuyển sang trả phí & Kết quả cuối cùng của phễu & Số khách trả phí / số pilot $\times$ 100\% & Hợp đồng/CRM & Sau pilot & Toàn & 1--3 khách trả phí \\
+
+% ---------- NHÓM F ----------
+\rowcolor{softGreen}\multicolumn{7}{@{}l}{\textbf{F. Hiệu quả chi phí (Cost efficiency)}}\\
+Chi phí mỗi lead (CPL) & Hiệu quả chi tiêu để tạo lead & Chi phí một kênh / số lead từ kênh đó & Bảng ngân sách (3.11) và lead log & Hàng tháng & Toàn & Tính sau khi phát sinh chi \\
+Chi phí có một khách hàng mới (CAC) & Chi phí để có một khách trả phí & Tổng chi phí bán hàng và quảng bá / số khách trả phí mới & Bảng ngân sách (3.11) và CRM & Sau pilot & Toàn & Ước tính, mẫu nhỏ nên chỉ tham khảo \\
+\end{longtable}
+\endgroup
+
+{\footnotesize\itshape \textsuperscript{*}Cột ``Nguồn dữ liệu'' là đề xuất sơ bộ; Nhật rà soát và chốt lại theo hạ tầng tracking thực tế và danh sách sự kiện đo lường ở mục 3.8.}
+
+\subsubsection{Công thức phễu cơ bản}
+
+Các tỷ lệ chuyển đổi giữa những tầng liền kề của phễu được tính theo cùng một dạng ``số đầu ra chia số đầu vào'', giúp so sánh nhất quán giữa các chu kỳ và giữa các kênh. Các công thức dưới đây thống nhất với cột ``Công thức'' của Bảng~\ref{tab:pa3-kpi-full}.
+
+\begin{NoteBox}[Các công thức phễu và chi phí chính]
+\begin{itemize}
+    \item \textbf{Tỷ lệ phản hồi} $=\dfrac{\text{Số khách hàng phản hồi}}{\text{Số khách hàng tiếp cận}}\times 100\%$
+    \item \textbf{Tỷ lệ đặt lịch demo} $=\dfrac{\text{Số lịch demo}}{\text{Số khách hàng phản hồi}}\times 100\%$
+    \item \textbf{Tỷ lệ chuyển đổi pilot} $=\dfrac{\text{Số đơn vị tham gia pilot}}{\text{Số đã demo}}\times 100\%$
+    \item \textbf{Tỷ lệ pilot chuyển sang trả phí} $=\dfrac{\text{Số khách trả phí mới}}{\text{Số đơn vị pilot}}\times 100\%$
+    \item \textbf{Tỷ lệ chuyển đổi từ quan tâm sang dùng thử} $=\dfrac{\text{Số đơn vị dùng thử (pilot)}}{\text{Số lead quan tâm}}\times 100\%$ --- bằng tích của các tỷ lệ chuyển đổi từng tầng ở trên.
+    \item \textbf{Chi phí mỗi lead (CPL)} $=\dfrac{\text{Chi phí của kênh}}{\text{Số lead từ kênh đó}}$
+    \item \textbf{Chi phí có một khách hàng mới (CAC)} $=\dfrac{\text{Tổng chi phí bán hàng và quảng bá}}{\text{Số khách hàng trả phí mới}}$
+\end{itemize}
+\end{NoteBox}
+
+Trong giai đoạn Pilot, do số khách hàng trả phí đầu tiên rất nhỏ (giả định 1--3 đơn vị), giá trị CAC tính ra sẽ dao động mạnh và \textbf{không nên} được xem như CAC ổn định của mô hình. Nhóm ghi nhận CAC ở đây như một ``CAC thử nghiệm'' để làm mốc so sánh về sau, thay vì dùng nó để kết luận về khả năng sinh lời.
+
+\subsubsection{Điều kiện tiếp tục hoặc dừng một kênh}
+
+Mỗi kênh quảng bá được đánh giá định kỳ theo một trong bốn trạng thái dưới đây. Các ngưỡng nêu ra là ngưỡng giả định ban đầu; khi có dữ liệu thực tế của vài chu kỳ, nhóm sẽ hiệu chỉnh lại cho phù hợp. Nguyên tắc chung: một kênh chỉ được giữ nếu vừa tạo ra lead \emph{đúng ICP}, vừa có chi phí mỗi lead nằm trong ngưỡng chấp nhận được.
+
+\begin{table}[H]
+    \centering
+    \footnotesize
+    \setlength{\tabcolsep}{4pt}
+    \renewcommand{\arraystretch}{1.3}
+    \caption{Bảng điều kiện quyết định tiếp tục hoặc dừng một kênh quảng bá}
+    \label{tab:pa3-kpi-kenh}
+    \begin{tabularx}{\linewidth}{@{}L{0.13\linewidth} L{0.40\linewidth} Y@{}}
+        \toprule
+        \rowcolor{softBlue}
+        \textbf{Trạng thái} & \textbf{Điều kiện (giả định ban đầu)} & \textbf{Hành động} \\ \midrule
+        \textbf{Tiếp tục} & Chi phí mỗi lead nằm trong ngưỡng chấp nhận và kênh tạo được lead đúng ICP, đóng góp ít nhất một demo hoặc pilot. & Duy trì và có thể tăng nhẹ nguồn lực cho kênh. \\
+        \textbf{Điều chỉnh} & Kênh có tạo lead nhưng chi phí mỗi lead cao hơn ngưỡng, hoặc phần lớn lead lệch ICP. & Tinh chỉnh nhắm mục tiêu, thông điệp hoặc định dạng nội dung; thử lại thêm một chu kỳ. \\
+        \textbf{Tạm dừng} & Sau 3--4 tuần kênh không tạo được lead đúng ICP, hoặc chi phí mỗi lead vượt hơn hai lần ngưỡng. & Tạm dừng chi tiền cho kênh, phân tích nguyên nhân trước khi quyết định. \\
+        \textbf{Loại bỏ} & Sau hai chu kỳ điều chỉnh vẫn không cải thiện về lead ICP và chi phí. & Ngừng đầu tư, dồn nguồn lực sang các kênh đang hiệu quả hơn. \\
+        \bottomrule
+    \end{tabularx}
+\end{table}
+
+\begin{WarningBox}[Lưu ý về cách đọc các chỉ số trong giai đoạn Pilot]
+Toàn bộ mục tiêu số trong mục này là \textbf{giả định ban đầu}, không phải kết quả đã đạt hay cam kết. Vì cỡ mẫu ở giai đoạn Pilot còn nhỏ, các tỷ lệ phần trăm có độ tin cậy thống kê thấp và có thể thay đổi lớn chỉ vì một vài quan sát. Do đó nhóm ưu tiên đọc chỉ số theo \emph{xu hướng} qua nhiều chu kỳ hơn là kết luận từ một con số đơn lẻ, và sẽ cập nhật lại các ngưỡng khi tích lũy đủ dữ liệu thực tế từ những pilot đầu tiên.
+\end{WarningBox}

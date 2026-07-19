@@ -35,6 +35,126 @@
 
 \subsection{Ngân sách và nguồn lực quảng bá}
 
-% TODO (Nguyễn Công Toàn): Viết nội dung mục 3.11
-% Tính ngân sách DỰA TRÊN các hoạt động đã chốt ở 3.6, 3.9, 3.10
-% Không làm ngân sách trước khi ICP, thông điệp và kênh được chốt
+% ============================================================
+% GHI CHÚ TRẠNG THÁI (19/07/2026):
+%   Đây là KHUNG mục 3.11. Các con số ngân sách phụ thuộc vào danh sách kênh
+%   (3.6), kế hoạch ra mắt (3.9) và hoạt động marketing (3.10) — cả ba hiện
+%   CHƯA được chốt. Vì vậy các giá trị tiền mặt, số giờ và giới hạn chi tiêu
+%   được đánh dấu bằng \placeholder{...} để điền sau khi ba mục trên hoàn tất.
+%   Phần định tính (phân loại chi phí, vai trò kênh, điều kiện kịch bản) đã điền
+%   sẵn vì không phụ thuộc số liệu. Danh sách kênh dưới đây bám theo các kênh ví
+%   dụ nêu ở 3.6 và cần được thay bằng danh sách kênh chính thức khi 3.6 chốt.
+% ============================================================
+
+Ngân sách quảng bá của 1Stream được lập cho giai đoạn Pilot kéo dài khoảng ba tháng, dưới ràng buộc nguồn lực của một nhóm khởi nghiệp sinh viên: dòng tiền mặt hạn chế và nhân lực kiêm nhiệm. Do đó, nguyên tắc xuyên suốt là ưu tiên các kênh có chi phí tiền mặt thấp và tận dụng chi phí thời gian của thành viên, chỉ chi tiền mặt cho những hạng mục có khả năng đo lường rõ ràng và có thể dừng nhanh khi không hiệu quả.
+
+Bảng ngân sách trong mục này được xây dựng \emph{dựa trên} các hoạt động và kênh quảng bá được chốt ở mục 3.6 (lựa chọn kênh), 3.9 (kế hoạch ra mắt) và 3.10 (hoạt động marketing). Tại thời điểm soạn khung này, ba mục trên chưa hoàn tất, nên các con số tiền mặt, số giờ nhân lực và hạn mức chi tiêu được để ở dạng \placeholder{giá trị cần điền} và sẽ được cập nhật ngay khi danh sách kênh chính thức được xác nhận. Việc lập ngân sách chỉ được coi là hoàn chỉnh sau khi ICP, thông điệp và kênh đã chốt --- đây là điều kiện tiên quyết đã thống nhất trong nhóm.
+
+\subsubsection{Phân loại chi phí quảng bá}
+
+Trước khi lập bảng, nhóm phân biệt rõ hai cặp loại chi phí để tránh nhầm lẫn giữa tiền thực chi và công sức bỏ ra, cũng như giữa chi phí không đổi và chi phí tăng theo quy mô. Cách phân loại này quyết định cột ``Chi phí dự kiến'' và ``Giới hạn chi tiêu'' trong bảng ngân sách.
+
+\begin{table}[H]
+    \centering
+    \footnotesize
+    \setlength{\tabcolsep}{4pt}
+    \renewcommand{\arraystretch}{1.3}
+    \caption{Phân loại chi phí quảng bá áp dụng cho 1Stream}
+    \label{tab:pa3-ns-phanloai}
+    \begin{tabularx}{\linewidth}{@{}L{0.22\linewidth} L{0.34\linewidth} Y@{}}
+        \toprule
+        \rowcolor{softBlue}
+        \textbf{Loại chi phí} & \textbf{Định nghĩa} & \textbf{Ví dụ trong 1Stream} \\ \midrule
+        \textbf{Chi phí tiền mặt} & Khoản tiền thực sự chi ra khỏi ngân sách. & Quảng cáo trả phí trên Facebook/TikTok, tên miền và hosting cho landing page, công cụ gửi email. \\
+        \textbf{Chi phí thời gian} & Thời gian và công sức của thành viên; không xuất tiền mặt nhưng có chi phí cơ hội. & Gọi và nhắn tin tiếp cận trực tiếp, sản xuất video, trực và vận hành phiên livestream. \\
+        \textbf{Chi phí cố định} & Không thay đổi theo số lead hay lượt tiếp cận. & Tên miền, hosting, chi phí thiết lập landing page ban đầu. \\
+        \textbf{Chi phí biến đổi} & Tăng theo mỗi lượt tiếp cận hoặc mỗi lead. & Chi phí quảng cáo tính theo lượt nhấp, chi phí tổ chức mỗi buổi workshop. \\
+        \bottomrule
+    \end{tabularx}
+\end{table}
+
+\subsubsection{Bảng ngân sách theo kênh}
+
+Bảng dưới đây liệt kê các kênh dự kiến (bám theo các kênh ví dụ ở mục 3.6) cùng hoạt động, chi phí, nhân lực, thời gian và kết quả kỳ vọng. Cột ``Kết quả kỳ vọng'' được liên kết trực tiếp với các KPI ở mục 3.12 để mỗi đồng chi ra đều gắn với một chỉ số đo được. Các ô \placeholder{...} chờ số liệu sau khi mục 3.6, 3.9 và 3.10 chốt.
+
+\begingroup
+\scriptsize
+\setlength{\tabcolsep}{2pt}
+\renewcommand{\arraystretch}{1.3}
+\begin{longtable}{@{}
+    >{\raggedright\arraybackslash}p{2.2cm}
+    >{\raggedright\arraybackslash}p{2.9cm}
+    >{\raggedright\arraybackslash}p{2.6cm}
+    >{\raggedright\arraybackslash}p{2.2cm}
+    >{\raggedright\arraybackslash}p{1.5cm}
+    >{\raggedright\arraybackslash}p{2.5cm}
+    >{\raggedright\arraybackslash}p{1.4cm}@{}}
+\caption{Khung ngân sách quảng bá theo kênh giai đoạn Pilot (số liệu chờ chốt từ 3.6, 3.9, 3.10)}
+\label{tab:pa3-ns-kenh}\\
+\toprule
+\rowcolor{softBlue}
+\textbf{Kênh} & \textbf{Hoạt động chính} & \textbf{Chi phí dự kiến} & \textbf{Nhân lực (thời gian)} & \textbf{Thời gian} & \textbf{Kết quả kỳ vọng} & \textbf{Giới hạn chi tiêu} \\
+\midrule
+\endfirsthead
+\multicolumn{7}{@{}l}{\footnotesize\itshape (tiếp theo Bảng~\ref{tab:pa3-ns-kenh})}\\
+\toprule
+\rowcolor{softBlue}
+\textbf{Kênh} & \textbf{Hoạt động chính} & \textbf{Chi phí dự kiến} & \textbf{Nhân lực (thời gian)} & \textbf{Thời gian} & \textbf{Kết quả kỳ vọng} & \textbf{Giới hạn chi tiêu} \\
+\midrule
+\endhead
+\midrule
+\multicolumn{7}{@{}r@{}}{\footnotesize\itshape Còn tiếp \dots}\\
+\endfoot
+\bottomrule
+\endlastfoot
+
+Tiếp cận trực tiếp (direct outreach) & Gọi điện, email và nhắn tin đến trung tâm ICP; giới thiệu và mời demo & Tiền mặt gần bằng 0; chủ yếu là chi phí thời gian & Thư, Quang --- \placeholder{số giờ/tuần} & Suốt pilot & 40--60 trung tâm tiếp cận; 20--30\% phản hồi (mục 3.12) & \placeholder{hạn mức} \\
+Cộng đồng giáo dục (Facebook Group, hội nhóm chủ trung tâm) & Đăng bài chia sẻ, tư vấn, xây uy tín và thu lead & Tiền mặt gần bằng 0; chi phí thời gian & Quang --- \placeholder{số giờ/tuần} & Suốt pilot & Góp vào chỉ tiêu lead ghi nhận và lead phù hợp ICP & \placeholder{hạn mức} \\
+Nội dung TikTok/Facebook & Sản xuất video minh họa tình huống dùng sản phẩm (tạo bằng chính 1Stream) & Tiền mặt: \placeholder{VND} nếu chạy quảng cáo; còn lại là thời gian & Nhật, Quang --- \placeholder{số giờ/tuần} & Suốt pilot & Số người tiếp cận và lượt tương tác (mục 3.12) & \placeholder{hạn mức ads} \\
+Workshop/webinar trực tuyến & Tổ chức buổi demo giải pháp cho nhóm trung tâm quan tâm & Tiền mặt: \placeholder{VND} (công cụ họp, có thể dùng bản miễn phí) & Thư --- \placeholder{số giờ/buổi} & \placeholder{số buổi} trong pilot & Số lịch demo và số đơn vị đồng ý pilot & \placeholder{hạn mức/buổi} \\
+Landing page và biểu mẫu & Trang thu thông tin, đặt lịch demo và đăng ký dùng thử & Tiền mặt: \placeholder{VND} (tên miền, hosting) --- chi phí cố định & Nhật --- \placeholder{số giờ thiết lập} & Thiết lập đầu pilot & Nơi ghi nhận lead và điểm khởi đầu của phễu (mục 3.8) & \placeholder{hạn mức} \\
+Email chăm sóc & Gửi thông tin và nuôi dưỡng lead sau tiếp xúc đầu tiên & Tiền mặt: \placeholder{VND} (công cụ email) & Quang --- \placeholder{số giờ/tuần} & Suốt pilot & Tăng tỷ lệ đặt demo từ lead đã có & \placeholder{hạn mức} \\
+\end{longtable}
+\endgroup
+
+{\footnotesize\itshape Danh sách kênh trên là dự kiến theo mục 3.6; cần thay bằng danh sách kênh chính thức và điền số liệu sau khi 3.6, 3.9 và 3.10 được chốt.}
+
+\subsubsection{Ba kịch bản ngân sách}
+
+Nhóm chuẩn bị ba kịch bản để chủ động theo mức nguồn lực thực tế. Ba kịch bản dùng chung khung kênh ở Bảng~\ref{tab:pa3-ns-kenh} nhưng khác nhau ở mức chi tiền mặt và số kênh trả phí được kích hoạt. Các cột định tính (kênh sử dụng và điều kiện áp dụng) đã được xác định; các con số chờ chốt cùng với bảng ngân sách.
+
+\begin{table}[H]
+    \centering
+    \footnotesize
+    \setlength{\tabcolsep}{4pt}
+    \renewcommand{\arraystretch}{1.3}
+    \caption{Ba kịch bản ngân sách quảng bá giai đoạn Pilot}
+    \label{tab:pa3-ns-kichban}
+    \begin{tabularx}{\linewidth}{@{}L{0.20\linewidth} Y Y Y@{}}
+        \toprule
+        \rowcolor{softBlue}
+        \textbf{Chỉ tiêu} & \textbf{Tối thiểu} & \textbf{Cơ sở} & \textbf{Mở rộng} \\ \midrule
+        \textbf{Tổng ngân sách tiền mặt (3 tháng)} & \placeholder{VND} & \placeholder{VND} & \placeholder{VND} \\
+        \textbf{Kênh sử dụng} & Chỉ kênh không tốn tiền mặt: tiếp cận trực tiếp, cộng đồng, nội dung tự nhiên & Thêm workshop và landing page có chi phí cố định thấp & Thêm quảng cáo trả phí có kiểm soát trên TikTok/Facebook \\
+        \textbf{Số lead kỳ vọng} & \placeholder{số lead} & \placeholder{số lead} & \placeholder{số lead} \\
+        \textbf{Số pilot kỳ vọng} & \placeholder{số pilot} & \placeholder{số pilot} & \placeholder{số pilot} \\
+        \textbf{Số khách trả phí kỳ vọng} & \placeholder{số KH} & \placeholder{số KH} & \placeholder{số KH} \\
+        \textbf{CAC thử nghiệm dự kiến} & \placeholder{VND} & \placeholder{VND} & \placeholder{VND} \\
+        \textbf{Điều kiện áp dụng} & Khi nguồn lực tiền mặt gần như bằng 0, ưu tiên kiểm chứng nhu cầu & Kịch bản mặc định cho giai đoạn Pilot & Khi có thêm ngân sách hoặc kết quả pilot ban đầu đủ tốt để tăng quy mô \\
+        \bottomrule
+    \end{tabularx}
+\end{table}
+
+\subsubsection{Chi phí có một khách hàng mới (CAC) dự kiến}
+
+CAC được tính theo công thức đã thống nhất ở mục 3.12: tổng chi phí bán hàng và quảng bá chia cho số khách hàng trả phí mới. Ở giai đoạn Pilot, do chưa có khách hàng trả phí thực tế, nhóm chỉ tính \textbf{CAC thử nghiệm} mang tính giả định ban đầu:
+
+\begin{NoteBox}[CAC thử nghiệm giai đoạn Pilot]
+$$\text{CAC thử nghiệm} = \dfrac{\text{Tổng ngân sách tiền mặt của kịch bản}}{\text{Số khách hàng trả phí kỳ vọng}} = \dfrac{\placeholder{VND}}{\placeholder{số KH}}$$
+\end{NoteBox}
+
+Hai lưu ý khi đọc con số này. Thứ nhất, tử số ở đây chỉ tính \emph{chi phí tiền mặt}; chi phí thời gian của thành viên được ghi nhận riêng ở cột nhân lực của Bảng~\ref{tab:pa3-ns-kenh} chứ không quy đổi thành tiền, nên CAC thực tế (nếu tính cả công sức) sẽ cao hơn. Thứ hai, vì số khách hàng trả phí kỳ vọng rất nhỏ (giả định 1--3 đơn vị), CAC thử nghiệm dao động mạnh và chỉ nên dùng làm mốc so sánh giữa các kịch bản, không dùng để kết luận về khả năng sinh lời của mô hình.
+
+\begin{WarningBox}[Trạng thái khung 3.11]
+Mục này hiện là khung. Toàn bộ giá trị \placeholder{...} chờ được điền sau khi danh sách kênh (3.6), kế hoạch ra mắt (3.9) và hoạt động marketing (3.10) được chốt. Khi cập nhật, cần bảo đảm tổng chi tiền mặt của từng kịch bản khớp với tổng cột ``Chi phí dự kiến'' của Bảng~\ref{tab:pa3-ns-kenh}, và mọi con số chưa có cơ sở thực tế phải được ghi rõ là giả định ban đầu.
+\end{WarningBox}
