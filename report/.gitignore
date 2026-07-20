@@ -21,5 +21,5 @@ tools
 # Temporary build/check files
 build_check*.log
 *.tmp
-
+main.synctex(busy)
 main.pdf
