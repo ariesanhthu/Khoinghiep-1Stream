@@ -40,6 +40,296 @@
 %   - Phân biệt rõ: Lời hứa / Cơ chế tạo giá trị / Bằng chứng đã có / Giả định cần kiểm chứng
 % ============================================================
 
-\subsection{Định vị và thông điệp truyền thông}
 
 % TODO (Nguyễn Anh Thư): Viết nội dung mục 3.5
+\subsection{Định vị và thông điệp truyền thông}
+
+Trong giai đoạn MVP, định vị của 1Stream không được xây dựng dựa trên số lượng tính năng hoặc mức độ tự động hóa cao hơn các giải pháp khác. Trọng tâm định vị là khả năng kết nối các tác vụ đang bị phân tán trong quy trình livestream tuyển sinh của trung tâm ngoại ngữ thành một luồng vận hành có kiểm soát, gồm chuẩn bị nội dung, duy trì phiên phát trong phạm vi phù hợp, phản hồi câu hỏi phổ biến và ghi nhận khách hàng tiềm năng.
+
+Vấn đề cụ thể mà 1Stream hướng đến giải quyết là tình trạng các trung tâm ngoại ngữ phải phụ thuộc nhiều vào nhân sự để duy trì livestream, trong khi đội ngũ marketing và tuyển sinh thường có quy mô nhỏ, phải thực hiện đồng thời nhiều công việc như chuẩn bị kịch bản, theo dõi bình luận, trả lời câu hỏi lặp lại và chuyển thông tin khách hàng cho tư vấn viên. Khi nhân sự không thể trực liên tục, trung tâm có thể bỏ trống một số khung giờ, phản hồi chậm hoặc cung cấp thông tin không nhất quán.
+
+Do đó, giá trị trung tâm của 1Stream được xác định là:
+
+\begin{quote}
+\textbf{Giảm khối lượng công việc lặp lại trong quá trình vận hành livestream tuyển sinh, đồng thời hỗ trợ trung tâm duy trì nội dung, chuẩn hóa thông tin tư vấn và ghi nhận khách hàng tiềm năng trong một quy trình thống nhất.}
+\end{quote}
+
+Các lợi ích như giảm chi phí vận hành, tăng số lượng khách hàng tiềm năng hoặc cải thiện tỷ lệ chuyển đổi hiện mới là các giả thuyết kinh doanh. Nhóm chưa sử dụng những lợi ích này làm cam kết truyền thông cho đến khi có dữ liệu pilot đủ để kiểm chứng.
+
+\subsubsection{Tuyên bố định vị}
+
+\begin{quote}
+\textbf{Dành cho các trung tâm ngoại ngữ đang tuyển sinh qua Facebook hoặc TikTok nhưng có đội ngũ vận hành nội dung và tư vấn còn mỏng, 1Stream là nền tảng hỗ trợ vận hành livestream tuyển sinh, giúp giảm các công việc lặp lại, mở rộng thời lượng hiện diện và chuẩn hóa quá trình phản hồi, ghi nhận khách hàng tiềm năng bằng cách kết nối dữ liệu khóa học đã được phê duyệt với công cụ tạo nội dung, quản lý phiên phát và AI hỗ trợ tư vấn trong cùng một quy trình có sự kiểm soát của con người.}
+\end{quote}
+
+Tuyên bố trên là định vị dự kiến cho giai đoạn pilot. Mức độ phù hợp của định vị cần được kiểm chứng thông qua phản hồi của khách hàng mục tiêu, tỷ lệ đồng ý tham gia demo, tỷ lệ gửi dữ liệu mẫu và tỷ lệ chuyển từ demo sang pilot.
+
+\subsubsection{Thông điệp truyền thông chính}
+
+Thông điệp truyền thông chính của 1Stream trong giai đoạn đầu là:
+
+\begin{quote}
+\centering
+\textbf{Duy trì livestream tuyển sinh và phản hồi khách hàng hiệu quả hơn mà không cần đội ngũ phải trực liên tục.}
+\end{quote}
+
+Thông điệp này tập trung vào kết quả vận hành mà khách hàng có thể hiểu ngay, thay vì bắt đầu bằng các thuật ngữ kỹ thuật như AI Agent, mô hình ngôn ngữ, RAG hoặc tạo video tự động.
+
+Trong các tài liệu hướng đến nhóm khách hàng có yêu cầu cao về kiểm soát dữ liệu, thông điệp có thể được mở rộng như sau:
+
+\begin{quote}
+\centering
+\textbf{1Stream hỗ trợ trung tâm biến dữ liệu khóa học đã được phê duyệt thành nội dung livestream, phản hồi câu hỏi phổ biến và thông tin khách hàng tiềm năng trong một quy trình có thể theo dõi và kiểm soát.}
+\end{quote}
+
+\subsubsection{Các thông điệp hỗ trợ}
+
+Ba thông điệp hỗ trợ được sử dụng để giải thích cụ thể hơn cho thông điệp chính.
+
+\paragraph{Giảm công việc lặp lại}
+
+1Stream hỗ trợ xử lý các tác vụ thường xuyên lặp lại trong quá trình vận hành livestream như tạo kịch bản ban đầu, chuẩn bị nội dung theo dữ liệu khóa học, trả lời câu hỏi phổ biến và tổng hợp thông tin khách hàng tiềm năng.
+
+Thông điệp đề xuất:
+
+\begin{quote}
+\textbf{Giảm thời gian dành cho những câu hỏi và thao tác lặp lại để đội ngũ tập trung vào nội dung chuyên môn và các khách hàng cần tư vấn sâu.}
+\end{quote}
+
+Thông điệp này không đồng nghĩa với việc 1Stream thay thế hoàn toàn nhân viên marketing, host livestream hoặc tư vấn viên. Hệ thống chỉ hỗ trợ các tác vụ có dữ liệu và quy tắc xử lý tương đối rõ ràng.
+
+\paragraph{Mở rộng thời lượng livestream}
+
+1Stream hỗ trợ trung tâm chuẩn bị và duy trì nội dung trong những khung giờ không thể bố trí host trực tiếp, thông qua nội dung đã được tạo và phê duyệt trước.
+
+Thông điệp đề xuất:
+
+\begin{quote}
+\textbf{Mở rộng thêm các khung giờ hiện diện bằng nội dung đã được chuẩn bị trước, thay vì phụ thuộc hoàn toàn vào lịch làm việc của host.}
+\end{quote}
+
+Trong giai đoạn MVP, nhóm chỉ truyền thông về khả năng mở rộng thời lượng trong phạm vi pilot. Nhóm không cam kết hệ thống có thể vận hành liên tục 24 giờ mỗi ngày trên mọi nền tảng khi chưa có kết quả kiểm thử thực tế.
+
+\paragraph{Chuẩn hóa tư vấn và thu lead}
+
+1Stream sử dụng dữ liệu do trung tâm cung cấp và phê duyệt, chẳng hạn như học phí, lịch khai giảng, chương trình học, ưu đãi và câu hỏi thường gặp, để hỗ trợ phản hồi nhất quán hơn. Những trường hợp ngoài phạm vi được chuyển cho nhân viên tư vấn.
+
+Thông điệp đề xuất:
+
+\begin{quote}
+\textbf{Phản hồi các câu hỏi phổ biến dựa trên dữ liệu đã được duyệt và chuyển các trường hợp cần tư vấn sâu cho đúng nhân sự phụ trách.}
+\end{quote}
+
+Giá trị của thông điệp này không nằm ở việc AI tự chốt toàn bộ quá trình bán khóa học, mà ở việc hạn chế thông tin không nhất quán, ghi nhận nhu cầu và hỗ trợ bàn giao khách hàng tiềm năng cho đội ngũ tuyển sinh.
+
+\subsubsection{Khác biệt so với các giải pháp hiện có}
+
+1Stream không được định vị là giải pháp có nhiều tính năng hơn mọi đối thủ. Sự khác biệt được xác định dựa trên phạm vi công việc mà sản phẩm hỗ trợ và cách các thành phần được kết nối trong cùng một quy trình.
+
+\begin{table}[htbp]
+    \centering
+    \caption{Khác biệt giữa 1Stream và các phương án hiện có}
+    \label{tab:positioning-alternatives}
+    \begin{tabular}{
+        p{0.20\textwidth}
+        p{0.31\textwidth}
+        p{0.39\textwidth}
+    }
+        \hline
+        \textbf{Phương án}
+        & \textbf{Giá trị chính}
+        & \textbf{Điểm khác biệt của 1Stream} \\
+        \hline
+
+        Agency livestream
+        &
+        Cung cấp nhân sự, nội dung, thiết bị và vận hành theo chiến dịch.
+        &
+        1Stream hướng đến quy trình nội bộ có thể sử dụng lặp lại, với dữ liệu thuộc quyền kiểm soát của trung tâm và phạm vi chi phí phù hợp hơn cho giai đoạn pilot. \\
+
+        \hline
+
+        Nhân viên nội bộ
+        &
+        Linh hoạt, hiểu rõ sản phẩm và có thể xử lý các tình huống phức tạp.
+        &
+        1Stream không thay thế nhân viên mà hỗ trợ giảm các tác vụ lặp lại, đồng thời chuyển các trường hợp cần tư vấn sâu cho con người. \\
+
+        \hline
+
+        Công cụ tạo video AI
+        &
+        Tạo avatar, giọng đọc hoặc video từ nội dung đầu vào.
+        &
+        1Stream sử dụng nội dung được tạo như một phần của quy trình livestream, kết hợp với dữ liệu khóa học, quản lý phiên phát và ghi nhận khách hàng tiềm năng. \\
+
+        \hline
+
+        Công cụ phát livestream
+        &
+        Hỗ trợ lên lịch, phát lại video hoặc quản lý luồng phát.
+        &
+        1Stream không chỉ tập trung vào phát nội dung mà còn hỗ trợ phản hồi câu hỏi và chuyển thông tin khách hàng sang bước tư vấn tiếp theo. \\
+
+        \hline
+
+        Chatbot
+        &
+        Tự động trả lời tin nhắn hoặc câu hỏi trong một số kênh giao tiếp.
+        &
+        1Stream thiết kế luồng phản hồi theo ngữ cảnh livestream tuyển sinh, liên kết câu hỏi với dữ liệu khóa học, trạng thái phiên phát và quy trình chuyển lead. \\
+
+        \hline
+    \end{tabular}
+\end{table}
+
+Điểm khác biệt cần kiểm chứng của 1Stream là khả năng kết nối các thành phần trên thành một quy trình phù hợp với đội ngũ vận hành nhỏ. Nhóm chưa xem đây là lợi thế cạnh tranh đã được chứng minh cho đến khi khách hàng thực tế xác nhận rằng quy trình tích hợp này có giá trị hơn việc sử dụng các công cụ rời rạc.
+
+\subsubsection{Thông điệp theo từng vai trò trong đơn vị mua}
+
+Quyết định sử dụng 1Stream có thể liên quan đến nhiều vai trò khác nhau trong trung tâm ngoại ngữ. Vì vậy, cùng một sản phẩm cần được diễn giải bằng các thông điệp phù hợp với mục tiêu và trách nhiệm của từng người.
+
+\begin{table}[htbp]
+    \centering
+    \caption{Thông điệp truyền thông theo từng vai trò trong đơn vị mua}
+    \label{tab:message-by-buying-role}
+    \begin{tabular}{
+        p{0.16\textwidth}
+        p{0.22\textwidth}
+        p{0.29\textwidth}
+        p{0.23\textwidth}
+    }
+        \hline
+        \textbf{Vai trò}
+        & \textbf{Mối quan tâm chính}
+        & \textbf{Thông điệp phù hợp}
+        & \textbf{Bằng chứng cần cung cấp} \\
+        \hline
+
+        Chủ trung tâm
+        &
+        Chi phí, hiệu quả tuyển sinh, rủi ro vận hành và khả năng mở rộng.
+        &
+        1Stream giúp trung tâm thử nghiệm một quy trình livestream có kiểm soát, giảm phụ thuộc vào việc bố trí nhân sự trực liên tục và tạo dữ liệu để đánh giá trước khi đầu tư lớn hơn.
+        &
+        Phạm vi và chi phí pilot; báo cáo trước và sau thử nghiệm; số giờ vận hành; phản hồi của đội ngũ. \\
+
+        \hline
+
+        Trưởng marketing
+        &
+        Tiến độ tạo nội dung, tính nhất quán thương hiệu và hiệu quả của từng chiến dịch.
+        &
+        1Stream hỗ trợ chuyển dữ liệu khóa học thành nội dung có thể kiểm duyệt, lên lịch và theo dõi trên một quy trình thống nhất.
+        &
+        Video demo; lịch nội dung; quy trình duyệt; dashboard theo dõi phiên phát. \\
+
+        \hline
+
+        Nhân viên vận hành
+        &
+        Khối lượng công việc, thao tác trên nhiều công cụ và xử lý lỗi trong phiên.
+        &
+        1Stream hỗ trợ tập trung các công việc chuẩn bị, theo dõi bình luận và ghi nhận trạng thái xử lý, giúp giảm thao tác lặp lại và dễ bàn giao hơn.
+        &
+        Giao diện thao tác; checklist onboarding; log trạng thái; thời gian hoàn thành từng bước. \\
+
+        \hline
+
+        Tư vấn tuyển sinh
+        &
+        Chất lượng thông tin khách hàng, tốc độ tiếp nhận lead và khả năng tiếp tục tư vấn.
+        &
+        1Stream hỗ trợ ghi nhận câu hỏi, nhu cầu và thông tin liên hệ để chuyển các trường hợp phù hợp cho tư vấn viên, thay vì cố gắng tự động xử lý toàn bộ quá trình tuyển sinh.
+        &
+        Mẫu dữ liệu lead; quy tắc chuyển người thật; thời gian bàn giao; tỷ lệ lead có đủ thông tin. \\
+
+        \hline
+    \end{tabular}
+\end{table}
+
+\subsubsection{Phân biệt lời hứa, cơ chế tạo giá trị, bằng chứng và giả định}
+
+Để tránh truyền thông vượt quá năng lực thực tế của sản phẩm, nhóm phân biệt rõ bốn thành phần gồm lời hứa giá trị, cơ chế tạo giá trị, bằng chứng hiện có và giả định cần kiểm chứng.
+
+\begin{table}[htbp]
+    \centering
+    \caption{Cơ sở xây dựng thông điệp truyền thông của 1Stream}
+    \label{tab:message-evidence-assumption}
+    \begin{tabular}{
+        p{0.19\textwidth}
+        p{0.29\textwidth}
+        p{0.42\textwidth}
+    }
+        \hline
+        \textbf{Thành phần}
+        & \textbf{Nội dung}
+        & \textbf{Cách sử dụng trong truyền thông} \\
+        \hline
+
+        Lời hứa giá trị
+        &
+        Giảm các công việc lặp lại, hỗ trợ mở rộng thời lượng hiện diện và chuẩn hóa phản hồi.
+        &
+        Chỉ diễn đạt dưới dạng hỗ trợ hoặc giảm tải; không cam kết mức tiết kiệm chi phí, số lead hoặc doanh thu cụ thể. \\
+
+        \hline
+
+        Cơ chế tạo giá trị
+        &
+        Dữ liệu khóa học được chuẩn hóa; nội dung được tạo và duyệt trước; câu hỏi phổ biến được xử lý theo dữ liệu; trường hợp ngoài phạm vi được chuyển cho nhân viên.
+        &
+        Được trình bày trong demo, sơ đồ workflow, checklist onboarding và mô tả phạm vi pilot. \\
+
+        \hline
+
+        Bằng chứng hiện có
+        &
+        Prototype giao diện, luồng AI Video Generator, luồng AI hỗ trợ phản hồi, knowledge database và quy trình quản lý phiên phát đã được mô tả trong PA2.
+        &
+        Chỉ chứng minh rằng nhóm đã thiết kế và có khả năng trình diễn quy trình; chưa đủ để chứng minh hiệu quả kinh doanh. \\
+
+        \hline
+
+        Giả định cần kiểm chứng
+        &
+        Trung tâm sẵn sàng cung cấp dữ liệu; nội dung AI được chấp nhận; hệ thống giảm thời gian vận hành; mở rộng giờ phát tạo thêm lead; khách hàng sẵn sàng trả phí.
+        &
+        Không sử dụng như kết luận. Các giả định phải được đo thông qua demo, pilot, phỏng vấn và hành vi thanh toán. \\
+
+        \hline
+    \end{tabular}
+\end{table}
+
+\subsubsection{Bằng chứng hỗ trợ thông điệp}
+
+Ở thời điểm xây dựng PA3, các bằng chứng mà nhóm có thể sử dụng để hỗ trợ thông điệp gồm:
+
+\begin{itemize}
+    \item prototype thể hiện quy trình chuẩn bị và quản lý phiên livestream;
+    \item mô hình dữ liệu khóa học và knowledge database đã được mô tả trong PA2;
+    \item luồng tạo kịch bản, giọng đọc và video từ dữ liệu đầu vào;
+    \item luồng làm sạch, phân loại và phản hồi bình luận;
+    \item cơ chế chuyển các trường hợp ngoài phạm vi cho nhân viên;
+    \item kết quả phỏng vấn và phản hồi ban đầu của người dùng tiềm năng đã được ghi nhận trong PA2;
+    \item video demo, ảnh giao diện và tình huống sử dụng mô phỏng do nhóm xây dựng.
+\end{itemize}
+
+Những bằng chứng trên chủ yếu chứng minh tính khả thi của ý tưởng và khả năng trình diễn sản phẩm. Chúng chưa chứng minh rằng 1Stream có thể làm tăng doanh thu, giảm chi phí ở một tỷ lệ xác định hoặc tạo thêm khách hàng tiềm năng trong điều kiện vận hành thực tế.
+
+\subsubsection{Các giả định cần kiểm chứng qua pilot}
+
+Các giả định quan trọng cần được kiểm chứng gồm:
+
+\begin{itemize}
+    \item Trung tâm ngoại ngữ có đủ dữ liệu để cấu hình hệ thống trong thời gian hợp lý.
+    \item Đội ngũ marketing chấp nhận quy trình chuẩn hóa và phê duyệt dữ liệu trước khi vận hành.
+    \item Nội dung được tạo bởi hệ thống đạt mức chất lượng có thể sử dụng sau một số vòng chỉnh sửa giới hạn.
+    \item AI có thể xử lý một tỷ lệ đủ lớn các câu hỏi phổ biến mà không trả lời ngoài phạm vi.
+    \item Việc hỗ trợ trả lời và ghi nhận lead thực sự làm giảm khối lượng công việc của nhân viên.
+    \item Trung tâm có nhu cầu mở rộng khung giờ phát ngoài thời gian có host.
+    \item Khách hàng sẵn sàng trả phí hoặc đặt cọc sau khi hoàn tất pilot.
+    \item Quy trình tích hợp của 1Stream tạo ra giá trị cao hơn việc sử dụng riêng lẻ công cụ tạo video, công cụ phát và chatbot.
+\end{itemize}
+
+Sau mỗi pilot, nhóm cần đối chiếu các giả định trên với dữ liệu thực tế, phản hồi của từng vai trò và quyết định tiếp tục hoặc dừng sử dụng. Kết quả này được sử dụng để điều chỉnh định vị, thông điệp truyền thông và phạm vi sản phẩm trong các giai đoạn tiếp theo.

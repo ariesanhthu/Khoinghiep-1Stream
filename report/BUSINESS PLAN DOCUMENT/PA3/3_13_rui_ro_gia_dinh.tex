@@ -29,8 +29,948 @@
 %   - Kế hoạch phù hợp với giai đoạn pilot có hỗ trợ
 % ============================================================
 
-\subsection{Rủi ro, giả định và kế hoạch kiểm chứng}
-
 % TODO (Nguyễn Ngọc Cảnh): Viết bảng rủi ro vận hành
 % TODO (Nguyễn Anh Thư): Tổng hợp toàn bộ giả định từ 3.1–3.12 vào danh sách
 % Cả nhóm review chéo để xác nhận giả định vs. thông tin đã kiểm chứng
+
+\subsection{Rủi ro, giả định và kế hoạch kiểm chứng}
+
+Trong giai đoạn PA3, các hoạt động quảng bá và tiếp cận thị trường của 1Stream được triển khai khi sản phẩm vẫn ở trạng thái MVP có hỗ trợ vận hành. Vì vậy, nhóm không xem các nhận định về nhu cầu khách hàng, hiệu quả kênh quảng bá, khả năng giảm công việc hoặc mức sẵn sàng trả phí là kết luận đã được chứng minh.
+
+Mục này có ba mục tiêu:
+
+\begin{enumerate}
+    \item nhận diện các rủi ro có thể ảnh hưởng đến khách hàng, sản phẩm và tiến độ pilot;
+    \item tổng hợp các giả định được sử dụng trong Chương 3;
+    \item xác định cách kiểm chứng, đầu ra cần thu thập và tiêu chí ra quyết định đối với từng giả định.
+\end{enumerate}
+
+\subsubsection{Phân biệt thông tin đã xác nhận và giả định cần kiểm chứng}
+
+Thông tin trong Chương 3 được chia thành ba nhóm nhằm tránh việc sử dụng giả định như một kết luận đã được thị trường xác nhận.
+
+\begin{table}[H]
+    \centering
+    \caption{Phân loại mức độ xác nhận của thông tin trong Chương 3}
+    \label{tab:information-validation-level}
+    \renewcommand{\arraystretch}{1.25}
+    \begin{tabularx}{\textwidth}{
+        p{0.20\textwidth}
+        X
+        X
+    }
+        \hline
+        \textbf{Nhóm thông tin}
+        & \textbf{Nội dung}
+        & \textbf{Cách sử dụng} \\
+        \hline
+
+        Thông tin đã xác nhận nội bộ
+        &
+        Phạm vi sản phẩm trong PA2; prototype hiện có; các luồng tạo nội dung, phản hồi câu hỏi và chuyển người thật; vai trò của các thành viên; nguồn lực và thời gian hiện có của nhóm.
+        &
+        Được sử dụng để xác định những gì nhóm có thể trình diễn hoặc triển khai trong phạm vi pilot. Các thông tin này chưa đồng nghĩa với việc sản phẩm đã được thị trường chấp nhận. \\
+
+        \hline
+
+        Thông tin tham khảo có nguồn
+        &
+        Số liệu thị trường, số lượng trung tâm, xu hướng livestream, hành vi sử dụng nền tảng và các thông tin công khai được trích dẫn từ tài liệu bên ngoài.
+        &
+        Được sử dụng để mô tả bối cảnh. Nhóm không sử dụng số liệu vĩ mô thay cho bằng chứng về nhu cầu của khách hàng mục tiêu cụ thể. \\
+
+        \hline
+
+        Giả định cần kiểm chứng
+        &
+        Mức độ nghiêm trọng của vấn đề, sự phù hợp của ICP, khả năng tiếp cận khách hàng, hiệu quả thông điệp, tỷ lệ chuyển đổi, chất lượng MVP, mức giảm công việc và mức sẵn sàng trả phí.
+        &
+        Chỉ được trình bày dưới dạng giả định, mục tiêu thử nghiệm hoặc tiêu chí cần đo. Không được sử dụng như kết quả đã đạt được. \\
+
+        \hline
+    \end{tabularx}
+\end{table}
+
+Các con số như số tài khoản cần tiếp cận, số cuộc demo, số pilot, tỷ lệ phản hồi hoặc tỷ lệ chuyển sang trả phí trong Chương 3 là \textbf{mục tiêu thử nghiệm}. Đây không phải số liệu thực tế cho đến khi nhóm hoàn tất hoạt động tiếp cận và ghi nhận kết quả.
+
+\subsubsection{Nguyên tắc quản lý rủi ro trong giai đoạn pilot}
+
+Việc quản lý rủi ro của 1Stream tuân theo các nguyên tắc sau:
+
+\begin{itemize}
+    \item ưu tiên bảo vệ tính chính xác của học phí, lịch học, ưu đãi và thông tin tuyển sinh;
+    \item không tự động trả lời khi dữ liệu không đủ hoặc câu hỏi nằm ngoài phạm vi đã cấu hình;
+    \item khách hàng phải phê duyệt dữ liệu, nội dung và quy tắc phản hồi trước khi triển khai;
+    \item mọi phiên pilot phải có người chịu trách nhiệm theo dõi và có quyền tạm dừng;
+    \item không tiếp tục sử dụng nội dung, hình ảnh, giọng nói hoặc tài khoản khi chưa xác nhận quyền sử dụng;
+    \item mọi lỗi quan trọng phải được ghi nhận, phân loại, xử lý và kiểm thử lại trước khi tiếp tục;
+    \item không mở rộng số lượng pilot khi nhóm chưa đủ khả năng hỗ trợ các khách hàng hiện tại.
+\end{itemize}
+
+\subsubsection{Phân cấp mức độ sự cố}
+
+Các sự cố được chia thành ba mức để xác định cách phản ứng.
+
+\begin{table}[H]
+    \centering
+    \caption{Phân cấp mức độ sự cố trong quá trình pilot}
+    \label{tab:incident-severity}
+    \renewcommand{\arraystretch}{1.25}
+    \begin{tabularx}{\textwidth}{
+        p{0.12\textwidth}
+        p{0.24\textwidth}
+        X
+        p{0.22\textwidth}
+    }
+        \hline
+        \textbf{Mức}
+        & \textbf{Đặc điểm}
+        & \textbf{Ví dụ}
+        & \textbf{Phản ứng} \\
+        \hline
+
+        S1 -- Nghiêm trọng
+        &
+        Có khả năng ảnh hưởng trực tiếp đến khách hàng, uy tín trung tâm, dữ liệu hoặc tài khoản nền tảng.
+        &
+        Trả lời sai học phí hoặc lịch học; sử dụng nội dung chưa được phép; rò rỉ dữ liệu; gửi phản hồi ngoài phạm vi; tài khoản có nguy cơ bị khóa.
+        &
+        Dừng ngay chức năng hoặc phiên liên quan; thông báo người phụ trách; chỉ tiếp tục sau khi sửa và được khách hàng duyệt lại. \\
+
+        \hline
+
+        S2 -- Trung bình
+        &
+        Ảnh hưởng đến chất lượng phiên nhưng chưa gây sai lệch thông tin quan trọng.
+        &
+        Video lỗi hình hoặc âm thanh; phản hồi chậm; nội dung không đúng phong cách; lỗi đồng bộ bình luận.
+        &
+        Tạm dừng phần bị lỗi; sử dụng phương án thủ công hoặc nội dung dự phòng; xử lý trong vòng một ngày làm việc. \\
+
+        \hline
+
+        S3 -- Nhẹ
+        &
+        Không ảnh hưởng trực tiếp đến nội dung hoặc dữ liệu khách hàng.
+        &
+        Lỗi giao diện nhỏ; lỗi căn chỉnh; câu chữ chưa tự nhiên; báo cáo hiển thị chưa tối ưu.
+        &
+        Ghi nhận vào backlog; xử lý theo mức ưu tiên mà không cần dừng toàn bộ pilot. \\
+
+        \hline
+    \end{tabularx}
+\end{table}
+
+\subsubsection{Quy trình xử lý sự cố}
+
+Khi phát hiện lỗi video, dữ liệu hoặc câu trả lời AI, nhóm thực hiện quy trình sau:
+
+\begin{enumerate}
+    \item \textbf{Phát hiện và cô lập:} dừng tác vụ tự động hoặc phiên bị ảnh hưởng để tránh lỗi tiếp tục lan rộng.
+    \item \textbf{Ghi nhận:} lưu thời điểm, đầu vào, đầu ra, tài khoản bị ảnh hưởng và người phát hiện.
+    \item \textbf{Phân loại:} xác định mức S1, S2 hoặc S3 và người chịu trách nhiệm xử lý.
+    \item \textbf{Thông báo:} thông báo cho Project Lead và đầu mối phía khách hàng đối với sự cố S1 hoặc S2.
+    \item \textbf{Khắc phục:} sửa dữ liệu, nội dung, quy tắc phản hồi hoặc thành phần kỹ thuật liên quan.
+    \item \textbf{Kiểm thử lại:} chạy lại các test case liên quan và so sánh với dữ liệu đã được duyệt.
+    \item \textbf{Phê duyệt tiếp tục:} chỉ khôi phục tác vụ khi người phụ trách nội bộ và khách hàng xác nhận.
+    \item \textbf{Phân tích nguyên nhân:} cập nhật nguyên nhân gốc, biện pháp phòng ngừa và checklist cho các pilot sau.
+\end{enumerate}
+
+\subsubsection{Bảng rủi ro vận hành}
+
+\begin{table}[H]
+    \centering
+    \caption{Rủi ro vận hành trong giai đoạn quảng bá và pilot}
+    \label{tab:operational-risk-matrix}
+    \small
+    \renewcommand{\arraystretch}{1.25}
+    \begin{tabularx}{\textwidth}{
+        p{0.18\textwidth}
+        p{0.09\textwidth}
+        p{0.09\textwidth}
+        X
+        p{0.16\textwidth}
+    }
+        \hline
+        \textbf{Rủi ro}
+        & \textbf{Xác suất}
+        & \textbf{Tác động}
+        & \textbf{Biện pháp phòng ngừa và xử lý}
+        & \textbf{Người xử lý} \\
+        \hline
+
+        Dữ liệu học phí, lịch học hoặc ưu đãi không chính xác
+        &
+        Trung bình
+        &
+        Cao
+        &
+        Sử dụng checklist dữ liệu; yêu cầu khách hàng chỉ định người duyệt; lưu phiên bản và ngày cập nhật; dừng phản hồi tự động nếu dữ liệu hết hiệu lực.
+        &
+        Operations Lead phối hợp đầu mối khách hàng \\
+
+        \hline
+
+        AI trả lời ngoài phạm vi hoặc suy diễn
+        &
+        Trung bình
+        &
+        Cao
+        &
+        Thiết lập danh sách câu hỏi được phép trả lời; đặt ngưỡng tin cậy; chuyển người thật khi thiếu dữ liệu; kiểm thử bằng bộ câu hỏi trước phiên; lưu log toàn bộ phản hồi.
+        &
+        Product Lead và Operations Lead \\
+
+        \hline
+
+        Video AI sai nội dung hoặc không phù hợp thương hiệu
+        &
+        Trung bình
+        &
+        Trung bình đến cao
+        &
+        Chỉ tạo nội dung từ dữ liệu đã duyệt; gửi bản nháp trước; giới hạn số vòng sửa; chuẩn bị video loop hoặc nội dung thủ công làm phương án dự phòng.
+        &
+        Product Lead và Marketing Lead \\
+
+        \hline
+
+        Lỗi render, âm thanh, phụ đề hoặc đồng bộ video
+        &
+        Trung bình
+        &
+        Trung bình
+        &
+        Kiểm thử trước phiên; sử dụng file dự phòng; không tạo video sát giờ phát; lưu phiên bản đã được xác nhận hoạt động ổn định.
+        &
+        Product Lead \\
+
+        \hline
+
+        Không nhận được bình luận hoặc trạng thái phiên từ nền tảng
+        &
+        Trung bình
+        &
+        Cao
+        &
+        Kiểm tra kết nối trước phiên; có dashboard cảnh báo; bố trí người theo dõi trong pilot; chuyển sang phản hồi thủ công nếu tích hợp gặp lỗi.
+        &
+        Product Lead và Operations Lead \\
+
+        \hline
+
+        Tài khoản livestream bị hạn chế hoặc vi phạm chính sách nền tảng
+        &
+        Thấp đến trung bình
+        &
+        Cao
+        &
+        Kiểm tra chính sách nền tảng; chỉ sử dụng tài khoản do khách hàng cấp quyền; không cam kết các cơ chế phát chưa được nền tảng hỗ trợ; dừng ngay khi có cảnh báo.
+        &
+        Operations Lead và khách hàng \\
+
+        \hline
+
+        Sử dụng hình ảnh, giọng nói hoặc video chưa có quyền
+        &
+        Thấp
+        &
+        Cao
+        &
+        Yêu cầu xác nhận quyền sử dụng bằng văn bản; lưu nguồn tài sản; không sử dụng dữ liệu nhạy cảm hoặc tài sản chưa rõ quyền sở hữu.
+        &
+        Project Lead và Operations Lead \\
+
+        \hline
+
+        Dữ liệu khách hàng tiềm năng bị truy cập sai mục đích
+        &
+        Thấp
+        &
+        Cao
+        &
+        Chỉ thu trường dữ liệu cần thiết; phân quyền truy cập; không đưa dữ liệu cá nhân vào nội dung demo; xóa hoặc trả lại dữ liệu theo thỏa thuận sau pilot.
+        &
+        Operations Lead và Product Lead \\
+
+        \hline
+
+        Không đo được nguồn hoặc trạng thái lead
+        &
+        Trung bình
+        &
+        Trung bình
+        &
+        Thống nhất biểu mẫu và trạng thái lead trước phiên; gắn mã nguồn; lưu thời điểm bàn giao; chỉ tính lead khi đáp ứng định nghĩa đã thống nhất.
+        &
+        Marketing Lead và Operations Lead \\
+
+        \hline
+
+        Khách hàng không cung cấp đủ dữ liệu
+        &
+        Cao
+        &
+        Cao
+        &
+        Chỉ xác nhận ngày bắt đầu sau khi hoàn tất checklist; giới hạn pilot vào một khóa học; hỗ trợ mẫu nhập liệu; tạm hoãn nếu dữ liệu tối thiểu chưa đủ.
+        &
+        Operations Lead \\
+
+        \hline
+
+        Khách hàng thay đổi dữ liệu trong quá trình pilot
+        &
+        Trung bình
+        &
+        Cao
+        &
+        Thiết lập quy trình cập nhật; xác định người có quyền thay đổi; ngừng sử dụng phiên bản cũ sau khi bản mới được duyệt.
+        &
+        Operations Lead và khách hàng \\
+
+        \hline
+
+        Khách hàng kỳ vọng sản phẩm thay thế hoàn toàn nhân sự
+        &
+        Trung bình
+        &
+        Trung bình
+        &
+        Trình bày rõ phạm vi MVP trong demo và đề xuất pilot; mô tả các trường hợp cần người thật; không sử dụng thông điệp ``tự động hóa hoàn toàn''.
+        &
+        Project Lead và Marketing Lead \\
+
+        \hline
+
+        Nhóm triển khai nhiều pilot hơn năng lực hỗ trợ
+        &
+        Trung bình
+        &
+        Cao
+        &
+        Giới hạn tối đa ba pilot đồng thời; chỉ mở pilot mới khi có người phụ trách; theo dõi backlog và thời gian phản hồi.
+        &
+        Project Lead và Operations Lead \\
+
+        \hline
+
+        Kênh quảng bá tạo nhiều lead không phù hợp
+        &
+        Trung bình
+        &
+        Trung bình
+        &
+        Chấm điểm ICP trước demo; theo dõi nguồn lead; điều chỉnh đối tượng, nội dung và CTA; dừng kênh sau hai chu kỳ không tạo lead phù hợp.
+        &
+        Marketing Lead và Project Lead \\
+
+        \hline
+
+        Khách hàng thích demo nhưng không sẵn sàng trả phí
+        &
+        Cao
+        &
+        Cao
+        &
+        Hỏi ngân sách và điều kiện mua trong quá trình khám phá; áp dụng pilot có phí hoặc đặt cọc; ghi nhận lý do không mua; không dùng lời khen như bằng chứng nhu cầu.
+        &
+        Project Lead và Finance Lead \\
+
+        \hline
+
+        Timeline quảng bá phụ thuộc vào tính năng chưa hoàn thiện
+        &
+        Trung bình
+        &
+        Cao
+        &
+        Chỉ quảng bá các luồng đã có thể demo; thiết kế pilot có phương án hỗ trợ thủ công; không công bố ngày ra mắt tính năng khi chưa kiểm thử.
+        &
+        Project Lead và Product Lead \\
+
+        \hline
+    \end{tabularx}
+\end{table}
+
+\subsubsection{Điều kiện dừng hoặc điều chỉnh chiến dịch}
+
+Một chiến dịch quảng bá không được tiếp tục chỉ vì đã được đưa vào kế hoạch. Nhóm đánh giá chiến dịch sau mỗi chu kỳ từ hai đến bốn tuần hoặc sau khi đạt số lượng mẫu tối thiểu.
+
+\begin{table}[H]
+    \centering
+    \caption{Quy tắc tiếp tục, điều chỉnh hoặc dừng chiến dịch}
+    \label{tab:campaign-decision-rules}
+    \renewcommand{\arraystretch}{1.25}
+    \begin{tabularx}{\textwidth}{
+        p{0.17\textwidth}
+        X
+        X
+    }
+        \hline
+        \textbf{Quyết định}
+        & \textbf{Điều kiện}
+        & \textbf{Hành động} \\
+        \hline
+
+        Tiếp tục
+        &
+        Kênh tạo được phản hồi từ đúng ICP và có ít nhất một cuộc demo hoặc cơ hội pilot trong chu kỳ.
+        &
+        Duy trì hoạt động; tăng nhẹ số lượng tiếp cận nhưng không vượt năng lực hỗ trợ của nhóm. \\
+
+        \hline
+
+        Điều chỉnh đối tượng
+        &
+        Có lượt phản hồi nhưng phần lớn khách hàng không đạt tiêu chí ICP, không có dữ liệu hoặc không có nhu cầu livestream.
+        &
+        Thu hẹp tiêu chí tìm kiếm, thay đổi nguồn danh sách và bổ sung bước sàng lọc trước khi liên hệ. \\
+
+        \hline
+
+        Điều chỉnh thông điệp
+        &
+        Khách hàng hiểu sai 1Stream là công cụ thay thế hoàn toàn host, công cụ tạo video đơn thuần hoặc chatbot thông thường.
+        &
+        Sửa headline, ví dụ sử dụng và CTA; ưu tiên mô tả vấn đề vận hành và phạm vi pilot thay vì liệt kê tính năng. \\
+
+        \hline
+
+        Điều chỉnh đề nghị
+        &
+        Khách hàng quan tâm nhưng không đồng ý gửi dữ liệu hoặc tham gia pilot.
+        &
+        Giảm phạm vi pilot, cung cấp audit trước, làm rõ trách nhiệm dữ liệu và bổ sung cơ chế giảm rủi ro. \\
+
+        \hline
+
+        Tạm dừng
+        &
+        Sau tối thiểu 20 tài khoản phù hợp hoặc từ ba đến bốn tuần, kênh không tạo ra phản hồi có ý nghĩa hoặc demo.
+        &
+        Dừng bổ sung ngân sách và thời gian; phân tích lại nguồn danh sách, thông điệp và thời điểm tiếp cận. \\
+
+        \hline
+
+        Loại bỏ
+        &
+        Sau hai chu kỳ điều chỉnh, kênh vẫn không tạo được lead đạt ICP, demo hoặc dữ liệu học hỏi mới.
+        &
+        Chuyển nguồn lực sang kênh khác và lưu lại kết quả để tránh lặp lại cùng giả định. \\
+
+        \hline
+    \end{tabularx}
+\end{table}
+
+Đối với thông điệp truyền thông, nhóm chỉ thay đổi một hoặc hai yếu tố trong mỗi lần thử nghiệm, chẳng hạn như vấn đề được nhấn mạnh, đối tượng nhận thông điệp hoặc CTA. Việc thay đổi đồng thời quá nhiều yếu tố sẽ làm nhóm không xác định được nguyên nhân dẫn đến kết quả.
+
+\subsubsection{Danh sách giả định cần kiểm chứng}
+
+Các giả định được tổng hợp từ nội dung Chương 3 và được đánh mã để theo dõi trong quá trình thực hiện.
+
+\begin{longtable}{
+    p{0.08\textwidth}
+    p{0.68\textwidth}
+    p{0.15\textwidth}
+}
+    \caption{Danh sách giả định cần kiểm chứng trong Chương 3}
+    \label{tab:chapter-3-assumptions} \\
+    \hline
+    \textbf{Mã}
+    & \textbf{Giả định}
+    & \textbf{Liên quan} \\
+    \hline
+    \endfirsthead
+
+    \hline
+    \textbf{Mã}
+    & \textbf{Giả định}
+    & \textbf{Liên quan} \\
+    \hline
+    \endhead
+
+    G1
+    &
+    Trung tâm ngoại ngữ có hoạt động tuyển sinh qua Facebook hoặc TikTok là phân khúc phù hợp để kiểm chứng MVP của 1Stream.
+    &
+    Thị trường, ICP \\
+
+    \hline
+
+    G2
+    &
+    Các trung tâm có đội marketing, nội dung và tư vấn khoảng từ ba đến năm người thường gặp áp lực do một người phải thực hiện nhiều tác vụ.
+    &
+    ICP, persona \\
+
+    \hline
+
+    G3
+    &
+    Các câu hỏi về học phí, lịch học, đầu vào, ưu đãi và đăng ký thường xuyên được lặp lại trong livestream hoặc quá trình tư vấn.
+    &
+    Vấn đề khách hàng \\
+
+    \hline
+
+    G4
+    &
+    Trung tâm có thể cung cấp dữ liệu khóa học đủ rõ và chỉ định người chịu trách nhiệm phê duyệt dữ liệu.
+    &
+    Pilot, onboarding \\
+
+    \hline
+
+    G5
+    &
+    Khách hàng có nhu cầu mở rộng thêm khung giờ livestream nhưng không muốn tăng tương ứng số giờ làm việc của host hoặc nhân viên trực.
+    &
+    Định vị, thông điệp \\
+
+    \hline
+
+    G6
+    &
+    Thông điệp về giảm công việc lặp lại và giảm nguy cơ bỏ sót lead tạo sự quan tâm cao hơn thông điệp tập trung vào công nghệ AI.
+    &
+    Thông điệp \\
+
+    \hline
+
+    G7
+    &
+    Tiếp cận trực tiếp có cá nhân hóa, mạng lưới giới thiệu và đối tác ngành tạo lead phù hợp hơn quảng cáo đại trà trong giai đoạn MVP.
+    &
+    Kênh quảng bá \\
+
+    \hline
+
+    G8
+    &
+    Audit một phiên livestream hoặc quy trình hiện tại giúp khách hàng sẵn sàng tham gia demo và chia sẻ dữ liệu hơn việc chỉ xem giới thiệu sản phẩm chung.
+    &
+    Khách hàng đầu tiên \\
+
+    \hline
+
+    G9
+    &
+    Video demo ngắn và landing page giúp người có quyền quyết định hiểu được quy trình của 1Stream và thực hiện CTA.
+    &
+    Landing page, nội dung \\
+
+    \hline
+
+    G10
+    &
+    Một pilot giới hạn trong một khóa học, một nền tảng và từ 14 đến 30 ngày đủ để quan sát giá trị vận hành ban đầu.
+    &
+    Pilot \\
+
+    \hline
+
+    G11
+    &
+    Nhóm có thể hoàn tất onboarding và triển khai phiên thử nghiệm đầu tiên trong vòng tối đa bảy ngày sau khi nhận đủ dữ liệu.
+    &
+    Timeline, vận hành \\
+
+    \hline
+
+    G12
+    &
+    Hệ thống có thể hỗ trợ xử lý một tỷ lệ đủ lớn các câu hỏi phổ biến, đồng thời chuyển đúng các trường hợp ngoài phạm vi cho nhân viên.
+    &
+    Chất lượng sản phẩm \\
+
+    \hline
+
+    G13
+    &
+    Việc sử dụng 1Stream giúp giảm một phần khối lượng công việc lặp lại của marketing, vận hành hoặc tư vấn tuyển sinh.
+    &
+    Giá trị sản phẩm \\
+
+    \hline
+
+    G14
+    &
+    Mở rộng thời lượng hiện diện bằng nội dung được duyệt có thể tạo thêm cơ hội tương tác hoặc ghi nhận lead.
+    &
+    Giá trị sản phẩm \\
+
+    \hline
+
+    G15
+    &
+    Quy trình kết hợp tạo nội dung, vận hành phiên, phản hồi FAQ và chuyển lead có giá trị hơn việc khách hàng sử dụng các công cụ rời rạc.
+    &
+    Định vị cạnh tranh \\
+
+    \hline
+
+    G16
+    &
+    Khách hàng chấp nhận mô hình có sự kiểm soát của con người và không yêu cầu hệ thống tự động hóa hoàn toàn.
+    &
+    Thông điệp, MVP \\
+
+    \hline
+
+    G17
+    &
+    Khách hàng sẵn sàng trả phí hoặc đặt cọc nếu pilot tạo ra giá trị vận hành có thể quan sát.
+    &
+    Mô hình chuyển đổi \\
+
+    \hline
+
+    G18
+    &
+    Khách hàng pilot sẵn sàng cung cấp phản hồi, case study hoặc giới thiệu đơn vị tương tự khi có kết quả tích cực.
+    &
+    Growth loop \\
+
+    \hline
+
+    G19
+    &
+    Nguồn lực của nhóm đủ để triển khai tối đa ba pilot đồng thời mà vẫn bảo đảm thời gian phản hồi và chất lượng hỗ trợ.
+    &
+    Nguồn lực \\
+
+    \hline
+
+    G20
+    &
+    Ngân sách quảng bá cơ sở và nguồn lực nội bộ đủ để nhóm đạt được các mục tiêu tiếp cận, demo và pilot trong 90 ngày.
+    &
+    Ngân sách \\
+
+    \hline
+
+    G21
+    &
+    Các mục tiêu như 24 tài khoản được tiếp cận, 5 cuộc demo, 3 pilot và tối thiểu 1 khách hàng trả phí là khả thi trong giai đoạn 90 ngày.
+    &
+    KPI, timeline \\
+
+    \hline
+
+    G22
+    &
+    Các nền tảng mục tiêu cho phép triển khai phạm vi tích hợp cần thiết của MVP mà không tạo rủi ro vận hành vượt quá khả năng kiểm soát.
+    &
+    Kỹ thuật, nền tảng \\
+
+    \hline
+\end{longtable}
+
+\subsubsection{Kế hoạch kiểm chứng giả định}
+
+Mỗi giả định phải được kiểm chứng bằng một hoạt động tạo ra đầu ra có thể xem xét. Nhóm không xem các cuộc trao đổi không có biên bản, lời khen chung chung hoặc lượt tương tác trên mạng xã hội là bằng chứng đầy đủ.
+
+\begin{longtable}{
+    p{0.07\textwidth}
+    p{0.32\textwidth}
+    p{0.20\textwidth}
+    p{0.31\textwidth}
+}
+    \caption{Kế hoạch kiểm chứng các giả định trong Chương 3}
+    \label{tab:assumption-validation-plan} \\
+    \hline
+    \textbf{Mã}
+    & \textbf{Cách kiểm chứng và đầu ra}
+    & \textbf{Thời điểm}
+    & \textbf{Tiêu chí xác nhận ban đầu} \\
+    \hline
+    \endfirsthead
+
+    \hline
+    \textbf{Mã}
+    & \textbf{Cách kiểm chứng và đầu ra}
+    & \textbf{Thời điểm}
+    & \textbf{Tiêu chí xác nhận ban đầu} \\
+    \hline
+    \endhead
+
+    G1
+    &
+    Lập danh sách 30 trung tâm đạt ICP; thực hiện phỏng vấn khám phá và ghi biên bản nhu cầu.
+    &
+    Trước và trong tháng đầu.
+    &
+    Ít nhất 5 đơn vị xác nhận có nhu cầu liên quan và ít nhất 2 đơn vị sẵn sàng xem demo. \\
+
+    \hline
+
+    G2
+    &
+    Hỏi số người tham gia nội dung, livestream và tư vấn; lập sơ đồ phân công công việc hiện tại.
+    &
+    Trong phỏng vấn khám phá.
+    &
+    Phần lớn đơn vị được phỏng vấn mô tả tình trạng một người đảm nhận nhiều tác vụ hoặc thiếu người trực. \\
+
+    \hline
+
+    G3
+    &
+    Thu thập replay, tập bình luận hoặc danh sách FAQ; phân nhóm câu hỏi và đếm tần suất.
+    &
+    Trước pilot.
+    &
+    Có tối thiểu 5 nhóm câu hỏi lặp lại và chiếm tỷ lệ đáng kể trong mẫu được cung cấp. \\
+
+    \hline
+
+    G4
+    &
+    Gửi checklist dữ liệu và yêu cầu khách hàng hoàn tất bộ dữ liệu mẫu.
+    &
+    Trước onboarding.
+    &
+    Ít nhất 2 trong số các đơn vị đã demo cung cấp được dữ liệu tối thiểu và chỉ định người duyệt. \\
+
+    \hline
+
+    G5
+    &
+    Phỏng vấn về lịch livestream, khung giờ bỏ trống và chi phí hoặc khó khăn khi bố trí host.
+    &
+    Giai đoạn khám phá.
+    &
+    Ít nhất 3 khách hàng phù hợp xác nhận có nhu cầu tăng khung giờ hoặc giảm phụ thuộc lịch host. \\
+
+    \hline
+
+    G6
+    &
+    Thử hai phiên bản thông điệp trên các nhóm tài khoản tương đương; lưu tỷ lệ phản hồi và demo.
+    &
+    Trong 7--14 ngày đầu tiếp cận.
+    &
+    Thông điệp nỗi đau tạo nhiều phản hồi có ý nghĩa hoặc demo hơn thông điệp tập trung vào AI. \\
+
+    \hline
+
+    G7
+    &
+    Theo dõi nguồn của từng lead, điểm ICP, demo và pilot.
+    &
+    Trong suốt 90 ngày.
+    &
+    Kênh trực tiếp hoặc giới thiệu tạo tối thiểu một pilot với chi phí và thời gian phù hợp hơn các kênh còn lại. \\
+
+    \hline
+
+    G8
+    &
+    Cung cấp audit cho một nhóm lead và demo chung cho nhóm đối chiếu; ghi nhận hành động tiếp theo.
+    &
+    Tháng đầu và đầu tháng thứ hai.
+    &
+    Nhóm nhận audit có tỷ lệ gửi dữ liệu hoặc đặt demo cao hơn, hoặc có phản hồi định tính rõ ràng hơn. \\
+
+    \hline
+
+    G9
+    &
+    Theo dõi lượt xem video, hoàn tất video, gửi form và đặt lịch; hỏi khách hàng phần nào giúp họ hiểu sản phẩm.
+    &
+    Sau khi landing page hoạt động.
+    &
+    Video tạo ra form hoặc lịch demo và khách hàng xác nhận hiểu được workflow sau khi xem. \\
+
+    \hline
+
+    G10
+    &
+    Triển khai pilot theo phạm vi một khóa học, một nền tảng; lập báo cáo cuối kỳ.
+    &
+    Từ ngày 31 đến ngày 90.
+    &
+    Có đủ dữ liệu để đánh giá onboarding, chất lượng phản hồi, handover, khối lượng công việc và nhu cầu tiếp tục. \\
+
+    \hline
+
+    G11
+    &
+    Ghi thời điểm nhận đủ dữ liệu, hoàn tất cấu hình và hoàn thành phiên đầu tiên.
+    &
+    Trong từng pilot.
+    &
+    Ít nhất 80\% pilot triển khai phiên đầu trong vòng 7 ngày sau khi dữ liệu đầy đủ. \\
+
+    \hline
+
+    G12
+    &
+    Xây dựng bộ test case; so sánh phản hồi với đáp án đã duyệt; kiểm tra log handover.
+    &
+    Trước và trong pilot.
+    &
+    Đạt ngưỡng xử lý FAQ đã thống nhất; 100\% câu ngoài phạm vi trong bộ test được chuyển người thật; không có lỗi S1 chưa xử lý. \\
+
+    \hline
+
+    G13
+    &
+    Đo thời gian thực hiện trước và sau; khảo sát người dùng trực tiếp; ghi nhận số tác vụ được giảm.
+    &
+    Cuối pilot.
+    &
+    Người dùng xác nhận giảm được ít nhất một nhóm công việc lặp lại và chấm mức hữu ích từ 4/5 trở lên. \\
+
+    \hline
+
+    G14
+    &
+    So sánh khung giờ có và không có nội dung hỗ trợ; ghi nhận lượt tương tác và lead theo phiên.
+    &
+    Trong pilot.
+    &
+    Khung giờ bổ sung tạo ra tương tác hoặc lead có thể xác định nguồn; chưa yêu cầu phải tăng doanh thu. \\
+
+    \hline
+
+    G15
+    &
+    Phỏng vấn khách hàng sau pilot về giải pháp cũ, số công cụ đang sử dụng và giá trị của workflow tích hợp.
+    &
+    Cuối pilot.
+    &
+    Ít nhất 2 khách hàng đánh giá quy trình tích hợp giúp giảm thao tác chuyển đổi hoặc theo dõi rõ hơn công cụ rời rạc. \\
+
+    \hline
+
+    G16
+    &
+    Trình bày rõ phạm vi human-in-the-loop trong demo và ghi nhận phản đối.
+    &
+    Trong demo và pilot.
+    &
+    Khách hàng chấp nhận cơ chế phê duyệt, handover và giám sát thay vì yêu cầu tự động hóa hoàn toàn. \\
+
+    \hline
+
+    G17
+    &
+    Đề xuất paid pilot, khoản đặt cọc hoặc gói tiếp theo; ghi nhận quyết định và lý do.
+    &
+    Trước hoặc ngay sau pilot.
+    &
+    Tối thiểu 1 trong 3 đơn vị hoàn tất pilot đồng ý trả phí, đặt cọc hoặc ký xác nhận tiếp tục có ngân sách. \\
+
+    \hline
+
+    G18
+    &
+    Yêu cầu phản hồi, quyền sử dụng case study hoặc lời giới thiệu sau khi báo cáo pilot.
+    &
+    Sau pilot.
+    &
+    Tối thiểu 1 khách hàng đồng ý cho sử dụng case study ẩn danh, trích dẫn hoặc giới thiệu đơn vị khác. \\
+
+    \hline
+
+    G19
+    &
+    Theo dõi số giờ hỗ trợ, backlog, thời gian phản hồi và lỗi của từng pilot.
+    &
+    Hàng tuần.
+    &
+    Ba pilot đồng thời không làm thời gian phản hồi vượt ngưỡng nội bộ và không làm tăng lỗi S1/S2 chưa xử lý. \\
+
+    \hline
+
+    G20
+    &
+    Ghi nhận toàn bộ chi phí tiền mặt và giờ công theo kênh, demo và pilot.
+    &
+    Hàng tuần và cuối 90 ngày.
+    &
+    Ngân sách không vượt kịch bản đã phê duyệt và tạo được ít nhất một pilot đủ dữ liệu đánh giá. \\
+
+    \hline
+
+    G21
+    &
+    Theo dõi phễu thực tế từ tài khoản mục tiêu đến trả phí.
+    &
+    Cuối mỗi tháng.
+    &
+    So sánh kết quả với mục tiêu; điều chỉnh nếu chênh lệch lớn hơn 30\% sau khi đã có đủ mẫu tiếp cận. \\
+
+    \hline
+
+    G22
+    &
+    Kiểm thử tích hợp bằng tài khoản thử nghiệm; rà soát chính sách nền tảng và ghi nhận lỗi kết nối.
+    &
+    Trước khi cam kết pilot.
+    &
+    Luồng cần thiết hoạt động ổn định trong phạm vi thử nghiệm và có phương án thủ công khi tích hợp bị gián đoạn. \\
+
+    \hline
+\end{longtable}
+
+\subsubsection{Cơ chế ghi nhận kết quả kiểm chứng}
+
+Mỗi giả định được quản lý trong một bảng theo dõi chung với các trường:
+
+\begin{itemize}
+    \item mã giả định;
+    \item mô tả giả định;
+    \item người chịu trách nhiệm;
+    \item hoạt động kiểm chứng;
+    \item ngày bắt đầu và ngày kết thúc;
+    \item đầu ra hoặc đường dẫn minh chứng;
+    \item kết quả định lượng;
+    \item phản hồi định tính;
+    \item trạng thái: chưa kiểm chứng, đang kiểm chứng, được hỗ trợ một phần, được xác nhận ban đầu hoặc bị bác bỏ;
+    \item quyết định tiếp theo;
+    \item nội dung trong Business Plan cần cập nhật.
+\end{itemize}
+
+Một giả định chỉ được chuyển sang trạng thái \textbf{được xác nhận ban đầu} khi có đầu ra kiểm tra được như biên bản phỏng vấn, dữ liệu hành vi, log hệ thống, báo cáo pilot, biểu mẫu thanh toán hoặc quyết định mua. Nhận xét chủ quan của thành viên trong nhóm không được xem là bằng chứng độc lập.
+
+\subsubsection{Kiểm tra tính nhất quán với Chương Sản phẩm}
+
+Trước khi phát hành tài liệu quảng bá hoặc đề xuất pilot, Project Lead và Product Lead cần kiểm tra các điều kiện sau:
+
+\begin{enumerate}
+    \item khách hàng mục tiêu trong Chương 3 phải nằm trong phạm vi ICP đã xác định ở Chương Sản phẩm;
+    \item thông điệp chỉ đề cập đến các năng lực đã có prototype, có thể demo hoặc có phương án hỗ trợ vận hành;
+    \item không sử dụng các cụm từ ``thay thế hoàn toàn'', ``chính xác tuyệt đối'', ``không bỏ sót'' hoặc ``vận hành 24/7'' như cam kết;
+    \item các chỉ số doanh thu, tiết kiệm chi phí hoặc tăng lead chỉ được sử dụng khi có dữ liệu pilot tương ứng;
+    \item kế hoạch ra mắt không phụ thuộc bắt buộc vào avatar tùy chỉnh, livestream đa nền tảng hoàn chỉnh hoặc các tính năng chưa được kiểm thử;
+    \item nếu một tính năng chưa sẵn sàng, nhóm phải thu hẹp phạm vi pilot hoặc sử dụng phương án có hỗ trợ thủ công;
+    \item mọi thay đổi về phạm vi MVP phải được cập nhật đồng thời trong Chương Sản phẩm, nội dung quảng bá và đề xuất pilot.
+\end{enumerate}
+
+\subsubsection{Điều kiện mở rộng sau pilot}
+
+Nhóm chỉ mở rộng số lượng khách hàng, ngân sách hoặc kênh quảng bá khi đạt đồng thời các điều kiện sau:
+
+\begin{itemize}
+    \item ít nhất một pilot đã hoàn tất đầy đủ;
+    \item không còn lỗi S1 chưa xử lý;
+    \item quy trình onboarding có checklist và thời gian thực hiện có thể dự đoán;
+    \item thông điệp tạo ra phản hồi từ đúng ICP;
+    \item có ít nhất một bằng chứng về mức sẵn sàng trả phí hoặc đặt cọc;
+    \item nhóm có đủ người hỗ trợ khách hàng mới;
+    \item dữ liệu pilot cho thấy sản phẩm tạo ra ít nhất một giá trị vận hành có thể quan sát;
+    \item các giới hạn kỹ thuật và điều kiện sử dụng được truyền thông rõ ràng.
+\end{itemize}
+
+Nếu các điều kiện trên chưa đạt, nhóm ưu tiên sửa sản phẩm, điều chỉnh ICP, thay đổi thông điệp hoặc thu hẹp phạm vi thử nghiệm thay vì tăng ngân sách quảng bá.
+
+\subsubsection{Kết luận}
+
+Rủi ro lớn nhất của 1Stream trong giai đoạn PA3 không chỉ là lỗi kỹ thuật, mà còn là việc truyền thông vượt quá năng lực MVP, lựa chọn sai khách hàng hoặc xem sự quan tâm ban đầu như bằng chứng về nhu cầu trả phí.
+
+Do đó, chiến lược của nhóm là triển khai pilot có hỗ trợ, giới hạn phạm vi, kiểm soát dữ liệu và duy trì sự tham gia của con người trong các bước quan trọng. Mỗi hoạt động quảng bá và thử nghiệm phải tạo ra đầu ra có thể kiểm tra, chẳng hạn như biên bản phỏng vấn, log hệ thống, dữ liệu phễu, báo cáo pilot hoặc quyết định thanh toán.
+
+Các giả định bị bác bỏ không được xem là thất bại của hoạt động PA3. Đây là dữ liệu cần thiết để nhóm điều chỉnh khách hàng mục tiêu, sản phẩm, thông điệp và kế hoạch tiếp cận trước khi mở rộng quy mô.
