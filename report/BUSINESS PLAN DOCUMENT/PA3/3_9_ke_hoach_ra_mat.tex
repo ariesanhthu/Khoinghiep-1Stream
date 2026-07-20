@@ -21,17 +21,17 @@
 %   - Khách hàng phải cung cấp những dữ liệu gì?
 %   - Thời gian từ khi đăng ký đến khi chạy được phiên đầu tiên là bao lâu?
 %   - Khi nào nhóm dừng một chiến dịch hoặc thay đổi thông điệp?
-%
+
 % OUTPUT BẮT BUỘC:
 %   1. Kế hoạch ra mắt theo 3 giai đoạn:
 %      - Trước ra mắt
 %      - Tuần ra mắt
 %      - Sau ra mắt
-%
+
 %   2. Timeline cụ thể:
 %      Công việc | Thời gian bắt đầu | Thời gian kết thúc |
 %      Người phụ trách | Đầu ra | Điều kiện hoàn thành
-%
+
 %   3. Danh sách tài sản cần chuẩn bị:
 %      - Landing page
 %      - Video demo
@@ -42,9 +42,9 @@
 %      - Tài liệu onboarding
 %      - Phiếu thu phản hồi
 %      - Báo cáo sau pilot
-%
+
 %   4. Checklist ra mắt (Chưa làm / Đang làm / Hoàn tất / Bị chặn)
-%
+
 % TIÊU CHÍ HOÀN THÀNH:
 %   - Mỗi hoạt động phải tạo ra một đầu ra kiểm tra được
 %   - Không viết "đẩy mạnh truyền thông" mà không có hành động cụ thể
@@ -52,8 +52,141 @@
 %   - Phải xác định người tiếp nhận và xử lý lead
 % ============================================================
 
-\subsection{Kế hoạch ra mắt sản phẩm}
-
 % TODO (Nguyễn Ngọc Cảnh): Viết nội dung mục 3.9
 % Phối hợp Nguyễn Anh Thư để xác nhận timeline phụ thuộc tính năng nào
 % Phối hợp Lê Nguyên Nhật để xác nhận tài sản kỹ thuật (landing page, form) sẵn sàng lúc nào
+
+
+% ============================================================
+% PHẦN 3.9 — KẾ HOẠCH RA MẮT SẢN PHẨM
+% ============================================================
+
+\subsection{Kế hoạch ra mắt sản phẩm}
+
+Trong giai đoạn đầu, 1Stream không áp dụng chiến lược ``Big Bang Launch" (ra mắt rầm rộ đại chúng) mà chọn cách ra mắt có kiểm soát (Soft Launch) nhắm thẳng vào phân khúc trung tâm ngoại ngữ tại TP.HCM. Mục tiêu cốt lõi là đưa sản phẩm vào môi trường thực chiến để kiểm chứng khả năng vận hành và mức độ sẵn sàng chi trả của khách hàng.
+
+\subsubsection{Định vị sản phẩm tại thời điểm ra mắt và Quy trình hỗ trợ}
+
+\textbf{1. Trạng thái sản phẩm ra mắt}
+\begin{itemize}
+    \item \textbf{Sản phẩm sẵn sàng ra mắt:} Nhóm triển khai mô hình \textbf{Pilot có hỗ trợ vận hành} (Service-Enabled Software). Cụ thể là Gói thử nghiệm 30 giờ-kênh/tuần. Khách hàng mua kết quả đầu ra (video AI, giờ phát, bot trực FAQ), còn hệ thống phần mềm do đội ngũ 1Stream thao tác nội bộ để đảm bảo chất lượng.
+    \item \textbf{Tính năng CHƯA được phép quảng bá:} Tuyệt đối không truyền thông 1Stream là "SaaS tự phục vụ 100\%", không cam kết "phát sóng tự động 24/7 không cần người", không quảng bá tính năng "Tích hợp sâu CRM/ERP", và không hứa hẹn tạo Avatar AI sao chép chính xác 100\% khẩu hình của giáo viên thực tế (chỉ dùng avatar/giọng đọc mẫu có sẵn của hệ thống để tránh rủi ro pháp lý).
+\end{itemize}
+
+\textbf{2. Phân công nhân sự vận hành \& Tiếp nhận Lead}
+Bám sát cơ cấu tổ chức nhóm (Mục 1.5), quy trình xử lý trong đợt ra mắt được phân công cứng như sau:
+\begin{itemize}
+    \item \textbf{Tiếp nhận và sàng lọc Lead:} \textbf{Quang (Marketing Lead)} chịu trách nhiệm hứng Lead từ Landing page/Inbox, chấm điểm ICP và chuyển trạng thái MQL sang SQL.
+    \item \textbf{Duyệt nội dung \& Trình diễn (Demo):} \textbf{Thư (CEO)} là người trực tiếp thực hiện các buổi Demo B2B với Giám đốc trung tâm và là người chốt quyền duyệt kịch bản cuối cùng trước khi đưa cho khách.
+    \item \textbf{Onboarding \& Hỗ trợ dữ liệu:} \textbf{Cảnh (Operations Lead)} chịu trách nhiệm hướng dẫn khách hàng điền form dữ liệu, đốc thúc thu thập tài liệu và chuẩn hóa thành định dạng JSON.
+    \item \textbf{Hỗ trợ kỹ thuật Pilot:} \textbf{Nhật (CTO)} chịu trách nhiệm thiết lập luồng phát sóng, kết nối API và giám sát rủi ro server/GPU trong suốt phiên live.
+    \item \textbf{Quản lý ngân sách \& Hợp đồng:} \textbf{Toàn (Finance Lead)} quản lý chi phí API/Cloud phát sinh, soạn thảo biên bản thỏa thuận Pilot và chốt hợp đồng trả phí sau khi Pilot kết thúc.
+\end{itemize}
+
+\textbf{3. Yêu cầu dữ liệu và Quy trình xử lý sự cố (SLA)}
+\begin{itemize}
+    \item \textbf{Thời gian triển khai (Time-to-first-run):} Cam kết tối đa \textbf{07 ngày làm việc} kể từ khi khách hàng ký biên bản Pilot đến khi phiên livestream AI đầu tiên được phát sóng.
+    \item \textbf{Dữ liệu khách hàng bắt buộc cung cấp:} Bảng giá học phí chuẩn, lịch khai giảng, ưu đãi tháng, 10-15 câu hỏi FAQ thường gặp, yêu cầu đầu vào/đầu ra, và tài liệu xác nhận quyền sở hữu logo/thương hiệu.
+    \item \textbf{Quy trình xử lý lỗi (Human-in-the-loop):}
+    \begin{itemize}
+        \item \textit{Lỗi Video/Hình ảnh:} Nếu Avatar bị lệch khẩu hình hoặc render lỗi, Cảnh (Ops) sẽ tạm dừng lịch phát, Nhật (CTO) render lại bản mới trong vòng 12h.
+        \item \textit{Lỗi Dữ liệu/AI trả lời sai:} Hệ thống cài đặt ngưỡng tự tin (confidence score). Nếu AI gặp câu hỏi ngoài Knowledge Base, hệ thống \textbf{tuyệt đối không tự bịa câu trả lời}, mà tự động nhắn: \textit{"Dạ câu hỏi này cần tư vấn chuyên sâu, anh/chị để lại SĐT để giáo vụ bên em gọi lại ngay nhé"}. Đồng thời bắn cảnh báo (ping) về Zalo/Telegram cho nhân viên của trung tâm để vào chat trực tiếp.
+    \end{itemize}
+\end{itemize}
+
+\subsubsection{Danh sách tài sản cần chuẩn bị trước ra mắt}
+
+Để phục vụ quá trình chuyển đổi, các tài sản (assets) sau phải được nghiệm thu trước Day 1:
+
+\begin{table}[H]
+    \centering
+    \footnotesize
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tabularx}{\linewidth}{|l|X|l|}
+        \hline
+        \rowcolor{softBlue}
+        \textbf{Tài sản} & \textbf{Mục đích \& Yêu cầu cốt lõi} & \textbf{Phụ trách} \\ \hline
+        \textbf{1. Landing page} & Giao diện trình bày giải pháp hẹp, có nhúng video demo và form thu Lead định danh. & Nhật / Quang \\ \hline
+        \textbf{2. Video demo} & Video $\le$ 2 phút quay lại màn hình cách AI của 1Stream lấy dữ liệu Excel và biến thành phiên live. & Quang \\ \hline
+        \textbf{3. Nội dung Sales Kit} & Bộ slide Pitch Deck ngắn gọn (5-7 slides) để Thư đi gặp trực tiếp chủ trung tâm. Trọng tâm là bài toán CPL và ROI. & Thư / Toàn \\ \hline
+        \textbf{4. Form đăng ký} & Biểu mẫu thu thập: Tên trung tâm, ngân sách Ads hiện tại, số lượng nhân sự trực page (để lọc ICP). & Quang \\ \hline
+        \textbf{5. Kịch bản gọi điện} & Kịch bản Telesales (Cold-call) ngắn gọn 3 phút để thiết lập cuộc hẹn Demo. & Quang / Thư \\ \hline
+        \textbf{6. Bộ FAQ nội bộ} & Bộ tài liệu xử lý từ chối (Objection Handling) dành cho team Sales khi khách lo sợ rủi ro AI hoặc giá cao. & Thư / Toàn \\ \hline
+        \textbf{7. Tài liệu Onboarding} & Template Excel chuẩn hóa để khách hàng điền học phí, lịch học, chính sách bảo lưu một cách dễ nhất. & Cảnh \\ \hline
+        \textbf{8. Phiếu thu phản hồi} & Mẫu Google Form (CSAT) dùng sau mỗi phiên live để khách chấm điểm độ thông minh của AI. & Cảnh \\ \hline
+        \textbf{9. Báo cáo sau Pilot} & Template báo cáo (PDF) thống kê số giờ tiết kiệm được, số Lead AI thu được để làm bằng chứng Up-sale. & Toàn / Nhật \\ \hline
+    \end{tabularx}
+\end{table}
+
+\subsubsection{Kế hoạch ra mắt theo 3 giai đoạn}
+
+\textbf{Giai đoạn 1: Trước ra mắt (Pre-launch - Chuẩn bị \& Trinh sát)}
+\begin{itemize}
+    \item \textbf{Mục tiêu:} Chuẩn bị đạn dược, chốt danh sách mục tiêu và test nội bộ.
+    \item \textbf{Hoạt động:} Xây dựng xong Landing Page và 9 tài sản Marketing (mục trên). Quang thực hiện "Trinh sát số" (OSINT) qua Facebook Ads Library để cào danh sách 50-80 trung tâm tiếng Anh tại TP.HCM đang chạy quảng cáo mạnh nhất. Đội Tech tự tạo một trung tâm "ảo", cấp dữ liệu giả để chạy thử toàn bộ luồng từ tạo video đến AI trực chat nhằm bắt bug trước khi mời khách thật.
+\end{itemize}
+
+\textbf{Giai đoạn 2: Tuần ra mắt (Launch Week - Tấn công \& Chuyển đổi)}
+\begin{itemize}
+    \item \textbf{Mục tiêu:} Gặp gỡ trực tiếp và chốt 02-03 trung tâm ký thỏa thuận Pilot.
+    \item \textbf{Hoạt động:} Khởi động chiến dịch ABM (Account-Based Marketing). Gửi 50 tin nhắn/email cá nhân hóa đến danh sách đã lọc. Tổ chức 01 buổi Workshop Online nhỏ mời chủ trung tâm vào xem Live Demo. Thư đi gặp trực tiếp (Offline) những khách hàng phản hồi tích cực nhất để chốt cam kết cung cấp dữ liệu Pilot.
+\end{itemize}
+
+\textbf{Giai đoạn 3: Sau ra mắt (Post-launch - Vận hành Pilot \& Tối ưu)}
+\begin{itemize}
+    \item \textbf{Mục tiêu:} Chạy thành công các phiên live bằng dữ liệu thật, thu phản hồi và chuyển đổi thành hợp đồng trả phí.
+    \item \textbf{Hoạt động:} Cảnh tiến hành Onboarding, thu thập và làm sạch JSON. Nhật đẩy video lên kênh. Trong 2 tuần Pilot, Cảnh trực nhóm Zalo hỗ trợ khách hàng liên tục. Cuối Pilot, Toàn xuất Báo cáo hiệu suất, Thư họp chốt nghiệm thu và đàm phán ký hợp đồng trả phí (Standard Subscription).
+    \item \textbf{Kích hoạt điểm dừng (Pivot/Kill Triggers):} Áp dụng nghiêm ngặt nguyên tắc từ Mục 3.10.4. Nếu tỷ lệ phản hồi tin nhắn tuần ra mắt $< 10\%$, hoặc hết đợt Pilot mà 0 khách hàng nào chịu trả phí, toàn bộ team phải dừng quảng bá, ngồi lại phân tích rào cản giá (Pricing) hoặc độ khó của Onboarding.
+\end{itemize}
+
+\subsubsection{Timeline triển khai chi tiết}
+
+\begin{table}[H]
+    \centering
+    \footnotesize
+    \renewcommand{\arraystretch}{1.4}
+    \begin{tabularx}{\linewidth}{|p{3.5cm}|c|c|c|X|X|}
+        \hline
+        \rowcolor{softBlue}
+        \textbf{Công việc} & \textbf{Bắt đầu} & \textbf{Kết thúc} & \textbf{Phụ trách} & \textbf{Đầu ra (Output)} & \textbf{Điều kiện hoàn thành} \\ \hline
+        
+        1. Xây dựng Landing Page \& Video Demo & Ngày 1 & Ngày 7 & Nhật, Quang & Landing page live (URL), 1 Video Demo & Form đăng ký hoạt động, luồng lead đổ về Sheet/CRM. \\ \hline
+        
+        2. Quét \& Chấm điểm danh sách ABM (50-80 Leads) & Ngày 5 & Ngày 10 & Quang & Danh sách Lead chuẩn ICP (Google Sheet) & 100\% Lead có tên GĐ/Trưởng phòng, có chạy Ads. \\ \hline
+        
+        3. Tạo Template Onboarding \& Kịch bản Sales & Ngày 8 & Ngày 12 & Thư, Cảnh & Bộ tài liệu Sales Kit, Template Excel & Thư duyệt kịch bản, Cảnh test thử việc điền form. \\ \hline
+        
+        4. Test nội bộ toàn hệ thống (Alpha Test) & Ngày 10 & Ngày 14 & Nhật, Cảnh & Bảng report Bug \& Tối ưu & Chạy mượt 1 phiên live 30p, bot AI phản hồi $\le$ 3s. \\ \hline
+        
+        5. Tổ chức Workshop Demo Online & Ngày 15 & Ngày 18 & Thư, Quang & 1 buổi Zoom, Record video, 3-5 booking & Có ít nhất 15 người tham dự đúng ngành. \\ \hline
+        
+        6. Triển khai Outreach trực tiếp \& Đặt lịch hẹn & Ngày 16 & Ngày 21 & Quang, Thư & 5-8 lịch hẹn Demo 1-1 (Discovery Call) & Tỷ lệ phản hồi tin nhắn/email $\ge$ 20\%. \\ \hline
+        
+        7. Gặp mặt, Chốt cam kết Pilot & Ngày 20 & Ngày 25 & Thư, Toàn & 02-03 Biên bản đồng ý Pilot & Khách cam kết cử người phối hợp làm dữ liệu. \\ \hline
+        
+        8. Onboarding, Xử lý dữ liệu \& Chạy phiên Pilot & Ngày 26 & Ngày 40 & Cảnh, Nhật & Các phiên Live chạy thực tế trên kênh & Hoàn thành đủ số giờ Pilot đã cam kết, hệ thống ổn định. \\ \hline
+        
+        9. Đánh giá CSAT \& Chốt hợp đồng trả phí & Ngày 40 & Ngày 45 & Thư, Toàn & Báo cáo hiệu suất, 1-2 Hợp đồng trả phí & Khách đồng ý ký HĐ trả tiền mặt cho tháng tiếp theo. \\ \hline
+    \end{tabularx}
+\end{table}
+
+\subsubsection{Checklist sẵn sàng ra mắt (Launch Readiness Checklist)}
+
+\begin{table}[H]
+    \centering
+    \footnotesize
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tabularx}{\linewidth}{|l|c|X|}
+        \hline
+        \rowcolor{softBlue}
+        \textbf{Hạng mục kiểm tra} & \textbf{Trạng thái} & \textbf{Ghi chú / Người xử lý} \\ \hline
+        Hoàn thiện Backend sinh Video AI \& RAG AI Agent & Đang làm & Nhật đang tối ưu tốc độ phản hồi (Latency). \\ \hline
+        Hoàn thiện Landing Page \& Hệ thống Tracking (Mục 3.8) & Đang làm & Nhật \& Quang setup UTM tracking. \\ \hline
+        Xây dựng xong danh sách 80 khách hàng mục tiêu & Chưa làm & Quang chờ kịch bản lọc ICP cuối cùng. \\ \hline
+        Thiết kế Bảng giá (Pricing) dự kiến & Hoàn tất & Toàn đã chốt 3 kịch bản giá Pilot. \\ \hline
+        Tài liệu Template Onboarding cho khách hàng & Hoàn tất & Cảnh đã đóng gói file Excel mẫu. \\ \hline
+        Kịch bản thuyết phục \& Xử lý từ chối (Sales Script) & Đang làm & Thư đang hoàn thiện bộ FAQ cho Sales. \\ \hline
+        Quy trình xử lý sự cố (SLA) khi Video/Live bị sập & Hoàn tất & Nhóm đã thống nhất luồng hỗ trợ thủ công. \\ \hline
+        Hợp đồng mẫu / Biên bản thỏa thuận bảo mật dữ liệu & Bị chặn & Chờ cố vấn pháp lý duyệt điều khoản bản quyền AI. \\ \hline
+    \end{tabularx}
+\end{table}
